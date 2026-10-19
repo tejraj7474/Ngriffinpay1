@@ -1,0 +1,1554 @@
+* {
+    box-sizing: border-box;
+    margin: 0
+}
+
+body {
+    font-family: Inter, system-ui, sans-serif;
+    color: #111
+}
+
+img {
+    max-width: 100%;
+    display: block
+}
+
+.logo img {
+    height: 64px
+}
+
+.cta {
+    display: flex;
+    gap: 12px;
+    align-items: center
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block
+}
+
+.p {
+    background: #7c3aed;
+    color: #fff
+}
+
+.w {
+    background: #fff;
+    color: #222
+}
+
+.o {
+    border: 1px solid #fff;
+    color: #fff
+}
+
+.main {
+    position: relative;
+    z-index: 2;
+    background: #fff
+}
+
+
+.pad {
+    padding: 12vh 8vw
+}
+
+.big {
+    font-size: clamp(36px, 3vw, 72px);
+    line-height: 1.08;
+    max-width: 100%;
+    letter-spacing: -.02em;
+    text-align: center
+}
+
+.big.c {
+    margin: auto;
+    text-align: center
+}
+
+.feat {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 30px;
+    align-items: center
+}
+
+.col h3 {
+    margin: 14px 0 8px
+}
+
+.ico {
+    width: 56px
+}
+
+.col img:not(.ico) {
+    border-radius: 8px
+}
+
+.svc {
+    position: relative;
+    background: #fff
+}
+
+.stick {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 12vh 4vw 0vh;
+    overflow: hidden
+}
+
+.stick .big {
+    font-size: clamp(30px, 3vw, 52px)
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 3.5fr 12fr;
+    gap: 40px;
+    margin-top: 3vh
+}
+
+.tabs {
+    list-style: none
+}
+
+.tabs li {
+    padding: 16px 0;
+    border-top: 1px solid #ddd;
+    color: #999;
+    transition: .3s
+}
+
+.tabs li.on {
+    color: #111;
+    border-top: 2px solid #7c3aed;
+    font-weight: 600
+}
+
+.tabs a {
+    color: inherit;
+    text-decoration: none
+}
+
+.vis {
+    position: relative;
+    height: 78vh;
+    border-radius: 8px;
+    overflow: hidden;
+    background-size: cover;
+    color: #fff;
+    padding: 28px
+}
+
+.vis small {
+    color: #c4b5fd
+}
+
+.vis h3 {
+    font-size: 34px
+}
+
+.vis p {
+    max-width: 560px;
+    margin-top: 8px
+}
+
+.vis .d {
+    position: absolute;
+    left: 20px;
+    bottom: 25px;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px #0007
+}
+
+.vis .m {
+    position: absolute;
+    right: 371px;
+    bottom: 16px;
+    width: 13%;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px #0008;
+}
+
+.dark {
+    background: #c0becc21;
+    color: #192954;
+}
+
+.ai .col {
+    overflow: hidden
+}
+
+.ai img {
+    border-radius: 10px
+}
+
+.int {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding-top: 12vh;
+    text-align: center;
+    background: linear-gradient(#0a0618, #4c2f8c 70%, #d68aa0)
+}
+
+.orbit {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    width: 0;
+    height: 0
+}
+
+.core {
+    position: absolute;
+    width: 220px;
+    left: -110px;
+    top: -150px
+}
+
+.orb {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    left: -38px;
+    top: -38px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 12px;
+    object-fit: contain
+}
+
+
+.cols {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 40px
+}
+
+.foot ul {
+    list-style: none
+}
+
+.foot li {
+    margin: 10px 0
+}
+
+.foot .h {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase
+}
+
+@media(max-width:800px) {
+
+    .feat,
+    .row {
+        grid-template-columns: 1fr
+    }
+
+
+}
+
+
+.hero {
+    position: relative;
+    height: 100vh !important;
+    overflow: hidden;
+    color: #fff;
+    text-align: center
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center bottom
+}
+
+.hero-tint {
+    position: absolute;
+    inset: 0;
+
+}
+
+.hero3d {
+    display: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding-top: 22vh
+}
+
+.hero h1 {
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 1.08;
+    max-width: 1100px;
+    margin: 0 auto 48px
+}
+
+.hero h1 span {
+    display: inline-block
+}
+
+.hero p {
+    max-width: 760px;
+    margin: 0 auto 8px;
+    font-size: 20px;
+    line-height: 1.7
+}
+
+.hero-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center
+}
+
+.hero .dash {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: 82%;
+    width: min(1000px, 82vw);
+    transform: translateX(-50%);
+    transform-origin: center top;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .4)
+}
+
+.hero .ppl {
+    position: absolute;
+    z-index: 4;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none
+}
+
+
+/* features section: slides over the pinned hero */
+.feat-sec {
+    position: relative;
+    z-index: 5;
+    /* above the hero */
+    margin-top: -100vh;
+    /* overlaps the extra 100% of hero pin */
+    background: #f7f8fe;
+    box-shadow: 0 -24px 60px rgba(20, 16, 60, 0.15);
+    padding: 110px 24px 58px;
+    min-height: 100vh;
+    /* must fully cover the hero */
+}
+
+.feat-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feat-wrap .big {
+    max-width: 100%;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.15;
+    text-align: center;
+}
+
+.feat-wrap .lead {
+    max-width: 100%;
+    margin: 16px 0 70px;
+    color: #2a2a3c;
+    text-align: center;
+}
+
+/* 3 | photo | 3 */
+.feat6 {
+    display: grid;
+    grid-template-columns: 1fr minmax(260px, 440px) 1fr;
+    gap: 48px;
+    align-items: stretch;
+}
+
+.fcol {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 17px;
+}
+
+.fitem .ico {
+    width: 55px;
+    height: 55px;
+    padding: 0px;
+
+    border-radius: 10px;
+    margin-bottom: 14px;
+}
+
+.fitem h3 {
+    font-size: 16px;
+    line-height: 1.3;
+    margin: 0 0 8px;
+}
+
+.fitem p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}
+
+/* photo with parallax room */
+.fmid {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+
+}
+
+.fmid img {
+    position: absolute;
+    left: 0;
+    top: 0%;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+    will-change: transform;
+}
+
+@media (max-width: 900px) {
+    .feat6 {
+        grid-template-columns: 1fr;
+    }
+
+    .fmid {
+        order: -1;
+        min-height: 360px;
+    }
+
+    .feat-sec {
+
+        padding: 80px 20px;
+    }
+}
+
+.fmid video {
+    position: absolute;
+    left: 0;
+    top: 0%;
+    width: 100%;
+    object-fit: scale-down;
+    display: block;
+    will-change: transform;
+    height: 437px;
+}
+
+
+
+.hrv {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+
+}
+
+.hrv-grid {
+    position: relative;
+    height: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 90px 32px 24px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-rows: minmax(0, 1fr);
+    /* NEW */
+    align-items: center;
+    gap: 24px;
+}
+
+/* ---- left ---- */
+.hrv-left {
+    color: #17496b;
+}
+
+.hrv-eyebrow {
+    font-size: 18px;
+    margin: 0 0 8px;
+    opacity: .85;
+}
+
+.hrv-left h2 {
+    font-size: clamp(30px, 3.6vw, 52px);
+    line-height: 1.08;
+    margin: 0;
+    font-weight: 800;
+}
+
+.hrv-cards {
+    position: relative;
+    height: 230px;
+    margin-top: 48px;
+}
+
+.hrv-card {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+}
+
+.hrv-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #b87500;
+    background: #fff3dc;
+    padding: 6px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+}
+
+.hrv-card h3 {
+    font-size: clamp(22px, 2.2vw, 32px);
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+.hrv-card p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #2c4a60;
+    margin: 0;
+    max-width: 460px;
+}
+
+.hrv-prog {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.hrv-prog i {
+    flex: 1;
+    max-width: 240px;
+    height: 3px;
+    background: rgba(23, 73, 107, .15);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.hrv-prog b {
+    display: block;
+    height: 100%;
+    background: #f5a623;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.hrv-right {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    min-height: 0;
+}
+
+.hrv-stage {
+    position: relative;
+    width: min(100%, 680px);
+    height: 100%;
+    /* fills the space under the header, never taller than the screen */
+    display: grid;
+    place-items: center;
+    /* phones stay centered, orbit centers on them */
+}
+
+.hrv-phones {
+    position: relative;
+    /* no more left/top; the grid centers it */
+    width: min(56%, 50vh);
+    /* phones shrink on short screens */
+    z-index: 2;
+}
+
+.hrv-phones img {
+    width: 60%;
+    display: block;
+    position: relative;
+    left: 29px;
+}
+
+/* 
+.hrv-shadow {
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    bottom: -6%;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(23, 73, 107, .28), transparent 70%);
+    filter: blur(6px);
+} */
+.hrv-ico {
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    opacity: 0;
+    will-change: transform;
+}
+
+.hrv-badge {
+    width: 46px !important;
+    height: 46px !important;
+    display: block;
+    filter: drop-shadow(0 10px 14px rgba(23, 73, 107, .25));
+    transition: transform .45s cubic-bezier(.2, 1.4, .4, 1), filter .45s;
+}
+
+.hrv-badge svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.hrv-lab {
+    font-size: 15px;
+    line-height: 1.25;
+    color: #17496b;
+    transition: color .3s, font-weight .3s;
+}
+
+.hrv-ico.on .hrv-badge {
+    transform: scale(1.25);
+    filter: drop-shadow(0 14px 22px rgba(245, 166, 35, .55));
+}
+
+.hrv-ico.on .hrv-lab {
+    font-weight: 700;
+}
+
+/* ---- mobile ---- */
+@media (max-width: 900px) {
+    .hrv-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 48% 52%;
+        padding: 0 16px;
+        gap: 0;
+    }
+
+    .hrv-right {
+        order: -1;
+    }
+
+    .hrv-stage {
+        width: min(100%, 420px);
+        height: 100%;
+        aspect-ratio: auto;
+    }
+
+    .hrv-phones {
+        width: 40%;
+    }
+
+    .hrv-badge {
+        width: 44px;
+        height: 44px;
+    }
+
+    .hrv-ico {
+        width: 100px;
+    }
+
+    .hrv-lab {
+        font-size: 11px;
+    }
+
+    .hrv-cards {
+        height: 120px;
+        margin-top: 20px;
+    }
+
+    .hrv-card p {
+        font-size: 15px;
+    }
+}
+
+
+
+
+.pin-spacer {
+    padding-bottom: 0px !important;
+}
+
+
+/* 1. stop anything that sticks out sideways from creating a horizontal scrollbar.
+      `clip` (not `hidden`) is used on purpose: it does not break position: sticky or GSAP pins */
+html,
+body,
+#root {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+/* 2. the page content sits ABOVE the fixed footer and has a solid background,
+      so the black footer can never show through a section */
+.main {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    overflow-x: clip;
+}
+
+/* 3. sections whose animations start off-screen */
+.ai,
+.int,
+.hero,
+.svc {
+    overflow-x: clip;
+}
+
+/* 4. footer: stays behind the content and is revealed at the end */
+.foot {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    /* padding no longer adds to the width */
+    z-index: 1;
+    background: #ffffff;
+    color: #000;
+    padding: 60px 4vw 24px;
+}
+
+
+.hero-bg {
+    height: 800px;
+}
+
+
+/* ---------- footer additions (existing .foot / .cols / .h untouched) ---------- */
+.foot .cols a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.foot .cols a:hover {
+    color: #1d4ed8;
+}
+
+.foot .ft-stores {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.foot .ft-stores a {
+    display: block;
+    width: 140px;
+}
+
+.foot .ft-stores a+a {
+    margin-top: 18px;
+}
+
+.foot .ft-stores img {
+    display: block;
+    width: 80%;
+    height: auto;
+}
+
+.ft-mid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+.ft-logo {
+    height: 120px;
+    width: auto;
+    display: block;
+}
+
+.ft-contact {
+    width: 100%;
+    max-width: 495px;
+}
+
+.ft-addr {
+    margin: 0 0 14px;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.ft-addr svg {
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+
+.ft-social {
+    display: flex;
+    gap: 16px;
+    padding-left: 20px;
+}
+
+.ft-social a {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: transform 0.2s;
+}
+
+.ft-social a:hover {
+    transform: translateY(-3px);
+}
+
+.ft-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+    padding: 24px 0 16px;
+    border-top: 1px solid rgba(128, 128, 128, 0.35);
+}
+
+.ft-bottom p {
+    margin: 0;
+}
+
+/* floating buttons */
+.ft-wa {
+    position: fixed;
+    right: 28px;
+    bottom: 84px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #25d366;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    z-index: 50;
+    transition: transform 0.2s;
+}
+
+.ft-wa:hover {
+    transform: scale(1.08);
+}
+
+.ft-top {
+    position: fixed;
+    right: 32px;
+    bottom: 26px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: #9a9a9a;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, background 0.2s;
+}
+
+.ft-top.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ft-top:hover {
+    background: #6b6b6b;
+}
+
+@media (max-width: 900px) {
+    .ft-mid {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ft-social {
+        padding-left: 0;
+    }
+}
+
+
+/* ---------- force footer columns to show ---------- */
+.foot .cols {
+    display: grid !important;
+    grid-template-columns: 1.9fr 1.3fr 1fr 1.3fr 1fr;
+    gap: 28px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin-bottom: 30px;
+}
+
+.foot .cols ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+.foot .cols li.h {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    /* white headings */
+    margin-bottom: 22px;
+}
+
+.foot .cols a {
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.foot .cols a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .foot .cols {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .foot .cols {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.nav-item {
+    position: relative;
+}
+
+
+/* ===== Services section: mobile (320px – 768px) ===== */
+@media (min-width: 320px) and (max-width: 768px) {
+
+    .svc .stick {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 76px 16px 16px;
+        /* top space for the sticky header */
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .svc .big {
+        margin: 0;
+        font-size: clamp(20px, 6vw, 28px);
+        line-height: 1.2;
+        text-align: left;
+    }
+
+    .svc .row {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    /* tabs become a horizontal scroll strip */
+    .svc .tabs {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        margin: 0;
+        padding: 0 0 4px;
+        list-style: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .svc .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .svc .tabs li {
+        flex: none;
+        width: auto;
+        scroll-snap-align: start;
+    }
+
+    .svc .tabs li a {
+        display: block;
+        padding: 8px 14px;
+        border-radius: 99px;
+        border: 1px solid rgba(109, 40, 217, 0.25);
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.2;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+
+    .svc .tabs li.on a {
+        background: #6d28d9;
+        border-color: #6d28d9;
+        color: #fff;
+    }
+
+    /* visual card */
+    .svc .vis {
+        position: relative;
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        padding: 18px 16px;
+        border-radius: 20px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        box-sizing: border-box;
+    }
+
+    .svc .vis small {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+    }
+
+    .svc .vis h3 {
+        margin: 6px 0 8px;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+
+
+    /* laptop + phone images (GSAP animates transform, so position with left/right/bottom only) */
+    .svc .vis img.d {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 6%;
+        width: 88%;
+        max-width: 440px;
+        height: auto;
+        margin: 0 auto;
+        object-fit: contain;
+    }
+
+    .svc .vis img.m {
+        position: absolute;
+        right: 5%;
+        bottom: 2%;
+        width: 30%;
+        max-width: 120px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+/* small phones */
+@media (min-width: 320px) and (max-width: 400px) {
+    .svc .stick {
+        padding: 70px 12px 12px;
+    }
+
+    .svc .vis {
+        padding: 14px 12px;
+    }
+
+    .svc .vis h3 {
+        font-size: 18px;
+    }
+
+
+
+    .svc .vis img.d {
+        width: 92%;
+        bottom: 8%;
+    }
+
+    .svc .vis img.m {
+        width: 28%;
+    }
+}
+
+/* landscape phones / short screens */
+@media (min-width: 320px) and (max-width: 768px) and (max-height: 520px) {
+    .svc .stick {
+        padding-top: 84px;
+        gap: 8px;
+    }
+
+    .svc .big {
+        font-size: 18px;
+    }
+
+    .svc .vis p {
+        display: none;
+    }
+
+    .svc .vis img.d {
+        width: 56%;
+        bottom: 4%;
+    }
+
+    .svc .vis img.m {
+        width: 16%;
+    }
+
+    .hero .ppl {
+        position: absolute;
+        z-index: 4;
+        bottom: 28px !important;
+        width: 100%;
+        pointer-events: none;
+    }
+
+    .hero .dash {
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        top: 109% !important;
+        width: min(1000px, 82vw);
+        transform: translateX(-50%);
+        transform-origin: center top;
+        border-radius: 12px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+    }
+}
+
+/* ===== Workflow: MOBILE PORTRAIT (320px – 768px): content on top, phones centred with icons spread around ===== */
+@media (min-width: 320px) and (max-width: 768px) and (orientation: portrait) {
+
+    .hrv {
+        height: 100vh !important;
+        height: 100svh !important;
+        overflow: hidden !important;
+    }
+
+    .hrv .hrv-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 72px 16px 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* content (top) */
+    .hrv .hrv-left {
+        grid-row: 2 !important;
+        grid-column: 2 !important;
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        text-align: left !important;
+    }
+
+    .hrv .hrv-eyebrow {
+        margin: 0 0 2px !important;
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+    }
+
+    .hrv .hrv-head h2 {
+        margin: 0 !important;
+        font-size: clamp(18px, 5.4vw, 26px) !important;
+        line-height: 1.2 !important;
+    }
+
+    .hrv .hrv-cards {
+        position: relative !important;
+        width: 100% !important;
+        min-height: 128px !important;
+    }
+
+    .hrv .hrv-card {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .hrv .hrv-tag {
+        display: inline-block !important;
+        margin-bottom: 6px !important;
+        padding: 4px 10px !important;
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+    }
+
+    .hrv .hrv-card h3 {
+        margin: 0 0 4px !important;
+        font-size: 15px !important;
+        line-height: 1.25 !important;
+    }
+
+    .hrv .hrv-card p {
+        margin: 0 !important;
+        font-size: 12px !important;
+        line-height: 1.45 !important;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .hrv .hrv-prog {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        font-size: 12px !important;
+    }
+
+    .hrv .hrv-prog i {
+        flex: 1 !important;
+    }
+
+    /* phones + icons (below) */
+    .hrv .hrv-right {
+        grid-row: 1 !important;
+        grid-column: 2 !important;
+        position: relative !important;
+        display: flex !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+    }
+
+    .hrv .hrv-stage {
+        position: relative !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 240px !important;
+    }
+
+
+    .hrv .hrv-float img {
+        display: block !important;
+        width: min(26vw, 92px) !important;
+        max-width: none !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+
+    .hrv .hrv-shadow {
+        display: block !important;
+        width: 50% !important;
+        height: 8px !important;
+        margin-top: 4px !important;
+    }
+
+    /* icon + label, same style as desktop but smaller */
+    .hrv .hrv-ico {
+        position: absolute !important;
+        left: 52% !important;
+        top: 43% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 4px !important;
+        width: 74px !important;
+        pointer-events: none !important;
+    }
+
+    .hrv .hrv-badge {
+        display: grid !important;
+        place-items: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        padding: 8px !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    .hrv .hrv-badge svg {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .hrv .hrv-lab {
+        max-width: 74px !important;
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+    }
+}
+
+/* tall phones (taller than 640px): bigger text, phones and orbit */
+@media (min-width: 320px) and (max-width: 768px) and (orientation: portrait) and (min-height: 641px) {
+    .hrv .hrv-grid {
+        padding-top: 78px !important;
+        gap: 12px !important;
+    }
+
+    .hrv .hrv-head h2 {
+        font-size: clamp(22px, 6vw, 28px) !important;
+    }
+
+    .hrv .hrv-cards {
+        min-height: 150px !important;
+    }
+
+    .hrv .hrv-card h3 {
+        font-size: 17px !important;
+    }
+
+    .hrv .hrv-card p {
+        font-size: 13px !important;
+
+    }
+
+
+
+    .hrv .hrv-float img {
+        width: min(30vw, 112px) !important;
+    }
+
+
+
+    .hrv .hrv-badge {
+        width: 46px !important;
+        height: 46px !important;
+        padding: 9px !important;
+    }
+
+    .hrv .hrv-lab {
+        max-width: 84px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* short phones (up to 560px high, like your 320 x 511 test): compact text */
+@media (min-width: 320px) and (max-width: 768px) and (orientation: portrait) and (max-height: 560px) {
+    .hrv .hrv-grid {
+        padding-top: 66px !important;
+        gap: 4px !important;
+    }
+
+    .hrv .hrv-eyebrow {
+        display: none !important;
+    }
+
+    .hrv .hrv-head h2 {
+        font-size: 17px !important;
+    }
+
+    .hrv .hrv-cards {
+        min-height: 104px !important;
+    }
+
+
+
+
+    .hrv .hrv-float img {
+        width: min(22vw, 76px) !important;
+    }
+
+
+
+    .hrv .hrv-badge {
+        width: 34px !important;
+        height: 34px !important;
+        padding: 7px !important;
+    }
+
+    .hrv .hrv-lab {
+        max-width: 66px !important;
+        font-size: 9px !important;
+    }
+}
+
+/* ===== LANDSCAPE phones only: text left, phones right ===== */
+@media (max-width: 900px) and (max-height: 520px) and (orientation: landscape) {
+    .hrv .hrv-grid {
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr !important;
+        gap: 12px !important;
+        padding: 64px 16px 8px !important;
+    }
+
+    .hrv .hrv-left {
+        grid-row: 2 !important;
+        grid-column: 2 !important;
+    }
+
+    .hrv .hrv-right {
+        grid-row: 1 !important;
+        grid-column: 2 !important;
+    }
+
+    .hrv .hrv-eyebrow {
+        display: none !important;
+    }
+
+    .hrv .hrv-head h2 {
+        font-size: 18px !important;
+    }
+
+    .hrv .hrv-cards {
+        min-height: 100px !important;
+    }
+
+    .hrv .hrv-float img {
+        width: min(18vw, 90px) !important;
+    }
+}
+
+
+/* ===== Workflow heading (.hrv-head): mobile 320px – 768px ===== */
+@media (min-width: 320px) and (max-width: 768px) {
+
+    .hrv .hrv-head {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .hrv .hrv-head .hrv-eyebrow {
+        margin: 0 0 6px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+        letter-spacing: 0.06em !important;
+    }
+
+    .hrv .hrv-head h2 {
+        margin: 0 !important;
+        font-size: clamp(20px, 6vw, 28px) !important;
+        line-height: 1.2 !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.01em !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+    }
+}
+
+/* small phones: 320px – 400px */
+@media (min-width: 320px) and (max-width: 400px) {
+    .hrv .hrv-head .hrv-eyebrow {
+        font-size: 10px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .hrv .hrv-head h2 {
+        font-size: 19px !important;
+    }
+}
+
+/* short portrait phones (like your 320 x 511 test): hide the small line to save space */
+@media (min-width: 320px) and (max-width: 768px) and (max-height: 560px) and (orientation: portrait) {
+    .hrv .hrv-head .hrv-eyebrow {
+        display: none !important;
+    }
+
+    .hrv .hrv-head h2 {
+        font-size: 17px !important;
+    }
+}
+
+
+
+/* ===== Footer: show the full footer on mobile (320px – 768px) ===== */
+@media (min-width: 320px) and (max-width: 768px) {
+
+    /* turn the "reveal" footer into a normal footer at the end of the page */
+    .foot {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        transform: none !important;
+        z-index: 1 !important;
+    }
+
+    /* remove the big gap your layout adds above the fixed footer */
+    .main {
+        margin-bottom: 0 !important;
+    }
+
+    /* let the page scroll normally */
+    html,
+    body,
+    #root {
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .svc .tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+        overflow-x: auto;
+        position: relative;
+        /* so li.offsetLeft is measured from the strip */
+        max-width: 100%;
+        min-width: 0;
+        padding-right: 16px;
+        /* stops the last pill looking cut off */
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .svc .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .svc .tabs li {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+}

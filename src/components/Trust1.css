@@ -1,0 +1,291 @@
+.trust {
+    position: relative;
+    background: #fff;
+    padding: 90px 24px;
+    z-index: 2;
+}
+
+.trust-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* header */
+.trust-head {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 36px;
+    justify-content: center;
+    align-items: center;
+}
+
+.trust-copy {
+    max-width: 100%;
+    text-align: center;
+}
+
+.trust-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6d28d9;
+}
+
+.trust-copy h2 {
+    margin: 10px 0 12px;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.2;
+    color: #14122b;
+}
+
+.trust-copy p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #5b5a72;
+    margin: 0;
+}
+
+.trust-certs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    max-width: 460px;
+    background: #f6f5fc;
+    border: 1px solid #dcd9ee;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.cert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 10px;
+    border-right: 1px solid #dcd9ee;
+    font-size: 12px;
+    font-weight: 600;
+    color: #14122b;
+}
+
+.cert:last-child {
+    border-right: 0;
+}
+
+.cert img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+/* testimonial slider */
+.tslider {
+    position: relative;
+    height: 615px;
+    border-radius: 8px;
+    overflow: hidden;
+    color: #fff;
+    background: #1b1040;
+}
+
+.tslide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 0.9s ease, transform 7s ease;
+}
+
+.tslide.on {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.tslider-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(20 10 60 / 0%) 51%, rgb(15 3 63 / 90%) 85%);
+}
+
+.tbars {
+    position: absolute;
+    top: 18px;
+    left: 24px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+
+.tbar {
+    width: 52px;
+    height: 3px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.tbar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #fff;
+}
+
+.tbar.done i {
+    width: 100%;
+}
+
+.tbar.run i {
+    animation: tfill linear forwards;
+}
+
+@keyframes tfill {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.tcompany {
+    position: absolute;
+    top: 38px;
+    left: 24px;
+    z-index: 2;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    font-size: 13px;
+}
+
+.tbody {
+    position: absolute;
+    left: 24px;
+    right: 120px;
+    bottom: 28px;
+    z-index: 2;
+    max-width: 620px;
+    animation: tin 0.7s ease both;
+}
+
+.tbody p {
+    margin: 0 0 14px;
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.tbody strong {
+    display: block;
+    font-size: 13px;
+}
+
+.tbody small {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+@keyframes tin {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.tarrows {
+    position: absolute;
+    right: 20px;
+    bottom: 24px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.tarrows button {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tarrows button:hover {
+    background: #6d28d9;
+    border-color: #6d28d9;
+}
+
+/* badges slider */
+.badges {
+    --vis: 7;
+    /* how many badges visible at once */
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.badges-track {
+    display: flex;
+    width: 100%;
+}
+
+.badges-track.anim {
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.badges-track {
+    transform: translateX(calc(var(--i) * -100% / var(--vis)));
+}
+
+.badge {
+    flex: 0 0 calc(100% / var(--vis));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.badge img {
+    max-width: 100%;
+    height: 72px;
+    object-fit: contain;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .trust-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .badges {
+        --vis: 4;
+    }
+}
+
+@media (max-width: 560px) {
+    .tslider {
+        height: 460px;
+    }
+
+    .tbody {
+        right: 24px;
+        bottom: 70px;
+    }
+
+    .badges {
+        --vis: 3;
+    }
+}

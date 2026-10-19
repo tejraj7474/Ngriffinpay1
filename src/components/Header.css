@@ -1,0 +1,466 @@
+/* =========================================================
+   Header: desktop mega/dropdown menus + mobile accordion menu
+   Everything is scoped under .hdr so it won't affect other sections.
+   Mobile / tablet breakpoint: 992px
+   ========================================================= */
+
+.hdr {
+  --h-ink: #1b1140;
+  --h-brand: #6d28d9;
+  --h-accent: #ff6b57;
+  --h-line: #ece6ff;
+  --h-soft: #f5f0ff;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 76px;
+  padding: 0 clamp(16px, 4vw, 48px);
+  background: rgb(255 255 255 / 71%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--h-line);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.hdr *,
+.hdr *::before,
+.hdr *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- logo ---------- */
+.hdr .logo {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.hdr .logo img {
+  display: block;
+  height: 48px;
+  width: auto;
+}
+
+/* the coloured logo is only for the white mobile header */
+.hdr .logo .logo-m {
+  display: none;
+}
+
+/* ---------- burger (hidden on desktop) ---------- */
+.hdr .burger {
+  display: none;
+}
+
+/* the "Request a Demo" item inside the menu is mobile only */
+.hdr .nav-item.nav-cta {
+  display: none;
+}
+
+/* ---------- desktop nav ---------- */
+.hdr nav {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.hdr .nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hdr .nav-item>a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 14px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--h-ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.hdr .nav-item>a::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--h-brand), var(--h-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.hdr .nav-item:hover>a,
+.hdr .nav-item.open>a {
+  color: var(--h-brand);
+}
+
+.hdr .nav-item:hover>a::before,
+.hdr .nav-item.open>a::before {
+  transform: scaleX(1);
+}
+
+/* ---------- dropdown panels (desktop) ---------- */
+.hdr .dd {
+  position: absolute;
+  top: calc(100% - 8px);
+  left: 0;
+  min-width: 240px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--h-line);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(109, 40, 217, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+}
+
+.hdr .nav-item.open>.dd {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+@media (hover: hover) and (min-width: 993px) {
+  .hdr .nav-item.has-dd:hover>.dd {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
+.hdr .dd ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hdr .dd li a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 500;
+  color: #3a2f6b;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.hdr .dd li a:hover {
+  background: var(--h-soft);
+  color: var(--h-brand);
+  padding-left: 16px;
+}
+
+.hdr .dd-mega {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+  width: min(680px, 92vw);
+  padding: 16px;
+}
+
+.hdr .dd-partner {
+  min-width: 220px;
+  left: 50%;
+  margin-left: -110px;
+}
+
+.hdr .dd-loc {
+  width: 440px;
+  left: 50%;
+  margin-left: -220px;
+  padding: 14px;
+}
+
+.hdr .dd-loc ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+}
+
+/* ---------- CTA ---------- */
+.hdr .cta {
+  flex: none;
+}
+
+.hdr .btn {
+  display: inline-block;
+  padding: 11px 22px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(90deg, var(--h-brand), var(--h-accent));
+  box-shadow: 0 10px 22px rgba(109, 40, 217, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hdr .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(109, 40, 217, 0.4);
+}
+
+.hdr a:focus-visible,
+.hdr .burger:focus-visible {
+  outline: 3px solid rgba(109, 40, 217, 0.45);
+  outline-offset: 2px;
+}
+
+/* ---------- small laptops: tighten spacing ---------- */
+@media (max-width: 1180px) {
+  .hdr {
+    gap: 12px;
+  }
+
+  .hdr .nav-item>a {
+    padding: 0 9px;
+    font-size: 14px;
+  }
+
+  .hdr .nav-item>a::before {
+    left: 9px;
+    right: 9px;
+  }
+
+  .hdr .btn {
+    padding: 10px 16px;
+  }
+}
+
+/* =========================================================
+   MOBILE + TABLET  (max-width: 992px)
+   White bar: coloured logo (left) | plain grey burger (right).
+   The menu opens below as an accordion, with the
+   "Request a Demo" button at the bottom of the menu.
+   ========================================================= */
+@media (max-width: 992px) {
+
+  /* white header bar like the reference */
+  .hdr {
+    height: auto;
+    min-height: 68px;
+    flex-wrap: wrap;
+    gap: 0 12px;
+    padding: 8px 20px;
+    background: #fff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* logo: swap to the coloured one */
+  .hdr .logo {
+    order: 1;
+  }
+
+  .hdr .logo .logo-d {
+    display: none;
+  }
+
+  .hdr .logo .logo-m {
+    display: block;
+    height: 52px;
+    width: auto;
+  }
+
+  /* demo button leaves the bar (it is inside the menu on mobile) */
+  .hdr .cta {
+    display: none;
+  }
+
+  /* burger: no box, just three grey lines */
+  .hdr button.burger {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hdr button.burger span {
+    display: block;
+    flex: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background: #9ca3af;
+    transition: transform 0.3s, opacity 0.2s;
+  }
+
+  .hdr button.burger[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .hdr button.burger[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hdr button.burger[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .hdr button.burger:focus-visible {
+    outline: 2px solid #9ca3af;
+    outline-offset: 2px;
+  }
+
+  /* the menu panel */
+  .hdr nav {
+    order: 3;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .hdr nav.mob-open {
+    max-height: calc(100vh - 76px);
+    max-height: calc(100dvh - 76px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 8px;
+    padding: 4px 0 20px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .hdr .nav-item {
+    display: block;
+    border-bottom: 1px solid #eef0f3;
+  }
+
+  .hdr .nav-item>a {
+    justify-content: space-between;
+    height: 52px;
+    padding: 0 4px;
+    font-size: 16px;
+  }
+
+  .hdr .nav-item>a::before {
+    display: none;
+  }
+
+  /* dropdowns become accordions inside the menu */
+  .hdr .dd,
+  .hdr .dd-partner,
+  .hdr .dd-loc,
+  .hdr .dd-mega {
+    position: static;
+    display: block;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+
+  .hdr .nav-item.open>.dd {
+    max-height: 1000px;
+    padding: 0 0 12px 8px;
+  }
+
+  .hdr .dd-loc ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hdr .dd li a {
+    padding: 11px 10px;
+    font-size: 15px;
+  }
+
+  .hdr .dd li a:hover {
+    padding-left: 14px;
+  }
+
+  /* "Request a Demo" at the bottom of the opened menu */
+  .hdr .nav-item.nav-cta {
+    display: block;
+    padding-top: 18px;
+    border-bottom: 0;
+  }
+
+  .hdr .nav-item.nav-cta>a.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 14px 20px;
+    font-size: 15px;
+    color: #fff;
+  }
+
+  .hdr .nav-item.nav-cta:hover>a.btn {
+    color: #fff;
+  }
+}
+
+/* very small phones */
+@media (max-width: 380px) {
+  .hdr {
+    padding: 8px 14px;
+  }
+
+  .hdr .logo .logo-m {
+    height: 54px;
+  }
+
+  .hdr button.burger {
+    width: 40px;
+    height: 40px;
+    padding: 0 7px;
+  }
+
+  .hdr .dd-loc ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hdr *,
+  .hdr *::before,
+  .hdr *::after {
+    transition: none !important;
+  }
+}

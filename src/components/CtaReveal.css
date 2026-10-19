@@ -1,0 +1,249 @@
+.cr {
+    position: relative;
+    height: 220vh;
+    /* scroll distance: bigger = slower reveal */
+    z-index: 2;
+}
+
+.cr-stage {
+    position: sticky;
+    /* this is what keeps it fixed while scrolling */
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* sky colour behind the logo */
+/* background image behind the logo */
+.cr-sky {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+}
+
+/* big logo */
+.cr-logo {
+    position: absolute;
+    left: 50%;
+    bottom: 58%;
+    height: 29vh;
+    width: auto;
+    transform-origin: 50% 100%;
+    translate: -50% 0;
+    /* centers it, so GSAP's yPercent/scale don't clash */
+    opacity: 0.9;
+    will-change: transform;
+}
+
+.cr-mountain {
+    position: absolute;
+    left: 0;
+    bottom: -56px;
+    width: 100%;
+    height: 77vh;
+    object-fit: cover;
+    object-position: center bottom;
+    pointer-events: none;
+}
+
+/* the purple "filter" effect, over sky + logo + mountain */
+.cr-tint {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            rgba(91, 75, 240, 0.55) 0%,
+            rgba(123, 108, 255, 0.25) 55%,
+            rgba(80, 60, 200, 0.35) 100%);
+    mix-blend-mode: soft-light;
+}
+
+/* content */
+.cr-copy {
+    position: absolute;
+    top: 14%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    padding: 0 24px;
+    z-index: 3;
+}
+
+.cr-copy h2 {
+    margin: 0 0 24px;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.15;
+}
+
+.cr-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+
+
+    .cr-mountain {
+        height: 40vh;
+    }
+}
+
+
+
+
+/* =========================================================
+   CtaReveal: mobile + tablet (all phone sizes)
+   Layer order: sky < logo < mountain < tint < copy
+   ========================================================= */
+@media (max-width: 992px) {
+    .cr {
+        position: relative;
+        height: 200vh;
+        /* scroll distance for the rise */
+    }
+
+    .cr-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100svh;
+        /* stable height as the mobile address bar hides/shows */
+        overflow: hidden;
+    }
+
+    .cr-sky {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* centred with auto margins (not transform), because GSAP controls transform */
+    .cr-logo {
+        position: absolute;
+        top: 12%;
+        left: 162px;
+        right: 0;
+        z-index: 2;
+        display: block;
+        margin: 0 auto;
+        width: min(78vw, 44svh);
+        height: auto;
+        max-width: none;
+        will-change: transform, opacity;
+    }
+
+    .cr-mountain {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 3;
+        width: 100%;
+        height: 58vh;
+        height: 58svh;
+        object-fit: cover;
+        object-position: center bottom;
+    }
+
+    .cr-tint {
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        pointer-events: none;
+    }
+
+    .cr-copy {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 8%;
+        z-index: 5;
+        padding: 0 20px;
+        text-align: center;
+    }
+}
+
+/* large phones / small tablets */
+@media (max-width: 768px) {
+    .cr-logo {
+        top: 14%;
+        width: min(80vw, 42svh);
+    }
+
+    .cr-mountain {
+        height: 56svh;
+    }
+}
+
+/* standard phones (390 to 430 wide) */
+@media (max-width: 480px) {
+    .cr {
+        height: 180vh;
+    }
+
+    .cr-logo {
+        top: 15%;
+        width: min(84vw, 40svh);
+    }
+
+    .cr-mountain {
+        height: 54svh;
+    }
+
+    .cr-copy {
+        padding: 0 16px;
+        bottom: 7%;
+    }
+}
+
+/* small phones (360 wide, iPhone SE, etc.) */
+@media (max-width: 360px) {
+    .cr-logo {
+        top: 13%;
+        width: min(88vw, 38svh);
+    }
+
+    .cr-mountain {
+        height: 52svh;
+    }
+
+    .cr-copy {
+        padding: 0 12px;
+    }
+}
+
+/* phones in landscape (short screens) */
+@media (max-height: 520px) and (orientation: landscape) {
+    .cr {
+        height: 170vh;
+    }
+
+    .cr-logo {
+        top: 6%;
+        width: min(36vw, 62svh);
+    }
+
+    .cr-mountain {
+        height: 46svh;
+    }
+
+    .cr-copy {
+        bottom: 4%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cr-logo {
+        will-change: auto;
+    }
+}
