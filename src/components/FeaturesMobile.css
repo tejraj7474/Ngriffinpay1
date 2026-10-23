@@ -15,7 +15,7 @@ section.feat-sec.pad {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  padding: 76px 20px 16px;
+  padding: 18px 20px 16px !important;
   /* top space for the fixed navbar */
   box-sizing: border-box;
   overflow: hidden;
@@ -276,7 +276,7 @@ section.feat-sec.pad {
 /* status bar + app header */
 .fm-status {
   position: absolute;
-  top: 2.6cqw;
+  top: -13cqw;
   left: 7cqw;
   right: 7cqw;
   display: flex;
@@ -328,8 +328,8 @@ section.feat-sec.pad {
 
 .fm-ah {
   position: absolute;
-  top: 9cqw;
-  left: 6cqw;
+  top: -8cqw;
+  left: 0cqw;
   right: 6cqw;
   display: flex;
   align-items: center;
@@ -2497,7 +2497,7 @@ section.feat-sec.pad {
   .fm-stage {
     position: relative;
     justify-content: flex-start;
-    padding: 84px 4vw 0;
+    padding: 18px 4vw 0 !important;
   }
 
   .fm-title {
