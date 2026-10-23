@@ -1249,7 +1249,7 @@ section.feat-sec.pad {
   flex: none;
   width: min(62vw, calc((100svh - 140px) * 1.528), 1200px);
   aspect-ratio: 494 / 505;
-  top: -99px;
+  top: -39px;
   left: 37px;
 }
 
