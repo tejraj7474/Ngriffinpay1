@@ -11,7 +11,7 @@
   --h-line: #ece6ff;
   --h-soft: #f5f0ff;
 
-  position: sticky;
+  position: relative !important;
   top: 0;
   z-index: 1000;
   display: flex;
@@ -209,8 +209,8 @@
   white-space: nowrap;
   text-decoration: none;
   color: #fff;
-  background: linear-gradient(90deg, var(--h-brand), var(--h-accent));
-  box-shadow: 0 10px 22px rgba(109, 40, 217, 0.3);
+  background: #0a3f83;
+  box-shadow: 0 10px 22px rgb(10 63 131 / 22%);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 

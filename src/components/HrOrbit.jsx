@@ -168,8 +168,8 @@ export default function HrOrbit() {
               onClick={() => setAct(i)}
               aria-label={mod.n}
             >
-              <span className="ho-mess" style={{ background: mod.mc }}>{mod.mess}</span>
-              <span className="ho-neat"><i style={{ background: mod.c }}>{mod.e}</i><b>{mod.n}</b></span>
+              <span className="ho-mess">{mod.mess}</span>
+              <span className="ho-neat"><i >{mod.e}</i><b>{mod.n}</b></span>
             </button>
           ))}
         </div>
@@ -177,7 +177,7 @@ export default function HrOrbit() {
         {/* one line about the module in focus */}
         <div className="ho-panel" ref={panelRef}>
           <div className="ho-pcard" key={act}>
-            <i style={{ background: m.c }}>{m.e}</i>
+            <i >{m.e}</i>
             <div><b>{m.n}</b><span>{m.line}</span></div>
           </div>
           <div className="ho-dots">

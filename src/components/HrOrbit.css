@@ -16,7 +16,7 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(180deg, #ffffff 0%, #faf6ff 55%, #fff4ee 100%)
+  background: linear-gradient(180deg, #ffffff 0%, #fdfeff 55%, #cdd8e6 100%)
 }
 
 .ho-blob {
@@ -30,7 +30,7 @@
 .ho-b1 {
   width: 380px;
   height: 380px;
-  background: #ddd6fe;
+  background: #859bc1;
   top: -110px;
   left: -90px
 }
@@ -38,7 +38,7 @@
 .ho-b2 {
   width: 340px;
   height: 340px;
-  background: #fed7aa;
+  background: #aebed5;
   top: 34%;
   right: -110px
 }
@@ -46,7 +46,7 @@
 .ho-b3 {
   width: 360px;
   height: 360px;
-  background: #bbf7d0;
+  background: #2c5992;
   bottom: -150px;
   left: 30%;
   opacity: .4
@@ -56,7 +56,7 @@
 .ho-head {
   position: absolute;
   z-index: 80;
-  top: 13vh;
+  top: 8vh;
   left: 0;
   right: 0;
   height: 130px;
@@ -101,7 +101,7 @@
 
 .ho-hb h2 em {
   font-style: normal;
-  background: linear-gradient(90deg, #6d28d9, #ff6b57);
+  background: #0c3d83;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent
@@ -177,7 +177,7 @@
   position: absolute;
   inset: -7px;
   border-radius: 50%;
-  background: conic-gradient(#6d28d9, #ff6b57, #ffb020, #22c58b, #3b9cff, #6d28d9);
+  background: #0a3f83;
   animation: ho-spin 6s linear infinite
 }
 
@@ -186,7 +186,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 2px solid rgba(109, 40, 217, .35);
+  border: 2px solid rgb(10 63 131);
   animation: ho-pulse 2.4s ease-out infinite
 }
 
@@ -232,8 +232,8 @@
   width: 158px;
   height: 62px;
   padding: 0;
-  border: 0;
-  background: none;
+  border-radius: 12px;
+  background: #0a3f83;
   cursor: pointer;
   font: inherit;
   will-change: transform
@@ -255,7 +255,7 @@
   font-size: 14px;
   font-weight: 700;
   line-height: 1.15;
-  color: #4a3a14;
+  color: #fff;
   box-shadow: 0 12px 24px rgba(0, 0, 0, .16)
 }
 
@@ -402,7 +402,7 @@
   height: 7px;
   margin-left: -2px;
   border-radius: 3px;
-  background: #6d28d9;
+  background: #0c3d83;
   animation: ho-wheel 1.4s ease-in-out infinite
 }
 

@@ -3,26 +3,42 @@ import { gsap, ScrollTrigger } from '../gsap';
 import logo from '../assets/ngriffinpay-logo.png';
 import './AppShowcase.css';
 
-const ACTIONS = [
-  ['Leave', '🌴', 'ngp-p', ''],
-  ['Payslip', '💸', 'ngp-c', ''],
-  ['Attendance', '🕘', 'ngp-b', 'ngp-a-att'],
-  ['Claims', '🧾', 'ngp-g', ''],
-];
-const TEAM = [
-  ['Aarav S.', 'Design', 'In office'],
-  ['Meera K.', 'Finance', 'In office'],
-  ['Rohan P.', 'Engineering', 'Remote'],
-];
-const DAYS = [['M', 70], ['T', 85], ['W', 60], ['T', 92], ['F', 78]];
+/* ---------- screen data ---------- */
 const PAY_ROWS = [
   ['Basic', '49,000'], ['HRA', '24,500'], ['Special allowance', '24,500'],
   ['Provident fund', '-5,880'], ['Income tax', '-9,670'],
 ];
-const CAL = [...Array(4).fill(null), ...Array.from({ length: 31 }, (_, i) => i + 1)]; // Oct 2026 starts on Thursday
-const HI = [20, 21, 22];
-const TABS = ['🏠', '🕘', '💸', '🌴'];
-const C = 339.3; // ring circumference (r = 54)
+const F24Q_CHECKS = [
+  'Deductee details verified',
+  'Challans mapped to TDS',
+  'Salary TDS computed',
+  'FVU file generated',
+];
+// [task, assignee, priority class, priority label, done at start]
+const TASKS = [
+  ['Update employee records', 'Priya · HR', 'ngp-pr-h', 'High', true],
+  ['Monthly payroll report', 'Meera · Finance', 'ngp-pr-m', 'Medium', true],
+  ['Policy document review', 'Rohan · Admin', 'ngp-pr-l', 'Low', false],
+  ['Training module update', 'Aarav · L&D', 'ngp-pr-m', 'Medium', false],
+  ['Verify new joiner docs', 'Sneha · HR', 'ngp-pr-h', 'High', false],
+  ['Asset handover — laptop', 'Kiran · IT', 'ngp-pr-l', 'Low', false],
+];
+const PENDING = [
+  ['R', 'Rohan P.', 'Leave · 27 – 28 Oct'],
+  ['M', 'Meera K.', 'Expense claim · ₹2,350'],
+  ['A', 'Aarav S.', 'Attendance regularisation'],
+  ['S', 'Sneha R.', 'Salary advance · ₹15,000'],
+];
+// [name, casual, sick, earned]
+const TEAM_LB = [
+  ['Aarav S.', 8, 6, 14],
+  ['Meera K.', 5, 4, 10],
+  ['Rohan P.', 2, 6, 12],
+  ['Sneha R.', 7, 3, 9],
+];
+const LB_MAX = 42; // 12 casual + 12 sick + 18 earned
+const TABS = ['⏱', '💸', '📄', '✅', '🔔', '🌴'];
+const DONE_AT_START = TASKS.filter(t => t[4]).length;
 
 const Status = () => (
   <div className="ngp-sb"><span>10:28</span><span>●●● ▮</span></div>
@@ -36,39 +52,79 @@ export default function AppShowcase() {
 
     const ctx = gsap.context(() => {
       const q = gsap.utils.selector(root);
-      const [s1, s2, s3, s4] = q('.ngp-screen');
-      const sc = [s1, s2, s3, s4].map(s => s.querySelector('.ngp-scroll'));
+      const screens = q('.ngp-screen');
+      const sc = screens.map(s => s.querySelector('.ngp-scroll'));
       const view = q('.ngp-viewport')[0];
       const splash = q('.ngp-splash')[0];
       const tap = q('.ngp-tap')[0];
-      const ring = q('.ngp-ring')[0];
-      const payNum = q('.ngp-paynum')[0];
-      const approve = q('.ngp-approve')[0];
       const tabs = q('.ngp-tabbar li');
-      const bars = q('.ngp-bars i');
-      const segs = q('.ngp-seg');
-      const hi = q('.ngp-cal .ngp-hi');
-      const rows = q('.ngp-prow');
-      const counter = { v: 0 };
 
+      // 1 · punch in
+      const pcard = q('.ngp-pcard')[0];
+      const pbtn = q('.ngp-pbtn')[0];
+      const pok = q('.ngp-pok')[0];
+      const ptxt = q('.ngp-ptxt')[0];
+      const ploc = q('.ngp-ploc')[0];
+      // 2 · salary
+      const notif = q('.ngp-notif')[0];
+      const payNum = q('.ngp-paynum')[0];
+      const segs = q('.ngp-seg');
+      const rows = q('.ngp-prow');
+      // 3 · form 24Q
+      const fbar = q('.ngp-fprog i')[0];
+      const fpct = q('.ngp-fpct')[0];
+      const fst = q('.ngp-fst')[0];
+      const checks = q('.ngp-chk li');
+      const ready = q('.ngp-ready')[0];
+      // 4 · tasks
+      const tasks = q('.ngp-task');
+      const tcount = q('.ngp-tcount')[0];
+      const tbar = q('.ngp-tbar i')[0];
+      const upd = q('.ngp-upd')[0];
+      // 5 · pending actions
+      const cards = q('.ngp-pa');
+      const badge = q('.ngp-badge')[0];
+      // 6 · team leave balance
+      const members = q('.ngp-tm');
+      const lbars = q('.ngp-tlb');
+
+      const pay = { v: 0 }, pct = { v: 0 };
       const setTab = i => tabs.forEach((t, k) => t.classList.toggle('ngp-on', k === i));
 
       const reset = () => {
-        gsap.set([s2, s3, s4], { opacity: 0, xPercent: 0 });
-        gsap.set(s1, { opacity: 1, xPercent: 0 });
+        gsap.set(screens.slice(1), { opacity: 0, xPercent: 0 });
+        gsap.set(screens[0], { opacity: 1, xPercent: 0 });
         gsap.set(splash, { opacity: 1, scale: 1 });
-        gsap.set(sc[0], { y: 0 });
-        gsap.set(ring, { strokeDashoffset: C });
-        gsap.set(bars, { scaleY: 0 });
-        gsap.set(segs, { scaleX: 0 });
-        gsap.set(hi, { scale: 0 });
-        gsap.set(rows, { opacity: 0, y: 10 });
         gsap.set(tap, { opacity: 0, scale: 0, xPercent: -50, yPercent: -50 });
-        approve.classList.remove('ngp-done');
-        approve.textContent = 'Approve';
-        payNum.textContent = '0';
-        counter.v = 0;
         setTab(0);
+
+        pcard.classList.remove('ngp-in');
+        ptxt.textContent = 'Not punched in yet';
+        gsap.set(pok, { scale: 0 });
+        gsap.set(ploc, { opacity: 0, y: 6 });
+
+        gsap.set(notif, { y: -90, opacity: 0 });
+        payNum.textContent = '0'; pay.v = 0;
+        gsap.set(segs, { scaleX: 0 });
+        gsap.set(rows, { opacity: 0, y: 10 });
+
+        gsap.set(fbar, { scaleX: 0 });
+        fpct.textContent = '0%'; pct.v = 0;
+        fst.textContent = 'Generating…';
+        gsap.set(checks, { opacity: 0, x: -12 });
+        gsap.set(ready, { opacity: 0, scale: 0.7 });
+
+        tasks.forEach((t, i) => t.classList.toggle('ngp-ck', TASKS[i][4]));
+        tcount.textContent = String(DONE_AT_START);
+        gsap.set(tbar, { scaleX: DONE_AT_START / TASKS.length });
+        gsap.set(upd, { opacity: 0, y: 6 });
+
+        cards.forEach(c => c.classList.remove('ngp-ok'));
+        gsap.set(cards, { clearProps: 'height,paddingTop,paddingBottom,marginBottom,opacity' });
+        badge.textContent = String(PENDING.length);
+
+        gsap.set(members, { opacity: 0, y: 12 });
+        gsap.set(lbars, { clipPath: 'inset(0 100% 0 0)' });
       };
       reset();
 
@@ -98,43 +154,76 @@ export default function AppShowcase() {
             { xPercent: 0, opacity: 1, duration: 0.6, ease: 'power3.out', immediateRender: false }, at + 0.25);
       };
 
-      // 0s  splash with logo -> dashboard
-      tl.to(splash, { opacity: 0, scale: 1.12, duration: 0.6, ease: 'power2.inOut' }, 1)
-        // dashboard scrolls down, then back up
-        .to(sc[0], { y: -250, duration: 1.7, ease: 'power2.inOut' }, 2)
-        .to(sc[0], { y: 0, duration: 1.1, ease: 'power2.inOut' }, 4.4);
+      const go = (i, at) => { // tap tab i and slide to its screen
+        press(tabs[i], view, at);
+        tl.call(() => setTab(i), null, at);
+        nav(screens[(i + screens.length - 1) % screens.length], screens[i], at + 0.3);
+      };
 
-      // dashboard -> attendance
-      press(q('.ngp-a-att')[0], sc[0], 5.8);
-      tl.call(() => setTab(1), null, 5.8);
-      nav(s1, s2, 6.1);
-      tl.to(ring, { strokeDashoffset: C * (1 - 0.82), duration: 1.6, ease: 'power2.out' }, 6.7)
-        .to(bars, { scaleY: 1, duration: 0.7, stagger: 0.1, ease: 'back.out(1.6)' }, 6.9);
+      // splash with logo -> 1 · Punch IN Done
+      tl.to(splash, { opacity: 0, scale: 1.12, duration: 0.6, ease: 'power2.inOut' }, 1);
+      press(pbtn, sc[0], 2.1);
+      tl.call(() => { pcard.classList.add('ngp-in'); ptxt.textContent = 'Punch IN Done · 09:02 AM'; }, null, 2.3)
+        .fromTo(pok, { scale: 0 }, { scale: 1, duration: 0.5, ease: 'back.out(2.4)', immediateRender: false }, 2.3)
+        .to(ploc, { opacity: 1, y: 0, duration: 0.4 }, 2.6);
 
-      // attendance -> payroll
-      press(tabs[2], view, 9.8);
-      tl.call(() => setTab(2), null, 9.8);
-      nav(s2, s3, 10.1);
-      tl.fromTo(counter, { v: 0 }, {
-        v: 82450, duration: 1.4, ease: 'power2.out', immediateRender: false,
-        onUpdate: () => { payNum.textContent = Math.round(counter.v).toLocaleString('en-IN'); },
-      }, 10.7)
-        .to(segs, { scaleX: 1, duration: 0.9, stagger: 0.15, ease: 'power3.out' }, 10.8)
-        .to(rows, { opacity: 1, y: 0, duration: 0.4, stagger: 0.12 }, 11.2);
+      // 2 · Salary Credited
+      go(1, 4.6);
+      tl.to(notif, { y: 0, opacity: 1, duration: 0.55, ease: 'back.out(1.6)' }, 5.4)
+        .fromTo(pay, { v: 0 }, {
+          v: 82450, duration: 1.4, ease: 'power2.out', immediateRender: false,
+          onUpdate: () => { payNum.textContent = Math.round(pay.v).toLocaleString('en-IN'); },
+        }, 5.6)
+        .to(segs, { scaleX: 1, duration: 0.9, stagger: 0.15, ease: 'power3.out' }, 5.7)
+        .to(rows, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, 6.0)
+        .to(notif, { y: -90, opacity: 0, duration: 0.4, ease: 'power2.in' }, 7.7);
 
-      // payroll -> leave
-      press(tabs[3], view, 13.6);
-      tl.call(() => setTab(3), null, 13.6);
-      nav(s3, s4, 13.9);
-      tl.to(hi, { scale: 1, duration: 0.45, stagger: 0.15, ease: 'back.out(2)' }, 14.6);
-      press(approve, sc[3], 16.2);
-      tl.call(() => { approve.classList.add('ngp-done'); approve.textContent = 'Approved ✓'; }, null, 16.4);
+      // 3 · Form 24Q Ready
+      go(2, 8.4);
+      tl.to(fbar, { scaleX: 1, duration: 1.8, ease: 'power1.inOut' }, 9.2)
+        .fromTo(pct, { v: 0 }, {
+          v: 100, duration: 1.8, ease: 'power1.inOut', immediateRender: false,
+          onUpdate: () => { fpct.textContent = `${Math.round(pct.v)}%`; },
+        }, 9.2)
+        .to(checks, { opacity: 1, x: 0, duration: 0.35, stagger: 0.42 }, 9.3)
+        .call(() => { fst.textContent = 'Validated ✓'; }, null, 11.0)
+        .to(ready, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, 11.1);
 
-      // leave -> back to home
-      press(tabs[0], view, 18.4);
-      tl.call(() => setTab(0), null, 18.4);
-      nav(s4, s1, 18.7);
-      tl.to({}, { duration: 1.2 }, 19.6); // hold the last frame before looping
+      // 4 · Tasks are Updated
+      go(3, 12.8);
+      TASKS.map((t, i) => i).filter(i => !TASKS[i][4]).slice(0, 3).forEach((i, k) => {
+        const at = 13.8 + k * 0.7;
+        press(tasks[i].querySelector('.ngp-box'), sc[3], at);
+        tl.call(() => {
+          tasks[i].classList.add('ngp-ck');
+          tcount.textContent = String(DONE_AT_START + k + 1);
+        }, null, at + 0.15)
+          .to(tbar, { scaleX: (DONE_AT_START + k + 1) / TASKS.length, duration: 0.4, ease: 'power2.out' }, at + 0.15);
+      });
+      tl.to(upd, { opacity: 1, y: 0, duration: 0.4 }, 16.0);
+
+      // 5 · Pending Actions
+      go(4, 17.4);
+      [0, 1].forEach((i, k) => {
+        const at = 18.4 + k * 1.3;
+        press(cards[i].querySelector('.ngp-pa-ok'), sc[4], at);
+        tl.call(() => cards[i].classList.add('ngp-ok'), null, at + 0.2)
+          .to(cards[i], {
+            height: 0, paddingTop: 0, paddingBottom: 0, marginBottom: 0, opacity: 0,
+            duration: 0.45, ease: 'power2.inOut',
+          }, at + 0.75)
+          .call(() => { badge.textContent = String(PENDING.length - k - 1); }, null, at + 0.75)
+          .fromTo(badge, { scale: 1.4 }, { scale: 1, duration: 0.4, ease: 'back.out(3)', immediateRender: false }, at + 0.75);
+      });
+
+      // 6 · Team Leave Balance
+      go(5, 21.6);
+      tl.to(members, { opacity: 1, y: 0, duration: 0.4, stagger: 0.12 }, 22.3)
+        .to(lbars, { clipPath: 'inset(0 0% 0 0)', duration: 0.9, stagger: 0.12, ease: 'power3.out' }, 22.5);
+
+      // back to 1 · Punch In, then loop
+      go(0, 25.2);
+      tl.to({}, { duration: 1.2 }, 26.1); // hold the last frame before looping
 
       // only run while the section is on screen
       ScrollTrigger.create({
@@ -148,13 +237,6 @@ export default function AppShowcase() {
         scrollTrigger: { trigger: root.current, start: 'top 70%', once: true },
       });
       gsap.to('.ngp-bob', { y: -14, duration: 2.8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-      gsap.utils.toArray('.ngp-fchip').forEach((c, i) => {
-        gsap.from(c, {
-          opacity: 0, x: i % 2 ? 40 : -40, duration: 0.8, delay: 0.4 + i * 0.25,
-          scrollTrigger: { trigger: root.current, start: 'top 70%', once: true },
-        });
-        gsap.to(c, { y: i % 2 ? 12 : -12, duration: 2.2 + i * 0.5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-      });
     }, root);
 
     return () => ctx.revert();
@@ -170,16 +252,12 @@ export default function AppShowcase() {
       </div>
 
       <div className="ngp-stage">
-        <span className="ngp-fchip ngp-f1">✅ Leave approved</span>
-        <span className="ngp-fchip ngp-f2">💸 Payslip ready</span>
-        <span className="ngp-fchip ngp-f3">⏱ On time · 98%</span>
-
         <div className="ngp-enter">
           <div className="ngp-bob">
             <div className="ngp-phone">
               <div className="ngp-viewport">
 
-                {/* 1 · Dashboard */}
+                {/* 1 · Punch IN Done */}
                 <section className="ngp-screen ngp-s1">
                   <div className="ngp-scroll">
                     <Status />
@@ -188,73 +266,36 @@ export default function AppShowcase() {
                       <div className="ngp-av">P</div>
                     </header>
                     <p className="ngp-hello">Good morning, <b>Priya</b></p>
-                    <div className="ngp-punch">
-                      <div><small>Checked in</small><strong>09:02 AM</strong><em>Bengaluru HQ</em></div>
-                      <button type="button">Punch Out</button>
-                    </div>
-                    <h4>Quick actions</h4>
-                    <div className="ngp-grid4">
-                      {ACTIONS.map(([n, e, c, k]) => (
-                        <div key={n} className={`ngp-act ${k}`}><span className={`ngp-ic ${c}`}>{e}</span><small>{n}</small></div>
-                      ))}
-                    </div>
-                    <h4>Leave balance</h4>
-                    <div className="ngp-lb">
-                      <div className="ngp-p"><b>8</b><small>Casual</small></div>
-                      <div className="ngp-c"><b>6</b><small>Sick</small></div>
-                      <div className="ngp-b"><b>14</b><small>Earned</small></div>
-                    </div>
-                    <h4>Who's in today</h4>
-                    {TEAM.map(([n, d, s]) => (
-                      <div className="ngp-mem" key={n}>
-                        <span className="ngp-av ngp-sm">{n[0]}</span>
-                        <div><b>{n}</b><small>{d}</small></div>
-                        <em>{s}</em>
+                    <div className="ngp-pcard">
+                      <small>Thursday, 22 Oct</small>
+                      <div className="ngp-pwrap">
+                        <button type="button" className="ngp-pbtn">
+                          <span className="ngp-pin">Punch In</span>
+                          <span className="ngp-pok">✓</span>
+                        </button>
                       </div>
-                    ))}
-                    <h4>Announcements</h4>
-                    <div className="ngp-note"><b>Diwali holiday</b><small>Offices closed 20 – 22 Oct. Happy Diwali!</small></div>
-                    <div className="ngp-pad" />
-                  </div>
-                </section>
-
-                {/* 2 · Attendance */}
-                <section className="ngp-screen ngp-s2">
-                  <div className="ngp-scroll">
-                    <Status />
-                    <h3 className="ngp-ttl">Attendance</h3>
-                    <p className="ngp-sub">This month · 22 working days</p>
-                    <div className="ngp-ringbox">
-                      <svg viewBox="0 0 140 140">
-                        <circle className="ngp-trk" cx="70" cy="70" r="54" />
-                        <circle className="ngp-ring" cx="70" cy="70" r="54" transform="rotate(-90 70 70)" strokeDasharray={C} />
-                      </svg>
-                      <div className="ngp-ringtxt"><strong>7h 42m</strong><small>worked today</small></div>
+                      <b className="ngp-ptxt">Not punched in yet</b>
+                      <small className="ngp-ploc">📍 Bengaluru HQ · GPS verified</small>
                     </div>
+                    <h4>Today's shift</h4>
                     <div className="ngp-trio">
-                      <div><b>19</b><small>Present</small></div>
-                      <div><b>2</b><small>Late</small></div>
-                      <div><b>1</b><small>Absent</small></div>
-                    </div>
-                    <h4>This week</h4>
-                    <div className="ngp-bars">
-                      {DAYS.map(([d, h], i) => (
-                        <div key={i}><i style={{ height: `${h}%` }} /><span>{d}</span></div>
-                      ))}
-                    </div>
-                    <div className="ngp-duo">
-                      <div className="ngp-pw">Shift<b>09:00 – 18:00</b></div>
-                      <div className="ngp-pw ngp-coral">Overtime<b>1h 20m</b></div>
+                      <div><b>09:00</b><small>Start</small></div>
+                      <div><b>45m</b><small>Break</small></div>
+                      <div><b>18:00</b><small>End</small></div>
                     </div>
                   </div>
                 </section>
 
-                {/* 3 · Payroll */}
-                <section className="ngp-screen ngp-s3">
+                {/* 2 · Salary Credited */}
+                <section className="ngp-screen ngp-s2">
+                  <div className="ngp-notif">
+                    <span className="ngp-ic ngp-g">🏦</span>
+                    <div><b>Salary Credited</b><small>₹82,450 to A/c ••4521</small></div>
+                  </div>
                   <div className="ngp-scroll">
                     <Status />
-                    <h3 className="ngp-ttl">Payroll</h3>
-                    <p className="ngp-sub">October payslip · Ready</p>
+                    <h3 className="ngp-ttl">Salary Credited</h3>
+                    <p className="ngp-sub">September salary · Credited 30 Sep</p>
                     <div className="ngp-pay">
                       <small>Net pay</small>
                       <strong>₹<span className="ngp-paynum">0</span></strong>
@@ -268,35 +309,102 @@ export default function AppShowcase() {
                   </div>
                 </section>
 
-                {/* 4 · Leave */}
+                {/* 3 · Form 24Q Ready */}
+                <section className="ngp-screen ngp-s3">
+                  <div className="ngp-scroll">
+                    <Status />
+                    <h3 className="ngp-ttl">Form 24Q</h3>
+                    <p className="ngp-sub">TDS on salary · Q2 FY 2026-27</p>
+                    <div className="ngp-fcard">
+                      <div className="ngp-frow">
+                        <span className="ngp-ic ngp-b">📄</span>
+                        <div><b>Quarterly TDS return</b><small>Jul – Sep 2026 · 249 employees</small></div>
+                      </div>
+                      <div className="ngp-fprog"><i /></div>
+                      <div className="ngp-fstat"><small className="ngp-fst">Generating…</small><small className="ngp-fpct">0%</small></div>
+                    </div>
+                    <ul className="ngp-chk">
+                      {F24Q_CHECKS.map(c => <li key={c}><span>✓</span>{c}</li>)}
+                    </ul>
+                    <div className="ngp-ready">✅ Form 24Q Ready · Due 31 Oct</div>
+                    <button type="button" className="ngp-dl">Download FVU file</button>
+                  </div>
+                </section>
+
+                {/* 4 · Tasks are Updated */}
                 <section className="ngp-screen ngp-s4">
                   <div className="ngp-scroll">
                     <Status />
-                    <h3 className="ngp-ttl">Leave</h3>
-                    <p className="ngp-sub">Calendar & approvals</p>
-                    <div className="ngp-cal">
-                      <div className="ngp-calh"><b>October 2026</b></div>
-                      <div className="ngp-calg">
-                        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => <span key={i} className="ngp-dn">{d}</span>)}
-                        {CAL.map((d, i) => (
-                          <span key={i} className="ngp-d">
-                            {d && <>{HI.includes(d) && <i className="ngp-hi" />}<em>{d}</em></>}
-                          </span>
-                        ))}
+                    <h3 className="ngp-ttl">Tasks</h3>
+                    <p className="ngp-sub"><span className="ngp-tcount">{DONE_AT_START}</span> of {TASKS.length} done today</p>
+                    <div className="ngp-tbar"><i /></div>
+                    {TASKS.map(([t, who, pc, pl]) => (
+                      <div className="ngp-task" key={t}>
+                        <span className="ngp-box">✓</span>
+                        <div><b>{t}</b><small>{who}</small></div>
+                        <span className={`ngp-pill ${pc}`}>{pl}</span>
                       </div>
+                    ))}
+                    <p className="ngp-upd">🔄 Tasks are updated · just now</p>
+                  </div>
+                </section>
+
+                {/* 5 · Pending Actions */}
+                <section className="ngp-screen ngp-s5">
+                  <div className="ngp-scroll">
+                    <Status />
+                    <div className="ngp-pah">
+                      <h3 className="ngp-ttl">Pending Actions</h3>
+                      <span className="ngp-badge">{PENDING.length}</span>
                     </div>
-                    <div className="ngp-req">
-                      <span className="ngp-av ngp-sm">R</span>
-                      <div><b>Rohan P.</b><small>Casual leave · 20 – 22 Oct</small></div>
+                    <p className="ngp-sub">Waiting for your approval</p>
+                    {PENDING.map(([a, n, d]) => (
+                      <div className="ngp-pa" key={n}>
+                        <span className="ngp-av ngp-sm">{a}</span>
+                        <div className="ngp-pa-txt"><b>{n}</b><small>{d}</small></div>
+                        <div className="ngp-pa-btn">
+                          <button type="button" className="ngp-pa-no">✕</button>
+                          <button type="button" className="ngp-pa-ok">✓</button>
+                        </div>
+                        <span className="ngp-pa-done">Approved ✓</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* 6 · Team Leave Balance */}
+                <section className="ngp-screen ngp-s6">
+                  <div className="ngp-scroll">
+                    <Status />
+                    <h3 className="ngp-ttl">Team Leave Balance</h3>
+                    <p className="ngp-sub">Design team · FY 2026-27</p>
+                    <div className="ngp-lb">
+                      <div className="ngp-p"><b>2</b><small>On leave</small></div>
+                      <div className="ngp-c"><b>3</b><small>Requests</small></div>
+                      <div className="ngp-b"><b>86</b><small>Days left</small></div>
                     </div>
-                    <div className="ngp-reqbtn">
-                      <button type="button" className="ngp-rej">Reject</button>
-                      <button type="button" className="ngp-approve">Approve</button>
+                    <h4>By member</h4>
+                    {TEAM_LB.map(([n, c, s, e]) => (
+                      <div className="ngp-tm" key={n}>
+                        <div className="ngp-tmh">
+                          <span className="ngp-av ngp-sm">{n[0]}</span>
+                          <div><b>{n}</b></div>
+                          <em>{c + s + e} days</em>
+                        </div>
+                        <div className="ngp-tlb">
+                          <i className="ngp-cs" style={{ width: `${(c / LB_MAX) * 100}%` }} />
+                          <i className="ngp-sk" style={{ width: `${(s / LB_MAX) * 100}%` }} />
+                          <i className="ngp-er" style={{ width: `${(e / LB_MAX) * 100}%` }} />
+                        </div>
+                      </div>
+                    ))}
+                    <div className="ngp-tleg">
+                      <span className="ngp-cs">Casual</span><span className="ngp-sk">Sick</span><span className="ngp-er">Earned</span>
                     </div>
                   </div>
                 </section>
 
-                {/* bottom tab bar (static) */}
+                {/* bottom tab bar */}
                 <ul className="ngp-tabbar">
                   {TABS.map((t, i) => <li key={i} className={i === 0 ? 'ngp-on' : ''}>{t}</li>)}
                 </ul>

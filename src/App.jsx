@@ -4,16 +4,12 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import Services from './components/Services';
-import AiSection from './components/AiSection';
-import Integrations from './components/Integrations';
 import Footer from './components/Footer';
 import Workflow from './components/Workflow';
 import AppShowcase from './components/AppShowcase';
 import HrOrbit from './components/HrOrbit';
 
 
-import Trust from './components/Trust';
-import CtaReveal from './components/CtaReveal'; 
 
 export default function App() {
   const foot = useRef();
@@ -37,9 +33,8 @@ export default function App() {
         <Services />
         <Workflow /> 
         <AppShowcase />   
-        <AiSection />
         <HrOrbit />  
-        <CtaReveal />  
+       
        
       </main>
       <Footer footRef={foot} />
