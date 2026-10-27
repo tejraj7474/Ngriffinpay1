@@ -702,86 +702,296 @@
   }
 }
 
-/* ===== mobile ===== */
+/* ===== mobile (≤768px) =====
+   Services.jsx renders every panel stacked (.svc-mobile), no sticky scroll.
+   Each panel takes its natural height, so nothing is cut off. */
 @media (max-width: 768px) {
-  .svc .vis.vis-pdf {
+  .svc.svc-mobile {
+    height: auto !important;
+    padding: 56px 16px 40px;
+  }
+
+  .svc-mobile .big {
+    margin: 0 0 24px;
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+  .svc-m-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* each panel card */
+  .svc-mobile .vis.vis-pdf {
     height: auto;
-    max-height: 72vh;
-    padding: 20px 18px 46px;
+    max-height: none;
+    overflow: hidden;
+    padding: 18px 16px 52px;
   }
 
-  .vis-pdf .pt {
+  .svc-m-tag {
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: #6d28d9;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .svc-mobile .vis-pdf .pt {
     white-space: normal;
-    font-size: 22px;
+    font-size: 21px;
   }
 
-  .vis-pdf .body {
-    overflow-y: auto;
+  .svc-mobile .vis-pdf .pt-rule {
+    width: 60%;
   }
 
-  .l-cards,
-  .l-phone,
-  .l-steps,
-  .l-time,
-  .l-two .two-cols {
+  .svc-mobile .vis-pdf .body {
+    flex: none;
+    overflow: visible;
+    margin-top: 14px;
+  }
+
+  .svc-mobile .vis-pdf .photo {
+    max-width: 100%;
+    max-height: 180px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .svc-mobile .vis-pdf .num {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .svc-mobile .vis-pdf .num-list li {
+    font-size: 14px;
+    gap: 12px;
+    padding: 9px 0;
+  }
+
+  .svc-mobile .vis-pdf .banner {
+    font-size: 13.5px;
+    padding: 10px 14px;
+  }
+
+  /* page 5 — cards: 2 columns */
+  .svc-mobile .l-cards {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+    gap: 10px;
+    height: auto;
+  }
+
+  .svc-mobile .l-cards .card {
+    padding: 14px 8px;
+  }
+
+  .svc-mobile .l-cards .ic {
+    width: 34px;
+    height: 34px;
+  }
+
+  .svc-mobile .l-cards h4 {
+    font-size: 14px;
+  }
+
+  .svc-mobile .l-cards p {
+    font-size: 12px;
+  }
+
+  /* page 6 — phone: photo on top, list below */
+  .svc-mobile .l-phone {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    height: auto;
+  }
+
+  .svc-mobile .l-phone .photo {
+    height: auto;
+    max-height: 220px;
+  }
+
+  .svc-mobile .feat-list {
+    gap: 12px;
+  }
+
+  .svc-mobile .feat-list .ring {
+    width: 42px;
+    height: 42px;
+  }
+
+  .svc-mobile .feat-list .ring svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .svc-mobile .feat-list h4 {
+    font-size: 14px;
+  }
+
+  /* page 7 — wheel on top, boxes stacked, icon inside each box */
+  .svc-mobile .l-wheel-wrap {
+    height: auto;
+  }
+
+  .svc-mobile .l-wheel {
     grid-template-columns: 1fr;
     grid-template-rows: none;
+    gap: 10px;
   }
 
-  .l-cards {
-    grid-template-columns: 1fr 1fr;
+  .svc-mobile .l-wheel .wheel {
+    display: block;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center;
+    width: 130px;
+    margin-bottom: 6px;
+  }
+
+  .svc-mobile .l-wheel .box {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .svc-mobile .l-wheel .badge,
+  .svc-mobile .l-wheel .box.left .badge,
+  .svc-mobile .l-wheel .box.right .badge {
+    position: static;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border: 0;
+  }
+
+  .svc-mobile .l-wheel .box::after {
+    display: none;
+  }
+
+  .svc-mobile .wheel-foot {
+    margin-top: 14px;
+  }
+
+  .svc-mobile .wheel-foot .photo {
+    display: none;
+  }
+
+  /* page 8 — steps, then photo with check-in card below */
+  .svc-mobile .l-steps {
+    grid-template-columns: 1fr;
+    gap: 14px;
     height: auto;
   }
 
-  .l-phone .photo,
-  .l-time .photo,
-  .l-steps .photo-box .photo {
-    max-height: 180px;
+  .svc-mobile .l-steps .photo-box {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
-  .l-steps .checkin {
+  .svc-mobile .l-steps .checkin {
     position: static;
-    margin-top: 10px;
+    align-self: stretch;
   }
 
-  .l-two .col+.col {
+  /* page 9 — two columns become one list */
+  .svc-mobile .l-two {
+    height: auto;
+  }
+
+  .svc-mobile .l-two .two-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-mobile .l-two .col + .col {
     padding-left: 0;
     margin-left: 0;
     border-left: 0;
+    border-top: 1px solid var(--line);
   }
 
-  .l-two .photo {
-    display: none;
+  .svc-mobile .l-two .photo {
+    position: static;
+    width: auto;
+    max-height: 150px;
+    margin: 12px auto;
   }
 
-  .l-wheel {
+  .svc-mobile .l-two .banner {
+    margin-top: 6px;
+  }
+
+  /* page 10 — photo, timeline, banner (all in normal flow) */
+  .svc-mobile .l-time-wrap {
+    height: auto;
+    gap: 14px;
+  }
+
+  .svc-mobile .l-time {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 14px;
+    flex: none;
   }
 
-  .l-wheel .box {
-    grid-column: auto !important;
-    grid-row: auto !important;
+  .svc-mobile .l-time .photo {
+    max-height: 200px;
   }
 
-  .l-wheel .box::after,
-  .l-wheel .wheel {
-    display: none;
+  .svc-mobile .l-time .tl {
+    height: auto;
+    gap: 14px;
+    justify-content: flex-start;
   }
 
-  .l-quad {
+  .svc-mobile .l-time .tl::before {
+    left: 15px;
+  }
+
+  .svc-mobile .l-time .tl li {
+    font-size: 14px;
+  }
+
+  /* page 11 — four blocks stacked, ring + photo hidden */
+  .svc-mobile .l-quad {
     grid-template-columns: 1fr;
     grid-template-rows: none;
+    gap: 14px;
     height: auto;
-    gap: 16px;
   }
 
-  .l-quad .qb {
+  .svc-mobile .l-quad .qb {
     grid-column: auto !important;
     grid-row: auto !important;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .l-quad .qcenter {
+  .svc-mobile .l-quad .qb:nth-child(4) {
+    border-bottom: 0;
+  }
+
+  .svc-mobile .l-quad .qi {
+    display: none;
+  }
+
+  .svc-mobile .l-quad .qb p {
+    padding-left: 42px;
+  }
+
+  .svc-mobile .l-quad .qcenter {
     display: none;
   }
 }

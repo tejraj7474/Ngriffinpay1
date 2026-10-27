@@ -14,6 +14,23 @@ const popTo = {
   stagger: 0.07,
 };
 
+const MOBILE_QUERY = "(max-width: 768px)";
+
+// true on phones; updates on resize / rotate
+function useIsMobile() {
+  const get = () =>
+    typeof window !== "undefined" && window.matchMedia(MOBILE_QUERY).matches;
+  const [mobile, setMobile] = useState(get);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const on = () => setMobile(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  return mobile;
+}
+
 /* ---------- inline icons (no extra dependency) ---------- */
 const P = {
   calendar: (
@@ -186,6 +203,18 @@ const Banner = ({ text }) => (
     <Icon n="shieldCheck" />
     <span>{text}</span>
   </div>
+);
+
+const Wave = () => (
+  <svg
+    className="wave"
+    viewBox="0 0 1200 60"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path d="M0 60V28C220 6 470 10 720 60Z" fill="#0f9b8e" />
+    <path d="M520 60C800 34 1000 14 1200 30V60Z" fill="#1d2252" />
+  </svg>
 );
 
 const Num = ({ n, alt }) => (
@@ -420,6 +449,7 @@ export default function Services() {
     tabsRef = useRef();
   const preloaded = useRef([]);
   const [act, setAct] = useState(0);
+  const isMobile = useIsMobile();
 
   // preload + decode every photo up front so nothing loads late while scrolling
   useEffect(() => {
@@ -432,6 +462,7 @@ export default function Services() {
     });
   }, []);
 
+  // heading animation (desktop + mobile) and sticky tab switching (desktop only)
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".big", {
@@ -446,44 +477,91 @@ export default function Services() {
         scale: 1.15,
         transformOrigin: "left",
       });
-      // sticky tabs: switch the active service by scroll progress
-      ScrollTrigger.create({
-        trigger: root.current,
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: (s) =>
-          setAct(
-            Math.min(
-              SERVICES.length - 1,
-              Math.floor(s.progress * SERVICES.length),
-            ),
-          ),
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
 
-  // pop the panel content in every time the active tab changes
+      if (!isMobile) {
+        // sticky tabs: switch the active service by scroll progress
+        ScrollTrigger.create({
+          trigger: root.current,
+          start: "top top",
+          end: "bottom bottom",
+          onUpdate: (s) =>
+            setAct(
+              Math.min(
+                SERVICES.length - 1,
+                Math.floor(s.progress * SERVICES.length),
+              ),
+            ),
+        });
+      }
+    }, root);
+    // section height changes between layouts, so re-measure everything after it
+    const t = setTimeout(() => ScrollTrigger.refresh(), 100);
+    return () => {
+      clearTimeout(t);
+      ctx.revert();
+    };
+  }, [isMobile]);
+
+  // DESKTOP: pop the panel content in every time the active tab changes
   useLayoutEffect(() => {
-    if (!panelRef.current) return;
+    if (isMobile || !panelRef.current) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(".pop", popFrom, popTo);
     }, panelRef);
     return () => ctx.revert();
-  }, [act]);
+  }, [act, isMobile]);
 
-  // mobile only: keep the active tab visible in the swipeable tab strip
+  // MOBILE: pop each panel's content in when it scrolls into view
   useEffect(() => {
-    if (!window.matchMedia("(max-width: 768px)").matches) return;
-    const ul = tabsRef.current;
-    const el = ul && ul.children[act];
-    if (!el) return;
-    ul.scrollTo({
-      left: el.offsetLeft - (ul.clientWidth - el.offsetWidth) / 2,
-      behavior: "smooth",
-    });
-  }, [act]);
+    if (!isMobile || !root.current) return;
+    const cards = root.current.querySelectorAll(".svc-m-card");
+    cards.forEach((c) => gsap.set(c.querySelectorAll(".pop"), popFrom));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          gsap.to(e.target.querySelectorAll(".pop"), popTo);
+          io.unobserve(e.target);
+        });
+      },
+      { threshold: 0.15 },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [isMobile]);
 
+  /* ---------------- MOBILE: all panels stacked, no sticky scroll ---------------- */
+  if (isMobile) {
+    return (
+      <section className="svc svc-mobile" ref={root}>
+        <h2 className="big">
+          One platform to unify people, processes, and experiences
+        </h2>
+        <div className="svc-m-list">
+          {SERVICES.map((sv, i) => (
+            <article
+              key={i}
+              id={`svc-${i}`}
+              className="vis vis-pdf svc-m-card"
+            >
+              <span className="svc-m-tag">{sv.tab}</span>
+              <h3 className="pt pop">
+                {sv.title[0]} <span>{sv.title[1]}</span>
+              </h3>
+              <i className="pt-rule pop" />
+              {sv.sub && <p className="sub pop">{sv.sub}</p>}
+              <div className="body">
+                <Panel s={sv} />
+              </div>
+              <Wave />
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  /* ---------------- DESKTOP: sticky tabs (unchanged) ---------------- */
   const s = SERVICES[act];
 
   return (
@@ -518,15 +596,7 @@ export default function Services() {
               <Panel s={s} />
             </div>
 
-            <svg
-              className="wave"
-              viewBox="0 0 1200 60"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path d="M0 60V28C220 6 470 10 720 60Z" fill="#0f9b8e" />
-              <path d="M520 60C800 34 1000 14 1200 30V60Z" fill="#1d2252" />
-            </svg>
+            <Wave />
           </div>
         </div>
       </div>

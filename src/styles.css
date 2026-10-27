@@ -242,9 +242,9 @@ img {
 }
 
 .foot .h {
-    color: #888;
-    font-size: 12px;
-    letter-spacing: .1em;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
     text-transform: uppercase
 }
 
@@ -692,11 +692,6 @@ img {
 
 
 
-.pin-spacer {
-    padding-bottom: 0px !important;
-}
-
-
 /* 1. stop anything that sticks out sideways from creating a horizontal scrollbar.
       `clip` (not `hidden`) is used on purpose: it does not break position: sticky or GSAP pins */
 html,
@@ -771,7 +766,7 @@ body,
 
 .foot .ft-stores img {
     display: block;
-    width: 80%;
+    width: 65%;
     height: auto;
 }
 
@@ -920,24 +915,7 @@ body,
 }
 
 
-.foot .cols li.h {
-    font-size: 18px;
-    font-weight: 700;
-    color: #000;
-    /* white headings */
-    margin-bottom: 22px;
-}
 
-.foot .cols a {
-    color: #000;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.foot .cols a:hover {
-    color: #ffffff;
-}
 
 @media (max-width: 900px) {
     .foot .cols {
@@ -1167,7 +1145,7 @@ body,
 
     .hrv .hrv-grid {
         display: grid !important;
-        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 0fr) !important;
         grid-template-rows: auto minmax(0, 1fr) !important;
         gap: 8px !important;
         width: 100% !important;

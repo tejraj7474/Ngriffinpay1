@@ -1,0 +1,189 @@
+/* =====================================================================
+   PartnerBurst — "Who can be Our Partner?"
+   Every rule is scoped to .gpx-* classes, so nothing here touches
+   other sections. The height is fixed, so the page never shifts.
+   ===================================================================== */
+
+.gpx-root {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 400vh;          /* 100vh on screen + 300vh of scroll for the animation */
+  margin: 0;
+  /* in case the parent is flex/grid */
+  min-width: 100%;
+  max-width: none;
+  flex: 0 0 auto;
+  grid-column: 1 / -1;
+  align-self: stretch;
+}
+
+.gpx-root *,
+.gpx-root *::before,
+.gpx-root *::after {
+  box-sizing: border-box;
+}
+
+/* Stays on screen while you scroll through .gpx-root */
+.gpx-stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 55%, #ffffff 0%, #eef1ff 55%, #e2e7ff 100%);
+}
+
+/* Visible area (below a fixed navbar, if headerOffset is set) */
+.gpx-area {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: var(--gpx-header, 0px);
+}
+
+/* Three.js canvas */
+.gpx-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gpx-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Title */
+.gpx-heading {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  margin: 0;
+  padding: 0 16px;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 46px);
+  line-height: 1.15;
+  color: #16305e;
+}
+
+/* Cards — start stacked at the centre, behind the logo */
+.gpx-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.gpx-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.gpx-badge {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 30px rgba(22, 48, 94, 0.1);
+}
+
+.gpx-badge svg {
+  width: 36px;
+  height: 36px;
+}
+
+.gpx-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #16305e;
+}
+
+/* Logo — above the cards so they appear from behind it */
+.gpx-center {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.gpx-emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+
+.gpx-glow {
+  position: absolute;
+  width: 170%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.92) 45%, rgba(255, 255, 255, 0) 70%);
+}
+
+.gpx-emblem-img {
+  position: relative;
+  display: block;
+  width: clamp(130px, 14vw, 190px);
+  height: auto;
+}
+
+/* Button */
+.gpx-button {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+  z-index: 4;
+  opacity: 0;
+  padding: 12px 28px;
+  border-radius: 8px;
+  background: #5b5bd6;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(91, 91, 214, 0.3);
+  transition: background 0.2s;
+}
+
+.gpx-button:hover {
+  background: #4a4ac4;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .gpx-card { width: 130px; gap: 8px; }
+  .gpx-badge { width: 58px; height: 58px; }
+  .gpx-badge svg { width: 26px; height: 26px; }
+  .gpx-card-title { font-size: 12.5px; }
+  .gpx-emblem-img { width: 90px; }
+}

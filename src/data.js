@@ -24,3 +24,13 @@ export const AI = [
     ['October 2026 HR Update: Labour Codes, PF Ceiling & Payroll Changes for Employers', 'October 2026 is an important month for HR and payroll teams across India.', 'ai-2.jpg'],
     ['A Day in the Life of Modern HR : The Daily, Weekly and Monthly Activities That Keep a Company Running', 'HR is often associated with recruitment, payroll and employee engagement.', 'ai-3.jpg'],
 ];
+
+
+export const partners = [
+    { title: 'Payroll Processing Companies', icon: 'pay', c: '#6a4bd8', bg: '#ece8ff' },
+    { title: 'HR Consultancy Firms', icon: 'hr', c: '#e5484d', bg: '#ffe9ea' },
+    { title: 'Are you a CA (Chartered Accountant)?', icon: 'ca', c: '#2a8bf2', bg: '#e6f3ff' },
+    { title: 'Are you a CS (Company Secretary)?', icon: 'cs', c: '#f08a24', bg: '#fff0e2' },
+    { title: 'Are you a Labour Consultant?', icon: 'labour', c: '#2fb36d', bg: '#e4f8ed' },
+    { title: 'Factory Compliance Advisors', icon: 'factory', c: '#f08a24', bg: '#fff0e2' },
+];
