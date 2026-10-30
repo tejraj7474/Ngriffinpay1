@@ -12,6 +12,11 @@ import HrOrbit from "./components/HrOrbit";
 import PartnerBurst from "./components/PartnerBurst";
 import HrmsBanner from "./components/HrmsBanner";
 import InteractiveDashboard from "./components/InteractiveDashboard";
+import EmployeeOnboarding from "./components/EmployeeOnboarding";
+import EmployeeSelfService from "./components/EmployeeSelfService";
+import AttendanceLeave from "./components/AttendanceLeave";
+import DigitalDocumentation from "./components/DigitalDocumentation";
+import PerformanceAppraisal from "./components/PerformanceAppraisal";
 
 // Home page = your existing sections
 function Home() {
@@ -59,6 +64,23 @@ export default function App() {
           <Route
             path="/interactive-dashboard"
             element={<InteractiveDashboard />}
+          />
+          <Route path="/employee-onboarding" element={<EmployeeOnboarding />} />
+          <Route
+            path="/employee-self-service"
+            element={<EmployeeSelfService />}
+          />
+          <Route
+            path="/attendance-leave-management"
+            element={<AttendanceLeave />}
+          />
+          <Route
+            path="/digital-employee-documentation"
+            element={<DigitalDocumentation />}
+          />
+          <Route
+            path="/performance-appraisal-management"
+            element={<PerformanceAppraisal />}
           />
         </Routes>
       </main>

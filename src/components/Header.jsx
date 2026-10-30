@@ -8,11 +8,27 @@ const MOBILE_LOGO = "logo.png";
 // [label, link, icon file]
 const PRODUCTS = [
   ["Interactive Dashboard", "/interactive-dashboard", "menu-icon-1.png"],
-  ["Seamless Employee Onboarding", "#", "menu-icon-2.png"],
-  ["Employee Self-Service Portal with Mobile App", "#", "menu-icon-3.png"],
-  ["Attendance & Leave Management", "#", "menu-icon-4.png"],
-  ["Digital Employee Documentation", "#", "menu-icon-5.png"],
-  ["Performance & Appraisal Management", "#", "menu-icon-6.png"],
+  ["Seamless Employee Onboarding", "/employee-onboarding", "menu-icon-2.png"],
+  [
+    "Employee Self-Service Portal with Mobile App",
+    "/employee-self-service",
+    "menu-icon-3.png",
+  ],
+  [
+    "Attendance & Leave Management",
+    "/attendance-leave-management",
+    "menu-icon-4.png",
+  ],
+  [
+    "Digital Employee Documentation",
+    "/digital-employee-documentation",
+    "menu-icon-5.png",
+  ],
+  [
+    "Performance & Appraisal Management",
+    "/performance-appraisal-management",
+    "menu-icon-6.png",
+  ],
   ["Shift & Scheduling Management", "#", "menu-icon-7.png"],
   ["Automated Payroll Processing", "#", "menu-icon-8.png"],
   ["Income Tax Computation & Compliance", "#", "menu-icon-9.png"],
