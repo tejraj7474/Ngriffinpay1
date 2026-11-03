@@ -124,7 +124,7 @@
 }
 .ess-title {
   margin: 18px 0 14px;
-  font-size: clamp(32px, 3.6vw, 48px);
+  font-size: clamp(30px, 1.6vw, 48px);
   line-height: 1.08;
   letter-spacing: -0.03em;
   font-weight: 800;
@@ -2433,7 +2433,7 @@
 /* ---------- Responsive (section 2) ---------- */
 @media (max-width: 991px) {
   .esc {
-    padding: 80px 0;
+    padding: 40px 0;
   }
   .esc-grid {
     grid-template-columns: 1fr;
@@ -2871,7 +2871,10 @@
 
 @media (max-width: 991px) {
   .esq {
-    padding: 90px 0 110px;
+    padding: 20px 0 40px;
+  }
+  .esq-title {
+    font-size: clamp(17px, 1.6vw, 57px);
   }
   .esq-grid {
     grid-template-columns: 1fr;
@@ -2972,7 +2975,7 @@
     width: calc(100% - 32px);
   }
   .ess-title {
-    font-size: clamp(28px, 8vw, 36px);
+    font-size: clamp(26px, 1.6vw, 57px);
   }
   .ess-eyebrow {
     white-space: normal;
@@ -2988,7 +2991,7 @@
     padding: 9px 12px;
   }
   .esc-title {
-    font-size: clamp(26px, 7.4vw, 34px);
+    font-size: clamp(19px, 1.4vw, 34px);
   }
   .esc-tabs {
     margin-left: -16px;
