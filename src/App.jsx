@@ -17,6 +17,12 @@ import EmployeeSelfService from "./components/EmployeeSelfService";
 import AttendanceLeave from "./components/AttendanceLeave";
 import DigitalDocumentation from "./components/DigitalDocumentation";
 import PerformanceAppraisal from "./components/PerformanceAppraisal";
+import ShiftScheduling from "./components/ShiftScheduling";
+import AutomatePayroll from "./components/AutomatePayroll";
+import IncomeTax from "./components/IncomeTax";
+import EmployeeExit from "./components/EmployeeExit";
+import FullFinalSettlement from "./components/FullFinalSettlement";
+import AssetManagement from "./components/AssetManagement";
 
 // Home page = your existing sections
 function Home() {
@@ -81,6 +87,28 @@ export default function App() {
           <Route
             path="/performance-appraisal-management"
             element={<PerformanceAppraisal />}
+          />
+          <Route
+            path="/shift-scheduling-management"
+            element={<ShiftScheduling />}
+          />
+
+          <Route
+            path="/automate-payroll-processing"
+            element={<AutomatePayroll />}
+          />
+          <Route
+            path="/income-tax-computation-compliance"
+            element={<IncomeTax />}
+          />
+          <Route path="/employee-exit-management" element={<EmployeeExit />} />
+          <Route
+            path="/full-and-final-settlement"
+            element={<FullFinalSettlement />}
+          />
+          <Route
+            path="/asset-allocation-management"
+            element={<AssetManagement />}
           />
         </Routes>
       </main>

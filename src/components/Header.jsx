@@ -7,34 +7,18 @@ const MOBILE_LOGO = "logo.png";
 
 // [label, link, icon file]
 const PRODUCTS = [
-  ["Interactive Dashboard", "/interactive-dashboard", "menu-icon-1.png"],
-  ["Seamless Employee Onboarding", "/employee-onboarding", "menu-icon-2.png"],
-  [
-    "Employee Self-Service Portal with Mobile App",
-    "/employee-self-service",
-    "menu-icon-3.png",
-  ],
-  [
-    "Attendance & Leave Management",
-    "/attendance-leave-management",
-    "menu-icon-4.png",
-  ],
-  [
-    "Digital Employee Documentation",
-    "/digital-employee-documentation",
-    "menu-icon-5.png",
-  ],
-  [
-    "Performance & Appraisal Management",
-    "/performance-appraisal-management",
-    "menu-icon-6.png",
-  ],
-  ["Shift & Scheduling Management", "#", "menu-icon-7.png"],
-  ["Automated Payroll Processing", "#", "menu-icon-8.png"],
-  ["Income Tax Computation & Compliance", "#", "menu-icon-9.png"],
-  ["Employee Exit Management", "#", "menu-icon-10.png"],
-  ["Full & Final Settlement Processing", "#", "menu-icon-11.png"],
-  ["Asset Allocation & Management", "#", "menu-icon-12.png"],
+  ["Interactive Dashboard", "/interactive-dashboard"],
+  ["Seamless Employee Onboarding", "/employee-onboarding"],
+  ["Employee Self-Service Portal with Mobile App", "/employee-self-service"],
+  ["Attendance & Leave Management", "/attendance-leave-management"],
+  ["Digital Employee Documentation", "/digital-employee-documentation"],
+  ["Performance & Appraisal Management", "/performance-appraisal-management"],
+  ["Shift & Scheduling Management", "/shift-scheduling-management"],
+  ["Automated Payroll Processing", "/automate-payroll-processing"],
+  ["Income Tax Computation & Compliance", "/income-tax-computation-compliance"],
+  ["Employee Exit Management", "/employee-exit-management"],
+  ["Full & Final Settlement Processing", "/full-and-final-settlement"],
+  ["Asset Allocation & Management", "/asset-allocation-management"],
 ];
 
 const LOCATIONS = [

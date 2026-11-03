@@ -56,6 +56,29 @@ const prefersReduced = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Slide a horizontally-scrolling tab row so tab `index` is fully visible (mobile) */
+function scrollTabIntoView(strip, index) {
+  if (!strip) return null;
+  const btn = strip.children[index];
+  if (!btn || strip.scrollWidth <= strip.clientWidth + 1) return null; // everything fits: nothing to do
+  const target = Math.max(
+    0,
+    Math.min(
+      strip.scrollWidth - strip.clientWidth,
+      btn.offsetLeft - strip.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2,
+    ),
+  );
+  const pos = { x: strip.scrollLeft };
+  return gsap.to(pos, {
+    x: target,
+    duration: prefersReduced() ? 0 : 0.5,
+    ease: "power2.out",
+    onUpdate: () => {
+      strip.scrollLeft = pos.x;
+    },
+  });
+}
+
 /* ------------------------------------------------------------------ */
 /* Icons                                                               */
 /* ------------------------------------------------------------------ */
@@ -676,8 +699,15 @@ const PANELS = [CentralizePanel, AccessPanel, AutomatePanel, SecurePanel];
 
 function Vault({ frameRef, stage, onSelect }) {
   const panelWrap = useRef(null);
+  const tabsRef = useRef(null);
   const first = useRef(true);
   const startDelay = first.current ? 1.3 : 0.2;
+
+  // Mobile: keep the active feature tab fully visible in the scrolling tab row
+  useEffect(() => {
+    const tw = scrollTabIntoView(tabsRef.current, stage);
+    return () => tw?.kill();
+  }, [stage]);
 
   useLayoutEffect(() => {
     const isFirst = first.current;
@@ -736,6 +766,7 @@ function Vault({ frameRef, stage, onSelect }) {
         <div className="dde-main">
           <div
             className="dde-tabs js-tabs"
+            ref={tabsRef}
             role="tablist"
             aria-label="Document features"
           >
@@ -864,16 +895,19 @@ function HeroSection() {
         ease: "sine.inOut",
         stagger: 1,
       });
-      gsap.to(visualRef.current, {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // parallax only on desktop — on mobile the vault sits under the list and would overlap it
+      if (window.matchMedia("(min-width: 1151px)").matches) {
+        gsap.to(visualRef.current, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
       const fine = window.matchMedia(
         "(hover: hover) and (pointer: fine)",
       ).matches;
@@ -1509,7 +1543,14 @@ const SHEETS = [
 /* ---------- The drawer ---------- */
 function Drawer({ active, onSelect, barRefs }) {
   const folderRefs = useRef([]);
+  const indexRef = useRef(null);
   const prev = useRef(null);
+
+  // Mobile: slide the index-tab row so the active tab is always fully visible
+  useEffect(() => {
+    const tw = scrollTabIntoView(indexRef.current, active);
+    return () => tw?.kill();
+  }, [active]);
 
   // The open folder rises out of the slot; the previous one slides back down
   useLayoutEffect(() => {
@@ -1577,6 +1618,7 @@ function Drawer({ active, onSelect, barRefs }) {
       {/* Index tabs */}
       <div
         className="ddw-index"
+        ref={indexRef}
         role="tablist"
         aria-label="Documentation features"
       >

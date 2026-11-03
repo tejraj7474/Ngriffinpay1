@@ -1128,16 +1128,19 @@ function HeroSection() {
         ease: "sine.inOut",
         stagger: 1,
       });
-      gsap.to(visualRef.current, {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // parallax only on desktop — on mobile the console sits under the list and would overlap it
+      if (window.matchMedia("(min-width: 1181px)").matches) {
+        gsap.to(visualRef.current, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
 
       const fine = window.matchMedia(
         "(hover: hover) and (pointer: fine)",
@@ -1942,6 +1945,7 @@ function DialSection() {
   const copyRef = useRef(null);
   const progressRef = useRef([]);
   const chipBars = useRef([]);
+  const chipsRef = useRef(null);
   const autoRef = useRef(null);
   const hoverRef = useRef(false);
   const visibleRef = useRef(false);
@@ -2036,6 +2040,31 @@ function DialSection() {
     return () => tl.kill();
   }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Mobile: slide the tab row so the active tab is always fully visible
+  useEffect(() => {
+    const strip = chipsRef.current;
+    if (!strip) return undefined;
+    const btn = strip.children[active];
+    if (!btn || strip.scrollWidth <= strip.clientWidth + 1) return undefined; // hidden on desktop / all fit
+    const target = Math.max(
+      0,
+      Math.min(
+        strip.scrollWidth - strip.clientWidth,
+        btn.offsetLeft - strip.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2,
+      ),
+    );
+    const pos = { x: strip.scrollLeft };
+    const tw = gsap.to(pos, {
+      x: target,
+      duration: prefersReduced() ? 0 : 0.5,
+      ease: "power2.out",
+      onUpdate: () => {
+        strip.scrollLeft = pos.x;
+      },
+    });
+    return () => tw.kill();
+  }, [active]);
+
   useLayoutEffect(() => {
     if (firstCopy.current) {
       firstCopy.current = false;
@@ -2081,6 +2110,7 @@ function DialSection() {
         {/* Mobile tabs (the dial labels are hidden on small screens) */}
         <div
           className="ald-chips"
+          ref={chipsRef}
           role="tablist"
           aria-label="Attendance features"
         >

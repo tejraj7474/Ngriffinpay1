@@ -1239,26 +1239,29 @@ function HeroSection() {
         stagger: 1,
       });
 
-      gsap.to(portalRef.current, {
-        yPercent: -6,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-      gsap.to(q(".ess-phone-wrap"), {
-        yPercent: -16,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // scroll parallax only on desktop — on mobile the mockups sit under the text and would overlap it
+      if (window.matchMedia("(min-width: 1101px)").matches) {
+        gsap.to(portalRef.current, {
+          yPercent: -6,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+        gsap.to(q(".ess-phone-wrap"), {
+          yPercent: -16,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
 
       // Two-layer mouse parallax: phone moves more than the portal
       const fine = window.matchMedia(
@@ -2143,6 +2146,7 @@ function AppShowcaseSection() {
   const activeRef = useRef(0);
   const sectionRef = useRef(null);
   const copyRef = useRef(null);
+  const tabsRef = useRef(null);
   const barRefs = useRef([]);
   const autoRef = useRef(null);
   const hoverRef = useRef(false);
@@ -2237,6 +2241,33 @@ function AppShowcaseSection() {
     return () => autoRef.current?.kill();
   }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Mobile/tablet: slide the tab row so the active tab is always fully visible
+  useEffect(() => {
+    const strip = tabsRef.current;
+    if (!strip) return undefined;
+    const btn = strip.children[active];
+    if (!btn || strip.scrollWidth <= strip.clientWidth + 1) return undefined; // desktop list: nothing to scroll
+    const target = Math.max(
+      0,
+      Math.min(
+        strip.scrollWidth - strip.clientWidth,
+        btn.offsetLeft -
+          strip.offsetLeft -
+          (strip.clientWidth - btn.offsetWidth) / 2,
+      ),
+    );
+    const pos = { x: strip.scrollLeft };
+    const tw = gsap.to(pos, {
+      x: target,
+      duration: prefersReduced() ? 0 : 0.5,
+      ease: "power2.out",
+      onUpdate: () => {
+        strip.scrollLeft = pos.x;
+      },
+    });
+    return () => tw.kill();
+  }, [active]);
+
   // Copy swap: title words rise, text fades
   useLayoutEffect(() => {
     if (firstCopy.current) {
@@ -2287,7 +2318,12 @@ function AppShowcaseSection() {
             onMouseEnter={hover(true)}
             onMouseLeave={hover(false)}
           >
-            <div className="esc-tabs" role="tablist" aria-label="App features">
+            <div
+              className="esc-tabs"
+              ref={tabsRef}
+              role="tablist"
+              aria-label="App features"
+            >
               {SHOW_TABS.map((s, i) => (
                 <button
                   key={s.label}
