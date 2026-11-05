@@ -65,7 +65,9 @@ function scrollTabIntoView(strip, index) {
     0,
     Math.min(
       strip.scrollWidth - strip.clientWidth,
-      btn.offsetLeft - strip.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2,
+      btn.offsetLeft -
+        strip.offsetLeft -
+        (strip.clientWidth - btn.offsetWidth) / 2,
     ),
   );
   const pos = { x: strip.scrollLeft };
@@ -1816,7 +1818,7 @@ function DrawerSection() {
             </h3>
             <p className="js-fade">{t.desc}</p>
             <div className="ddw-actions js-fade">
-              <a href="/contact" className="dde-btn primary">
+              <a href="/contact-us" className="dde-btn primary">
                 Book a Free Demo <Icon name="arrow" size={16} />
               </a>
               <div className="ddw-nav">
@@ -1929,7 +1931,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about employee documents.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about employee documents.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2124,7 +2126,7 @@ function DocumentationFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2246,7 +2248,7 @@ function DocumentationFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

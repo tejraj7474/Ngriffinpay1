@@ -1710,7 +1710,7 @@ function SettlementVaultSection() {
               <Card key={active} />
             </div>
             <div className="ffs2-actions">
-              <a href="/contact" className="ffs-btn primary">
+              <a href="/contact-us" className="ffs-btn primary">
                 Get Started with NGriffinpay <Icon name="arrow" size={16} />
               </a>
               <div className="ffs2-nav">
@@ -1825,7 +1825,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about full & final settlements.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about full & final settlements.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2020,7 +2020,7 @@ function SettlementFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2142,7 +2142,7 @@ function SettlementFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

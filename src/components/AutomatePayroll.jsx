@@ -66,6 +66,9 @@ const FEATURES = [
 ];
 
 const STAGE_TIME = 5.5;
+
+// Payment modes supported (shown in the hero app and on the cube's "Pay structures" face)
+const PAY_MODES = ["Daily", "Weekly", "Monthly", "Hourly"];
 const TOTAL_NET = 18462400; // ₹1,84,62,400 for 248 employees
 const EMPLOYEES = 248;
 
@@ -1095,6 +1098,36 @@ function PayrollApp({ frameRef, stage }) {
               <Icon name="users" size={11} /> {EMPLOYEES} employees
             </span>
           </div>
+          <div className="apr-total">
+            <small>Payment modes</small>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 4,
+                marginTop: 6,
+              }}
+            >
+              {PAY_MODES.map((m) => (
+                <span
+                  key={m}
+                  style={{
+                    padding: "3px 8px",
+                    borderRadius: 999,
+                    fontSize: 9.5,
+                    fontWeight: 800,
+                    color: "#fff",
+                    background:
+                      m === "Monthly"
+                        ? "rgba(56, 189, 248, 0.35)"
+                        : "rgba(255, 255, 255, 0.1)",
+                  }}
+                >
+                  {m}
+                </span>
+              ))}
+            </div>
+          </div>
           <ol className="apr-check">
             {FEATURES.map((f, i) => (
               <li
@@ -1713,9 +1746,10 @@ function FaceCompliance({ active }) {
 // 30-day attendance strip: p = present, l = paid leave, x = loss of pay, w = week off
 const DAYS30 = "wpppppwwpppplpwwppppxpwwpppppw";
 const STRUCTS = [
+  ["Daily", "Per day"],
+  ["Weekly", "Every Fri"],
   ["Monthly", "CTC based"],
   ["Hourly", "₹ / hour"],
-  ["Contract", "Fixed fee"],
 ];
 function FaceStructures({ active }) {
   const ref = useFace(active, (tl, q) => {
@@ -1767,9 +1801,16 @@ function FaceStructures({ active }) {
       <div className="aps-fhead">
         <Icon name="users" size={14} /> Pay structures <em>Synced</em>
       </div>
-      <div className="aps-structs">
-        {STRUCTS.map(([a, b], i) => (
-          <div className={`aps-struct ${i === 0 ? "on" : ""}`} key={a}>
+      <div
+        className="aps-structs"
+        style={{ gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}
+      >
+        {STRUCTS.map(([a, b]) => (
+          <div
+            className={`aps-struct ${a === "Monthly" ? "on" : ""}`}
+            key={a}
+            style={{ padding: "8px 7px" }}
+          >
             <b>{a}</b>
             <small>{b}</small>
           </div>
@@ -2059,7 +2100,9 @@ function PayrollCubeSection() {
       0,
       Math.min(
         strip.scrollWidth - strip.clientWidth,
-        btn.offsetLeft - strip.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2,
+        btn.offsetLeft -
+          strip.offsetLeft -
+          (strip.clientWidth - btn.offsetWidth) / 2,
       ),
     );
     const pos = { x: strip.scrollLeft };
@@ -2111,11 +2154,11 @@ function PayrollCubeSection() {
         .from(
           q(".aps-tab"),
           {
-            x: -24,
-            opacity: 0,
+            opacity: 0, // fade only — no sideways slide, so no translate is left on the tabs
             stagger: 0.07,
             duration: 0.5,
             ease: "power3.out",
+            clearProps: "transform",
           },
           0.3,
         )
@@ -2252,7 +2295,7 @@ function PayrollCubeSection() {
               distribution—reducing manual errors and ensuring timely employee
               payments.
             </p>
-            <a href="/contact" className="apr-btn primary js-t">
+            <a href="/contact-us" className="apr-btn primary js-t">
               Get Started with NGriffinpay <Icon name="arrow" size={16} />
             </a>
           </div>
@@ -2351,7 +2394,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about payroll processing.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about payroll processing.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2546,7 +2589,7 @@ function PayrollFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2668,7 +2711,7 @@ function PayrollFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

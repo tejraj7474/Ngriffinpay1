@@ -25,7 +25,7 @@
   background: var(--ng-bg);
 }
 .idp-container {
-  width: min(1240px, 100% - 40px);
+  width: min(1095px, 100% - 40px);
   margin-inline: auto;
 }
 

@@ -12,6 +12,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
+import { I } from "../data";
 import "./ShiftScheduling.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -787,8 +788,26 @@ function RosterApp({ frameRef, stage, onSelect }) {
       <div className="ssm-app">
         <aside className="ssm-side js-side">
           <div className="ssm-brand">
-            <span>N</span>
-            <b>Shift Planner</b>
+            <span
+              style={{
+                background: "#fff",
+                padding: 3,
+                boxSizing: "border-box",
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={I("ngriffinpay-mark.png")}
+                alt="NGriffinpay"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            </span>
+            <b>Admin</b>
           </div>
           <nav className="ssm-nav" aria-hidden>
             <span className="is-on">
@@ -2104,7 +2123,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about shifts and scheduling.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about shifts and scheduling.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2299,7 +2318,7 @@ function ShiftFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2421,7 +2440,7 @@ function ShiftFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

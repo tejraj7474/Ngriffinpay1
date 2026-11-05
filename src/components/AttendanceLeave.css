@@ -22,7 +22,7 @@
   background: var(--al-bg);
 }
 .alm-container {
-  width: min(1280px, 100% - 40px);
+  width: min(1095px, 100% - 40px);
   margin-inline: auto;
 }
 

@@ -3,14 +3,14 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "./gsap";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Features from "./components/Features";
+import CoreHR from "./components/CoreHR";
+import FeaturesMobile from "./components/FeaturesMobile";
 import Services from "./components/Services";
 import Footer from "./components/Footer";
 import Workflow from "./components/Workflow";
 import AppShowcase from "./components/AppShowcase";
 import HrOrbit from "./components/HrOrbit";
 import PartnerBurst from "./components/PartnerBurst";
-import HrmsBanner from "./components/HrmsBanner";
 import InteractiveDashboard from "./components/InteractiveDashboard";
 import EmployeeOnboarding from "./components/EmployeeOnboarding";
 import EmployeeSelfService from "./components/EmployeeSelfService";
@@ -23,13 +23,24 @@ import IncomeTax from "./components/IncomeTax";
 import EmployeeExit from "./components/EmployeeExit";
 import FullFinalSettlement from "./components/FullFinalSettlement";
 import AssetManagement from "./components/AssetManagement";
-
+import Tracking from "./components/Tracking";
+import People from "./components/People";
+import Pricing from "./components/Pricing";
+import ContactUs from "./components/ContactUs";
+import PartnerWithUs from "./components/PartnerWithUs";
+import Blogs from "./components/Blogs";
+import BlogPost from "./components/BlogPost";
+import TermsConditions from "./components/TermsConditions";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import HRHelp from "./components/HRHelp";
+import RecruitmentAnalytics from "./components/RecruitmentAnalytics";
+import Preloader from "./components/Preloader";
 // Home page = your existing sections
 function Home() {
   return (
     <>
       <Hero />
-      <Features />
+      <FeaturesMobile />
       <Services />
       <PartnerBurst logo="/images/logo.png" headerOffset={0} />
       <div className="gpx-next">
@@ -37,7 +48,6 @@ function Home() {
       </div>
       <AppShowcase />
       <HrOrbit />
-      <HrmsBanner image="/images/one-hrms.jpg" />
     </>
   );
 }
@@ -63,6 +73,7 @@ export default function App() {
 
   return (
     <div>
+      <Preloader />
       <Header />
       <main style={{ marginBottom: fh }} className="main">
         <Routes>
@@ -110,6 +121,21 @@ export default function App() {
             path="/asset-allocation-management"
             element={<AssetManagement />}
           />
+          <Route path="/core-hr" element={<CoreHR />} />
+          <Route path="/tracking" element={<Tracking />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/partner-with-us" element={<PartnerWithUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/blog" element={<Blogs />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/terms-and-conditions" element={<TermsConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route
+            path="/recruitment-analytics"
+            element={<RecruitmentAnalytics />}
+          />
+          <Route path="/ngriffinpay-hr-help" element={<HRHelp />} />
         </Routes>
       </main>
       <Footer footRef={foot} />

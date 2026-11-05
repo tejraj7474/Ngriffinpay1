@@ -67,40 +67,40 @@ const AppHead = ({ at }) => (
 const POPS = [
   // 0 - spreadsheets
   [
-    { s: 'l', y: 34, c: 'red',   ic: '!', t: 'Typo in Leave column', d: '“five” instead of 5', at: 1.0 },
-    { s: 'r', y: 50, c: 'amber', ic: '!', t: 'Department missing',   d: 'Row 3 says N/A',      at: 1.8 },
-    { s: 'l', y: 66, c: 'amber', ic: '!', t: 'Which file is latest?', d: 'employees_final_v3', at: 2.6 },
-    { s: 'r', y: 40, c: 'green', ic: '✓', t: 'Now in one platform',  d: 'Payroll, leave and HR tasks', at: 4.3 },
+    { s: 'l', y: 34, c: 'red',   ic: '!', t: 'Typo in Leave column', d: '“five” instead of 5', at: 0.3 },
+    { s: 'r', y: 50, c: 'amber', ic: '!', t: 'Department missing',   d: 'Row 3 says N/A',      at: 0.6 },
+    { s: 'l', y: 66, c: 'amber', ic: '!', t: 'Which file is latest?', d: 'employees_final_v3', at: 0.9 },
+    { s: 'r', y: 40, c: 'green', ic: '✓', t: 'Now in one platform',  d: 'Payroll, leave and HR tasks', at: 3.5 },
   ],
   // 1 - payroll
   [
-    { s: 'r', y: 34, c: 'green',  ic: '✓', t: 'Salaries calculated', d: '48 employees, 0 errors', at: 1.0 },
-    { s: 'l', y: 50, c: 'violet', ic: '₹', t: 'PF, ESI and TDS applied', d: 'Filled in by rules', at: 2.0 },
-    { s: 'r', y: 66, c: 'blue',   ic: '✓', t: 'Payslips emailed',     d: 'Everyone got theirs', at: 3.2 },
+    { s: 'r', y: 34, c: 'green',  ic: '✓', t: 'Salaries calculated', d: '48 employees, 0 errors', at: 0.2 },
+    { s: 'l', y: 50, c: 'violet', ic: '₹', t: 'PF, ESI and TDS applied', d: 'Filled in by rules', at: 0.45 },
+    { s: 'r', y: 66, c: 'blue',   ic: '✓', t: 'Payslips emailed',     d: 'Everyone got theirs', at: 0.7 },
   ],
   // 2 - repetitive tasks
   [
-    { s: 'l', y: 34, c: 'violet', ic: '✓', t: 'Offer letters sent',  d: 'To 3 candidates', at: 1.2 },
-    { s: 'r', y: 50, c: 'blue',   ic: '✓', t: 'Attendance synced',   d: 'From the biometric device', at: 2.4 },
-    { s: 'l', y: 66, c: 'green',  ic: '✓', t: '0 clicks needed',     d: 'Runs every month', at: 3.6 },
+    { s: 'l', y: 34, c: 'violet', ic: '✓', t: 'Offer letters sent',  d: 'To 3 candidates', at: 0.2 },
+    { s: 'r', y: 50, c: 'blue',   ic: '✓', t: 'Attendance synced',   d: 'From the biometric device', at: 0.45 },
+    { s: 'l', y: 66, c: 'green',  ic: '✓', t: '0 clicks needed',     d: 'Runs every month', at: 0.7 },
   ],
   // 3 - leave
   [
-    { s: 'r', y: 34, c: 'amber', ic: '!', t: 'New leave request',  d: 'Meera, 3 days', at: 0.8 },
-    { s: 'l', y: 50, c: 'green', ic: '✓', t: 'Manager approved',   d: 'In one tap', at: 2.2 },
-    { s: 'r', y: 66, c: 'blue',  ic: '✓', t: 'Calendar updated',   d: 'Payroll adjusts itself', at: 3.0 },
+    { s: 'r', y: 34, c: 'amber', ic: '!', t: 'New leave request',  d: 'Meera, 3 days', at: 0.2 },
+    { s: 'l', y: 50, c: 'green', ic: '✓', t: 'Manager approved',   d: 'In one tap', at: 0.45 },
+    { s: 'r', y: 66, c: 'blue',  ic: '✓', t: 'Calendar updated',   d: 'Payroll adjusts itself', at: 0.7 },
   ],
   // 4 - insights
   [
-    { s: 'l', y: 34, c: 'violet', ic: '↑', t: 'Headcount 248',       d: 'Up 6 this quarter', at: 1.0 },
-    { s: 'r', y: 50, c: 'green',  ic: '↓', t: 'Attrition down 12%',  d: 'Compared to last year', at: 2.0 },
-    { s: 'l', y: 66, c: 'blue',   ic: '✓', t: 'Report scheduled',    d: 'Mailed every Monday', at: 3.0 },
+    { s: 'l', y: 34, c: 'violet', ic: '↑', t: 'Headcount 248',       d: 'Up 6 this quarter', at: 0.2 },
+    { s: 'r', y: 50, c: 'green',  ic: '↓', t: 'Attrition down 12%',  d: 'Compared to last year', at: 0.45 },
+    { s: 'l', y: 66, c: 'blue',   ic: '✓', t: 'Report scheduled',    d: 'Mailed every Monday', at: 0.7 },
   ],
   // 5 - employee app
   [
-    { s: 'r', y: 34, c: 'green',  ic: '✓', t: 'Checked in 9:02',  d: 'From Anita’s phone', at: 2.2 },
-    { s: 'l', y: 50, c: 'violet', ic: '₹', t: 'Payslip ready',    d: 'October 2026', at: 3.0 },
-    { s: 'r', y: 66, c: 'blue',   ic: '✓', t: 'Leave approved',   d: '12 days left', at: 3.8 },
+    { s: 'r', y: 34, c: 'green',  ic: '✓', t: 'Checked in 9:02',  d: 'From Anita’s phone', at: 0.2 },
+    { s: 'l', y: 50, c: 'violet', ic: '₹', t: 'Payslip ready',    d: 'October 2026', at: 0.45 },
+    { s: 'r', y: 66, c: 'blue',   ic: '✓', t: 'Leave approved',   d: '12 days left', at: 0.7 },
   ],
 ];
 
@@ -197,9 +197,9 @@ const SceneSheet = () => (
 const ScenePayroll = () => {
   const n = useCount(100, 2400, 300);
   const rows = [
-    ['AN', 'Anita', '52,400', '#7c4dff'],
-    ['RV', 'Ravi', '47,800', '#ff7a45'],
-    ['ME', 'Meera', '61,250', '#2f8cff'],
+    ['AN', 'Anita', '52,400', '#0a3f83'],
+    ['RV', 'Ravi', '47,800', '#0284c7'],
+    ['ME', 'Meera', '61,250', '#1d6fd8'],
     ['JO', 'John', '39,900', '#22b573'],
   ];
   return (
@@ -545,12 +545,12 @@ const DDash = () => {
 const DPayroll = () => {
   const n = useCount(100, 2600, 300);
   const rows = [
-    ['AR', 'Anita Rao', 'Finance', '52,400', '6,288', '46,112', '#7c4dff'],
-    ['RK', 'Ravi Kumar', 'Sales', '47,800', '5,736', '42,064', '#ff7a45'],
-    ['MN', 'Meera Nair', 'HR', '61,250', '7,350', '53,900', '#2f8cff'],
+    ['AR', 'Anita Rao', 'Finance', '52,400', '6,288', '46,112', '#0a3f83'],
+    ['RK', 'Ravi Kumar', 'Sales', '47,800', '5,736', '42,064', '#0284c7'],
+    ['MN', 'Meera Nair', 'HR', '61,250', '7,350', '53,900', '#1d6fd8'],
     ['JD', 'John Dsouza', 'Ops', '39,900', '4,788', '35,112', '#22b573'],
-    ['PM', 'Priya Menon', 'Sales', '44,500', '5,340', '39,160', '#7c4dff'],
-    ['AD', 'Arjun Das', 'Ops', '36,200', '4,344', '31,856', '#ff7a45'],
+    ['PM', 'Priya Menon', 'Sales', '44,500', '5,340', '39,160', '#0a3f83'],
+    ['AD', 'Arjun Das', 'Ops', '36,200', '4,344', '31,856', '#0284c7'],
   ];
   return (
     <>
@@ -735,9 +735,9 @@ const DReports = () => {
           <h4>By department</h4>
           <div className="fd-donut" />
           <ul>
-            <li><i style={{ background: '#7c4dff' }} />Sales</li>
-            <li><i style={{ background: '#ff7a45' }} />Finance</li>
-            <li><i style={{ background: '#2f8cff' }} />Ops</li>
+            <li><i style={{ background: '#0a3f83' }} />Sales</li>
+            <li><i style={{ background: '#38bdf8' }} />Finance</li>
+            <li><i style={{ background: '#1d6fd8' }} />Ops</li>
             <li><i style={{ background: '#22b573' }} />HR</li>
           </ul>
         </div>
@@ -819,7 +819,7 @@ const PopLayer = ({ active, total, desk }) => {
   const mainSide = active % 2 === 0 ? 'l' : 'r';
   return (
     <div className="fm-pops" key={active}>
-      <div className={`fm-pop fm-main fm-${mainSide}`} style={{ top: desk ? '14%' : '3%', '--d': '0.15s' }}>
+      <div className={`fm-pop fm-main fm-${mainSide}`} style={{ top: desk ? '14%' : '3%', '--d': '0s' }}>
         <div>
           <span>{String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
           <strong>{FEATURES[active][0]}</strong>

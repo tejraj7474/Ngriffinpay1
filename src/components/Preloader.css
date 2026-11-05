@@ -1,0 +1,111 @@
+/* Preloader.css — NGriffinpay website preloader (logo gradient theme) */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap");
+
+html.ngp-loading, html.ngp-loading body { overflow: hidden; }
+
+.ngp-pre {
+  --p-navy: #0a3f83;
+  --p-blue: #1d6fd8;
+  --p-sky: #38bdf8;
+  position: fixed; inset: 0; z-index: 100000;
+  display: grid; place-items: center;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #cfe0f7; pointer-events: all;
+}
+.ngp-pre * { box-sizing: border-box; }
+
+/* two halves of the background — they split open on exit */
+.ngp-pre-half {
+  position: absolute; left: 0; right: 0; height: 50.5%;
+  background: radial-gradient(ellipse 90% 120% at 50% 100%, #0f3a78 0%, #071631 60%, #050f22 100%);
+  transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.ngp-pre-half.top { top: 0; }
+.ngp-pre-half.bottom { bottom: 0; background: radial-gradient(ellipse 90% 120% at 50% 0%, #0f3a78 0%, #071631 60%, #050f22 100%); }
+.ngp-pre-half::after { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--p-sky), transparent); opacity: 0; transition: opacity 0.3s; }
+.ngp-pre-half.top::after { bottom: 0; }
+.ngp-pre-half.bottom::after { top: 0; }
+
+.ngp-pre-grid {
+  position: absolute; inset: 0; opacity: 0.35; pointer-events: none;
+  background-image: radial-gradient(rgba(125, 211, 252, 0.45) 1px, transparent 1.4px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 60%);
+  transition: opacity 0.4s;
+}
+
+.ngp-pre-center { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 50px; transition: transform 0.7s cubic-bezier(0.6, 0, 0.3, 1), opacity 0.5s; }
+
+/* ring + orbit */
+.ngp-pre-orbit-wrap { position: relative; width: 190px; height: 190px; display: grid; place-items: center; animation: ngpPreIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+.ngp-pre-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.ngp-pre-track { fill: none; stroke: rgba(148, 190, 255, 0.14); stroke-width: 6; }
+.ngp-pre-ticks { fill: none; stroke: rgba(148, 190, 255, 0.28); stroke-width: 14; stroke-dasharray: 1 8.7; opacity: 0.5; }
+.ngp-pre-fill { fill: none; stroke: url(#ngpPreGrad); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8)); }
+
+.ngp-pre-orbit { position: absolute; inset: -22px; animation: ngpPreSpin 6s linear infinite; }
+.ngp-pre-sat {
+  position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 11px;
+  display: grid; place-items: center; font-size: 16px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--p-navy), var(--p-blue)); border: 1px solid rgba(125, 211, 252, 0.45);
+  box-shadow: 0 8px 20px -6px rgba(56, 189, 248, 0.7);
+  animation: ngpPreSpin 6s linear infinite reverse; /* keep icons upright */
+}
+.ngp-pre-sat svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ngp-pre-sat.s1 { left: 50%; top: 0; }
+.ngp-pre-sat.s2 { left: 93.3%; top: 75%; }
+.ngp-pre-sat.s3 { left: 6.7%; top: 75%; }
+
+.ngp-pre-logo {
+  position: relative; width: 96px; height: 96px; padding: 12px; border-radius: 28px; background: #fff;
+  display: grid; place-items: center;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.06), 0 20px 50px -12px rgba(56, 189, 248, 0.6);
+  animation: ngpPreBreath 2.2s ease-in-out infinite;
+}
+.ngp-pre-logo::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.85) 50%, transparent 65%);
+  background-size: 250% 100%; animation: ngpPreShine 2.4s ease-in-out infinite; mix-blend-mode: overlay;
+}
+.ngp-pre-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* brand + status */
+.ngp-pre-brand { margin-bottom: -36px; display: flex; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; color: #fff; }
+.ngp-pre-brand span { display: inline-block; opacity: 0; transform: translateY(14px); animation: ngpPreLetter 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3) forwards; }
+.ngp-pre-brand span:nth-child(n + 2):nth-child(-n + 8) { background: linear-gradient(180deg, #fff, #bae6fd); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ngp-pre-brand span:nth-child(n + 9) { color: var(--p-sky); }
+.ngp-pre-meta { display: flex; align-items: center; gap: 12px; min-height: 22px; }
+.ngp-pre-status { font-size: 13.5px; font-weight: 500; color: #9fb6d8; animation: ngpPreStatus 0.4s ease both; }
+.ngp-pre-pct { min-width: 46px; padding: 3px 10px; border-radius: 999px; text-align: center; font-size: 12.5px; font-weight: 800; color: #fff; background: rgba(56, 189, 248, 0.16); border: 1px solid rgba(56, 189, 248, 0.35); font-variant-numeric: tabular-nums; }
+
+.ngp-pre-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 3px; background: rgba(148, 190, 255, 0.12); }
+.ngp-pre-bar i { display: block; height: 100%; transform-origin: left; background: linear-gradient(90deg, var(--p-navy), var(--p-blue), var(--p-sky)); box-shadow: 0 0 12px rgba(56, 189, 248, 0.8); }
+
+/* exit: content zooms + fades, then the halves split open */
+.ngp-pre.is-leaving { pointer-events: none; }
+.ngp-pre.is-leaving .ngp-pre-center { transform: scale(1.12); opacity: 0; }
+.ngp-pre.is-leaving .ngp-pre-grid, .ngp-pre.is-leaving .ngp-pre-bar { opacity: 0; transition: opacity 0.3s; }
+.ngp-pre.is-leaving .ngp-pre-half::after { opacity: 1; }
+.ngp-pre.is-leaving .ngp-pre-half.top { transform: translateY(-101%); transition-delay: 0.25s; }
+.ngp-pre.is-leaving .ngp-pre-half.bottom { transform: translateY(101%); transition-delay: 0.25s; }
+
+@keyframes ngpPreIn { from { opacity: 0; transform: scale(0.6) rotate(-30deg); } }
+@keyframes ngpPreSpin { to { transform: rotate(360deg); } }
+@keyframes ngpPreBreath { 50% { transform: scale(1.05); } }
+@keyframes ngpPreShine { 0% { background-position: 150% 0; } 60%, 100% { background-position: -50% 0; } }
+@keyframes ngpPreLetter { to { opacity: 1; transform: none; } }
+@keyframes ngpPreStatus { from { opacity: 0; transform: translateY(6px); } }
+
+@media (max-width: 480px) {
+  .ngp-pre-orbit-wrap { width: 160px; height: 160px; }
+  .ngp-pre-logo { width: 80px; height: 80px; border-radius: 24px; padding: 10px; }
+  .ngp-pre-sat { width: 30px; height: 30px; margin: -15px 0 0 -15px; font-size: 14px; }
+  .ngp-pre-brand { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ngp-pre-orbit, .ngp-pre-sat, .ngp-pre-logo, .ngp-pre-logo::after, .ngp-pre-orbit-wrap { animation: none; }
+  .ngp-pre-brand span { animation: none; opacity: 1; transform: none; }
+  .ngp-pre-half, .ngp-pre-center { transition: opacity 0.3s; }
+  .ngp-pre.is-leaving .ngp-pre-half { transform: none; opacity: 0; }
+}

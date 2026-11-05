@@ -1,0 +1,161 @@
+/* DemoModal.css — NGriffinpay "Book a Demo" pop-up (logo gradient theme) */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+.dmo {
+  --d-navy: #0a3f83;
+  --d-blue: #1d6fd8;
+  --d-sky: #38bdf8;
+  --d-green: #10b981;
+  --d-red: #e11d48;
+  --d-ink: #0b1b36;
+  --d-text: #33415c;
+  --d-muted: #64748b;
+  --d-line: #e3e8f2;
+  --d-bg: #f5f8fd;
+  --d-grad: linear-gradient(135deg, #0a3f83 0%, #1d6fd8 55%, #38bdf8 100%);
+  --d-font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  position: fixed; inset: 0; z-index: 10000;
+  display: grid; place-items: center; padding: 20px;
+  background: rgba(6, 18, 40, 0.62); backdrop-filter: blur(6px);
+  font-family: var(--d-font); color: var(--d-text);
+  animation: dmoFade 0.25s ease both;
+}
+.dmo * { box-sizing: border-box; }
+html.dmo-lock, html.dmo-lock body { overflow: hidden; }
+.dmo.is-closing { animation: dmoFadeOut 0.22s ease both; }
+.dmo.is-closing .dmo-box { animation: dmoOut 0.22s ease both; }
+@keyframes dmoFade { from { opacity: 0; } }
+@keyframes dmoFadeOut { to { opacity: 0; } }
+@keyframes dmoIn { from { opacity: 0; transform: translateY(24px) scale(0.97); } }
+@keyframes dmoOut { to { opacity: 0; transform: translateY(16px) scale(0.98); } }
+@keyframes dmoShake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+
+.dmo-box {
+  position: relative; display: grid; grid-template-columns: 0.85fr 1.15fr;
+  width: min(920px, 100%); max-height: calc(100vh - 40px); overflow: hidden;
+  border-radius: 24px; background: #fff;
+  box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.55);
+  animation: dmoIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+.dmo-box.dmo-shake { animation: dmoShake 0.4s ease; }
+
+.dmo-x {
+  position: absolute; top: 14px; right: 14px; z-index: 2; display: grid; place-items: center;
+  width: 38px; height: 38px; border: 0; border-radius: 11px; background: var(--d-bg); color: var(--d-text); cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.dmo-x:hover { background: #e6edf7; transform: rotate(90deg); }
+
+/* ---------- Left brand panel ---------- */
+.dmo-side {
+  position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 14px;
+  padding: 36px 32px; background: var(--d-ink); color: #a9bddb;
+}
+.dmo-side::before { content: ""; position: absolute; width: 360px; height: 360px; right: -140px; top: -150px; border-radius: 50%; background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 65%); }
+.dmo-side::after { content: ""; position: absolute; width: 300px; height: 300px; left: -140px; bottom: -150px; border-radius: 50%; background: radial-gradient(circle, rgba(29, 111, 216, 0.5), transparent 65%); }
+.dmo-side > * { position: relative; z-index: 1; }
+.dmo-logo { width: 56px; height: 56px; padding: 6px; border-radius: 16px; background: #fff; display: grid; place-items: center; box-shadow: 0 14px 30px -12px rgba(56, 189, 248, 0.6); }
+.dmo-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.dmo-side h2 { margin: 6px 0 0; color: #fff; font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
+.dmo-side > p { margin: 0; font-size: 15px; line-height: 1.6; }
+.dmo-side ul { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.dmo-side li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #dbe7f8; }
+.dmo-side li > span { flex: none; display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: rgba(52, 211, 153, 0.18); color: #34d399; }
+.dmo-side-card { margin-top: auto; display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(148, 190, 255, 0.2); }
+.dmo-side-card b { display: block; color: #fff; font-size: 14px; }
+.dmo-side-card small { font-size: 12.5px; color: #8fa7c9; }
+.dmo-cal { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--d-grad); color: #fff; }
+
+/* ---------- Right form ---------- */
+.dmo-main { overflow-y: auto; padding: 36px 34px 28px; }
+.dmo-form-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; margin: 0 40px 20px 0; }
+.dmo-form-head h3 { margin: 0; color: var(--d-ink); font-size: 21px; font-weight: 800; }
+.dmo-form-head span { font-size: 12.5px; color: var(--d-muted); }
+.dmo-form-head em, .dmo-field label em { font-style: normal; color: var(--d-red); margin-left: 3px; }
+.dmo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+
+.dmo-field { margin-bottom: 16px; min-width: 0; }
+.dmo-field label { display: flex; align-items: center; gap: 2px; margin-bottom: 7px; font-size: 13.5px; font-weight: 700; color: var(--d-ink); }
+.dmo-opt { margin-left: 6px; padding: 1px 7px; border-radius: 99px; background: var(--d-bg); color: var(--d-muted); font-size: 10.5px; font-weight: 700; }
+.dmo-input { position: relative; display: flex; align-items: center; }
+.dmo-input-ic { position: absolute; left: 14px; color: #94a3b8; display: grid; pointer-events: none; transition: color 0.2s; }
+.dmo-input input {
+  width: 100%; padding: 13px 40px 13px 42px; border-radius: 12px;
+  border: 1.5px solid var(--d-line); background: var(--d-bg); color: var(--d-ink);
+  font: 500 15px var(--d-font); transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.dmo-input input::placeholder { color: #a3b1c6; }
+.dmo-input input:focus { outline: 0; border-color: var(--d-blue); background: #fff; box-shadow: 0 0 0 4px rgba(29, 111, 216, 0.12); }
+.dmo-input:focus-within .dmo-input-ic, .dmo-field.has-val .dmo-input-ic { color: var(--d-blue); }
+.dmo-ok { position: absolute; right: 12px; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--d-green); color: #fff; animation: dmoPop 0.3s cubic-bezier(0.3, 1.6, 0.6, 1) both; }
+@keyframes dmoPop { from { transform: scale(0); } }
+.dmo-field.has-err input { border-color: var(--d-red); background: #fff7f8; }
+.dmo-field.has-err .dmo-input-ic { color: var(--d-red); }
+.dmo-err { display: block; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: var(--d-red); }
+.dmo-hint { display: block; margin-top: 6px; font-size: 12.5px; color: #b45309; }
+
+.dmo-consent { position: relative; display: flex; align-items: flex-start; gap: 11px; margin: 4px 0 18px; padding: 12px 14px; border-radius: 12px; background: var(--d-bg); font-size: 12.5px; line-height: 1.6; color: var(--d-muted); cursor: pointer; }
+.dmo-consent input { position: absolute; opacity: 0; width: 20px; height: 20px; margin: 0; cursor: pointer; }
+.dmo-check { flex: none; display: grid; place-items: center; width: 20px; height: 20px; margin-top: 1px; border-radius: 6px; border: 1.5px solid #b9c7da; background: #fff; color: transparent; transition: all 0.2s; }
+.dmo-consent input:checked + .dmo-check { background: var(--d-grad); border-color: transparent; color: #fff; }
+.dmo-consent input:focus-visible + .dmo-check { box-shadow: 0 0 0 4px rgba(29, 111, 216, 0.2); }
+.dmo-consent a, .dmo-safe a { color: var(--d-blue); font-weight: 700; }
+
+.dmo-fail { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #fff1f2; color: var(--d-red); font-size: 13px; font-weight: 600; }
+.dmo-submit {
+  width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 15px 22px; border: 0; border-radius: 13px; cursor: pointer;
+  background: var(--d-grad); color: #fff; font: 800 16px/1 var(--d-font);
+  box-shadow: 0 14px 30px -12px rgba(29, 111, 216, 0.8); transition: transform 0.2s, filter 0.2s;
+}
+.dmo-submit:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.dmo-submit:disabled { opacity: 0.8; cursor: wait; transform: none; }
+.dmo-spin { width: 16px; height: 16px; border-radius: 50%; border: 2.5px solid rgba(255, 255, 255, 0.4); border-top-color: #fff; animation: dmoSpin 0.7s linear infinite; }
+@keyframes dmoSpin { to { transform: rotate(360deg); } }
+.dmo-safe { margin: 12px 0 0; text-align: center; font-size: 12px; line-height: 1.5; color: var(--d-muted); }
+.dmo-safe svg { vertical-align: -2px; margin-right: 4px; }
+
+/* success */
+.dmo-done { height: 100%; min-height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px 6px; }
+.dmo-done-ic svg { width: 84px; height: 84px; }
+.dmo-done-ic circle { fill: #ecfdf5; stroke: var(--d-green); stroke-width: 2.5; stroke-dasharray: 152; stroke-dashoffset: 152; animation: dmoDraw 0.6s ease forwards; }
+.dmo-done-ic path { fill: none; stroke: var(--d-green); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; animation: dmoDraw 0.4s 0.5s ease forwards; }
+@keyframes dmoDraw { to { stroke-dashoffset: 0; } }
+.dmo-done h3 { margin: 18px 0 8px; color: var(--d-ink); font-size: 24px; font-weight: 800; }
+.dmo-done p { margin: 0 0 24px; max-width: 380px; font-size: 15px; line-height: 1.65; }
+.dmo-done b { color: var(--d-ink); }
+.dmo-done .dmo-submit { max-width: 220px; }
+
+/* ---------- Tablet / mobile ---------- */
+@media (max-width: 820px) {
+  .dmo-box { grid-template-columns: 1fr; overflow-y: auto; }
+  .dmo-side { padding: 24px 22px 20px; gap: 8px; }
+  .dmo-side ul, .dmo-side-card { display: none; }
+  .dmo-logo { width: 46px; height: 46px; border-radius: 13px; }
+  .dmo-side h2 { font-size: 24px; }
+  .dmo-side > p { font-size: 14px; }
+  /* close button stays visible while the form scrolls */
+  .dmo-x { position: sticky; top: 12px; grid-row: 1; grid-column: 1; justify-self: end; align-self: start; margin: 12px 12px 0 0; background: rgba(255, 255, 255, 0.14); color: #fff; backdrop-filter: blur(6px); }
+  .dmo-side { grid-row: 1; grid-column: 1; }
+  .dmo-main { grid-row: 2; }
+  .dmo-x:hover { background: rgba(255, 255, 255, 0.2); }
+  .dmo-main { overflow: visible; padding: 22px 22px 24px; }
+  .dmo-form-head { margin-right: 0; }
+}
+@media (max-width: 520px) {
+  .dmo { padding: 0; align-items: end; }
+  .dmo-box { max-height: 94vh; border-radius: 22px 22px 0 0; animation-name: dmoUp; }
+  @keyframes dmoUp { from { transform: translateY(100%); } }
+  .dmo.is-closing .dmo-box { animation: dmoDown 0.22s ease both; }
+  @keyframes dmoDown { to { transform: translateY(100%); } }
+  .dmo-grid { grid-template-columns: 1fr; }
+  .dmo-input input { font-size: 16px; } /* stops iPhone zooming into fields */
+  .dmo-form-head h3 { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dmo, .dmo-box, .dmo-ok, .dmo.is-closing, .dmo.is-closing .dmo-box { animation: none !important; }
+  .dmo-done-ic circle, .dmo-done-ic path { animation: none; stroke-dashoffset: 0; }
+  .dmo-x, .dmo-submit, .dmo-input input { transition: none; }
+}

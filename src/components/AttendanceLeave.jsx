@@ -2050,7 +2050,9 @@ function DialSection() {
       0,
       Math.min(
         strip.scrollWidth - strip.clientWidth,
-        btn.offsetLeft - strip.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2,
+        btn.offsetLeft -
+          strip.offsetLeft -
+          (strip.clientWidth - btn.offsetWidth) / 2,
       ),
     );
     const pos = { x: strip.scrollLeft };
@@ -2165,7 +2167,7 @@ function DialSection() {
             </h3>
             <p className="js-fade">{t.desc}</p>
             <div className="ald-actions js-fade">
-              <a href="/contact" className="alm-btn primary">
+              <a href="/contact-us" className="alm-btn primary">
                 Book a Free Demo <Icon name="arrow" size={16} />
               </a>
               <div className="ald-nav">
@@ -2278,7 +2280,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about attendance and leave.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about attendance and leave.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2473,7 +2475,7 @@ function AttendanceFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2595,7 +2597,7 @@ function AttendanceFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

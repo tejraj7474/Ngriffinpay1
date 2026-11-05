@@ -11,6 +11,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { I } from "../data";
 import "./EmployeeSelfService.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -997,7 +998,21 @@ function Portal({ portalRef, stage }) {
 
       <div className="ess-portal-app">
         <aside className="ess-portal-side js-pside">
-          <span className="ess-logo">N</span>
+          <span
+            className="ess-logo"
+            style={{ background: "#fff", padding: 3, boxSizing: "border-box" }}
+          >
+            <img
+              src={I("ngriffinpay-mark.png")}
+              alt="NGriffinpay"
+              style={{
+                display: "block",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </span>
           {["home", "wallet", "calendar", "chat", "eye", "shield"].map(
             (ic, i) => (
               <span
@@ -2381,7 +2396,7 @@ function AppShowcaseSection() {
                   </a>
                 </div>
               ) : (
-                <a href="/contact" className="ess-btn primary js-copy-fade">
+                <a href="/contact-us" className="ess-btn primary js-copy-fade">
                   Book a Free Demo <Icon name="arrow" size={16} />
                 </a>
               )}
@@ -2507,7 +2522,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about the self-service portal and app.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about the self-service portal and app.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2702,7 +2717,7 @@ function SelfServiceFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2824,7 +2839,7 @@ function SelfServiceFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

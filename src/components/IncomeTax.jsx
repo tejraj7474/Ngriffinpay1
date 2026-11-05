@@ -1659,7 +1659,7 @@ function TaxPrinterSection() {
                 </div>
               ))}
             </div>
-            <a href="/contact" className="itx-btn primary itp-cta">
+            <a href="/contact-us" className="itx-btn primary itp-cta">
               See it with your payroll data <Icon name="arrow" size={16} />
             </a>
           </div>
@@ -1744,7 +1744,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about income tax and TDS.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about income tax and TDS.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -1939,7 +1939,7 @@ function TaxFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2061,7 +2061,7 @@ function TaxFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

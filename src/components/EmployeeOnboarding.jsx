@@ -2069,7 +2069,9 @@ function JourneySection() {
       0,
       Math.min(
         strip.scrollWidth - strip.clientWidth,
-        btn.offsetLeft - strip.offsetLeft - (strip.clientWidth - btn.offsetWidth) / 2,
+        btn.offsetLeft -
+          strip.offsetLeft -
+          (strip.clientWidth - btn.offsetWidth) / 2,
       ),
     );
     const pos = { x: strip.scrollLeft };
@@ -2205,7 +2207,7 @@ function JourneySection() {
               </h3>
               <p>{j.desc}</p>
               <div className="ejn-actions">
-                <a href="/contact" className="eob-btn primary">
+                <a href="/contact-us" className="eob-btn primary">
                   Get Started with NGriffinpay <Icon name="arrow" size={16} />
                 </a>
                 <div className="ejn-nav">
@@ -2316,7 +2318,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about employee onboarding.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about employee onboarding.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2511,7 +2513,7 @@ function OnboardingFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2633,7 +2635,7 @@ function OnboardingFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

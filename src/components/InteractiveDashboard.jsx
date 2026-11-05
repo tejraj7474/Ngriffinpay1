@@ -14,6 +14,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/Flip";
 import * as THREE from "three";
+import { I } from "../data";
 import "./InteractiveDashboard.css";
 
 gsap.registerPlugin(ScrollTrigger, Flip);
@@ -453,8 +454,19 @@ function LiveDashboard({ frameRef }) {
         {/* Sidebar */}
         <aside className="idp-side">
           <div className="idp-side-logo">
-            <span className="idp-logo-mark">N</span>
-            <span>NGriffinpay</span>
+            <img
+              src={I("ngriffinpay-mark.png")}
+              alt="NGriffinpay"
+              style={{
+                display: "block",
+                height: 56,
+                width: "auto",
+                padding: "6px 10px",
+                borderRadius: 10,
+                background: "#fff",
+                boxShadow: "0 6px 14px -8px rgba(0,0,0,0.5)",
+              }}
+            />
           </div>
           <nav className="idp-side-nav">
             {SIDEBAR.map((s) => (
@@ -483,7 +495,7 @@ function LiveDashboard({ frameRef }) {
         <div className="idp-main">
           <div className="idp-top js-top">
             <div>
-              <p className="idp-hello">Good morning, Admin 👋</p>
+              <p className="idp-hello">Good Morning, Priya 👋</p>
               <p className="idp-sub">
                 Synced {synced < 2 ? "just now" : `${synced}s ago`} · Tue, 27
                 Oct
@@ -497,7 +509,7 @@ function LiveDashboard({ frameRef }) {
                 <Icon name="bell" size={13} />
                 <i />
               </span>
-              <span className="idp-avatar">AD</span>
+              <span className="idp-avatar">PR</span>
             </div>
           </div>
 
@@ -2155,7 +2167,7 @@ function FeatureSection() {
                 )}
               </h3>
               <p>{f.desc}</p>
-              <a href="/contact" className="idv-cta">
+              <a href="/contact-us" className="idv-cta">
                 Get Started with NGriffinpay <Icon name="arrow" size={16} />
               </a>
             </div>
@@ -2525,7 +2537,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about the Interactive Dashboard.";
+  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about the Interactive Dashboard.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2720,7 +2732,7 @@ function FaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact" },
+                  cta: { label: "Book a Free Demo", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },
@@ -2841,7 +2853,7 @@ function FaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

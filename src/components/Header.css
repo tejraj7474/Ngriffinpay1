@@ -5,11 +5,14 @@
    ========================================================= */
 
 .hdr {
-  --h-ink: #1b1140;
-  --h-brand: #6d28d9;
-  --h-accent: #ff6b57;
-  --h-line: #ece6ff;
-  --h-soft: #f5f0ff;
+  /* NGriffinpay logo colours: navy -> blue -> sky */
+  --h-ink: #0b1b36;
+  --h-navy: #0a3f83;
+  --h-brand: #1d6fd8;
+  --h-accent: #38bdf8;
+  --h-grad: linear-gradient(90deg, #0a3f83 0%, #1d6fd8 55%, #38bdf8 100%);
+  --h-line: #e3e8f2;
+  --h-soft: #eaf2fc;
 
   position: relative !important;
   top: 0;
@@ -23,13 +26,31 @@
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--h-line);
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
 }
 
 .hdr *,
 .hdr *::before,
 .hdr *::after {
   box-sizing: border-box;
+}
+
+/* thin logo-gradient line along the bottom of the header */
+.hdr::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--h-grad);
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 /* ---------- logo ---------- */
@@ -74,7 +95,7 @@
   align-items: center;
 }
 
-.hdr .nav-item>a {
+.hdr .nav-item > a {
   position: relative;
   display: flex;
   align-items: center;
@@ -89,55 +110,58 @@
   transition: color 0.2s;
 }
 
-.hdr .nav-item>a::before {
-  content: '';
+.hdr .nav-item > a::before {
+  content: "";
   position: absolute;
   left: 14px;
   right: 14px;
   bottom: 20px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--h-brand), var(--h-accent));
+  background: var(--h-grad);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s;
 }
 
-.hdr .nav-item:hover>a,
-.hdr .nav-item.open>a {
+.hdr .nav-item:hover > a,
+.hdr .nav-item.open > a {
   color: var(--h-brand);
 }
 
-.hdr .nav-item:hover>a::before,
-.hdr .nav-item.open>a::before {
+.hdr .nav-item:hover > a::before,
+.hdr .nav-item.open > a::before {
   transform: scaleX(1);
 }
 
 /* ---------- dropdown panels (desktop) ---------- */
 .hdr .dd {
   position: absolute;
-  top: calc(100% - 8px);
+  top: calc(100% - 0px);
   left: 0;
   min-width: 240px;
   padding: 12px;
   background: #fff;
   border: 1px solid var(--h-line);
   border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(109, 40, 217, 0.16);
+  box-shadow: 0 24px 60px rgba(10, 63, 131, 0.16);
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+  transition:
+    opacity 0.25s,
+    transform 0.25s,
+    visibility 0.25s;
 }
 
-.hdr .nav-item.open>.dd {
+.hdr .nav-item.open > .dd {
   opacity: 1;
   visibility: visible;
   transform: none;
 }
 
 @media (hover: hover) and (min-width: 993px) {
-  .hdr .nav-item.has-dd:hover>.dd {
+  .hdr .nav-item.has-dd:hover > .dd {
     opacity: 1;
     visibility: visible;
     transform: none;
@@ -157,14 +181,17 @@
   font-size: 14px;
   line-height: 1.35;
   font-weight: 500;
-  color: #3a2f6b;
+  color: #33415c;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    padding-left 0.2s;
 }
 
 .hdr .dd li a:hover {
   background: var(--h-soft);
-  color: var(--h-brand);
+  color: var(--h-navy);
   padding-left: 16px;
 }
 
@@ -209,19 +236,25 @@
   white-space: nowrap;
   text-decoration: none;
   color: #fff;
-  background: #0a3f83;
+  background: linear-gradient(135deg, #0a3f83 0%, #1d6fd8 60%, #38bdf8 100%);
+  background-size: 160% 100%;
+  background-position: 0% 0;
   box-shadow: 0 10px 22px rgb(10 63 131 / 22%);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background-position 0.4s;
 }
 
 .hdr .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(109, 40, 217, 0.4);
+  background-position: 100% 0;
+  box-shadow: 0 14px 28px rgba(29, 111, 216, 0.4);
 }
 
 .hdr a:focus-visible,
 .hdr .burger:focus-visible {
-  outline: 3px solid rgba(109, 40, 217, 0.45);
+  outline: 3px solid rgba(29, 111, 216, 0.45);
   outline-offset: 2px;
 }
 
@@ -231,12 +264,12 @@
     gap: 12px;
   }
 
-  .hdr .nav-item>a {
+  .hdr .nav-item > a {
     padding: 0 9px;
     font-size: 14px;
   }
 
-  .hdr .nav-item>a::before {
+  .hdr .nav-item > a::before {
     left: 9px;
     right: 9px;
   }
@@ -253,7 +286,6 @@
    "Request a Demo" button at the bottom of the menu.
    ========================================================= */
 @media (max-width: 992px) {
-
   /* white header bar like the reference */
   .hdr {
     height: auto;
@@ -313,18 +345,20 @@
     height: 3px;
     border-radius: 2px;
     background: #9ca3af;
-    transition: transform 0.3s, opacity 0.2s;
+    transition:
+      transform 0.3s,
+      opacity 0.2s;
   }
 
-  .hdr button.burger[aria-expanded='true'] span:nth-child(1) {
+  .hdr button.burger[aria-expanded="true"] span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
   }
 
-  .hdr button.burger[aria-expanded='true'] span:nth-child(2) {
+  .hdr button.burger[aria-expanded="true"] span:nth-child(2) {
     opacity: 0;
   }
 
-  .hdr button.burger[aria-expanded='true'] span:nth-child(3) {
+  .hdr button.burger[aria-expanded="true"] span:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
   }
 
@@ -361,14 +395,14 @@
     border-bottom: 1px solid #eef0f3;
   }
 
-  .hdr .nav-item>a {
+  .hdr .nav-item > a {
     justify-content: space-between;
     height: 52px;
     padding: 0 4px;
     font-size: 16px;
   }
 
-  .hdr .nav-item>a::before {
+  .hdr .nav-item > a::before {
     display: none;
   }
 
@@ -392,10 +426,12 @@
     transform: none;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease, padding 0.35s ease;
+    transition:
+      max-height 0.35s ease,
+      padding 0.35s ease;
   }
 
-  .hdr .nav-item.open>.dd {
+  .hdr .nav-item.open > .dd {
     max-height: 1000px;
     padding: 0 0 12px 8px;
   }
@@ -420,7 +456,7 @@
     border-bottom: 0;
   }
 
-  .hdr .nav-item.nav-cta>a.btn {
+  .hdr .nav-item.nav-cta > a.btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -430,7 +466,7 @@
     color: #fff;
   }
 
-  .hdr .nav-item.nav-cta:hover>a.btn {
+  .hdr .nav-item.nav-cta:hover > a.btn {
     color: #fff;
   }
 }
@@ -457,7 +493,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .hdr *,
   .hdr *::before,
   .hdr *::after {

@@ -10,15 +10,15 @@
   gap: 28px;
   padding: 90px 20px;
   background: linear-gradient(180deg, #f4f0ff 0%, #e8e0ff 100%);
-  font-family: 'Inter', system-ui, sans-serif
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .ngp-blob {
   position: absolute;
   border-radius: 50%;
   filter: blur(70px);
-  opacity: .75;
-  pointer-events: none
+  opacity: 0.75;
+  pointer-events: none;
 }
 
 .ngp-b1 {
@@ -27,7 +27,7 @@
   background: #6385b0;
   top: -120px;
   right: -100px;
-  animation: ngp-drift 14s ease-in-out infinite alternate
+  animation: ngp-drift 14s ease-in-out infinite alternate;
 }
 
 .ngp-b2 {
@@ -36,8 +36,8 @@
   background: #bdcadf;
   bottom: -220px;
   right: -140px;
-  opacity: .55;
-  animation: ngp-drift 18s ease-in-out infinite alternate-reverse
+  opacity: 0.55;
+  animation: ngp-drift 18s ease-in-out infinite alternate-reverse;
 }
 
 .ngp-b3 {
@@ -46,36 +46,36 @@
   background: #0a3f83;
   bottom: -80px;
   left: -120px;
-  opacity: .5;
-  animation: ngp-drift 16s ease-in-out infinite alternate
+  opacity: 0.5;
+  animation: ngp-drift 16s ease-in-out infinite alternate;
 }
 
 @keyframes ngp-drift {
   to {
-    transform: translate(40px, -30px) scale(1.12)
+    transform: translate(40px, -30px) scale(1.12);
   }
 }
 
 .ngp-sc-head {
   position: relative;
   z-index: 2;
-  text-align: center
+  text-align: center;
 }
 
 .ngp-sc-head small {
   display: block;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   font-size: 12px;
   font-weight: 700;
-  color: #6b21f0;
-  margin-bottom: 8px
+  color: #0b3f87;
+  margin-bottom: 8px;
 }
 
 .ngp-sc-head h2 {
   margin: 0;
   font-size: clamp(26px, 4vw, 40px);
-  color: #1b1140;
-  font-weight: 800
+  color: #0b3f87;
+  font-weight: 800;
 }
 
 /* ---------- stage + 3D phone ---------- */
@@ -83,20 +83,20 @@
   position: relative;
   z-index: 2;
   width: 340px;
-  height: 640px
+  height: 640px;
 }
 
 .ngp-enter {
   width: 100%;
   height: 100%;
-  perspective: 1400px
+  perspective: 1400px;
 }
 
 .ngp-bob {
   width: 100%;
   height: 100%;
   display: grid;
-  place-items: center
+  place-items: center;
 }
 
 .ngp-phone {
@@ -117,24 +117,24 @@
   border-radius: 36px;
   overflow: hidden;
   background: #f5f3ff;
-  color: #1b1140;
-  font-size: 12px
+  color: #0b3f87;
+  font-size: 12px;
 }
 
 .ngp-screen {
   position: absolute;
   inset: 0;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .ngp-screen:not(.ngp-s1) {
-  opacity: 0
+  opacity: 0;
 }
 
 .ngp-scroll {
   position: relative;
   padding: 0 16px;
-  will-change: transform
+  will-change: transform;
 }
 
 .ngp-sb {
@@ -142,30 +142,30 @@
   justify-content: space-between;
   padding: 12px 6px 8px;
   font-size: 10px;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .ngp-showcase h4 {
   margin: 16px 0 8px;
   font-size: 13px;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .ngp-ttl {
   margin: 6px 0 2px;
   font-size: 20px;
-  font-weight: 800
+  font-weight: 800;
 }
 
 .ngp-sub {
   margin: 0 0 12px;
   color: #7c7799;
-  font-size: 11px
+  font-size: 11px;
 }
 
 .ngp-showcase small {
   color: #7c7799;
-  font-size: 10px
+  font-size: 10px;
 }
 
 .ngp-av {
@@ -175,15 +175,15 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6b21f0, #a78bfa);
+  background: linear-gradient(135deg, #0b3f87, hsl(215, 76%, 64%));
   color: #fff;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .ngp-av.ngp-sm {
   width: 26px;
   height: 26px;
-  font-size: 11px
+  font-size: 11px;
 }
 
 .ngp-ic {
@@ -193,11 +193,15 @@
   width: 30px;
   height: 30px;
   border-radius: 10px;
-  font-size: 15px
+  font-size: 15px;
 }
 
-.ngp-ic.ngp-b { background: #dbeafe }
-.ngp-ic.ngp-g { background: #dcfce7 }
+.ngp-ic.ngp-b {
+  background: #dbeafe;
+}
+.ngp-ic.ngp-g {
+  background: #dcfce7;
+}
 
 .ngp-dl {
   width: 100%;
@@ -207,7 +211,7 @@
   border-radius: 14px;
   font-weight: 700;
   color: #fff;
-  background: #6b21f0
+  background: #0b3f87;
 }
 
 /* ---------- 1 · Punch IN Done ---------- */
@@ -215,17 +219,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2px
+  margin-top: 2px;
 }
 
 .ngp-hd-logo {
   height: 34px;
-  width: auto
+  width: auto;
 }
 
 .ngp-hello {
   margin: 10px 0 12px;
-  font-size: 13px
+  font-size: 13px;
 }
 
 .ngp-pcard {
@@ -233,13 +237,13 @@
   border-radius: 18px;
   background: #fff;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(80, 30, 200, .1)
+  box-shadow: 0 8px 20px rgba(80, 30, 200, 0.1);
 }
 
 .ngp-pwrap {
   display: grid;
   place-items: center;
-  margin: 18px 0 16px
+  margin: 18px 0 16px;
 }
 
 .ngp-pbtn {
@@ -252,53 +256,65 @@
   color: #fff;
   font-size: 15px;
   font-weight: 800;
-  background: linear-gradient(135deg, #6b21f0, #8b5cf6);
-  box-shadow: 0 0 0 10px #ede9fe, 0 14px 28px rgba(107, 33, 240, .35);
-  transition: background .35s, box-shadow .35s
+  background: linear-gradient(135deg, #0b3f87, hsl(215, 76%, 64%));
+  box-shadow:
+    0 0 0 10px #ede9fe,
+    0 14px 28px rgba(107, 33, 240, 0.35);
+  transition:
+    background 0.35s,
+    box-shadow 0.35s;
 }
 
 .ngp-pok {
   display: none;
   font-size: 46px;
-  line-height: 1
+  line-height: 1;
 }
 
 .ngp-in .ngp-pbtn {
   background: linear-gradient(135deg, #16a34a, #22c55e);
-  box-shadow: 0 0 0 10px #dcfce7, 0 14px 28px rgba(22, 163, 74, .35)
+  box-shadow:
+    0 0 0 10px #dcfce7,
+    0 14px 28px rgba(22, 163, 74, 0.35);
 }
 
-.ngp-in .ngp-pin { display: none }
-.ngp-in .ngp-pok { display: block }
+.ngp-in .ngp-pin {
+  display: none;
+}
+.ngp-in .ngp-pok {
+  display: block;
+}
 
 .ngp-ptxt {
   display: block;
-  font-size: 14px
+  font-size: 14px;
 }
 
-.ngp-in .ngp-ptxt { color: #16a34a }
+.ngp-in .ngp-ptxt {
+  color: #16a34a;
+}
 
 .ngp-ploc {
   display: block;
-  margin-top: 4px
+  margin-top: 4px;
 }
 
 .ngp-trio {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px
+  gap: 8px;
 }
 
 .ngp-trio div {
   padding: 10px;
   border-radius: 14px;
   background: #fff;
-  text-align: center
+  text-align: center;
 }
 
 .ngp-trio b {
   display: block;
-  font-size: 16px
+  font-size: 16px;
 }
 
 /* ---------- 2 · Salary Credited ---------- */
@@ -313,26 +329,26 @@
   gap: 10px;
   padding: 10px 12px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, .97);
-  box-shadow: 0 12px 26px rgba(80, 30, 200, .22)
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 12px 26px rgba(80, 30, 200, 0.22);
 }
 
 .ngp-notif b {
   display: block;
-  font-size: 12px
+  font-size: 12px;
 }
 
 .ngp-pay {
   padding: 16px;
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 8px 20px rgba(80, 30, 200, .1)
+  box-shadow: 0 8px 20px rgba(80, 30, 200, 0.1);
 }
 
 .ngp-pay strong {
   display: block;
   margin: 4px 0 12px;
-  font-size: 28px
+  font-size: 28px;
 }
 
 .ngp-stack {
@@ -340,23 +356,23 @@
   height: 10px;
   border-radius: 6px;
   overflow: hidden;
-  background: #eee
+  background: #eee;
 }
 
 .ngp-seg {
   display: block;
   height: 100%;
-  transform-origin: left
+  transform-origin: left;
 }
 
 .ngp-seg.ngp-e {
   width: 84%;
-  background: #6b21f0
+  background: #0b3f87;
 }
 
 .ngp-seg.ngp-d {
   width: 16%;
-  background: #ef5b45
+  background: #ef5b45;
 }
 
 .ngp-legend {
@@ -364,33 +380,33 @@
   justify-content: space-between;
   margin-top: 8px;
   font-size: 10px;
-  color: #7c7799
+  color: #7c7799;
 }
 
 .ngp-le::before,
 .ngp-ld::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   margin-right: 5px;
-  background: #6b21f0
+  background: #0b3f87;
 }
 
 .ngp-ld::before {
-  background: #ef5b45
+  background: #ef5b45;
 }
 
 .ngp-prow {
   display: flex;
   justify-content: space-between;
   padding: 10px 4px;
-  border-bottom: 1px solid #e5dcff
+  border-bottom: 1px solid #e5dcff;
 }
 
 .ngp-prow .ngp-neg {
-  color: #ef5b45
+  color: #ef5b45;
 }
 
 /* ---------- 3 · Form 24Q Ready ---------- */
@@ -398,42 +414,44 @@
   padding: 14px;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 8px 20px rgba(80, 30, 200, .1)
+  box-shadow: 0 8px 20px rgba(80, 30, 200, 0.1);
 }
 
 .ngp-frow {
   display: flex;
   align-items: center;
   gap: 10px;
-  line-height: 1.3
+  line-height: 1.3;
 }
 
-.ngp-frow b { display: block }
+.ngp-frow b {
+  display: block;
+}
 
 .ngp-fprog {
   height: 8px;
   margin: 14px 0 6px;
   border-radius: 6px;
   overflow: hidden;
-  background: #ede9fe
+  background: #ede9fe;
 }
 
 .ngp-fprog i {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, #6b21f0, #16a34a);
-  transform-origin: left
+  background: linear-gradient(90deg, #0b3f87, #16a34a);
+  transform-origin: left;
 }
 
 .ngp-fstat {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .ngp-chk {
   list-style: none;
   margin: 12px 0 0;
-  padding: 0
+  padding: 0;
 }
 
 .ngp-chk li {
@@ -441,7 +459,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 4px;
-  border-bottom: 1px solid #e5dcff
+  border-bottom: 1px solid #e5dcff;
 }
 
 .ngp-chk li span {
@@ -454,7 +472,7 @@
   font-size: 10px;
   font-weight: 800;
   color: #fff;
-  background: #16a34a
+  background: #16a34a;
 }
 
 .ngp-ready {
@@ -464,7 +482,7 @@
   text-align: center;
   font-weight: 700;
   color: #15803d;
-  background: #dcfce7
+  background: #dcfce7;
 }
 
 /* ---------- 4 · Tasks are Updated ---------- */
@@ -473,14 +491,14 @@
   margin-bottom: 10px;
   border-radius: 6px;
   overflow: hidden;
-  background: #ede9fe
+  background: #ede9fe;
 }
 
 .ngp-tbar i {
   display: block;
   height: 100%;
-  background: #6b21f0;
-  transform-origin: left
+  background: #0b3f87;
+  transform-origin: left;
 }
 
 .ngp-task {
@@ -490,17 +508,17 @@
   padding: 9px 10px;
   margin-bottom: 6px;
   border-radius: 14px;
-  background: #fff
+  background: #fff;
 }
 
 .ngp-task div {
   flex: 1;
-  line-height: 1.25
+  line-height: 1.25;
 }
 
 .ngp-task b {
   display: block;
-  font-size: 12px
+  font-size: 12px;
 }
 
 .ngp-box {
@@ -514,44 +532,56 @@
   font-size: 12px;
   font-weight: 800;
   color: transparent;
-  transition: background .25s, border-color .25s, color .25s
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s;
 }
 
 .ngp-task.ngp-ck .ngp-box {
   border-color: #16a34a;
   background: #16a34a;
-  color: #fff
+  color: #fff;
 }
 
 .ngp-task.ngp-ck b {
   color: #7c7799;
-  text-decoration: line-through
+  text-decoration: line-through;
 }
 
 .ngp-pill {
   padding: 3px 7px;
   border-radius: 8px;
   font-size: 9px;
-  font-weight: 700
+  font-weight: 700;
 }
 
-.ngp-pr-h { background: #ffe4de; color: #ef5b45 }
-.ngp-pr-m { background: #fff7d6; color: #b45309 }
-.ngp-pr-l { background: #dcfce7; color: #16a34a }
+.ngp-pr-h {
+  background: #ffe4de;
+  color: #ef5b45;
+}
+.ngp-pr-m {
+  background: #fff7d6;
+  color: #b45309;
+}
+.ngp-pr-l {
+  background: #dcfce7;
+  color: #16a34a;
+}
 
 .ngp-upd {
   margin: 8px 0 0;
   text-align: center;
   font-size: 11px;
   font-weight: 700;
-  color: #6b21f0
+  color: #0b3f87;
 }
 
 /* ---------- 5 · Pending Actions ---------- */
 .ngp-pah {
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .ngp-badge {
@@ -564,7 +594,7 @@
   font-size: 12px;
   font-weight: 800;
   color: #fff;
-  background: #ef5b45
+  background: #ef5b45;
 }
 
 .ngp-pa {
@@ -576,22 +606,22 @@
   border-radius: 14px;
   overflow: hidden;
   background: #fff;
-  transition: background .3s
+  transition: background 0.3s;
 }
 
 .ngp-pa-txt {
   flex: 1;
-  line-height: 1.25
+  line-height: 1.25;
 }
 
 .ngp-pa-txt b {
   display: block;
-  font-size: 12px
+  font-size: 12px;
 }
 
 .ngp-pa-btn {
   display: flex;
-  gap: 6px
+  gap: 6px;
 }
 
 .ngp-pa-btn button {
@@ -599,85 +629,114 @@
   height: 28px;
   border: 0;
   border-radius: 9px;
-  font-weight: 800
+  font-weight: 800;
 }
 
-.ngp-pa-no { background: #ffe4de; color: #ef5b45 }
-.ngp-pa-ok { background: #6b21f0; color: #fff }
+.ngp-pa-no {
+  background: #ffe4de;
+  color: #ef5b45;
+}
+.ngp-pa-ok {
+  background: #0b3f87;
+  color: #fff;
+}
 
 .ngp-pa-done {
   display: none;
   font-size: 11px;
   font-weight: 700;
-  color: #16a34a
+  color: #16a34a;
 }
 
-.ngp-pa.ngp-ok { background: #dcfce7 }
-.ngp-pa.ngp-ok .ngp-pa-btn { display: none }
-.ngp-pa.ngp-ok .ngp-pa-done { display: block }
+.ngp-pa.ngp-ok {
+  background: #dcfce7;
+}
+.ngp-pa.ngp-ok .ngp-pa-btn {
+  display: none;
+}
+.ngp-pa.ngp-ok .ngp-pa-done {
+  display: block;
+}
 
 /* ---------- 6 · Team Leave Balance ---------- */
 .ngp-lb {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px
+  gap: 8px;
 }
 
 .ngp-lb div {
   padding: 12px 8px;
   border-radius: 14px;
   text-align: center;
-  background: #ede9fe
+  background: #ede9fe;
 }
 
-.ngp-lb .ngp-c { background: #ffe4de }
-.ngp-lb .ngp-b { background: #dbeafe }
+.ngp-lb .ngp-c {
+  background: #ffe4de;
+}
+.ngp-lb .ngp-b {
+  background: #dbeafe;
+}
 
 .ngp-lb b {
   display: block;
-  font-size: 20px
+  font-size: 20px;
 }
 
 .ngp-tm {
   padding: 9px 10px;
   margin-bottom: 6px;
   border-radius: 14px;
-  background: #fff
+  background: #fff;
 }
 
 .ngp-tmh {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 7px
+  margin-bottom: 7px;
 }
 
-.ngp-tmh div { flex: 1 }
+.ngp-tmh div {
+  flex: 1;
+}
 
-.ngp-tmh b { font-size: 12px }
+.ngp-tmh b {
+  font-size: 12px;
+}
 
 .ngp-tmh em {
   font-style: normal;
   font-size: 11px;
   font-weight: 700;
-  color: #6b21f0
+  color: #0b3f87;
 }
 
 .ngp-tlb {
   display: flex;
   gap: 3px;
-  height: 8px
+  height: 8px;
 }
 
 .ngp-tlb i {
   display: block;
   height: 100%;
-  border-radius: 4px
+  border-radius: 4px;
 }
 
-.ngp-tlb .ngp-cs, .ngp-tleg .ngp-cs::before { background: #6b21f0 }
-.ngp-tlb .ngp-sk, .ngp-tleg .ngp-sk::before { background: #ef5b45 }
-.ngp-tlb .ngp-er, .ngp-tleg .ngp-er::before { background: #3b82f6 }
+.ngp-tlb .ngp-cs,
+.ngp-tleg .ngp-cs::before {
+  background: #0b3f87;
+}
+.ngp-tlb .ngp-sk,
+.ngp-tleg .ngp-sk::before {
+  background: #ef5b45;
+}
+.ngp-tlb .ngp-er,
+.ngp-tleg .ngp-er::before {
+  background: #3b82f6;
+}
 
 .ngp-tleg {
   display: flex;
@@ -685,16 +744,16 @@
   gap: 14px;
   margin-top: 6px;
   font-size: 10px;
-  color: #7c7799
+  color: #7c7799;
 }
 
 .ngp-tleg span::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 7px;
   height: 7px;
   margin-right: 5px;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 /* ---------- tab bar, tap ripple, splash ---------- */
@@ -709,9 +768,9 @@
   padding: 7px 6px;
   list-style: none;
   border-radius: 22px;
-  background: rgba(255, 255, 255, .92);
-  box-shadow: 0 8px 24px rgba(80, 30, 200, .18);
-  z-index: 5
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 24px rgba(80, 30, 200, 0.18);
+  z-index: 5;
 }
 
 .ngp-tabbar li {
@@ -721,14 +780,14 @@
   height: 36px;
   border-radius: 50%;
   font-size: 15px;
-  opacity: .55;
-  transition: .3s
+  opacity: 0.55;
+  transition: 0.3s;
 }
 
 .ngp-tabbar li.ngp-on {
   opacity: 1;
-  background: #6b21f0;
-  box-shadow: 0 6px 14px rgba(107, 33, 240, .4)
+  background: transparent;
+  box-shadow: 0 6px 14px rgba(107, 33, 240, 0.4);
 }
 
 .ngp-tap {
@@ -738,9 +797,9 @@
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: rgba(107, 33, 240, .35);
+  background: rgba(107, 33, 240, 0.35);
   pointer-events: none;
-  z-index: 9
+  z-index: 9;
 }
 
 .ngp-splash {
@@ -749,17 +808,17 @@
   z-index: 10;
   display: grid;
   place-items: center;
-  background: #fff
+  background: #fff;
 }
 
 .ngp-splash img {
   width: 120px;
-  height: auto
+  height: auto;
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
   .ngp-stage {
-    scale: .82;
-    margin: -55px 0
+    scale: 0.82;
+    margin: -55px 0;
   }
 }
