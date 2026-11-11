@@ -1,5 +1,5 @@
 // HRHelp.jsx
-// NGriffinpay — "NGriffinpay HR Help – User Guides" inner page
+// NGriffinPay  — "NGriffinPay  HR Help – User Guides" inner page
 // Section 1: Hero banner (live Help Center app on the left — 3 guides play out; content on the right)
 // Section 2: Additional Resources — a 3D rotating carousel (FAQs · How-to videos · Product Updates · Webinars),
 //            every card is a live mini preview (GSAP)
@@ -45,7 +45,7 @@ const FEATURES = [
     short: "Admin",
     icon: "dashboard",
     href: LINKS.admin,
-    desc: "Seamlessly manage payroll, compliance, and HR functions using the intuitive NGriffinpay Admin Dashboard.",
+    desc: "Seamlessly manage payroll, compliance, and HR functions using the intuitive NGriffinPay  Admin Dashboard.",
   },
   {
     title: "Employee Portal – Web",
@@ -53,7 +53,7 @@ const FEATURES = [
     short: "Web portal",
     icon: "monitor",
     href: LINKS.portal,
-    desc: "Explore the NGriffinpay Employee Self-Service portal and simplify everyday HR and payroll tasks online.",
+    desc: "Explore the NGriffinPay  Employee Self-Service portal and simplify everyday HR and payroll tasks online.",
   },
   {
     title: "Mobile App",
@@ -61,7 +61,7 @@ const FEATURES = [
     short: "Mobile app",
     icon: "phone",
     href: LINKS.mobile,
-    desc: "Manage your attendance, payslips, and leave requests on the go with the NGriffinpay mobile app.",
+    desc: "Manage your attendance, payslips, and leave requests on the go with the NGriffinPay  mobile app.",
   },
 ];
 
@@ -515,7 +515,7 @@ function PortalGuidePanel({ delay }) {
 
 // 3 — Mobile App guide: phone + steps
 const MOBILE_STEPS = [
-  "Open the NGriffinpay app",
+  "Open the NGriffinPay  app",
   "Tap Punch in",
   "Location is verified",
   "Attendance marked",
@@ -574,7 +574,7 @@ function MobileGuidePanel({ delay }) {
               </span>
               <b>Hi, Priya</b>
             </div>
-            <small className="hlp-date">Thu, 13 Nov · General shift</small>
+            <small className="hlp-date">Fri, 13 Nov · General shift</small>
             <span className="hlp-punch">
               <span className="hlp-punch-ring" />
               <Icon name="pin" size={16} />
@@ -706,7 +706,7 @@ function HelpApp({ frameRef, stage, onSelect }) {
 
       <div className="hlp-topbar js-top">
         <span className="hlp-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
         </span>
         <b>HR Help</b>
         <span className="hlp-search">
@@ -943,7 +943,7 @@ function HeroSection() {
             <span className="hlp-live-dot" /> Help Center · User Guides
           </span>
           <h1 id="hlp-hero-title" className="hlp-title js-reveal">
-            <span className="hlp-grad">NGriffinpay HR Help</span> – User Guides
+            <span className="hlp-grad">NGriffinPay HR Help</span> – User Guides
           </h1>
 
           <ul className="hlp-feats" role="tablist" aria-label="User guides">
@@ -1021,7 +1021,7 @@ const RESOURCES = [
     icon: "video",
     href: LINKS.videos,
     cta: "Watch videos",
-    desc: "Follow step-by-step video tutorials to master every feature on NGriffinpay.",
+    desc: "Follow step-by-step video tutorials to master every feature on NGriffinPay .",
   },
   {
     key: "updates",
@@ -1030,7 +1030,7 @@ const RESOURCES = [
     icon: "rocket",
     href: LINKS.updates,
     cta: "See what's new",
-    desc: "Stay informed about the latest features, improvements, and releases on NGriffinpay.",
+    desc: "Stay informed about the latest features, improvements, and releases on NGriffinPay .",
   },
   {
     key: "webinars",
@@ -1039,7 +1039,7 @@ const RESOURCES = [
     icon: "mic",
     href: LINKS.webinars,
     cta: "View webinars",
-    desc: "Join our expert-led sessions and deep-dive into NGriffinpay’s capabilities.",
+    desc: "Join our expert-led sessions and deep-dive into NGriffinPay ’s capabilities.",
   },
 ];
 const RES_TIME = 5;
@@ -1297,7 +1297,7 @@ function ResourcesSection() {
           </h2>
           <p className="hr2-lead js-hr2">
             Explore more tools, tips, and insights for a smooth and productive
-            NGriffinpay experience
+            NGriffinPay experience
           </p>
         </div>
 
@@ -1475,7 +1475,7 @@ function AppCommunitySection() {
             </span>
             <h2>Smart Payroll in Your Pocket</h2>
             <p>
-              Download the NGriffinpay App and simplify your HR tasks on the
+              Download the NGriffinPay App and simplify your HR tasks on the
               move.
             </p>
             <div className="hr3-stores">
@@ -1540,7 +1540,7 @@ function AppCommunitySection() {
             </span>
             <h2>Connect and Collaborate with Peers on All Things HR</h2>
             <p>
-              Be part of the NGriffinpay Community and exchange ideas, insights,
+              Be part of the NGriffinPay Community and exchange ideas, insights,
               and solutions with fellow HR professionals.
             </p>
             <a href={LINKS.community} className="hlp-btn primary">

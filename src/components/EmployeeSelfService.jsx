@@ -1,5 +1,5 @@
 // EmployeeSelfService.jsx
-// NGriffinpay — Product inner page: "Employee Self-Service Portal with Mobile App"
+// NGriffinPay  — Product inner page: "Employee Self-Service Portal with Mobile App"
 // Section 1: Hero banner (web portal + mobile app on the left, content on the right)
 // Section 2: App showcase (3D phone coverflow with 5 live app screens)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -992,7 +992,7 @@ function Portal({ portalRef, stage }) {
         <span className="ess-dot y" />
         <span className="ess-dot g" />
         <div className="ess-url">
-          <span aria-hidden>🔒</span> portal.ngriffinpay.in
+          <span aria-hidden>🔒</span> portal.NGriffinPay .in
         </div>
       </div>
 
@@ -1004,7 +1004,7 @@ function Portal({ portalRef, stage }) {
           >
             <img
               src={I("ngriffinpay-mark.png")}
-              alt="NGriffinpay"
+              alt="NGriffinPay "
               style={{
                 display: "block",
                 width: "100%",
@@ -2051,7 +2051,7 @@ function AppNotifications({ active }) {
           </div>
         ))}
       </div>
-      <div className="esa-swipe-up">Swipe up to open NGriffinpay</div>
+      <div className="esa-swipe-up">Swipe up to open NGriffinPay </div>
     </div>
   );
 }
@@ -2375,7 +2375,7 @@ function AppShowcaseSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="esc-store"
-                    aria-label="Download NGriffinpay on Google Play"
+                    aria-label="Download NGriffinPay  on Google Play"
                   >
                     <Icon name="play" size={16} />
                     <span>
@@ -2387,7 +2387,7 @@ function AppShowcaseSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="esc-store"
-                    aria-label="Download NGriffinpay on the App Store"
+                    aria-label="Download NGriffinPay  on the App Store"
                   >
                     <Icon name="phone" size={16} />
                     <span>
@@ -2445,8 +2445,8 @@ function AppShowcaseSection() {
 
 const FAQS = [
   {
-    q: "What is the Employee Self-Service Portal in NGriffinpay?",
-    a: "NGriffinpay’s Employee Self-Service Portal with Mobile App allows employees to access their work-related information, manage personal details, and perform HR tasks anytime, anywhere—right from their smartphone or desktop.",
+    q: "What is the Employee Self-Service Portal in NGriffinPay ?",
+    a: "NGriffinPay ’s Employee Self-Service Portal with Mobile App allows employees to access their work-related information, manage personal details, and perform HR tasks anytime, anywhere—right from their smartphone or desktop.",
     keys: [
       "what is",
       "about",
@@ -2477,7 +2477,7 @@ const FAQS = [
   },
   {
     q: "Is the portal accessible through a mobile app?",
-    a: "Yes, the NGriffinpay mobile app provides the same self-service features as the web portal, allowing employees to stay connected and productive on the go.",
+    a: "Yes, the NGriffinPay  mobile app provides the same self-service features as the web portal, allowing employees to stay connected and productive on the go.",
     keys: [
       "mobile",
       "app",
@@ -2506,7 +2506,7 @@ const FAQS = [
   },
   {
     q: "Is the portal secure for employee data?",
-    a: "Yes, NGriffinpay uses enterprise-grade encryption and secure authentication to protect sensitive employee information at all times.",
+    a: "Yes, NGriffinPay  uses enterprise-grade encryption and secure authentication to protect sensitive employee information at all times.",
     keys: [
       "secure",
       "security",

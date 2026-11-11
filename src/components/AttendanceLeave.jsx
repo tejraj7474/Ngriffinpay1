@@ -1,5 +1,5 @@
 // AttendanceLeave.jsx
-// NGriffinpay — Product inner page: "Attendance & Leave Management"
+// NGriffinPay  — Product inner page: "Attendance & Leave Management"
 // Section 1: Hero banner (live attendance console on the left, content on the right)
 // Section 2: Attendance dial (clock-face tabs + live centre demo)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -924,7 +924,7 @@ function Console({ frameRef, stage }) {
         <span className="alm-dot y" />
         <span className="alm-dot g" />
         <div className="alm-url">
-          <span aria-hidden>🔒</span> app.ngriffinpay.in/attendance
+          <span aria-hidden>🔒</span> app.NGriffinPay .in/attendance
         </div>
       </div>
 
@@ -2202,8 +2202,8 @@ function DialSection() {
 
 const FAQS = [
   {
-    q: "What is the Attendance & Leave Management feature in NGriffinpay?",
-    a: "NGriffinpay’s Attendance & Leave Management system allows organizations to accurately track employee working hours, manage leave requests, and maintain compliance—all through a single, automated platform.",
+    q: "What is the Attendance & Leave Management feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Attendance & Leave Management system allows organizations to accurately track employee working hours, manage leave requests, and maintain compliance—all through a single, automated platform.",
     keys: [
       "what is",
       "about",

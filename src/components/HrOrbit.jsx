@@ -244,7 +244,7 @@ export default function HrOrbit() {
           </div>
           <div className="ho-hb" ref={hbRef}>
             <h2>
-              HR with <em>NGriffinpay</em>
+              HR with <em>NGriffinPay </em>
             </h2>
             <p>One system for every IT team.</p>
           </div>
@@ -293,7 +293,7 @@ export default function HrOrbit() {
 
           <div className="ho-core" ref={coreRef}>
             <div className="ho-disc">
-              <img src={logo} alt="NGriffinpay" />
+              <img src={logo} alt="NGriffinPay " />
             </div>
           </div>
 

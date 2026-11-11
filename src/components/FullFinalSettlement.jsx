@@ -1,5 +1,5 @@
 // FullFinalSettlement.jsx
-// NGriffinpay — Product inner page: "Full & Final Settlement Processing"
+// NGriffinPay  — Product inner page: "Full & Final Settlement Processing"
 // Section 1: Hero banner (live FNF settlement workspace on the left, content on the right)
 // Section 2: Settlement Vault (combination dial turns to each service + live settlement card)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -673,7 +673,7 @@ function SettlementApp({ frameRef, stage, onSelect }) {
         <span className="ffs-dot y" />
         <span className="ffs-dot g" />
         <div className="ffs-url">
-          <span aria-hidden>🔒</span> app.ngriffinpay.in/fnf-settlement
+          <span aria-hidden>🔒</span> app.NGriffinPay .in/fnf-settlement
         </div>
       </div>
 
@@ -1711,7 +1711,7 @@ function SettlementVaultSection() {
             </div>
             <div className="ffs2-actions">
               <a href="/contact-us" className="ffs-btn primary">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
               <div className="ffs2-nav">
                 <button
@@ -1746,8 +1746,8 @@ function SettlementVaultSection() {
 
 const FAQS = [
   {
-    q: "What is the Full & Final Settlement (F&F) process in NGriffinpay?",
-    a: "NGriffinpay’s Full & Final Settlement module automates the entire offboarding payout process — from pending salary and leave encashment to deductions and compliance — ensuring accurate, timely settlements.",
+    q: "What is the Full & Final Settlement (F&F) process in NGriffinPay ?",
+    a: "NGriffinPay ’s Full & Final Settlement module automates the entire offboarding payout process — from pending salary and leave encashment to deductions and compliance — ensuring accurate, timely settlements.",
     keys: [
       "what is",
       "about",
@@ -1780,7 +1780,7 @@ const FAQS = [
   },
   {
     q: "Does the system calculate payouts automatically?",
-    a: "Yes. NGriffinpay automatically calculates the final payable amount based on payroll data, attendance, and applicable policies, reducing manual errors and saving time.",
+    a: "Yes. NGriffinPay  automatically calculates the final payable amount based on payroll data, attendance, and applicable policies, reducing manual errors and saving time.",
     keys: [
       "calculat",
       "automatic",

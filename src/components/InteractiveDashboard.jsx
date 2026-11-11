@@ -1,5 +1,5 @@
 // InteractiveDashboard.jsx
-// NGriffinpay — Product inner page: "Interactive Dashboard"
+// NGriffinPay  — Product inner page: "Interactive Dashboard"
 // Section 1: Hero banner (live dashboard on the left, content on the right)
 // Section 2: Feature story (pinned scroll + three.js particle scene)
 // Section 3: Interactive Dashboard, Instant Control (switches + phone)
@@ -456,7 +456,7 @@ function LiveDashboard({ frameRef }) {
           <div className="idp-side-logo">
             <img
               src={I("ngriffinpay-mark.png")}
-              alt="NGriffinpay"
+              alt="NGriffinPay "
               style={{
                 display: "block",
                 height: 56,
@@ -1889,7 +1889,7 @@ function AIPanel({ active }) {
     <div className="idv-card">
       <div className="idv-card-top">
         <span className="idv-pill ai">
-          <Icon name="sparkles" size={12} /> NGriffinpay AI
+          <Icon name="sparkles" size={12} /> NGriffinPay AI
         </span>
         <small>
           Insight {idx + 1} of {INSIGHTS.length}
@@ -2168,7 +2168,7 @@ function FeatureSection() {
               </h3>
               <p>{f.desc}</p>
               <a href="/contact-us" className="idv-cta">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
             </div>
           </div>
@@ -2206,7 +2206,7 @@ const CONTROLS = [
 ];
 
 const CONTROL_TEXT =
-  "NGriffinpay’s Interactive Dashboard gives HR teams and decision-makers real-time visibility into every aspect of workforce management. Monitor KPIs, approve requests, track attendance, and view payroll summaries—all from a single, dynamic interface. Fully customizable and mobile-ready, it brings critical data to your fingertips, enabling quick and confident decisions.";
+  "NGriffinPay ’s Interactive Dashboard gives HR teams and decision-makers real-time visibility into every aspect of workforce management. Monitor KPIs, approve requests, track attendance, and view payroll summaries—all from a single, dynamic interface. Fully customizable and mobile-ready, it brings critical data to your fingertips, enabling quick and confident decisions.";
 
 function PhoneCard({ i }) {
   switch (i) {
@@ -2462,8 +2462,8 @@ function InstantControlSection() {
 
 const FAQS = [
   {
-    q: "What is the Interactive Dashboard in NGriffinpay?",
-    a: "The Interactive Dashboard in NGriffinpay provides a centralized, real-time view of all your HR, payroll, and workforce data, helping you track KPIs and take informed decisions instantly.",
+    q: "What is the Interactive Dashboard in NGriffinPay ?",
+    a: "The Interactive Dashboard in NGriffinPay  provides a centralized, real-time view of all your HR, payroll, and workforce data, helping you track KPIs and take informed decisions instantly.",
     keys: [
       "what is",
       "about",
@@ -2522,7 +2522,7 @@ const FAQS = [
   },
   {
     q: "Can I export data from the dashboard?",
-    a: "Yes, NGriffinpay allows you to export dashboard reports and charts in multiple formats, including Excel and PDF, making it easy to share insights with stakeholders.",
+    a: "Yes, NGriffinPay  allows you to export dashboard reports and charts in multiple formats, including Excel and PDF, making it easy to share insights with stakeholders.",
     keys: [
       "export",
       "download",

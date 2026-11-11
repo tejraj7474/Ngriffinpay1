@@ -1,5 +1,5 @@
 // RecruitmentAnalytics.jsx
-// NGriffinpay — Product inner page: "Recruitment & Analytics"
+// NGriffinPay  — Product inner page: "Recruitment & Analytics"
 // (Job Posting · Applicant Tracking · Interview Scheduling · Hiring Analytics)
 // Section 1: Hero banner (live Hiring app on the left, content on the right)
 // Section 2: Hiring Funnel — a 3D funnel where candidates drop through each stage (GSAP)
@@ -792,7 +792,7 @@ function HiringApp({ frameRef, stage, onSelect }) {
 
       <div className="rca-topbar js-top">
         <span className="rca-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
         </span>
         <b>Admin</b>
         <span className="rca-search">
@@ -1551,7 +1551,7 @@ function HiringFunnelSection() {
 
 const FAQS = [
   {
-    q: "What does Recruitment & Analytics in NGriffinpay include?",
+    q: "What does Recruitment & Analytics in NGriffinPay  include?",
     a: "It covers the full hiring cycle: job posting, applicant tracking, interview scheduling, offer letters and hiring analytics — and every hire flows straight into onboarding and the employee record.",
     keys: [
       "what is",
@@ -1631,7 +1631,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the NGriffinpay assistant. Pick a question or type your own about job posting, candidates, interviews or hiring reports.";
+  "Hi there! 👋 I'm the NGriffinPay  assistant. Pick a question or type your own about job posting, candidates, interviews or hiring reports.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -1947,7 +1947,7 @@ function RecruitmentFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinpay Assistant</strong>
+              <strong>NGriffinPay Assistant</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

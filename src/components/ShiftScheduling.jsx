@@ -1,5 +1,5 @@
 // ShiftScheduling.jsx
-// NGriffinpay — Product inner page: "Shift & Scheduling Management"
+// NGriffinPay  — Product inner page: "Shift & Scheduling Management"
 // Section 1: Hero banner (live roster app on the left, content on the right)
 // Section 2: 3D shift floor (isometric board, GSAP story per tab, three.js time ribbons)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -798,7 +798,7 @@ function RosterApp({ frameRef, stage, onSelect }) {
             >
               <img
                 src={I("ngriffinpay-mark.png")}
-                alt="NGriffinpay"
+                alt="NGriffinPay "
                 style={{
                   display: "block",
                   width: "100%",
@@ -2043,8 +2043,8 @@ function ScheduleBoardSection() {
 
 const FAQS = [
   {
-    q: "What is shift & scheduling management in NGriffinpay?",
-    a: "NGriffinpay’s Shift & Scheduling Management module helps you plan, assign, and manage employee shifts with accuracy and flexibility, ensuring smooth operations across your workforce.",
+    q: "What is shift & scheduling management in NGriffinPay ?",
+    a: "NGriffinPay ’s Shift & Scheduling Management module helps you plan, assign, and manage employee shifts with accuracy and flexibility, ensuring smooth operations across your workforce.",
     keys: [
       "what is",
       "about",
@@ -2073,7 +2073,7 @@ const FAQS = [
   },
   {
     q: "How are shift exceptions handled?",
-    a: "NGriffinpay allows real-time handling of shift exceptions like absenteeism, late arrivals, or shift swaps, with manager alerts and approval workflows.",
+    a: "NGriffinPay  allows real-time handling of shift exceptions like absenteeism, late arrivals, or shift swaps, with manager alerts and approval workflows.",
     keys: [
       "exception",
       "absent",
@@ -2105,7 +2105,7 @@ const FAQS = [
   },
   {
     q: "Does it support auto-scheduling?",
-    a: "Absolutely. NGriffinpay can auto-generate shifts based on rules like location, skills, workload, and labor laws, helping reduce manual errors and save time.",
+    a: "Absolutely. NGriffinPay  can auto-generate shifts based on rules like location, skills, workload, and labor laws, helping reduce manual errors and save time.",
     keys: [
       "auto",
       "automatic",

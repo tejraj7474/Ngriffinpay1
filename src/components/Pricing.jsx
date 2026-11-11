@@ -1,5 +1,5 @@
 // Pricing.jsx
-// NGriffinpay — Pricing / Packages inner page
+// NGriffinPay  — Pricing / Packages inner page
 // Section 1: "Plan Stack" — every plan is a tower of HR modules. Switch plan and the
 //            blocks drop in (GSAP), the price counts up, click any block to see its features.
 // Section 2: "Compare every module" — module × plan matrix, expand a row to see features.
@@ -675,7 +675,7 @@ function PlanStack({ onPurchase }) {
                   );
                 })}
               <div className="prc-tower-base">
-                <span>NGriffinpay HRMS · {P.short}</span>
+                <span>NGriffinPay HRMS · {P.short}</span>
               </div>
             </div>
           </div>

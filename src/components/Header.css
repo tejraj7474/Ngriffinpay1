@@ -5,7 +5,7 @@
    ========================================================= */
 
 .hdr {
-  /* NGriffinpay logo colours: navy -> blue -> sky */
+  /* NGriffinPay  logo colours: navy -> blue -> sky */
   --h-ink: #0b1b36;
   --h-navy: #0a3f83;
   --h-brand: #1d6fd8;
@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  height: 76px;
+  height: 88px;
   padding: 0 clamp(16px, 4vw, 48px);
   background: rgb(255 255 255 / 71%);
   -webkit-backdrop-filter: blur(12px);
@@ -62,7 +62,7 @@
 
 .hdr .logo img {
   display: block;
-  height: 80px;
+  height: 90px;
   width: auto;
 }
 

@@ -1,5 +1,5 @@
 // EmployeeOnboarding.jsx
-// NGriffinpay — Product inner page: "Seamless Employee Onboarding"
+// NGriffinPay  — Product inner page: "Seamless Employee Onboarding"
 // Section 1: Hero banner (live onboarding app on the left, content on the right)
 // Section 2: Onboarding journey (step tabs + live feature card)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -698,7 +698,7 @@ function WelcomePanel({ delay }) {
             <i className="eob-confetti" key={i} />
           ))}
         </div>
-        <small>Day 1 · Monday, 3 Nov</small>
+        <small>Day 1 · Tuesday, 3 Nov</small>
         <strong>Welcome aboard, Ananya! 🎉</strong>
         <span>Your desk, laptop and team are ready for you.</span>
       </div>
@@ -850,7 +850,7 @@ function OnboardingApp({ frameRef, stage, onSelect }) {
             </div>
 
             <div className="eob-join-chip">
-              <Icon name="calendar" size={11} /> Joins Mon, 3 Nov
+              <Icon name="calendar" size={11} /> Joins Tue, 3 Nov
             </div>
 
             <ol className="eob-steps">
@@ -1178,14 +1178,14 @@ const JOURNEY = [
     desc: "Automate ID verification, background checks, and compliance documentation to ensure smooth and legal onboarding.",
   },
   {
-    label: "Personalized Training",
+    label: "Personalized Learning",
     icon: "grad",
     title: [
       ["Empower", true],
       [" with ", false],
       ["personalized learning", true],
     ],
-    desc: "Provide custom training modules and resources to help new employees adapt faster and perform confidently.",
+    desc: "Provide custom learning modules and resources to help new employees adapt faster and perform confidently.",
   },
   {
     label: "Integration with HR & Payroll",
@@ -2208,7 +2208,7 @@ function JourneySection() {
               <p>{j.desc}</p>
               <div className="ejn-actions">
                 <a href="/contact-us" className="eob-btn primary">
-                  Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                  Get Started with NGriffinPay <Icon name="arrow" size={16} />
                 </a>
                 <div className="ejn-nav">
                   <button
@@ -2243,8 +2243,8 @@ function JourneySection() {
 
 const FAQS = [
   {
-    q: "What is the Seamless Employee Onboarding feature in NGriffinpay?",
-    a: "NGriffinpay’s Seamless Employee Onboarding module helps you quickly and efficiently bring new hires into your organization with minimal paperwork and maximum engagement.",
+    q: "What is the Seamless Employee Onboarding feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Seamless Employee Onboarding module helps you quickly and efficiently bring new hires into your organization with minimal paperwork and maximum engagement.",
     keys: [
       "what is",
       "about",
@@ -2303,7 +2303,7 @@ const FAQS = [
   },
   {
     q: "Does it integrate with payroll and HR systems?",
-    a: "Yes, NGriffinpay integrates with payroll, HR, and compliance systems to ensure employee records are automatically synced and ready for their first paycheck.",
+    a: "Yes, NGriffinPay  integrates with payroll, HR, and compliance systems to ensure employee records are automatically synced and ready for their first paycheck.",
     keys: [
       "integrat",
       "payroll",

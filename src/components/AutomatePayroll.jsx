@@ -1,5 +1,5 @@
 // AutomatePayroll.jsx
-// NGriffinpay — Product inner page: "Automate Payroll Processing"
+// NGriffinPay  — Product inner page: "Automate Payroll Processing"
 // Section 1: Hero banner (live payroll run app on the left, content on the right)
 // Section 2: 3D payroll cube (one face per tab) + three.js floating gold coins
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -762,7 +762,7 @@ function DisbursePanel({ delay }) {
           <span className="apr-node-ic">
             <Icon name="rupee" size={14} />
           </span>
-          <b>NGriffinpay</b>
+          <b>NGriffinPay </b>
           <small>Approved run</small>
         </div>
         <div className="apr-wire">
@@ -1078,7 +1078,7 @@ function PayrollApp({ frameRef, stage }) {
         <span className="apr-dot y" />
         <span className="apr-dot g" />
         <div className="apr-url">
-          <span aria-hidden>🔒</span> app.ngriffinpay.in/payroll/run/oct-2026
+          <span aria-hidden>🔒</span> app.NGriffinPay .in/payroll/run/oct-2026
         </div>
       </div>
 
@@ -2290,13 +2290,13 @@ function PayrollCubeSection() {
             </h3>
             <p className="js-t">{tab.desc}</p>
             <p className="aps-about js-t">
-              NGriffinpay’s Automated Payroll Processing module handles salary
+              NGriffinPay ’s Automated Payroll Processing module handles salary
               calculations, deductions, tax compliance, and payslip
               distribution—reducing manual errors and ensuring timely employee
               payments.
             </p>
             <a href="/contact-us" className="apr-btn primary js-t">
-              Get Started with NGriffinpay <Icon name="arrow" size={16} />
+              Get Started with NGriffinPay <Icon name="arrow" size={16} />
             </a>
           </div>
         </div>
@@ -2311,8 +2311,8 @@ function PayrollCubeSection() {
 
 const FAQS = [
   {
-    q: "What is the Automated Payroll Processing feature in NGriffinpay?",
-    a: "NGriffinpay’s Automated Payroll Processing system calculates salaries, deductions, bonuses, and taxes instantly—ensuring accuracy, compliance, and timely payments without manual intervention.",
+    q: "What is the Automated Payroll Processing feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Automated Payroll Processing system calculates salaries, deductions, bonuses, and taxes instantly—ensuring accuracy, compliance, and timely payments without manual intervention.",
     keys: [
       "what is",
       "about",
@@ -2342,7 +2342,7 @@ const FAQS = [
   },
   {
     q: "Can the system handle tax and compliance requirements?",
-    a: "Yes. NGriffinpay automatically applies the latest tax rules, provident fund contributions, and compliance requirements—reducing errors and ensuring legal adherence.",
+    a: "Yes. NGriffinPay  automatically applies the latest tax rules, provident fund contributions, and compliance requirements—reducing errors and ensuring legal adherence.",
     keys: [
       "tax",
       "tds",

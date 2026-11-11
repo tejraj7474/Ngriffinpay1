@@ -1,5 +1,5 @@
 // IncomeTax.jsx
-// NGriffinpay — Product inner page: "Income Tax Computation & Compliance"
+// NGriffinPay  — Product inner page: "Income Tax Computation & Compliance"
 // Section 1: Hero banner (live tax desk app on the left, content on the right)
 // Section 2: Tax-engine printer (receipt per tab) + three.js waving point grid
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -1152,7 +1152,7 @@ const RECEIPTS = [
   },
   {
     head: "REPORTS GENERATED",
-    sub: "NGriffinpay Pvt Ltd · Q2 FY 2026-27",
+    sub: "NGriffinPay  Pvt Ltd · Q2 FY 2026-27",
     rows: [
       ["r", "Form 24Q · Q2 statement", "✓"],
       ["r", "Form 16 · Part A + B", "248 ✓"],
@@ -1595,7 +1595,7 @@ function TaxPrinterSection() {
               <div className="itp-printer" ref={printerRef}>
                 <div className="itp-pr-top">
                   <span className="itp-led" />
-                  <b>NGriffinpay · Tax Engine</b>
+                  <b>NGriffinPay · Tax Engine</b>
                   <span className="itp-screen">0{active + 1}/05</span>
                 </div>
                 <div className="itp-slot" />
@@ -1675,8 +1675,8 @@ function TaxPrinterSection() {
 
 const FAQS = [
   {
-    q: "What is the Income Tax Computation & Compliance feature in NGriffinpay?",
-    a: "NGriffinpay’s Income Tax Computation & Compliance module automatically calculates employee income tax deductions (TDS) as per the latest tax laws, ensuring accuracy and timely compliance with statutory requirements.",
+    q: "What is the Income Tax Computation & Compliance feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Income Tax Computation & Compliance module automatically calculates employee income tax deductions (TDS) as per the latest tax laws, ensuring accuracy and timely compliance with statutory requirements.",
     keys: [
       "what is",
       "about",
@@ -1706,7 +1706,7 @@ const FAQS = [
   },
   {
     q: "Does it handle multiple tax regimes?",
-    a: "Yes, NGriffinpay supports both the old and new income tax regimes, allowing employees to choose and switch between them as per their preference.",
+    a: "Yes, NGriffinPay  supports both the old and new income tax regimes, allowing employees to choose and switch between them as per their preference.",
     keys: ["regime", "old", "new", "switch", "choose", "multiple", "both"],
   },
   {

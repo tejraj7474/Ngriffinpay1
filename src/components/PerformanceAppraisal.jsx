@@ -1,5 +1,5 @@
 // PerformanceAppraisal.jsx
-// NGriffinpay — Product inner page: "Performance & Appraisal Management"
+// NGriffinPay  — Product inner page: "Performance & Appraisal Management"
 // Section 1: Hero banner (live performance app on the left, content on the right)
 // Section 2: Growth mountain (climber walks flag to flag, one live card per tab)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -1889,7 +1889,7 @@ function GrowthClimbSection() {
             <p className="js-f">{t.desc}</p>
             <div className="pa2-actions js-f">
               <a href="/contact-us" className="pam-btn primary">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
               <div className="pa2-nav">
                 <button
@@ -1923,8 +1923,8 @@ function GrowthClimbSection() {
 
 const FAQS = [
   {
-    q: "What is the Performance & Appraisal Management feature in NGriffinpay?",
-    a: "NGriffinpay’s Performance & Appraisal Management module helps organizations evaluate employee performance, set measurable goals, and conduct structured appraisals to drive growth and engagement.",
+    q: "What is the Performance & Appraisal Management feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Performance & Appraisal Management module helps organizations evaluate employee performance, set measurable goals, and conduct structured appraisals to drive growth and engagement.",
     keys: [
       "what is",
       "about",
@@ -1953,7 +1953,7 @@ const FAQS = [
   },
   {
     q: "Does the system support 360-degree feedback?",
-    a: "Absolutely. NGriffinpay supports 360-degree feedback, allowing inputs from peers, subordinates, and managers to ensure a holistic performance review.",
+    a: "Absolutely. NGriffinPay  supports 360-degree feedback, allowing inputs from peers, subordinates, and managers to ensure a holistic performance review.",
     keys: [
       "360",
       "peer",

@@ -1,5 +1,5 @@
 // AssetManagement.jsx
-// NGriffinpay — Product inner page: "Asset Allocation & Management"
+// NGriffinPay  — Product inner page: "Asset Allocation & Management"
 // Section 1: Hero banner (live asset desk app on the left, content on the right)
 // Section 2: Smart Locker Wall (one wall of assets that changes per service tab)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -1567,7 +1567,7 @@ function LockerWallSection() {
             </div>
             <div className="as2-actions">
               <a href="/contact-us" className="ast-btn primary">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
               <div className="as2-nav">
                 <button
@@ -1602,8 +1602,8 @@ function LockerWallSection() {
 
 const FAQS = [
   {
-    q: "What is the Asset Allocation & Management feature in NGriffinpay?",
-    a: "NGriffinpay’s Asset Allocation & Management module enables organizations to efficiently assign, track, and monitor company assets—from laptops to vehicles—ensuring optimal utilization and accountability.",
+    q: "What is the Asset Allocation & Management feature in NGriffinPay ?",
+    a: "NGriffinPay   Asset Allocation & Management module enables organizations to efficiently assign, track, and monitor company assets—from laptops to vehicles—ensuring optimal utilization and accountability.",
     keys: [
       "what is",
       "about",

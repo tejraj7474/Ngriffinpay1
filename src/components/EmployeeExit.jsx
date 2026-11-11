@@ -1,5 +1,5 @@
 // EmployeeExit.jsx
-// NGriffinpay — Product inner page: "Employee Exit Management"
+// NGriffinPay  — Product inner page: "Employee Exit Management"
 // Section 1: Hero banner (live exit desk app on the left, content on the right)
 // Section 2: Exit Terminal (split-flap departure board = tabs, boarding pass per service)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -1686,7 +1686,7 @@ function ExitTerminalSection() {
             >
               <div className="ex2-pass-main">
                 <div className="ex2-pass-top">
-                  <span className="ex2-brand">NGriffinpay · Exit Pass</span>
+                  <span className="ex2-brand">NGriffinPay · Exit Pass</span>
                   <span className="ex2-pax">
                     <small>Passenger</small>
                     <b>Priya S.</b>
@@ -1737,7 +1737,7 @@ function ExitTerminalSection() {
 
             <div className="ex2-actions">
               <a href="/contact-us" className="exm-btn primary">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
               <div className="ex2-nav">
                 <button
@@ -1772,8 +1772,8 @@ function ExitTerminalSection() {
 
 const FAQS = [
   {
-    q: "What is the Employee Exit Management feature in NGriffinpay?",
-    a: "NGriffinpay’s Employee Exit Management module streamlines the entire offboarding process, ensuring smooth clearance, proper documentation, and compliance with company policies.",
+    q: "What is the Employee Exit Management feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Employee Exit Management module streamlines the entire offboarding process, ensuring smooth clearance, proper documentation, and compliance with company policies.",
     keys: [
       "what is",
       "about",
@@ -1833,7 +1833,7 @@ const FAQS = [
   },
   {
     q: "Does the system generate compliance documents?",
-    a: "Yes, NGriffinpay automatically generates experience letters, relieving letters, and compliance reports, reducing manual effort and error risk.",
+    a: "Yes, NGriffinPay  automatically generates experience letters, relieving letters, and compliance reports, reducing manual effort and error risk.",
     keys: [
       "document",
       "letter",

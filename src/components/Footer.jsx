@@ -20,8 +20,8 @@ const COLS = [
   ],
   ["Partner", ["Partner with us", "/partner-with-us"]],
   [
-    "NGriffinpay Customers",
-    ["NGriffinpay HR Help", "/ngriffinpay-hr-help"],
+    "NGriffinPay  Customers",
+    ["NGriffinPay  HR Help", "/ngriffinpay-hr-help"],
     ["Request a Demo", "/demo"],
   ],
   [
@@ -29,7 +29,7 @@ const COLS = [
     ["Home", "/"],
     ["Product", "/interactive-dashboard"],
     ["Pricing", "/pricing"],
-    ["Partner", "/partner-with-usr"],
+    ["Partner", "/partner-with-us"],
     ["Blog", "/blog"],
     ["Contact us", "/contact-us"],
   ],
@@ -120,7 +120,7 @@ export default function Footer({ footRef }) {
               ))}
 
               {/* app store badges go under the Customers column */}
-              {c[0] === "NGriffinpay Customers" && (
+              {c[0] === "NGriffinPay  Customers" && (
                 <li className="ft-stores">
                   <a href="#playstore" aria-label="Get it on Google Play">
                     <img
@@ -142,7 +142,7 @@ export default function Footer({ footRef }) {
 
         {/* logo + address + socials */}
         <div className="ft-mid">
-          <img className="ft-logo" src={I("logo.png")} alt="NGriffinpay" />
+          <img className="ft-logo" src={I("logo.png")} alt="NGriffinPay " />
 
           <div className="ft-contact">
             <p className="ft-addr">
@@ -180,7 +180,7 @@ export default function Footer({ footRef }) {
 
         {/* bottom bar */}
         <div className="ft-bottom">
-          <p>© 2025 NGriffinpay. All Rights Reserved</p>
+          <p>© 2025 NGriffinPay . All Rights Reserved</p>
           <p>Design &amp; Developed By : DigitalNock India Pvt. Ltd.</p>
         </div>
       </footer>

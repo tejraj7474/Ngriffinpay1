@@ -1,5 +1,5 @@
 // DigitalDocumentation.jsx
-// NGriffinpay — Product inner page: "Digital Employee Documentation"
+// NGriffinPay  — Product inner page: "Digital Employee Documentation"
 // Section 1: Hero banner (live document vault on the left, content on the right)
 // Section 2: 3D filing drawer (folders lift out and open live sheets)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -1853,8 +1853,8 @@ function DrawerSection() {
 
 const FAQS = [
   {
-    q: "What is the Digital Employee Documentation feature in NGriffinpay?",
-    a: "NGriffinpay’s Digital Employee Documentation module allows organizations to securely store, manage, and retrieve all employee-related documents in a centralized, paperless environment—saving time and reducing administrative overhead.",
+    q: "What is the Digital Employee Documentation feature in NGriffinPay ?",
+    a: "NGriffinPay ’s Digital Employee Documentation module allows organizations to securely store, manage, and retrieve all employee-related documents in a centralized, paperless environment—saving time and reducing administrative overhead.",
     keys: [
       "what is",
       "about",
@@ -1915,7 +1915,7 @@ const FAQS = [
   },
   {
     q: "Can documents be accessed remotely?",
-    a: "Yes, authorized users can securely access documents anytime, anywhere, via the NGriffinpay web portal or mobile app, making remote work seamless and efficient.",
+    a: "Yes, authorized users can securely access documents anytime, anywhere, via the NGriffinPay  web portal or mobile app, making remote work seamless and efficient.",
     keys: [
       "remote",
       "remotely",

@@ -1,8 +1,8 @@
-/* InteractiveDashboard.css — NGriffinpay product inner page (brand blue theme) */
+/* InteractiveDashboard.css — NGriffinPay  product inner page (brand blue theme) */
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 :root {
-  /* NGriffinpay brand — taken from the logo (royal blue #0A3F83) */
+  /* NGriffinPay  brand — taken from the logo (royal blue #0A3F83) */
   --ng-primary: #0a3f83; /* logo blue */
   --ng-primary-2: #1d6fd8; /* lighter brand blue for gradients */
   --ng-accent: #10b981; /* success / "present" green */

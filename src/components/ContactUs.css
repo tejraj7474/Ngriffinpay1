@@ -295,6 +295,52 @@
   margin-top: auto;
 }
 
+/* email list — one address per line */
+.cnt-mails {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cnt-mails li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 10px 9px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--c-border);
+  transition:
+    border-color 0.25s,
+    background 0.25s;
+  min-width: 0;
+}
+.cnt-mails li:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.08);
+}
+.cnt-mails a {
+  min-width: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.cnt-mails a:hover {
+  color: #7dd3fc;
+}
+.cnt-copy.is-compact {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  justify-content: center;
+}
+
 /* mail badge */
 .cnt-badge {
   position: absolute;
@@ -327,6 +373,7 @@
 /* ================================================================== */
 .cnt-main {
   position: relative;
+  overflow-x: clip;
   padding: 70px 0 110px;
   background: linear-gradient(180deg, var(--c-bg) 0%, var(--c-bg2) 100%);
 }

@@ -244,7 +244,7 @@ function Panel({ s }) {
           <img
             className="photo pop"
             src={I(s.photo)}
-            alt="NGriffinPay employee app"
+            alt="NGriffinPay  employee app"
           />
           <ul className="feat-list">
             {s.items.map((it, k) => (
@@ -539,11 +539,7 @@ export default function Services() {
         </h2>
         <div className="svc-m-list">
           {SERVICES.map((sv, i) => (
-            <article
-              key={i}
-              id={`svc-${i}`}
-              className="vis vis-pdf svc-m-card"
-            >
+            <article key={i} id={`svc-${i}`} className="vis vis-pdf svc-m-card">
               <span className="svc-m-tag">{sv.tab}</span>
               <h3 className="pt pop">
                 {sv.title[0]} <span>{sv.title[1]}</span>

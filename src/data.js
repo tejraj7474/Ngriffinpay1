@@ -11,12 +11,12 @@ export const SERVICES = [
 
 // first three go on the left, last three on the right
 export const FEATURES = [
-    ['Still using spreadsheets?', 'NGriffinpay unifies payroll, leave, and HR tasks in one smart platform.'],
-    ['Manual payroll is draining?', 'Automate with NGriffinpay for faster, error-free processing.'],
+    ['Still using spreadsheets?', 'NGriffinPay  unifies payroll, leave, and HR tasks in one smart platform.'],
+    ['Manual payroll is draining?', 'Automate with NGriffinPay  for faster, error-free processing.'],
     ['Too many repetitive tasks?', 'Automate routine HR tasks and boost team efficiency.'],
     ['Old leave tracking methods?', 'Upgrade to digital tracking with instant approvals.'],
     ['No insights from data?', 'Get 150+ ready-to-use HR and payroll reports.'],
-    ['Employees need flexibility?', 'NGriffinpay’s mobile ESS lets them handle HR tasks on the go.'],
+    ['Employees need flexibility?', 'NGriffinPay  mobile ESS lets them handle HR tasks on the go.'],
 ];
 
 export const AI = [

@@ -1,5 +1,5 @@
 // CoreHR.jsx
-// NGriffinpay — Product inner page: "Core HR"
+// NGriffinPay  — Product inner page: "Core HR"
 // Section 1: Hero banner (live HR records app on the left, content on the right)
 // Section 2: HR Metro Map (each Core HR module is a metro line through one employee record)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
@@ -660,13 +660,13 @@ function CoreHRApp({ frameRef, stage, onSelect }) {
         <span className="chr-dot y" />
         <span className="chr-dot g" />
         <div className="chr-url">
-          <span aria-hidden>🔒</span> app.ngriffinpay.in/core-hr
+          <span aria-hidden>🔒</span> app.NGriffinPay .in/core-hr
         </div>
       </div>
 
       <div className="chr-topbar js-top">
         <span className="chr-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
         </span>
         <b>Admin</b>
         <span className="chr-search">
@@ -1455,7 +1455,7 @@ function MetroMapSection() {
             </div>
             <div className="ch2-actions">
               <a href="/contact-us" className="chr-btn primary">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
               <div className="ch2-nav">
                 <button
@@ -1490,8 +1490,8 @@ function MetroMapSection() {
 
 const FAQS = [
   {
-    q: "What is Core HR in NGriffinpay?",
-    a: "Core HR is the foundation of NGriffinpay. It keeps every employee’s personal, job, salary, bank and statutory details in one secure record, and that same record powers payroll, attendance, leave and every other module.",
+    q: "What is Core HR in NGriffinPay ?",
+    a: "Core HR is the foundation of NGriffinPay . It keeps every employee’s personal, job, salary, bank and statutory details in one secure record, and that same record powers payroll, attendance, leave and every other module.",
     keys: [
       "what is",
       "about",

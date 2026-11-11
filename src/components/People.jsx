@@ -1,5 +1,5 @@
 // People.jsx
-// NGriffinpay — Product inner page: "People"
+// NGriffinPay  — Product inner page: "People"
 // (Asset Management · Reward & Recognition · Announcements · Separation)
 // Section 1: Hero banner (live People hub app on the left, content on the right)
 // Section 2: People Wall (polaroid corkboard that changes per tab, GSAP)
@@ -674,7 +674,7 @@ function PeopleApp({ frameRef, stage, onSelect }) {
 
       <div className="pep-topbar js-top">
         <span className="pep-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
         </span>
         <b>Admin</b>
         <span className="pep-search">
@@ -982,7 +982,6 @@ function HeroSection() {
     </section>
   );
 }
-
 /* ------------------------------------------------------------------ */
 /* SECTION 2 — People Wall (polaroid corkboard, changes per tab)       */
 /* ------------------------------------------------------------------ */
@@ -1115,55 +1114,83 @@ function PeopleWallSection() {
 
   const go = (i) => setActive((i + WALL_TABS.length) % WALL_TABS.length);
 
-  // Heading reveal, polaroids pinned one by one, autoplay only while on screen
+  // Heading reveal, polaroids pinned one by one, autoplay only while on screen.
+  // Uses IntersectionObserver (measured by the browser itself) instead of ScrollTrigger,
+  // so the wall can never get stuck hidden when the page opens (preloader, late images, etc.).
   useLayoutEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return undefined;
+    const reduce = prefersReduced();
+    let played = false;
+    let tl = null;
+
     const ctx = gsap.context(() => {
+      if (reduce) return;
       const q = gsap.utils.selector(sectionRef);
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top 75%",
-        end: "bottom 20%",
-        onToggle: (self) => setInView(self.isActive),
-      });
-      if (prefersReduced()) return;
-      gsap.from(q(".pp2-hw > span"), {
-        yPercent: 110,
-        duration: 0.8,
-        stagger: 0.035,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-      gsap.from(q(".pp2-polaroid"), {
-        y: -40,
-        rotation: () => gsap.utils.random(-20, 20),
-        autoAlpha: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "back.out(1.6)",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%",
-          once: true,
-        },
-      });
-      gsap.from([q(".pp2-tabs"), q(".pp2-card")], {
-        y: 40,
-        autoAlpha: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 65%",
-          once: true,
-        },
-      });
+      tl = gsap.timeline({ paused: true });
+      tl.fromTo(
+        q(".pp2-hw > span"),
+        { yPercent: 110 },
+        { yPercent: 0, duration: 0.8, stagger: 0.035, ease: "power4.out" },
+        0,
+      )
+        .fromTo(
+          [q(".pp2-tabs"), q(".pp2-card")],
+          { y: 40, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+            clearProps: "transform,opacity,visibility",
+          },
+          0.15,
+        )
+        .fromTo(
+          q(".pp2-polaroid"),
+          { y: -40, rotation: () => gsap.utils.random(-20, 20), autoAlpha: 0 },
+          {
+            y: 0,
+            // land exactly on each polaroid's own CSS tilt (--r) so nothing jumps afterwards
+            rotation: (i, node) =>
+              parseFloat(getComputedStyle(node).getPropertyValue("--r")) || 0,
+            autoAlpha: 1,
+            duration: 0.6,
+            stagger: 0.05,
+            ease: "back.out(1.6)",
+            clearProps: "transform,opacity,visibility",
+          },
+          0.25,
+        );
     }, sectionRef);
-    return () => ctx.revert();
+
+    const play = () => {
+      if (played) return;
+      played = true;
+      tl?.play();
+    };
+
+    // very old browsers: just show everything
+    if (typeof IntersectionObserver === "undefined") {
+      tl?.progress(1);
+      setInView(true);
+      return () => ctx.revert();
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) play();
+      },
+      { threshold: 0, rootMargin: "0px 0px -15% 0px" },
+    );
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      ctx.revert();
+    };
   }, []);
 
   // Autoplay with progress bar in the active tab
@@ -1511,7 +1538,7 @@ function PeopleWallSection() {
             </div>
             <div className="pp2-actions">
               <a href="/contact-us" className="pep-btn primary">
-                Get Started with NGriffinpay <Icon name="arrow" size={16} />
+                Get Started with NGriffinPay <Icon name="arrow" size={16} />
               </a>
               <div className="pp2-nav">
                 <button
@@ -1545,7 +1572,7 @@ function PeopleWallSection() {
 
 const FAQS = [
   {
-    q: "What does the People module in NGriffinpay include?",
+    q: "What does the People module in NGriffinPay  include?",
     a: "People brings together four everyday HR jobs: asset management, reward & recognition, company announcements and employee separation — all linked to the same employee record, so nothing is tracked twice.",
     keys: [
       "what is",

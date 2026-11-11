@@ -1,6 +1,6 @@
 // PartnerWithUs.jsx
-// NGriffinpay — "Partner With Us" inner page
-// Section 1: "Who can be our partner?" — a live partner network: the NGriffinpay hub in the
+// NGriffinPay  — "Partner With Us" inner page
+// Section 1: "Who can be our partner?" — a live partner network: the NGriffinPay  hub in the
 //            middle, the 6 partner types around it, data flowing along the lines (GSAP).
 //            Auto-cycles while in view; click a node or a row to pick a partner type.
 // Section 2: Partnership programs — Reseller (live partner-portal mockup: deals, margin, support)
@@ -41,7 +41,7 @@ const PARTNERS = [
     title: "Are you a CA (Chartered Accountant)?",
     short: "CA",
     badge: "CA",
-    desc: "Recommend NGriffinpay to your clients and close TDS, Form 16 and payroll audits faster with clean data.",
+    desc: "Recommend NGriffinPay  to your clients and close TDS, Form 16 and payroll audits faster with clean data.",
     tags: ["TDS & Form 16", "Audit-ready reports"],
   },
   {
@@ -319,9 +319,9 @@ function PartnerNetwork({ active, onPick }) {
         <span className="ptn-hub-glow" aria-hidden />
         <span className="ptn-ping" aria-hidden />
         <span className="ptn-hub-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
         </span>
-        <b>NGriffinpay</b>
+        <b>NGriffinPay </b>
         <small>Partner Network</small>
       </div>
 
@@ -471,7 +471,7 @@ function PartnerHero() {
           </h1>
           <p className="ptn-lead ptn-anim">
             If you look after the payroll, HR or compliance of other businesses,
-            NGriffinpay can become part of the work you already do — and grow
+            NGriffinPay can become part of the work you already do — and grow
             with you.
           </p>
 
@@ -525,7 +525,7 @@ const PROGRAMS = [
     key: "reseller",
     title: "Reseller Partners",
     icon: "tag",
-    desc: "Promote and sell NGriffinpay solutions while earning attractive margins and enjoying end-to-end support.",
+    desc: "Promote and sell NGriffinPay  solutions while earning attractive margins and enjoying end-to-end support.",
     perks: [
       "Margin on every plan you sell and renew",
       "Demo, onboarding and support handled with you",
@@ -567,7 +567,7 @@ const ALLY_ROWS = [
 
 const SYNC_LOG = [
   "48 employees synced from Your Platform",
-  "November attendance pushed to NGriffinpay",
+  "November attendance pushed to NGriffinPay ",
   "Payroll run complete · journal sent back",
   "Single sign-on enabled for shared users",
 ];
@@ -833,7 +833,7 @@ function ResellerPortal() {
       <div className="pt2-support">
         <span className="pt2-ava sm">NG</span>
         <span>
-          <b>NGriffinpay Support</b>We'll handle Apex Tools' onboarding & data
+          <b>NGriffinPay Support</b>We'll handle Apex Tools' onboarding & data
           migration ✓
         </span>
       </div>
@@ -978,7 +978,7 @@ function AllianceBridge() {
             <span className="pt2-app-logo xs">
               <img src={I("ngriffinpay-mark.png")} alt="" />
             </span>{" "}
-            NGriffinpay <small>Payroll · Nov</small>
+            NGriffinPay <small>Payroll · Nov</small>
           </div>
           <div className="pt2-pay">
             <div className="pt2-pay-row">
@@ -1107,7 +1107,7 @@ function PartnerPrograms() {
             Partner <span>with Us</span>
           </h2>
           <p>
-            Join hands with NGriffinpay to expand your business, offer more
+            Join hands with NGriffinPay to expand your business, offer more
             value to your clients, and grow in the HR and Payroll automation
             ecosystem. Choose the partnership that fits you best:
           </p>

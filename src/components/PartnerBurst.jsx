@@ -4,7 +4,7 @@ import * as THREE from "three";
 import "./PartnerBurst.css";
 
 /* =====================================================================
-   PartnerBurst — "Who can be Our Partner?" scroll reveal (NGriffinpay)
+   PartnerBurst — "Who can be Our Partner?" scroll reveal (NGriffinPay )
 
    ISOLATED: this section does NOT use ScrollTrigger, does NOT pin, and
    never calls ScrollTrigger.refresh(). Its height is fixed from the first
@@ -219,7 +219,7 @@ function GpxBurstCanvas({ progressRef, activeRef }) {
 
 /* ---------------- Main component ---------------- */
 export default function PartnerBurst({
-  logo = "NGriffinpay",
+  logo = "NGriffinPay ",
   headerOffset = 0,
   demoUrl = "https://ngriffinpay.in/request-a-demo.html",
 }) {
@@ -420,7 +420,7 @@ export default function PartnerBurst({
               <img
                 className="gpx-emblem-img"
                 src={logo}
-                alt="NGriffinpay"
+                alt="NGriffinPay "
                 width="190"
                 height="240"
               />

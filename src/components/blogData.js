@@ -1,4 +1,4 @@
-// blogData.js — all NGriffinpay blog posts live here.
+// blogData.js — all NGriffinPay  blog posts live here.
 // Used by Blogs.jsx (listing page) and BlogPost.jsx (single post page).
 //
 // To add a post: copy one object below, give it a unique `slug`, and fill in `content`.
@@ -23,7 +23,7 @@ export const BLOG_POSTS = [
     title: "How to Choose HR Software for a Small Business: A Practical Buyer’s Guide",
     date: "2026-09-26",
     category: "Buyer's Guide",
-    author: "NGriffinpay Team",
+    author: "NGriffinPay  Team",
     image: I("blog-hr-software-small-business.jpg"),
     excerpt: "Running a growing business is exciting, but employee administration scales non-linearly.",
     content: [
@@ -87,7 +87,7 @@ export const BLOG_POSTS = [
     title: "October 2026 HR Update: Labour Codes, PF Ceiling & Payroll Changes for Employers",
     date: "2026-10-05",
     category: "Compliance",
-    author: "NGriffinpay Team",
+    author: "NGriffinPay  Team",
     image: I("blog-october-2026-hr-update.jpg"),
     excerpt: "October 2026 is an important month for HR and payroll teams across India.",
     content: [
@@ -106,7 +106,7 @@ export const BLOG_POSTS = [
     title: "A Day in the Life of Modern HR : The Daily, Weekly and Monthly Activities That Keep a Company Running",
     date: "2026-10-06",
     category: "HR Operations",
-    author: "NGriffinpay Team",
+    author: "NGriffinPay  Team",
     image: I("blog-day-in-the-life-of-modern-hr.jpg"),
     excerpt: "HR is often associated with recruitment, payroll and employee engagement.",
     content: [
@@ -117,7 +117,7 @@ export const BLOG_POSTS = [
       { type: "list", items: ["Shift planning and roster changes", "Checking pending approvals and exits", "Team check-ins with managers", "Updating employee records and documents"] },
       { type: "h2", text: "Monthly Activities" },
       { type: "steps", items: ["Lock attendance for the month", "Run payroll and share payslips", "File PF, ESI, PT and TDS", "Review HR reports and headcount"] },
-      { type: "callout", title: "Where software helps", text: "Most of these tasks are repeatable. An HRMS like NGriffinpay automates the routine steps so HR can focus on people." },
+      { type: "callout", title: "Where software helps", text: "Most of these tasks are repeatable. An HRMS like NGriffinPay  automates the routine steps so HR can focus on people." },
     ],
   },
 ];
