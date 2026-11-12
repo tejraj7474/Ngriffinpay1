@@ -126,7 +126,7 @@ img {
 
 .tabs li.on {
   color: #111;
-  border-top: 2px solid #7c3aed;
+  border-top: 2px solid #1d2252;
   font-weight: 600;
 }
 
@@ -286,7 +286,7 @@ img {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding-top: 22vh;
+  padding-top: 62vh;
 }
 
 .hero h1 {
@@ -733,7 +733,7 @@ body,
 
 .foot .ft-stores a {
   display: block;
-  width: 140px;
+  width: 65%;
 }
 
 .foot .ft-stores a + a {
@@ -797,7 +797,7 @@ body,
 
 .ft-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;

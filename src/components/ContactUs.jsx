@@ -31,7 +31,7 @@ const CONTACT = {
     "Near Sita Circle, BSK 3rd Stage",
     "Girinagar, Bangalore – 560085",
   ],
-  privacy: "https://ngriffinpay.in/privacy-policy.html",
+  privacy: "/privacy-policy",
 };
 // first address is used for "Write a mail", the form preview and messages
 const PRIMARY_EMAIL = CONTACT.email[1];
@@ -693,7 +693,7 @@ function ContactForm() {
               </span>
               <span>
                 I agree to receive email updates, promotions, and personalized
-                offers from NGriffinpay and its partners. I understand that I
+                offers from NGriffinPay and its partners. I understand that I
                 can unsubscribe or manage my preferences at any time through the
                 link provided in any email.{" "}
                 <a
@@ -736,7 +736,7 @@ function ContactForm() {
                 <i />
               </span>
               <span className="cnt-pv-app">
-                <Icon name="inbox" size={13} /> NGriffinpay · Inbox
+                <Icon name="inbox" size={13} /> NGriffinPay · Inbox
               </span>
             </div>
 
@@ -786,7 +786,7 @@ function ContactForm() {
                   </div>
 
                   <div className="cnt-mail-text">
-                    <p>Hi NGriffinpay team,</p>
+                    <p>Hi NGriffinPay team,</p>
                     {form.comments ? (
                       <p className="typed">
                         {form.comments}
@@ -905,7 +905,7 @@ function OfficeMap() {
     <section className="cnt-map" id="cnt-map" ref={rootRef}>
       <div className="cnt-map-frame">
         <iframe
-          title="NGriffinpay office location"
+          title="NGriffinPay office location"
           src={MAP_EMBED}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -919,7 +919,7 @@ function OfficeMap() {
               <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
             </span>
             <div>
-              <b>NGriffinpay Office</b>
+              <b>NGriffinPay Office</b>
               <span>Girinagar, Bangalore</span>
             </div>
             <span className="cnt-map-pin" aria-hidden>

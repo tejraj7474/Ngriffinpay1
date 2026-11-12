@@ -650,9 +650,6 @@ function TermsHero({ onRead, onPrint }) {
             <button type="button" className="tnc-btn" onClick={onRead}>
               Read the terms <Icon name="arrow" size={16} />
             </button>
-            <button type="button" className="tnc-btn ghost" onClick={onPrint}>
-              <Icon name="print" size={16} /> Print / Save PDF
-            </button>
           </div>
         </div>
 

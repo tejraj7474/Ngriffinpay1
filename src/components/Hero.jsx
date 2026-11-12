@@ -60,16 +60,17 @@ export default function Hero() {
       <Hero3D />
 
       <div className="hero-content">
-        <h1 aria-label="Modern people platform for growing enterprises">
+        {/* <h1 aria-label="Modern people platform for growing enterprises">
           {"Modern people platform for growing enterprises"
             .split(" ")
             .map((w, i) => (
               <span key={i}>{w}&nbsp;</span>
             ))}
-        </h1>
+        </h1> */}
         <p>
-          One interconnected, AI-native core runs your payroll, hiring,
-          performance, time and attendance.
+          NGriffinPay – AI-Powered HRMS That Automates Workflows, Predicts
+          Insights, Simplifies Payroll, and Transforms the Future of Workforce
+          Management.
         </p>
         <div className="hero-btns">
           <a className="btn p" href="/contact-us">

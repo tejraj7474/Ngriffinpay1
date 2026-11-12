@@ -264,8 +264,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  gap: 7px;
+  justify-content: space-evenly;
+  gap: 17px;
 }
 
 .prc-slab {

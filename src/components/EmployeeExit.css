@@ -1066,9 +1066,8 @@
     animation: none;
   }
 }
-
 /* =================================================================== */
-/* SECTION 2 — Exit Terminal                                            */
+/* SECTION 2 — Offboarding Workspace (HRMS)                             */
 /* =================================================================== */
 .ex2 {
   position: relative;
@@ -1110,286 +1109,318 @@
 .ex2-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-  gap: 40px;
+  gap: 32px;
   align-items: stretch;
 }
 
-/* Departure board */
-.ex2-board {
-  position: relative;
+/* ---------- LEFT: Offboarding workflow ---------- */
+.ex2-flow {
   display: flex;
   flex-direction: column;
-  padding: 18px;
+  gap: 16px;
+  padding: 20px;
   border-radius: 24px;
-  background: linear-gradient(180deg, #0b2550 0%, #06152f 100%);
-  box-shadow:
-    0 40px 80px -40px rgba(6, 21, 47, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  color: #c8d6ee;
+  background: #fff;
+  border: 1px solid var(--ex-line);
+  box-shadow: 0 40px 80px -48px rgba(10, 40, 90, 0.45);
 }
-.ex2-board-head {
+.ex2-flow-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 2px 6px 14px;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fbbf24;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ex-line);
 }
-.ex2-board-head span {
+.ex2-flow-ic {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--ex-primary), var(--ex-primary-2));
+  box-shadow: 0 10px 20px -10px rgba(10, 63, 131, 0.7);
+}
+.ex2-flow-name {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.ex2-flow-name b {
+  font-size: 15.5px;
+  color: var(--ex-ink);
+}
+.ex2-flow-name small {
+  font-size: 12px;
+  color: var(--ex-muted);
+}
+.ex2-auto {
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-.ex2-board-head em {
-  font-style: normal;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 12px;
-  color: #8fa3c4;
-}
-.ex2-cols {
-  display: grid;
-  grid-template-columns: 96px 1fr 132px;
-  gap: 12px;
-  padding: 0 12px 8px;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #6c80a4;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.ex2-rows {
-  display: grid;
   gap: 6px;
-  padding-top: 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #047857;
+  background: #ecfdf5;
+  white-space: nowrap;
 }
-.ex2-row {
+.ex2-auto i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ex-accent);
+  animation: exm-pulse 1.8s infinite;
+}
+
+/* Vertical stepper */
+.ex2-tasks {
   position: relative;
   display: grid;
-  grid-template-columns: 96px 1fr 132px;
+  gap: 8px;
+}
+.ex2-tasks::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 30px;
+  bottom: 30px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--ex-line);
+}
+.ex2-task {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
   padding: 12px;
   border: 1px solid transparent;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
   cursor: pointer;
   text-align: left;
   font-family: var(--ex-font);
-  color: #c8d6ee;
+  color: var(--ex-text);
   transition:
     background 0.3s,
-    border-color 0.3s;
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
-.ex2-row:hover {
-  background: rgba(255, 255, 255, 0.07);
+.ex2-task:hover {
+  background: var(--ex-bg);
 }
-.ex2-row.is-active {
-  background: rgba(56, 189, 248, 0.1);
-  border-color: rgba(56, 189, 248, 0.45);
+.ex2-task.is-active {
+  background: #fff;
+  border-color: rgba(29, 111, 216, 0.35);
+  box-shadow: 0 14px 30px -18px rgba(10, 63, 131, 0.45);
 }
-.ex2-flap {
-  display: inline-flex;
-  gap: 2px;
-  perspective: 300px;
-}
-.ex2-ch {
+.ex2-task-node {
   position: relative;
-  width: 15px;
-  height: 24px;
-  display: grid;
-  place-items: center;
-  border-radius: 3px;
-  overflow: hidden;
-  white-space: pre;
-  font:
-    700 13px "JetBrains Mono",
-    ui-monospace,
-    monospace;
-  color: #f8fafc;
-  background: linear-gradient(180deg, #13284d 50%, #0e213f 50%);
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.4);
-}
-.ex2-ch::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.45);
-}
-.ex2-flap.status .ex2-ch {
-  width: 14px;
-  color: #8fa3c4;
-}
-.ex2-row.is-done .ex2-flap.status .ex2-ch {
-  color: #34d399;
-}
-.ex2-row.is-active .ex2-flap.status .ex2-ch {
-  color: #fbbf24;
-  animation: ex2-blink 1.4s steps(1) infinite;
-}
-@keyframes ex2-blink {
-  50% {
-    opacity: 0.55;
-  }
-}
-.ex2-proc {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-.ex2-proc-ic {
+  z-index: 1;
   width: 32px;
   height: 32px;
-  flex: none;
-  border-radius: 10px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  color: #93c5fd;
-  background: rgba(147, 197, 253, 0.1);
-  transition: 0.3s;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ex-muted);
+  background: #fff;
+  border: 2px solid #d6dfec;
+  transition: 0.35s;
 }
-.ex2-row.is-active .ex2-proc-ic {
-  color: #fff;
-  background: linear-gradient(135deg, var(--ex-primary-2), var(--ex-sky));
-}
-.ex2-row.is-done .ex2-proc-ic {
+.ex2-task.is-done .ex2-task-node {
   color: #fff;
   background: var(--ex-accent);
+  border-color: var(--ex-accent);
 }
-.ex2-proc-txt {
+.ex2-task.is-active .ex2-task-node {
+  color: #fff;
+  background: linear-gradient(135deg, var(--ex-primary), var(--ex-primary-2));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 5px rgba(29, 111, 216, 0.15),
+    0 8px 16px -6px rgba(10, 63, 131, 0.7);
+}
+.ex2-task-txt {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.ex2-task-txt b {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.3;
-  color: #e2e8f0;
+  color: var(--ex-ink);
 }
-.ex2-row.is-active .ex2-proc-txt {
-  color: #fff;
+.ex2-task-txt small {
+  font:
+    700 11px "JetBrains Mono",
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.04em;
+  color: var(--ex-muted);
 }
-.ex2-row-bar {
+.ex2-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--ex-muted);
+  background: #f1f5f9;
+  transition:
+    color 0.3s,
+    background 0.3s;
+}
+.ex2-pill.done {
+  color: #047857;
+  background: #ecfdf5;
+}
+.ex2-pill.active {
+  color: var(--ex-primary);
+  background: var(--ex-soft);
+}
+.ex2-task-bar {
   position: absolute;
-  left: 12px;
+  left: 56px;
   right: 12px;
-  bottom: 4px;
+  bottom: 5px;
   height: 2px;
   border-radius: 2px;
   overflow: hidden;
+  background: var(--ex-line);
   opacity: 0;
+  transition: opacity 0.3s;
 }
-.ex2-row.is-active .ex2-row-bar {
+.ex2-task.is-active .ex2-task-bar {
   opacity: 1;
 }
-.ex2-row-bar i {
+.ex2-task-bar i {
   display: block;
   height: 100%;
   transform: scaleX(0);
   transform-origin: left;
-  background: linear-gradient(90deg, var(--ex-sky), #fbbf24);
-}
-.ex2-route {
-  position: relative;
-  height: 34px;
-  margin: auto 22px 2px;
-  padding-top: 14px;
-}
-.ex2-route-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 30px;
-  border-top: 2px dashed rgba(143, 163, 196, 0.35);
-}
-.ex2-stop {
-  position: absolute;
-  top: 25px;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  border-radius: 50%;
-  background: #13284d;
-  border: 2px solid #3b5583;
-  transition: 0.4s;
-}
-.ex2-stop.on {
-  background: #34d399;
-  border-color: #34d399;
-  box-shadow: 0 0 10px rgba(52, 211, 153, 0.7);
-}
-.ex2-plane {
-  position: absolute;
-  top: 9px;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  margin-left: -15px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: #06152f;
-  background: #fbbf24;
-  box-shadow: 0 0 18px rgba(251, 191, 36, 0.7);
-}
-.ex2-plane svg {
-  transform: rotate(45deg);
+  background: linear-gradient(90deg, var(--ex-primary-2), var(--ex-sky));
 }
 
-/* Boarding pass */
-.ex2-pass-wrap {
+/* Overall progress */
+.ex2-meter {
+  margin-top: auto;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--ex-bg);
+  border: 1px solid var(--ex-line);
+}
+.ex2-meter-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ex-text);
+}
+.ex2-meter-top b {
+  color: var(--ex-primary);
+  font-variant-numeric: tabular-nums;
+}
+.ex2-meter-track {
+  display: block;
+  height: 8px;
+  border-radius: 8px;
+  background: #e3e8f2;
+  overflow: hidden;
+}
+.ex2-meter-track i {
+  display: block;
+  height: 100%;
+  border-radius: 8px;
+  transform: scaleX(0.2);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--ex-accent), var(--ex-primary-2));
+}
+
+/* ---------- RIGHT: Employee exit record ---------- */
+.ex2-record-wrap {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  min-width: 0;
 }
-.ex2-pass {
+.ex2-record {
   flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 84px;
+  display: flex;
+  flex-direction: column;
   border-radius: 24px;
   background: #fff;
   border: 1px solid var(--ex-line);
   box-shadow: 0 40px 80px -40px rgba(10, 40, 90, 0.45);
   overflow: hidden;
 }
-.ex2-pass-main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.ex2-pass-top {
+.ex2-record-head {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 14px 20px;
+  gap: 12px;
+  padding: 16px 20px;
   color: #fff;
   background: linear-gradient(120deg, var(--ex-primary), var(--ex-primary-2));
 }
-.ex2-brand {
-  margin-right: auto;
+.ex2-avatar {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
   font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
-.ex2-pax {
+.ex2-emp {
   display: grid;
-  text-align: right;
+  gap: 2px;
+  margin-right: auto;
+  min-width: 0;
 }
-.ex2-pax small {
+.ex2-emp b {
+  font-size: 15px;
+}
+.ex2-emp small {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.75);
+}
+.ex2-meta {
+  display: flex;
+  gap: 8px;
+}
+.ex2-meta span {
+  display: grid;
+  gap: 2px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.ex2-meta small {
   font-size: 9.5px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
 }
-.ex2-pax b {
-  font-size: 13px;
+.ex2-meta b {
+  font-size: 12.5px;
+  white-space: nowrap;
 }
-.ex2-pass-body {
+.ex2-record-body {
   flex: 1;
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
@@ -1397,14 +1428,23 @@
   padding: 22px 20px;
   align-items: center;
 }
-.ex2-step {
-  display: inline-block;
+.ex2-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.4;
   color: var(--ex-primary);
+  background: var(--ex-soft);
+}
+.ex2-kicker svg {
+  flex: none;
 }
 .ex2-copy h3 {
-  margin: 12px 0 12px;
+  margin: 14px 0 12px;
   font-size: clamp(22px, 2vw, 30px);
   line-height: 1.18;
   letter-spacing: -0.02em;
@@ -1427,65 +1467,48 @@
   line-height: 1.65;
   color: var(--ex-text);
 }
-.ex2-stub {
-  position: relative;
+.ex2-record-foot {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 22px 10px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--ex-line);
   background: #f7f9fd;
-  border-left: 2px dashed #c9d6ea;
-}
-.ex2-stub::before,
-.ex2-stub::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #fafcfe;
-  box-shadow: inset 0 0 0 1px var(--ex-line);
-}
-.ex2-stub::before {
-  top: -11px;
-}
-.ex2-stub::after {
-  bottom: -11px;
-}
-.ex2-stub > span {
-  display: grid;
-  text-align: center;
-}
-.ex2-stub small {
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--ex-muted);
 }
-.ex2-stub b {
-  font-size: 18px;
-  color: var(--ex-ink);
+.ex2-saved {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.ex2-barcode {
-  flex: 1;
-  width: 44px;
-  min-height: 120px;
-  margin-top: auto;
-  background: repeating-linear-gradient(
-    180deg,
-    var(--ex-ink) 0 2px,
-    transparent 2px 4px,
-    var(--ex-ink) 4px 7px,
-    transparent 7px 9px,
-    var(--ex-ink) 9px 10px,
-    transparent 10px 13px
-  );
-  border-radius: 2px;
-  opacity: 0.85;
+.ex2-saved svg {
+  color: var(--ex-accent);
 }
+.ex2-dots {
+  display: flex;
+  gap: 6px;
+}
+.ex2-dots i {
+  width: 22px;
+  height: 6px;
+  border-radius: 6px;
+  background: #d6dfec;
+  transition:
+    width 0.35s,
+    background 0.35s;
+}
+.ex2-dots i.done {
+  background: var(--ex-accent);
+}
+.ex2-dots i.active {
+  width: 34px;
+  background: linear-gradient(90deg, var(--ex-primary), var(--ex-primary-2));
+}
+
+/* Actions */
 .ex2-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1519,7 +1542,7 @@
   transform: rotate(180deg);
 }
 
-/* Scenes (inside the pass) */
+/* Scenes (inside the exit record) */
 .ex2-scene {
   display: flex;
   flex-direction: column;
@@ -1848,18 +1871,6 @@
   font-weight: 600;
   color: #fff;
   background: linear-gradient(130deg, var(--ex-primary), var(--ex-primary-2));
-}
-
-@media (max-width: 1180px) {
-  .ex2-pass-body {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ex2-row.is-active .ex2-flap.status .ex2-ch,
-  .ex2-live i {
-    animation: none;
-  }
 }
 
 /* =================================================================== */
@@ -2292,7 +2303,7 @@
 }
 
 /* =================================================================== */
-/* MOBILE RESPONSIVE (keep this block at the very end)                  */
+/* MOBILE RESPONSIVE — Hero                                             */
 /* =================================================================== */
 @media (max-width: 720px) {
   .exm-hero {
@@ -2450,7 +2461,15 @@
   }
 }
 
-/* Section 2 on tablets & phones */
+/* =================================================================== */
+/* Section 2 on laptops, tablets & phones                               */
+/* =================================================================== */
+@media (max-width: 1180px) {
+  .ex2-record-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 991px) {
   .ex2 {
     padding: 20px 0 40px;
@@ -2462,22 +2481,20 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 26px;
   }
-  .ex2-pass-body {
+  .ex2-record-body {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   }
 
-  /* Board rows become one sideways-scrolling tab row; the active one is slid into view by JS */
-  .ex2-board {
-    padding: 14px 0;
+  /* Workflow steps become one sideways-scrolling row; the active one is slid into view by JS */
+  .ex2-flow {
+    padding: 16px 0;
     border-radius: 20px;
   }
-  .ex2-board-head {
-    padding: 0 16px 12px;
+  .ex2-flow-head,
+  .ex2-meter {
+    margin-inline: 16px;
   }
-  .ex2-cols {
-    display: none;
-  }
-  .ex2-rows {
+  .ex2-tasks {
     display: flex;
     gap: 10px;
     padding: 4px 16px 8px;
@@ -2501,61 +2518,57 @@
       transparent 100%
     );
   }
-  .ex2-rows::-webkit-scrollbar {
+  .ex2-tasks::-webkit-scrollbar {
     display: none;
   }
-  .ex2-row {
+  .ex2-tasks::before {
+    display: none;
+  }
+  .ex2-task {
     flex: 0 0 auto;
-    width: 236px;
-    grid-template-columns: 1fr auto;
-    grid-template-areas: "code status" "proc proc";
+    width: 240px;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "node pill"
+      "txt txt";
     gap: 10px;
+    border-color: var(--ex-line);
+    background: #fff;
     scroll-snap-align: center;
   }
-  .ex2-flap.code {
-    grid-area: code;
+  .ex2-task-node {
+    grid-area: node;
   }
-  .ex2-flap.status {
-    grid-area: status;
+  .ex2-pill {
+    grid-area: pill;
+    justify-self: end;
   }
-  .ex2-proc {
-    grid-area: proc;
+  .ex2-task-txt {
+    grid-area: txt;
   }
-  .ex2-ch {
-    width: 13px;
-    height: 22px;
-    font-size: 12px;
-  }
-  .ex2-flap.status .ex2-ch {
-    width: 12px;
-  }
-  .ex2-route {
-    margin: 6px 38px 0;
+  .ex2-task-bar {
+    left: 12px;
   }
 }
+
 @media (max-width: 720px) {
   .ex2-title {
     font-size: clamp(18px, 1.4vw, 34px);
   }
-  .ex2-board-head {
-    font-size: 11.5px;
-  }
-  .ex2-pass {
-    grid-template-columns: minmax(0, 1fr);
+  .ex2-record {
     border-radius: 20px;
   }
-  .ex2-pass-top {
+  .ex2-record-head {
     flex-wrap: wrap;
-    gap: 8px 16px;
-    padding: 12px 16px;
+    padding: 14px 16px;
   }
-  .ex2-brand {
+  .ex2-meta {
     flex-basis: 100%;
   }
-  .ex2-pax {
-    text-align: left;
+  .ex2-meta span {
+    flex: 1;
   }
-  .ex2-pass-body {
+  .ex2-record-body {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
     padding: 18px 16px;
@@ -2566,45 +2579,9 @@
   .ex2-scene {
     padding: 11px;
   }
-  /* stub turns into a strip along the bottom */
-  .ex2-stub {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 12px;
+  .ex2-record-foot {
+    flex-wrap: wrap;
     padding: 12px 16px;
-    border-left: 0;
-    border-top: 2px dashed #c9d6ea;
-  }
-  .ex2-stub::before,
-  .ex2-stub::after {
-    top: -12px;
-    bottom: auto;
-  }
-  .ex2-stub::before {
-    left: -11px;
-  }
-  .ex2-stub::after {
-    left: auto;
-    right: -11px;
-  }
-  .ex2-stub b {
-    font-size: 15px;
-  }
-  .ex2-barcode {
-    flex: none;
-    width: 110px;
-    min-height: 0;
-    height: 34px;
-    margin: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--ex-ink) 0 2px,
-      transparent 2px 4px,
-      var(--ex-ink) 4px 7px,
-      transparent 7px 9px,
-      var(--ex-ink) 9px 10px,
-      transparent 10px 13px
-    );
   }
   .ex2-actions .exm-btn {
     box-sizing: border-box;
@@ -2618,9 +2595,13 @@
     grid-template-columns: 96px 1fr 32px;
   }
 }
+
 @media (max-width: 400px) {
-  .ex2-row {
+  .ex2-task {
     width: 214px;
+  }
+  .ex2-auto {
+    display: none;
   }
   .ex2-upd {
     grid-template-columns: 34px 1fr 20px;
@@ -2636,7 +2617,16 @@
   }
 }
 
-/* Section 3 (FAQ chat) on phones */
+@media (prefers-reduced-motion: reduce) {
+  .ex2-auto i,
+  .ex2-live i {
+    animation: none;
+  }
+}
+
+/* =================================================================== */
+/* Section 3 (FAQ chat) on phones — keep at the very end                */
+/* =================================================================== */
 @media (max-width: 720px) {
   .exq-grid {
     grid-template-columns: minmax(0, 1fr);

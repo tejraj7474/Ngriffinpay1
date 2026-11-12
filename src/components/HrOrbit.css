@@ -2,13 +2,13 @@
 .ho-section {
   position: relative;
   height: 320vh;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   color: #2b1d57;
-  background: #fff
+  background: #fff;
 }
 
 .ho-static {
-  height: auto
+  height: auto;
 }
 
 .ho-pin {
@@ -16,7 +16,7 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(180deg, #ffffff 0%, #fdfeff 55%, #cdd8e6 100%)
+  background: linear-gradient(180deg, #ffffff 0%, #fdfeff 55%, #cdd8e6 100%);
 }
 
 .ho-blob {
@@ -24,7 +24,7 @@
   border-radius: 50%;
   filter: blur(80px);
   pointer-events: none;
-  opacity: .5
+  opacity: 0.5;
 }
 
 .ho-b1 {
@@ -32,7 +32,7 @@
   height: 380px;
   background: #859bc1;
   top: -110px;
-  left: -90px
+  left: -90px;
 }
 
 .ho-b2 {
@@ -40,7 +40,7 @@
   height: 340px;
   background: #aebed5;
   top: 34%;
-  right: -110px
+  right: -110px;
 }
 
 .ho-b3 {
@@ -49,7 +49,7 @@
   background: #2c5992;
   bottom: -150px;
   left: 30%;
-  opacity: .4
+  opacity: 0.4;
 }
 
 /* headline */
@@ -61,7 +61,7 @@
   right: 0;
   height: 130px;
   text-align: center;
-  pointer-events: none
+  pointer-events: none;
 }
 
 .ho-ha,
@@ -70,11 +70,11 @@
   left: 0;
   right: 0;
   top: 0;
-  padding: 0 20px
+  padding: 0 20px;
 }
 
 .ho-hb {
-  opacity: 0
+  opacity: 0;
 }
 
 .ho-head h2 {
@@ -82,21 +82,21 @@
   font-size: clamp(28px, 4.6vw, 56px);
   line-height: 1.08;
   font-weight: 800;
-  color: #1b1140
+  color: #1b1140;
 }
 
 .ho-head p {
   margin: 10px 0 0;
   font-size: clamp(13px, 1.4vw, 16px);
   font-weight: 600;
-  color: #7a6fa8
+  color: #7a6fa8;
 }
 
 .ho-ha h2 em {
   font-style: normal;
   color: #ff6b57;
   text-decoration: line-through;
-  text-decoration-thickness: 4px
+  text-decoration-thickness: 4px;
 }
 
 .ho-hb h2 em {
@@ -104,7 +104,7 @@
   background: #0c3d83;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent
+  color: transparent;
 }
 
 /* anchor = centre of the orbit */
@@ -114,7 +114,7 @@
   top: 53%;
   width: 0;
   height: 0;
-  will-change: transform
+  will-change: transform;
 }
 
 .ho-tangle {
@@ -124,7 +124,7 @@
   width: 800px;
   height: 400px;
   overflow: visible;
-  pointer-events: none
+  pointer-events: none;
 }
 
 .ho-tangle path {
@@ -132,18 +132,18 @@
   stroke: #ff9d8f;
   stroke-width: 3;
   stroke-dasharray: 8 10;
-  stroke-linecap: round
+  stroke-linecap: round;
 }
 
 .ho-bang circle {
-  fill: #ff6b57
+  fill: #ff6b57;
 }
 
 .ho-bang text {
   font-size: 22px;
   font-weight: 800;
   fill: #fff;
-  font-family: inherit
+  font-family: inherit;
 }
 
 .ho-ring {
@@ -152,13 +152,13 @@
   top: 0;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 2px dashed rgba(109, 40, 217, .28);
+  border: 2px dashed rgba(109, 40, 217, 0.28);
   opacity: 0;
-  pointer-events: none
+  pointer-events: none;
 }
 
 .ho-r2 {
-  border-color: rgba(255, 107, 87, .25)
+  border-color: rgba(255, 107, 87, 0.25);
 }
 
 /* centre logo */
@@ -169,25 +169,25 @@
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
-  z-index: 50
+  z-index: 50;
 }
 
 .ho-core::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -7px;
   border-radius: 50%;
   background: #0a3f83;
-  animation: ho-spin 6s linear infinite
+  animation: ho-spin 6s linear infinite;
 }
 
 .ho-core::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: -6px;
   border-radius: 50%;
   border: 2px solid rgb(10 63 131);
-  animation: ho-pulse 2.4s ease-out infinite
+  animation: ho-pulse 2.4s ease-out infinite;
 }
 
 .ho-disc {
@@ -198,29 +198,29 @@
   place-items: center;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 20px 50px rgba(109, 40, 217, .3)
+  box-shadow: 0 20px 50px rgba(109, 40, 217, 0.3);
 }
 
 .ho-disc img {
   height: 108px;
-  width: auto
+  width: auto;
 }
 
 @keyframes ho-spin {
   to {
-    transform: rotate(360deg)
+    transform: rotate(360deg);
   }
 }
 
 @keyframes ho-pulse {
   from {
     transform: scale(1);
-    opacity: .8
+    opacity: 0.8;
   }
 
   to {
     transform: scale(1.7);
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -236,7 +236,7 @@
   background: #0a3f83;
   cursor: pointer;
   font: inherit;
-  will-change: transform
+  will-change: transform;
 }
 
 .ho-mess,
@@ -245,7 +245,7 @@
   inset: 0;
   display: flex;
   align-items: center;
-  border-radius: 16px
+  border-radius: 16px;
 }
 
 .ho-mess {
@@ -256,15 +256,17 @@
   font-weight: 700;
   line-height: 1.15;
   color: #fff;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, .16)
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
 .ho-neat {
   gap: 10px;
   padding: 0 14px;
   background: #fff;
-  box-shadow: 0 14px 30px rgba(109, 40, 217, .18), 0 0 0 1px rgba(109, 40, 217, .08);
-  transition: box-shadow .3s
+  box-shadow:
+    0 14px 30px rgba(109, 40, 217, 0.18),
+    0 0 0 1px rgba(109, 40, 217, 0.08);
+  transition: box-shadow 0.3s;
 }
 
 .ho-neat i {
@@ -274,16 +276,18 @@
   height: 36px;
   border-radius: 12px;
   font-style: normal;
-  font-size: 18px
+  font-size: 18px;
 }
 
 .ho-neat b {
   font-size: 14px;
-  color: #1b1140
+  color: #1b1140;
 }
 
 .ho-chip.ho-on .ho-neat {
-  box-shadow: 0 18px 40px rgba(109, 40, 217, .38), 0 0 0 2px #6d28d9
+  box-shadow:
+    0 18px 40px rgb(13 91 204),
+    0 0 0 2px #0c3d83;
 }
 
 /* info panel */
@@ -294,7 +298,7 @@
   bottom: 7vh;
   width: min(520px, 90vw);
   opacity: 0;
-  text-align: center
+  text-align: center;
 }
 
 .ho-pcard {
@@ -304,10 +308,12 @@
   padding: 14px 18px;
   border-radius: 20px;
   text-align: left;
-  background: rgba(255, 255, 255, .92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
-  box-shadow: 0 20px 50px rgba(109, 40, 217, .2), 0 0 0 1px rgba(109, 40, 217, .08);
-  animation: ho-pop .45s cubic-bezier(.2, 1.4, .4, 1)
+  box-shadow:
+    0 20px 50px rgba(109, 40, 217, 0.2),
+    0 0 0 1px rgba(109, 40, 217, 0.08);
+  animation: ho-pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
 }
 
 .ho-pcard i {
@@ -318,13 +324,13 @@
   height: 46px;
   border-radius: 14px;
   font-style: normal;
-  font-size: 22px
+  font-size: 22px;
 }
 
 .ho-pcard b {
   display: block;
   font-size: 16px;
-  color: #1b1140
+  color: #1b1140;
 }
 
 .ho-pcard span {
@@ -332,18 +338,18 @@
   margin-top: 2px;
   font-size: 13px;
   line-height: 1.4;
-  color: #6a5f98
+  color: #6a5f98;
 }
 
 @keyframes ho-pop {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(.96)
+    transform: translateY(12px) scale(0.96);
   }
 
   to {
     opacity: 1;
-    transform: none
+    transform: none;
   }
 }
 
@@ -351,7 +357,7 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 12px
+  margin-top: 12px;
 }
 
 .ho-d {
@@ -362,12 +368,14 @@
   border-radius: 99px;
   cursor: pointer;
   background: #d9cffc;
-  transition: width .3s, background .3s
+  transition:
+    width 0.3s,
+    background 0.3s;
 }
 
 .ho-dact {
   width: 26px;
-  background: linear-gradient(90deg, #6d28d9, #ff6b57)
+  background: linear-gradient(90deg, #0c3d83, #7daae9);
 }
 
 /* scroll hint */
@@ -382,7 +390,7 @@
   gap: 10px;
   font-size: 13px;
   font-weight: 700;
-  color: #7a6fa8
+  color: #7a6fa8;
 }
 
 .ho-hint span {
@@ -390,11 +398,11 @@
   width: 20px;
   height: 32px;
   border-radius: 12px;
-  border: 2px solid #a78bfa
+  border: 2px solid #a78bfa;
 }
 
 .ho-hint span::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 6px;
@@ -403,48 +411,47 @@
   margin-left: -2px;
   border-radius: 3px;
   background: #0c3d83;
-  animation: ho-wheel 1.4s ease-in-out infinite
+  animation: ho-wheel 1.4s ease-in-out infinite;
 }
 
 @keyframes ho-wheel {
   0% {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(12px)
+    transform: translateY(12px);
   }
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
   .ho-chip {
     width: 140px;
-    height: 56px
+    height: 56px;
   }
 
   .ho-neat b {
-    font-size: 13px
+    font-size: 13px;
   }
 
   .ho-neat i {
     width: 32px;
     height: 32px;
-    font-size: 16px
+    font-size: 16px;
   }
 
   .ho-core {
     width: 120px;
     height: 120px;
-    margin: -60px 0 0 -60px
+    margin: -60px 0 0 -60px;
   }
 
   .ho-disc img {
-    height: 86px
+    height: 86px;
   }
 }
-
 
 .ho-ic {
   display: inline-flex;

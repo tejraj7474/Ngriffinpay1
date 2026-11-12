@@ -18,7 +18,7 @@ import "./DemoModal.css";
 // Leave it empty while testing — the form will just show the success screen.
 const DEMO_ENDPOINT = "";
 
-const PRIVACY_URL = "https://ngriffinpay.in/privacy-policy.html";
+const PRIVACY_URL = "/privacy-policy";
 const OPEN_EVENT = "ngp:open-demo";
 
 // Call this from any button on any page to open the pop-up:

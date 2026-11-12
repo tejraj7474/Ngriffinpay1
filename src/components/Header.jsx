@@ -27,6 +27,9 @@ const PRODUCTS = [
 ];
 const HALF = Math.ceil(PRODUCTS.length / 2); // left column gets the extra item
 
+// Resources menu items [label, link] — add more here later (Case Studies, Guides …)
+const RESOURCES = [["Blogs", "/blog"]];
+
 // Location menu is hidden for now — set this to true to show it again
 const SHOW_LOCATION = false;
 
@@ -87,7 +90,14 @@ export default function Header() {
   // You can also force it on any element with data-demo, href="#demo" or openDemo().
   useEffect(() => {
     const onClick = (e) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      if (
+        e.defaultPrevented ||
+        e.button !== 0 ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.shiftKey
+      )
+        return;
       const el = e.target.closest("a, button");
       if (!el || el.closest(".dmo")) return; // ignore clicks inside the pop-up itself
       if (el.type === "submit") return; // never hijack form submit buttons
@@ -95,7 +105,7 @@ export default function Header() {
       const isDemo = /\bdemo\b/i.test(el.textContent || "");
       if (forced || isDemo) showDemo(e);
     };
-    const onOpen = () => showDemo();
+    const onOpen = (e) => showDemo(e); // marks the event as handled, so the button knows the pop-up opened
     document.addEventListener("click", onClick);
     window.addEventListener("ngp:open-demo", onOpen);
     return () => {
@@ -185,10 +195,22 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="nav-item">
-          <a href="/blog" onClick={closeAll}>
-            Blogs
+        {/* RESOURCES dropdown (same style as Partner) */}
+        <div {...item("resources")}>
+          <a href="#" onClick={toggle("resources")}>
+            Resources ▾
           </a>
+          <div className="dd dd-partner dd-resources">
+            <ul>
+              {RESOURCES.map(([t, h]) => (
+                <li key={t}>
+                  <a href={h} onClick={closeAll}>
+                    <span>{t}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* LOCATION dropdown (hidden while SHOW_LOCATION is false) */}

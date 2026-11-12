@@ -39,7 +39,7 @@ const SOCIALS = [
   {
     name: "Facebook",
     bg: "#1877f2",
-    href: "#",
+    href: "https://www.facebook.com/profile.php?id=61558411455022&rdid=Zh8tHf5KvJHDlPD0&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1F33JS4okm%2F#",
     svg: (
       <path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.4 1.5-1.4h1.6V4.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H8v3h2.5V21h3z" />
     ),
@@ -47,7 +47,7 @@ const SOCIALS = [
   {
     name: "Instagram",
     bg: "linear-gradient(45deg,#f9a93b,#e1306c 55%,#833ab4)",
-    href: "#",
+    href: "https://www.instagram.com/ngriffin.group.official/",
     svg: (
       <>
         <rect
@@ -75,7 +75,7 @@ const SOCIALS = [
   {
     name: "YouTube",
     bg: "#ff0000",
-    href: "#",
+    href: "https://www.youtube.com/@NGriffin.group.official",
     svg: <path d="M10 8.3v7.4l6.2-3.7L10 8.3z" />,
   },
   {
@@ -180,8 +180,18 @@ export default function Footer({ footRef }) {
 
         {/* bottom bar */}
         <div className="ft-bottom">
-          <p>© 2025 NGriffinPay . All Rights Reserved</p>
-          <p>Design &amp; Developed By : DigitalNock India Pvt. Ltd.</p>
+          <p>© 2026 NGriffinPay . All Rights Reserved</p>
+          <p>
+            Design &amp; Developed By :
+            <a
+              href="https://digitalnockindia.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {" "}
+              DigitalNock India Pvt. Ltd.
+            </a>
+          </p>
         </div>
       </footer>
 

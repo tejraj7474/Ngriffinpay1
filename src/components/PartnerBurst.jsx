@@ -221,12 +221,21 @@ function GpxBurstCanvas({ progressRef, activeRef }) {
 export default function PartnerBurst({
   logo = "NGriffinPay ",
   headerOffset = 0,
-  demoUrl = "https://ngriffinpay.in/request-a-demo.html",
+  demoUrl = "https://ngriffinpay.in/request-a-demo.html", // fallback only, if the pop-up isn't on the page
 }) {
   const rootRef = useRef(null);
   const areaRef = useRef(null);
   const progressRef = useRef({ value: 0 }); // burst progress, read by the canvas
   const activeRef = useRef(false); // is the section on screen?
+
+  // Open the "Book a Demo" pop-up (from the Header).
+  // If no pop-up is listening, fall back to the demo page.
+  const openDemo = (e) => {
+    e.preventDefault(); // stop the link + stops the Header's global click handler running twice
+    const evt = new CustomEvent("ngp:open-demo", { cancelable: true });
+    const handled = !window.dispatchEvent(evt); // false = pop-up opened it
+    if (!handled) window.location.href = demoUrl;
+  };
 
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -427,7 +436,14 @@ export default function PartnerBurst({
             </div>
           </div>
 
-          <a className="gpx-button" href={demoUrl}>
+          {/* Opens the "Book a Demo" pop-up form */}
+          <a
+            className="gpx-button"
+            href={demoUrl}
+            data-demo
+            aria-haspopup="dialog"
+            onClick={openDemo}
+          >
             Request a Demo
           </a>
         </div>

@@ -1011,7 +1011,6 @@ const RESOURCES = [
     short: "FAQs",
     icon: "help",
     href: LINKS.faqs,
-    cta: "Browse FAQs",
     desc: "Find quick answers to your HR, payroll, and compliance-related questions.",
   },
   {
@@ -1020,7 +1019,6 @@ const RESOURCES = [
     short: "How-to videos",
     icon: "video",
     href: LINKS.videos,
-    cta: "Watch videos",
     desc: "Follow step-by-step video tutorials to master every feature on NGriffinPay .",
   },
   {
@@ -1029,7 +1027,6 @@ const RESOURCES = [
     short: "Product Updates",
     icon: "rocket",
     href: LINKS.updates,
-    cta: "See what's new",
     desc: "Stay informed about the latest features, improvements, and releases on NGriffinPay .",
   },
   {
@@ -1038,7 +1035,6 @@ const RESOURCES = [
     short: "Webinars",
     icon: "mic",
     href: LINKS.webinars,
-    cta: "View webinars",
     desc: "Join our expert-led sessions and deep-dive into NGriffinPay ’s capabilities.",
   },
 ];
@@ -1369,9 +1365,6 @@ function ResourcesSection() {
                 </li>
               ))}
             </ul>
-            <a className="hlp-btn primary hr2-cta" href={R.href}>
-              {R.cta} <Icon name="arrow" size={16} />
-            </a>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 // EmployeeExit.jsx
 // NGriffinPay  — Product inner page: "Employee Exit Management"
 // Section 1: Hero banner (live exit desk app on the left, content on the right)
-// Section 2: Exit Terminal (split-flap departure board = tabs, boarding pass per service)
+// Section 2: Offboarding Workspace (workflow tracker = tabs, employee exit record per service)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
 // Header & Footer come from App.jsx (your existing site components).
 //
@@ -629,56 +629,60 @@ function FnfPanel({ delay }) {
 const PANELS = [ResignationPanel, NoticePanel, InterviewPanel, FnfPanel];
 
 /* ------------------------------------------------------------------ */
-/* Exit desk app (left side)                                           */
+/* Exit desk app (left side of the hero)                               */
 /* ------------------------------------------------------------------ */
 
 const P_R = 30;
 const P_C = 2 * Math.PI * P_R;
 
 function ExitApp({ frameRef, stage, onSelect }) {
-  const panelWrap = useRef(null);
-  const tabsRef = useRef(null);
   const ringRef = useRef(null);
   const pctRef = useRef(null);
   const pipeRef = useRef(null);
-  const prog = useRef({ v: 0 });
-  const first = useRef(true);
-  const startDelay = first.current ? 1.3 : 0.2;
+  const stepsRef = useRef(null);
+  const pct = useRef({ v: 0 });
+  const firstPanel = useRef(true);
 
-  // Exit progress ring + stepper line
+  // First panel waits for the hero intro; later panels start right away
+  const delay = firstPanel.current ? 1.1 : 0.1;
   useEffect(() => {
-    const isFirst = first.current;
-    const target = PROGRESS[stage];
-    const tw = gsap.to(prog.current, {
-      v: target,
-      duration: prefersReduced() ? 0 : 1,
-      delay: isFirst ? 1 : 0.15,
-      ease: "power3.out",
-      onUpdate: () => {
-        const v = prog.current.v;
-        if (pctRef.current) pctRef.current.textContent = Math.round(v);
-        if (ringRef.current)
-          ringRef.current.style.strokeDashoffset = P_C * (1 - v / 100);
-      },
-    });
-    const tw2 = gsap.to(pipeRef.current, {
-      scaleX: stage / (FEATURES.length - 1),
-      duration: prefersReduced() ? 0 : 0.8,
-      delay: isFirst ? 1 : 0.1,
-      ease: "power3.inOut",
-    });
-    return () => {
-      tw.kill();
-      tw2.kill();
-    };
+    firstPanel.current = false;
+  }, []);
+
+  // Progress ring, % counter and step pipe follow the active stage
+  useEffect(() => {
+    const d = prefersReduced() ? 0 : 1;
+    const to = PROGRESS[stage];
+    const tweens = [
+      gsap.to(ringRef.current, {
+        strokeDashoffset: P_C * (1 - to / 100),
+        duration: d,
+        ease: "power2.out",
+      }),
+      gsap.to(pct.current, {
+        v: to,
+        duration: d,
+        ease: "power2.out",
+        onUpdate: () => {
+          if (pctRef.current)
+            pctRef.current.textContent = Math.round(pct.current.v);
+        },
+      }),
+      gsap.to(pipeRef.current, {
+        scaleX: stage / (FEATURES.length - 1),
+        duration: d * 0.7,
+        ease: "power3.inOut",
+      }),
+    ];
+    return () => tweens.forEach((t) => t.kill());
   }, [stage]);
 
-  // Mobile: when the listed feature changes, slide the step row so the active step is fully visible
+  // Mobile: step row scrolls sideways — slide the active step into view
   useEffect(() => {
-    const strip = tabsRef.current;
-    if (!strip) return undefined;
+    const strip = stepsRef.current;
+    if (!strip || strip.scrollWidth <= strip.clientWidth + 1) return undefined;
     const btn = strip.querySelectorAll("button")[stage];
-    if (!btn || strip.scrollWidth <= strip.clientWidth + 1) return undefined; // all steps fit: nothing to do
+    if (!btn) return undefined;
     const target = Math.max(
       0,
       Math.min(
@@ -698,37 +702,25 @@ function ExitApp({ frameRef, stage, onSelect }) {
     return () => tw.kill();
   }, [stage]);
 
-  useLayoutEffect(() => {
-    const isFirst = first.current;
-    first.current = false;
-    if (isFirst || !panelWrap.current) return;
-    gsap.fromTo(
-      panelWrap.current.firstElementChild,
-      { autoAlpha: 0, y: 14 },
-      { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" },
-    );
-  }, [stage]);
-
   const Panel = PANELS[stage];
 
   return (
     <div className="exm-frame" ref={frameRef}>
-      <div className="exm-chrome">
+      <div className="exm-chrome" aria-hidden>
         <span className="exm-dot r" />
         <span className="exm-dot y" />
         <span className="exm-dot g" />
-        <div className="exm-url">
-          <span aria-hidden>🔒</span> app.ngriffinpay.in/exit-management
-        </div>
+        <span className="exm-url">app.ngriffinpay.in/exit-management</span>
       </div>
 
       <div className="exm-app">
+        {/* Sidebar: employee, progress ring, clearance checklist */}
         <aside className="exm-side js-side">
           <div className="exm-emp">
             <span className="exm-av">PS</span>
             <div>
               <b>Priya S.</b>
-              <small>Product Designer · 3.4 yrs</small>
+              <small>Product Designer · Exit in progress</small>
             </div>
           </div>
 
@@ -736,11 +728,11 @@ function ExitApp({ frameRef, stage, onSelect }) {
             <svg viewBox="0 0 80 80" aria-hidden>
               <circle cx="40" cy="40" r={P_R} className="exm-prog-bg" />
               <circle
-                ref={ringRef}
                 cx="40"
                 cy="40"
                 r={P_R}
                 className="exm-prog-fill"
+                ref={ringRef}
                 strokeDasharray={P_C}
                 strokeDashoffset={P_C}
               />
@@ -749,34 +741,33 @@ function ExitApp({ frameRef, stage, onSelect }) {
               <b>
                 <span ref={pctRef}>0</span>%
               </b>
-              <small>Exit done</small>
+              <small>Exit progress</small>
             </div>
           </div>
 
-          <div className="exm-clear">
-            <small className="exm-side-lbl">Clearance</small>
-            {CLEARANCE.map((c, i) => (
-              <div
-                key={c.label}
-                className={`exm-clear-item ${i <= stage ? "is-done" : ""}`}
-              >
-                <span className="exm-clear-ic">
-                  {i <= stage ? (
-                    <Icon name="check" size={10} />
-                  ) : (
-                    <Icon name={c.icon} size={10} />
-                  )}
-                </span>
-                {c.label}
-              </div>
-            ))}
+          <div>
+            <span className="exm-side-lbl">Clearance</span>
+            <div className="exm-clear">
+              {CLEARANCE.map((c, i) => (
+                <div
+                  key={c.label}
+                  className={`exm-clear-item ${i <= stage ? "is-done" : ""}`}
+                >
+                  <span className="exm-clear-ic">
+                    <Icon name={i <= stage ? "check" : c.icon} size={11} />
+                  </span>
+                  {c.label}
+                </div>
+              ))}
+            </div>
           </div>
         </aside>
 
+        {/* Main: stepper + animated panel */}
         <div className="exm-main">
           <div
             className="exm-steps js-tabs"
-            ref={tabsRef}
+            ref={stepsRef}
             role="tablist"
             aria-label="Exit stages"
           >
@@ -785,22 +776,23 @@ function ExitApp({ frameRef, stage, onSelect }) {
             </span>
             {FEATURES.map((f, i) => (
               <button
+                key={f.short}
                 type="button"
-                key={f.title}
-                className={`${stage === i ? "is-on" : ""} ${i < stage ? "is-past" : ""}`}
-                onClick={() => onSelect(i)}
                 role="tab"
                 aria-selected={stage === i}
+                className={i < stage ? "is-past" : i === stage ? "is-on" : ""}
+                onClick={() => onSelect(i)}
               >
                 <span className="exm-step-dot">
-                  {i < stage ? <Icon name="check" size={11} /> : i + 1}
+                  {i < stage ? <Icon name="check" size={12} /> : i + 1}
                 </span>
                 <span className="exm-step-lbl">{f.short}</span>
               </button>
             ))}
           </div>
-          <div className="exm-panel-wrap" ref={panelWrap}>
-            <Panel key={stage} delay={startDelay} />
+
+          <div className="exm-panel-wrap">
+            <Panel key={stage} delay={delay} />
           </div>
         </div>
       </div>
@@ -809,241 +801,7 @@ function ExitApp({ frameRef, stage, onSelect }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* SECTION 1 — Hero banner                                             */
-/* ------------------------------------------------------------------ */
-
-function HeroSection() {
-  const [stage, setStage] = useState(0);
-  const sectionRef = useRef(null);
-  const visualRef = useRef(null);
-  const frameRef = useRef(null);
-  const barRefs = useRef([]);
-  const firstStage = useRef(true);
-
-  // Auto-advance through the 4 features
-  useEffect(() => {
-    barRefs.current.forEach((b) => b && gsap.set(b, { scaleX: 0 }));
-    if (prefersReduced()) return undefined;
-    const extra = firstStage.current ? 1.3 : 0;
-    firstStage.current = false;
-    const bar = barRefs.current[stage];
-    const tw = bar
-      ? gsap.fromTo(
-          bar,
-          { scaleX: 0 },
-          { scaleX: 1, duration: STAGE_TIME + extra, ease: "none" },
-        )
-      : null;
-    const next = gsap.delayedCall(STAGE_TIME + extra, () =>
-      setStage((s) => (s + 1) % FEATURES.length),
-    );
-    return () => {
-      tw?.kill();
-      next.kill();
-    };
-  }, [stage]);
-
-  useLayoutEffect(() => {
-    const reduce = prefersReduced();
-    const ctx = gsap.context(() => {
-      const q = gsap.utils.selector(sectionRef);
-      gsap.set(frameRef.current, {
-        transformPerspective: 1400,
-        transformOrigin: "50% 60%",
-      });
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(
-        q(".js-reveal"),
-        { y: 28, opacity: 0, duration: 0.8, stagger: 0.07 },
-        0.1,
-      );
-      tl.from(
-        frameRef.current,
-        {
-          opacity: 0,
-          y: 60,
-          rotationX: 16,
-          rotationY: -10,
-          scale: 0.92,
-          duration: 1.2,
-          ease: "expo.out",
-        },
-        0.15,
-      );
-      tl.from(q(".js-side"), { x: -18, opacity: 0, duration: 0.5 }, 0.6);
-      tl.from(
-        q(".exm-clear-item"),
-        { x: -10, opacity: 0, stagger: 0.07, duration: 0.35 },
-        0.8,
-      );
-      tl.from(
-        q(".js-tabs button"),
-        { y: -10, opacity: 0, stagger: 0.08, duration: 0.4 },
-        0.7,
-      );
-      tl.from(
-        q(".js-float"),
-        {
-          opacity: 0,
-          scale: 0.8,
-          y: 16,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: "back.out(1.7)",
-        },
-        1.4,
-      );
-      if (reduce) {
-        tl.progress(1);
-        return undefined;
-      }
-      q(".js-float").forEach((el, i) =>
-        gsap.to(el, {
-          y: i % 2 ? 10 : -10,
-          duration: 2.6 + i * 0.4,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 2.1,
-        }),
-      );
-      gsap.to(q(".js-blob"), {
-        x: "random(-40, 40)",
-        y: "random(-30, 30)",
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: 1,
-      });
-      // parallax only on desktop — on mobile the app sits under the list and would overlap it
-      if (window.matchMedia("(min-width: 1151px)").matches) {
-        gsap.to(visualRef.current, {
-          yPercent: -8,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
-      const fine = window.matchMedia(
-        "(hover: hover) and (pointer: fine)",
-      ).matches;
-      if (fine) {
-        const rx = gsap.quickTo(frameRef.current, "rotationX", {
-          duration: 0.8,
-          ease: "power3",
-        });
-        const ry = gsap.quickTo(frameRef.current, "rotationY", {
-          duration: 0.8,
-          ease: "power3",
-        });
-        const wrap = visualRef.current;
-        const move = (e) => {
-          const r = wrap.getBoundingClientRect();
-          ry(((e.clientX - r.left) / r.width - 0.5) * 6);
-          rx(-((e.clientY - r.top) / r.height - 0.5) * 4);
-        };
-        const leave = () => {
-          rx(0);
-          ry(0);
-        };
-        wrap.addEventListener("mousemove", move);
-        wrap.addEventListener("mouseleave", leave);
-        return () => {
-          wrap.removeEventListener("mousemove", move);
-          wrap.removeEventListener("mouseleave", leave);
-        };
-      }
-      return undefined;
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section
-      className="exm-hero"
-      ref={sectionRef}
-      aria-labelledby="exm-hero-title"
-    >
-      <div className="exm-hero-bg" aria-hidden>
-        <span className="exm-blob b1 js-blob" />
-        <span className="exm-blob b2 js-blob" />
-        <span className="exm-grid-bg" />
-      </div>
-
-      <div className="exm-container exm-hero-grid">
-        {/* RIGHT: content (first in DOM for SEO) */}
-        <div className="exm-content">
-          <span className="exm-eyebrow js-reveal">
-            <span className="exm-live-dot" /> Exit Management Made Easy
-          </span>
-          <h1 id="exm-hero-title" className="exm-title js-reveal">
-            Employee <span className="exm-grad">Exit Management</span>
-          </h1>
-
-          <ul
-            className="exm-feats"
-            role="tablist"
-            aria-label="Exit management features"
-          >
-            {FEATURES.map((f, i) => (
-              <li key={f.title} className="js-reveal">
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={stage === i}
-                  className={`exm-feat ${stage === i ? "is-active" : ""}`}
-                  onClick={() => setStage(i)}
-                >
-                  <span className="exm-feat-ic">
-                    <Icon name={f.icon} size={15} />
-                  </span>
-                  <span className="exm-feat-txt">
-                    <b>{f.title}</b>
-                    <span>{f.desc}</span>
-                  </span>
-                  <span className="exm-feat-bar">
-                    <i ref={(el) => (barRefs.current[i] = el)} />
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* LEFT: exit desk app */}
-        <div className="exm-visual" ref={visualRef}>
-          <ExitApp frameRef={frameRef} stage={stage} onSelect={setStage} />
-          <div className="exm-float f1 js-float">
-            <span className="exm-float-ic ok">
-              <Icon name="laptop" size={14} />
-            </span>
-            <div>
-              <strong>Laptop &amp; ID returned</strong>
-              <small>IT clearance done</small>
-            </div>
-          </div>
-          <div className="exm-float f2 js-float">
-            <span className="exm-float-ic pr">
-              <Icon name="shield" size={14} />
-            </span>
-            <div>
-              <strong>FNF compliance checked</strong>
-              <small>TDS, PF &amp; gratuity rules</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* SECTION 2 — Exit Terminal (departure board + boarding pass)          */
+/* SECTION 2 — Offboarding Workspace (HRMS workflow + exit record)      */
 /* ------------------------------------------------------------------ */
 
 const TERMINAL_HEADING = [
@@ -1097,66 +855,20 @@ const TERMINAL_TABS = [
 ];
 
 const TERMINAL_TIME = 6; // seconds per tab
-const FLAP_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-// Split-flap text: letters spin through random characters, then land on the new word
-function Flap({ text, len, className = "" }) {
-  const ref = useRef(null);
-  const prev = useRef(null);
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const target = text.toUpperCase().padEnd(len, " ").slice(0, len);
-    const spans = el.children;
-    const from = prev.current;
-    prev.current = target;
-    if (from === null || prefersReduced()) {
-      for (let i = 0; i < len; i += 1) spans[i].textContent = target[i];
-      return undefined;
-    }
-    const tweens = [];
-    for (let i = 0; i < len; i += 1) {
-      if (from[i] === target[i]) continue;
-      const s = spans[i];
-      const st = { n: 0 };
-      tweens.push(
-        gsap.to(st, {
-          n: 1,
-          duration: 0.35 + i * 0.05,
-          ease: "none",
-          onUpdate: () => {
-            s.textContent =
-              FLAP_CHARS[Math.floor(Math.random() * FLAP_CHARS.length)];
-          },
-          onComplete: () => {
-            s.textContent = target[i];
-          },
-        }),
-      );
-      tweens.push(
-        gsap.fromTo(
-          s,
-          { rotationX: -70 },
-          { rotationX: 0, duration: 0.18, repeat: 2, ease: "none" },
-        ),
-      );
-    }
-    return () => {
-      tweens.forEach((t) => t.kill());
-      for (let i = 0; i < len; i += 1) {
-        spans[i].textContent = target[i];
-        spans[i].style.transform = "";
-      }
-    };
-  }, [text, len]);
-  return (
-    <span className={`ex2-flap ${className}`} ref={ref} aria-label={text}>
-      {Array.from({ length: len }, (_, i) => (
-        <span key={i} className="ex2-ch" aria-hidden />
-      ))}
-    </span>
-  );
-}
+// HRMS status label for each workflow step
+const EXIT_STATUS = {
+  done: "Completed",
+  active: "In progress",
+  next: "Pending",
+};
+
+// Employee shown on the exit record
+const EXIT_EMPLOYEE = { name: "Priya S.", initials: "PS", empId: "EMP-1048" };
+
+const exPad = (n) => String(n).padStart(2, "0");
+
+/* ---- Scenes shown inside the exit record ---- */
 
 function useScene(build) {
   const ref = useRef(null);
@@ -1466,14 +1178,14 @@ function ExitTerminalSection() {
   const [paused, setPaused] = useState(false);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef(null);
-  const boardRef = useRef(null);
-  const passRef = useRef(null);
-  const planeRef = useRef(null);
+  const listRef = useRef(null);
+  const recordRef = useRef(null);
+  const meterRef = useRef(null);
   const barRefs = useRef([]);
   const firstChange = useRef(true);
 
-  const go = (i) =>
-    setActive((i + TERMINAL_TABS.length) % TERMINAL_TABS.length);
+  const total = TERMINAL_TABS.length;
+  const go = (i) => setActive((i + total) % total);
 
   // Title reveal + start autoplay only when the section is on screen
   useLayoutEffect(() => {
@@ -1497,7 +1209,7 @@ function ExitTerminalSection() {
           once: true,
         },
       });
-      gsap.from([q(".ex2-board"), q(".ex2-pass-wrap")], {
+      gsap.from([q(".ex2-flow"), q(".ex2-record-wrap")], {
         y: 40,
         autoAlpha: 0,
         duration: 0.9,
@@ -1513,7 +1225,7 @@ function ExitTerminalSection() {
     return () => ctx.revert();
   }, []);
 
-  // Autoplay with progress bar on the active board row
+  // Autoplay with a progress line under the active workflow step
   useEffect(() => {
     barRefs.current.forEach((b) => b && gsap.set(b, { scaleX: 0 }));
     if (!inView || paused || prefersReduced()) return undefined;
@@ -1532,47 +1244,52 @@ function ExitTerminalSection() {
     };
   }, [active, paused, inView]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Plane moves along the exit route to the active stop
+  // Offboarding progress bar fills up to the active stage
   useEffect(() => {
-    const tw = gsap.to(planeRef.current, {
-      left: `${(active / (TERMINAL_TABS.length - 1)) * 100}%`,
-      duration: prefersReduced() ? 0 : 0.9,
+    const tw = gsap.to(meterRef.current, {
+      scaleX: (active + 1) / total,
+      duration: prefersReduced() ? 0 : 0.8,
       ease: "power3.inOut",
     });
     return () => tw.kill();
-  }, [active]);
+  }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Boarding pass re-prints on every change
+  // Exit record text refreshes on every change
   useLayoutEffect(() => {
     if (firstChange.current) {
       firstChange.current = false;
-      return;
+      return undefined;
     }
-    if (prefersReduced() || !passRef.current) return;
-    gsap.fromTo(
-      passRef.current,
-      { y: 26, rotation: 1.5, autoAlpha: 0 },
-      { y: 0, rotation: 0, autoAlpha: 1, duration: 0.55, ease: "power3.out" },
-    );
-    gsap.fromTo(
-      passRef.current.querySelectorAll(".ex2-tw > span"),
-      { yPercent: 110 },
-      {
-        yPercent: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "power4.out",
-        delay: 0.1,
-      },
-    );
+    if (prefersReduced() || !recordRef.current) return undefined;
+    const copy = recordRef.current.querySelector(".ex2-copy");
+    if (!copy) return undefined;
+    const tweens = [
+      gsap.fromTo(
+        copy,
+        { y: 16, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
+      ),
+      gsap.fromTo(
+        copy.querySelectorAll(".ex2-tw > span"),
+        { yPercent: 110 },
+        {
+          yPercent: 0,
+          duration: 0.6,
+          stagger: 0.05,
+          ease: "power4.out",
+          delay: 0.1,
+        },
+      ),
+    ];
+    return () => tweens.forEach((t) => t.kill());
   }, [active]);
 
-  // Mobile: when the listed service changes, slide the board/tab row so the active one is fully visible
+  // Mobile: workflow steps become a sideways row — slide the active one into view
   useEffect(() => {
-    const strip = boardRef.current;
+    const strip = listRef.current;
     if (!strip) return undefined;
     const btn = strip.children[active];
-    if (!btn || strip.scrollWidth <= strip.clientWidth + 1) return undefined; // desktop: rows stacked, nothing to scroll
+    if (!btn || strip.scrollWidth <= strip.clientWidth + 1) return undefined; // desktop: steps stacked, nothing to scroll
     const target = Math.max(
       0,
       Math.min(
@@ -1596,8 +1313,8 @@ function ExitTerminalSection() {
 
   const tab = TERMINAL_TABS[active];
   const Scene = TERMINAL_SCENES[active];
-  const statusOf = (i) =>
-    i < active ? "Cleared" : i === active ? "Boarding" : "On time";
+  const stateOf = (i) =>
+    i < active ? "done" : i === active ? "active" : "next";
 
   return (
     <section
@@ -1617,121 +1334,135 @@ function ExitTerminalSection() {
         </h2>
 
         <div className="ex2-grid">
-          {/* LEFT: departure board — every row is a tab */}
-          <div className="ex2-board">
-            <div className="ex2-board-head">
-              <span>
-                <Icon name="door" size={14} /> Departures · Exit Terminal
+          {/* LEFT: offboarding workflow — every step is a tab */}
+          <div className="ex2-flow">
+            <div className="ex2-flow-head">
+              <span className="ex2-flow-ic">
+                <Icon name="door" size={18} />
               </span>
-              <em>IST 10:12</em>
-            </div>
-            <div className="ex2-cols" aria-hidden>
-              <span>Code</span>
-              <span>Process</span>
-              <span>Status</span>
+              <div className="ex2-flow-name">
+                <b>Offboarding Workflow</b>
+                <small>Exit management · {total} modules</small>
+              </div>
+              <span className="ex2-auto">
+                <i /> Auto-tracked
+              </span>
             </div>
 
             <div
-              className="ex2-rows"
-              ref={boardRef}
+              className="ex2-tasks"
+              ref={listRef}
               role="tablist"
               aria-label="Exit management services"
             >
-              {TERMINAL_TABS.map((t, i) => (
-                <button
-                  type="button"
-                  key={t.code}
-                  role="tab"
-                  aria-selected={active === i}
-                  className={`ex2-row ${active === i ? "is-active" : ""} ${i < active ? "is-done" : ""}`}
-                  onClick={() => setActive(i)}
-                >
-                  <Flap text={t.code} len={5} className="code" />
-                  <span className="ex2-proc">
-                    <span className="ex2-proc-ic">
-                      <Icon name={t.icon} size={14} />
+              {TERMINAL_TABS.map((t, i) => {
+                const state = stateOf(i);
+                return (
+                  <button
+                    type="button"
+                    key={t.code}
+                    role="tab"
+                    aria-selected={active === i}
+                    className={`ex2-task is-${state}`}
+                    onClick={() => setActive(i)}
+                  >
+                    <span className="ex2-task-node">
+                      {state === "done" ? (
+                        <Icon name="check" size={13} />
+                      ) : state === "active" ? (
+                        <Icon name={t.icon} size={14} />
+                      ) : (
+                        exPad(i + 1)
+                      )}
                     </span>
-                    <span className="ex2-proc-txt">{t.label}</span>
-                  </span>
-                  <Flap text={statusOf(i)} len={8} className="status" />
-                  <span className="ex2-row-bar">
-                    <i ref={(el) => (barRefs.current[i] = el)} />
-                  </span>
-                </button>
-              ))}
+                    <span className="ex2-task-txt">
+                      <b>{t.label}</b>
+                      <small>{t.code}</small>
+                    </span>
+                    <span className={`ex2-pill ${state}`}>
+                      {EXIT_STATUS[state]}
+                    </span>
+                    <span className="ex2-task-bar">
+                      <i ref={(el) => (barRefs.current[i] = el)} />
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            <div className="ex2-route" aria-hidden>
-              <span className="ex2-route-line" />
-              {TERMINAL_TABS.map((t, i) => (
-                <span
-                  key={t.code}
-                  className={`ex2-stop ${i <= active ? "on" : ""}`}
-                  style={{ left: `${(i / (TERMINAL_TABS.length - 1)) * 100}%` }}
-                />
-              ))}
-              <span className="ex2-plane" ref={planeRef}>
-                <Icon name="plane" size={16} />
+            <div className="ex2-meter">
+              <div className="ex2-meter-top">
+                <span>Offboarding progress</span>
+                <b>
+                  Stage {exPad(active + 1)} / {exPad(total)}
+                </b>
+              </div>
+              <span className="ex2-meter-track">
+                <i ref={meterRef} />
               </span>
             </div>
           </div>
 
-          {/* RIGHT: boarding pass for the active service */}
-          <div className="ex2-pass-wrap">
+          {/* RIGHT: employee exit record for the active service */}
+          <div className="ex2-record-wrap">
             <div
-              className="ex2-pass"
-              ref={passRef}
+              className="ex2-record"
+              ref={recordRef}
               role="tabpanel"
               aria-live="polite"
             >
-              <div className="ex2-pass-main">
-                <div className="ex2-pass-top">
-                  <span className="ex2-brand">NGriffinPay · Exit Pass</span>
-                  <span className="ex2-pax">
-                    <small>Passenger</small>
-                    <b>Priya S.</b>
-                  </span>
-                  <span className="ex2-pax">
-                    <small>Flight</small>
+              <div className="ex2-record-head">
+                <span className="ex2-avatar">{EXIT_EMPLOYEE.initials}</span>
+                <div className="ex2-emp">
+                  <b>{EXIT_EMPLOYEE.name}</b>
+                  <small>Employee exit case · {EXIT_EMPLOYEE.empId}</small>
+                </div>
+                <div className="ex2-meta">
+                  <span>
+                    <small>Module</small>
                     <b>{tab.code}</b>
                   </span>
-                </div>
-                <div className="ex2-pass-body">
-                  <div className="ex2-copy">
-                    <span className="ex2-step">
-                      {String(active + 1).padStart(2, "0")} /{" "}
-                      {String(TERMINAL_TABS.length).padStart(2, "0")} ·{" "}
-                      {tab.label}
-                    </span>
-                    <h3 key={`t${active}`}>
-                      {tab.title
-                        .flatMap(([t, hl]) =>
-                          t
-                            .trim()
-                            .split(" ")
-                            .map((w) => [w, hl]),
-                        )
-                        .map(([w, hl], i) => (
-                          <span key={i} className="ex2-tw">
-                            <span className={hl ? "hl" : ""}>{w}</span>
-                          </span>
-                        ))}
-                    </h3>
-                    <p key={`d${active}`}>{tab.desc}</p>
-                  </div>
-                  <Scene key={active} />
+                  <span>
+                    <small>Status</small>
+                    <b>{EXIT_STATUS.active}</b>
+                  </span>
                 </div>
               </div>
-              <div className="ex2-stub" aria-hidden>
-                <span>
-                  <small>Gate</small>
-                  <b>G{active + 1}</b>
+
+              <div className="ex2-record-body">
+                <div className="ex2-copy">
+                  <span className="ex2-kicker">
+                    <Icon name={tab.icon} size={13} />
+                    {exPad(active + 1)} / {exPad(total)} · {tab.label}
+                  </span>
+                  <h3 key={`t${active}`}>
+                    {tab.title
+                      .flatMap(([t, hl]) =>
+                        t
+                          .trim()
+                          .split(" ")
+                          .map((w) => [w, hl]),
+                      )
+                      .map(([w, hl], i) => (
+                        <span key={i} className="ex2-tw">
+                          <span className={hl ? "hl" : ""}>{w}</span>
+                        </span>
+                      ))}
+                  </h3>
+                  <p key={`d${active}`}>{tab.desc}</p>
+                </div>
+                <Scene key={active} />
+              </div>
+
+              <div className="ex2-record-foot">
+                <span className="ex2-saved">
+                  <Icon name="check" size={13} /> Synced to employee record
                 </span>
-                <span>
-                  <small>Seq</small>
-                  <b>{String(active + 1).padStart(2, "0")}/05</b>
+                <span className="ex2-dots" aria-hidden>
+                  {TERMINAL_TABS.map((t, i) => (
+                    <i key={t.code} className={stateOf(i)} />
+                  ))}
                 </span>
-                <span className="ex2-barcode" />
               </div>
             </div>
 
@@ -1766,7 +1497,240 @@ function ExitTerminalSection() {
 }
 
 /* ------------------------------------------------------------------ */
+/* SECTION 1 — Hero banner                                             */
+/* ------------------------------------------------------------------ */
 
+function HeroSection() {
+  const [stage, setStage] = useState(0);
+  const sectionRef = useRef(null);
+  const visualRef = useRef(null);
+  const frameRef = useRef(null);
+  const barRefs = useRef([]);
+  const firstStage = useRef(true);
+
+  // Auto-advance through the 4 features
+  useEffect(() => {
+    barRefs.current.forEach((b) => b && gsap.set(b, { scaleX: 0 }));
+    if (prefersReduced()) return undefined;
+    const extra = firstStage.current ? 1.3 : 0;
+    firstStage.current = false;
+    const bar = barRefs.current[stage];
+    const tw = bar
+      ? gsap.fromTo(
+          bar,
+          { scaleX: 0 },
+          { scaleX: 1, duration: STAGE_TIME + extra, ease: "none" },
+        )
+      : null;
+    const next = gsap.delayedCall(STAGE_TIME + extra, () =>
+      setStage((s) => (s + 1) % FEATURES.length),
+    );
+    return () => {
+      tw?.kill();
+      next.kill();
+    };
+  }, [stage]);
+
+  useLayoutEffect(() => {
+    const reduce = prefersReduced();
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(sectionRef);
+      gsap.set(frameRef.current, {
+        transformPerspective: 1400,
+        transformOrigin: "50% 60%",
+      });
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.from(
+        q(".js-reveal"),
+        { y: 28, opacity: 0, duration: 0.8, stagger: 0.07 },
+        0.1,
+      );
+      tl.from(
+        frameRef.current,
+        {
+          opacity: 0,
+          y: 60,
+          rotationX: 16,
+          rotationY: -10,
+          scale: 0.92,
+          duration: 1.2,
+          ease: "expo.out",
+        },
+        0.15,
+      );
+      tl.from(q(".js-side"), { x: -18, opacity: 0, duration: 0.5 }, 0.6);
+      tl.from(
+        q(".exm-clear-item"),
+        { x: -10, opacity: 0, stagger: 0.07, duration: 0.35 },
+        0.8,
+      );
+      tl.from(
+        q(".js-tabs button"),
+        { y: -10, opacity: 0, stagger: 0.08, duration: 0.4 },
+        0.7,
+      );
+      tl.from(
+        q(".js-float"),
+        {
+          opacity: 0,
+          scale: 0.8,
+          y: 16,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "back.out(1.7)",
+        },
+        1.4,
+      );
+      if (reduce) {
+        tl.progress(1);
+        return undefined;
+      }
+      q(".js-float").forEach((el, i) =>
+        gsap.to(el, {
+          y: i % 2 ? 10 : -10,
+          duration: 2.6 + i * 0.4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 2.1,
+        }),
+      );
+      gsap.to(q(".js-blob"), {
+        x: "random(-40, 40)",
+        y: "random(-30, 30)",
+        duration: 6,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 1,
+      });
+      // parallax only on desktop — on mobile the app sits under the list and would overlap it
+      if (window.matchMedia("(min-width: 1151px)").matches) {
+        gsap.to(visualRef.current, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+      const fine = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+      ).matches;
+      if (fine) {
+        const rx = gsap.quickTo(frameRef.current, "rotationX", {
+          duration: 0.8,
+          ease: "power3",
+        });
+        const ry = gsap.quickTo(frameRef.current, "rotationY", {
+          duration: 0.8,
+          ease: "power3",
+        });
+        const wrap = visualRef.current;
+        const move = (e) => {
+          const r = wrap.getBoundingClientRect();
+          ry(((e.clientX - r.left) / r.width - 0.5) * 6);
+          rx(-((e.clientY - r.top) / r.height - 0.5) * 4);
+        };
+        const leave = () => {
+          rx(0);
+          ry(0);
+        };
+        wrap.addEventListener("mousemove", move);
+        wrap.addEventListener("mouseleave", leave);
+        return () => {
+          wrap.removeEventListener("mousemove", move);
+          wrap.removeEventListener("mouseleave", leave);
+        };
+      }
+      return undefined;
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      className="exm-hero"
+      ref={sectionRef}
+      aria-labelledby="exm-hero-title"
+    >
+      <div className="exm-hero-bg" aria-hidden>
+        <span className="exm-blob b1 js-blob" />
+        <span className="exm-blob b2 js-blob" />
+        <span className="exm-grid-bg" />
+      </div>
+
+      <div className="exm-container exm-hero-grid">
+        {/* RIGHT: content (first in DOM for SEO) */}
+        <div className="exm-content">
+          <span className="exm-eyebrow js-reveal">
+            <span className="exm-live-dot" /> Exit Management Made Easy
+          </span>
+          <h1 id="exm-hero-title" className="exm-title js-reveal">
+            Employee <span className="exm-grad">Exit Management</span>
+          </h1>
+
+          <ul
+            className="exm-feats"
+            role="tablist"
+            aria-label="Exit management features"
+          >
+            {FEATURES.map((f, i) => (
+              <li key={f.title} className="js-reveal">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={stage === i}
+                  className={`exm-feat ${stage === i ? "is-active" : ""}`}
+                  onClick={() => setStage(i)}
+                >
+                  <span className="exm-feat-ic">
+                    <Icon name={f.icon} size={15} />
+                  </span>
+                  <span className="exm-feat-txt">
+                    <b>{f.title}</b>
+                    <span>{f.desc}</span>
+                  </span>
+                  <span className="exm-feat-bar">
+                    <i ref={(el) => (barRefs.current[i] = el)} />
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* LEFT: exit desk app */}
+        <div className="exm-visual" ref={visualRef}>
+          <ExitApp frameRef={frameRef} stage={stage} onSelect={setStage} />
+          <div className="exm-float f1 js-float">
+            <span className="exm-float-ic ok">
+              <Icon name="laptop" size={14} />
+            </span>
+            <div>
+              <strong>Laptop &amp; ID returned</strong>
+              <small>IT clearance done</small>
+            </div>
+          </div>
+          <div className="exm-float f2 js-float">
+            <span className="exm-float-ic pr">
+              <Icon name="shield" size={14} />
+            </span>
+            <div>
+              <strong>FNF compliance checked</strong>
+              <small>TDS, PF &amp; gratuity rules</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* SECTION 3 — FAQs as a live chat                                     */
 /* ------------------------------------------------------------------ */
 

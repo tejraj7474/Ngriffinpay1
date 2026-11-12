@@ -494,6 +494,7 @@ function PlanStack({ onPurchase }) {
           {
             y: -80,
             opacity: 0,
+            // "end" = bottom slab drops first, so the tower still builds upward
             stagger: { each: 0.07, from: "end" },
             duration: 0.55,
             ease: "bounce.out",
@@ -591,6 +592,7 @@ function PlanStack({ onPurchase }) {
   const P = PLANS[plan];
   const m = MODULES[mod];
   const mIncluded = inPlan(m, plan);
+  const lastIndex = MODULES.length - 1;
 
   return (
     <section className="prc-hero" ref={rootRef}>
@@ -643,37 +645,37 @@ function PlanStack({ onPurchase }) {
               </span>
             </div>
             <div className="prc-tower" ref={towerRef}>
-              {MODULES.map((x, i) => ({ x, i }))
-                .reverse()
-                .map(({ x, i }) => {
-                  const on = inPlan(x, plan);
-                  return (
-                    <button
-                      key={x.name}
-                      type="button"
-                      data-i={i}
-                      className={`prc-slab tier-${x.from} ${on ? "is-on" : "is-off"} ${mod === i ? "is-sel" : ""}`}
-                      onClick={() => setMod(i)}
-                      style={{ "--k": i }}
-                      aria-pressed={mod === i}
-                    >
-                      <span className="prc-slab-ic">
-                        <Icon name={on ? x.icon : "lock"} size={15} />
-                      </span>
-                      <span className="prc-slab-name">{x.name}</span>
-                      <span className="prc-slab-meta">
-                        {on ? (
-                          <>
-                            <b>{x.features.length}</b>
-                            <i> features</i>
-                          </>
-                        ) : (
-                          `in ${PLANS[x.from].short}`
-                        )}
-                      </span>
-                    </button>
-                  );
-                })}
+              {/* Flipped: first module on top, last module at the bottom */}
+              {MODULES.map((x, i) => {
+                const on = inPlan(x, plan);
+                return (
+                  <button
+                    key={x.name}
+                    type="button"
+                    data-i={i}
+                    className={`prc-slab tier-${x.from} ${on ? "is-on" : "is-off"} ${mod === i ? "is-sel" : ""}`}
+                    onClick={() => setMod(i)}
+                    // --k = position counted from the bottom, so the tower keeps its shape
+                    style={{ "--k": lastIndex - i }}
+                    aria-pressed={mod === i}
+                  >
+                    <span className="prc-slab-ic">
+                      <Icon name={on ? x.icon : "lock"} size={15} />
+                    </span>
+                    <span className="prc-slab-name">{x.name}</span>
+                    <span className="prc-slab-meta">
+                      {on ? (
+                        <>
+                          <b>{x.features.length}</b>
+                          <i> features</i>
+                        </>
+                      ) : (
+                        `in ${PLANS[x.from].short}`
+                      )}
+                    </span>
+                  </button>
+                );
+              })}
               <div className="prc-tower-base">
                 <span>NGriffinPay HRMS · {P.short}</span>
               </div>

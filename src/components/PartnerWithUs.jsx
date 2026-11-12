@@ -1155,10 +1155,6 @@ function PartnerPrograms() {
                 )}
               </button>
             ))}
-            <a className="ptn-btn pt2-cta" href="#partner-form">
-              Apply as {P.title.replace(" Partners", " Partner")}{" "}
-              <PIcon name="trend" size={16} />
-            </a>
           </div>
 
           <div className="pt2-device">

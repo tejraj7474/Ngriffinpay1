@@ -1149,7 +1149,7 @@
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  background: #7c3aed;
+  background: #1d2252;
   color: #fff;
   font-size: 11px;
   font-weight: 800;
@@ -1290,7 +1290,7 @@
   opacity: 0;
 }
 .pt2-pkt.b {
-  background: #7c3aed;
+  background: #1d2252;
   box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
 }
 .pt2-api {
