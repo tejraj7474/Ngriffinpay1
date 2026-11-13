@@ -35,6 +35,9 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import HRHelp from "./components/HRHelp";
 import RecruitmentAnalytics from "./components/RecruitmentAnalytics";
 import Preloader from "./components/Preloader";
+import HrmsDemoCTA from "./components/HrmsDemoCTA";
+import DemoForm from "./components/DemoForm";
+
 // Home page = your existing sections
 function Home() {
   return (
@@ -139,6 +142,9 @@ export default function App() {
         </Routes>
       </main>
       <Footer footRef={foot} />
+      <HrmsDemoCTA>
+        {(onSuccess) => <DemoForm onSuccess={onSuccess} endpoint="" />}
+      </HrmsDemoCTA>
     </div>
   );
 }

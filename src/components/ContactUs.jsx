@@ -22,8 +22,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CONTACT = {
   email: ["hr@ngriffin.in", "sales@ngriffin.in", "Support@ngriffin.in"],
-  phone: "+91 9901540666",
-  phoneHref: "tel:+919901540666",
+  phone: ["+91 9901540666", "+9172046 99307"],
+  phoneHref: ["tel:+919901540666", "tel:+917204699307"],
   address:
     "#4272, 1st Floor Saptagiri Building Near Sita Circle, BSK 3rd Stage, Girinagar, Bangalore-560085.",
   addressShort: [
@@ -323,14 +323,21 @@ function ContactHero() {
               </span>
               <span className="cnt-card-tag">Call Us</span>
             </div>
-            <a className="cnt-card-val" href={CONTACT.phoneHref}>
-              {CONTACT.phone}
-            </a>
+
+            {/* one number below the other, same style as the email list */}
+            <ul className="cnt-mails">
+              {CONTACT.phone.map((num, i) => (
+                <li key={num}>
+                  <a href={CONTACT.phoneHref[i]}>{num}</a>
+                  <CopyBtn text={num} label={num} compact />
+                </li>
+              ))}
+            </ul>
+
             <div className="cnt-card-actions">
-              <a className="cnt-chip" href={CONTACT.phoneHref}>
+              <a className="cnt-chip" href={CONTACT.phoneHref[0]}>
                 <Icon name="phone" size={13} /> Tap to call
               </a>
-              <CopyBtn text={CONTACT.phone} label="phone number" />
             </div>
           </div>
 
@@ -864,7 +871,8 @@ function ContactForm() {
             </div>
 
             <div className="cnt-pv-alt">
-              Prefer to talk? <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+              Prefer to talk?{" "}
+              <a href={CONTACT.phoneHref[0]}>{CONTACT.phone[0]}</a>
             </div>
           </div>
         </div>

@@ -1,0 +1,316 @@
+/* ==========================================================
+   NGriffinPay – HRMS Demo bar + popup
+   Logo blue #053A93
+   ========================================================== */
+
+:root {
+  --hdc-blue: #053a93;
+  --hdc-navy: #021c4a;
+  --hdc-blue-2: #0b4fc2;
+  --hdc-sky: #8ec5ff;
+  --hdc-mint: #3ddc97;
+  --hdc-text: #1a2540;
+}
+
+/* ---------------- Floating bar ---------------- */
+.hdc-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  z-index: 9998;
+  width: min(900px, calc(100% - 140px)); /* room for WhatsApp button */
+  transform: translate(-50%, 150%);
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+.hdc-bar--show { transform: translate(-50%, 0); opacity: 1; }
+
+.hdc-bar__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 8px 8px 10px;
+  border-radius: 16px;
+  background:
+    radial-gradient(120% 180% at 0% 0%, rgba(142, 197, 255, 0.25), transparent 55%),
+    linear-gradient(120deg, var(--hdc-navy) 0%, var(--hdc-blue) 60%, var(--hdc-blue-2) 100%);
+  border: 1px solid rgba(142, 197, 255, 0.35);
+  box-shadow: 0 14px 34px rgba(2, 28, 74, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+/* faint grid like a dashboard */
+.hdc-bar__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+
+.hdc-bar__badge {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.hdc-bar__live {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--hdc-mint);
+  box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.7);
+  animation: hdc-live 1.6s infinite;
+}
+
+.hdc-bar__ticker {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  overflow: hidden;
+}
+.hdc-bar__msg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  animation: hdc-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hdc-bar__msg-icon {
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: rgba(142, 197, 255, 0.18);
+  color: var(--hdc-sky);
+}
+.hdc-bar__msg-icon svg,
+.hdc-bar__btn-icon svg {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.hdc-bar__msg-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.hdc-bar__dots { position: relative; display: flex; gap: 5px; flex-shrink: 0; }
+.hdc-bar__dots span {
+  width: 6px; height: 6px; border-radius: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: width 0.3s, background 0.3s;
+}
+.hdc-bar__dots span.active { width: 18px; background: var(--hdc-sky); }
+
+.hdc-bar__btn {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--hdc-blue);
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: hdc-btn-glow 2.4s ease-in-out infinite;
+}
+.hdc-bar__btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28); }
+.hdc-bar__btn:focus-visible { outline: 3px solid var(--hdc-sky); outline-offset: 3px; }
+.hdc-bar__btn-icon { display: grid; color: var(--hdc-blue); }
+.hdc-bar__btn-short { display: none; }
+
+/* ---------------- Popup ---------------- */
+.hdc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(2, 18, 48, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: hdc-fade 0.3s ease;
+}
+
+.hdc-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  width: min(920px, 100%);
+  max-height: calc(100vh - 40px);
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(2, 28, 74, 0.45);
+  animation: hdc-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hdc-modal__close {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 2;
+  display: grid; place-items: center;
+  width: 36px; height: 36px;
+  border: none; border-radius: 50%;
+  cursor: pointer;
+  color: var(--hdc-text);
+  background: #eef3fb;
+  transition: background 0.2s, transform 0.2s;
+}
+.hdc-modal__close:hover { background: #dde7f7; transform: rotate(90deg); }
+.hdc-modal__close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+
+.hdc-modal__side {
+  position: relative;
+  padding: 38px 32px;
+  color: #fff;
+  background:
+    radial-gradient(90% 60% at 100% 0%, rgba(142, 197, 255, 0.3), transparent 60%),
+    linear-gradient(160deg, var(--hdc-blue-2) 0%, var(--hdc-blue) 45%, var(--hdc-navy) 100%);
+  overflow: hidden;
+}
+.hdc-modal__side::after {
+  content: "";
+  position: absolute;
+  right: -60px; bottom: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 30px solid rgba(255, 255, 255, 0.06);
+}
+
+.hdc-modal__tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.hdc-modal__title { margin: 16px 0 10px; font-size: 28px; line-height: 1.2; font-weight: 800; color: #fff; }
+.hdc-modal__sub { margin: 0 0 22px; font-size: 14.5px; line-height: 1.55; color: rgba(255, 255, 255, 0.82); }
+
+.hdc-modal__list { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 12px; }
+.hdc-modal__list li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; }
+.hdc-modal__tick {
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--hdc-mint);
+  color: var(--hdc-navy);
+}
+.hdc-modal__tick svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* mini payslip card */
+.hdc-payslip {
+  position: relative;
+  z-index: 1;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+}
+.hdc-payslip__row { display: flex; justify-content: space-between; align-items: center; }
+.hdc-payslip__label { font-size: 12px; color: rgba(255, 255, 255, 0.75); }
+.hdc-payslip__status {
+  font-size: 11px; font-weight: 700;
+  padding: 3px 9px; border-radius: 999px;
+  color: var(--hdc-navy); background: var(--hdc-mint);
+}
+.hdc-payslip__amount { margin: 8px 0 10px; font-size: 20px; font-weight: 800; }
+.hdc-payslip__bar { height: 6px; border-radius: 6px; background: rgba(255, 255, 255, 0.15); overflow: hidden; }
+.hdc-payslip__bar span {
+  display: block; height: 100%; width: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--hdc-sky), var(--hdc-mint));
+  transform-origin: left;
+  animation: hdc-progress 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hdc-payslip__foot { margin-top: 10px; font-size: 12px; color: rgba(255, 255, 255, 0.75); }
+
+.hdc-modal__form {
+  padding: 38px 32px 32px;
+  overflow-y: auto;
+}
+
+/* ---------------- Animations ---------------- */
+@keyframes hdc-live {
+  0% { box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(61, 220, 151, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(61, 220, 151, 0); }
+}
+@keyframes hdc-slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes hdc-btn-glow {
+  0%, 100% { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.5); }
+  50% { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+@keyframes hdc-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hdc-pop {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes hdc-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 900px) {
+  .hdc-bar__dots { display: none; }
+  .hdc-bar__msg { font-size: 14px; }
+  .hdc-modal { grid-template-columns: 1fr; }
+  .hdc-modal__side { padding: 28px 24px; }
+  .hdc-modal__list, .hdc-payslip { display: none; }
+  .hdc-modal__title { font-size: 22px; }
+  .hdc-modal__sub { margin-bottom: 0; }
+  .hdc-modal__close { background: rgba(255, 255, 255, 0.2); color: #fff; }
+  .hdc-modal__form { padding: 24px; }
+}
+
+@media (max-width: 640px) {
+  .hdc-bar {
+    left: 12px;
+    bottom: 14px;
+    width: calc(100% - 96px); /* room for WhatsApp */
+    transform: translate(0, 150%);
+  }
+  .hdc-bar--show { transform: translate(0, 0); }
+  .hdc-bar__badge, .hdc-bar__msg-icon { display: none; }
+  .hdc-bar__inner { gap: 8px; padding: 6px 6px 6px 12px; }
+  .hdc-bar__msg { font-size: 13px; }
+  .hdc-bar__btn { padding: 11px 14px; font-size: 14px; }
+  .hdc-bar__btn-long { display: none; }
+  .hdc-bar__btn-short { display: inline; }
+  .hdc-overlay { padding: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hdc-bar, .hdc-bar__msg, .hdc-bar__btn, .hdc-bar__live,
+  .hdc-overlay, .hdc-modal, .hdc-payslip__bar span {
+    animation: none !important;
+    transition: none !important;
+  }
+}
