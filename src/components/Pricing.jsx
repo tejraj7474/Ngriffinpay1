@@ -1,9 +1,10 @@
 // Pricing.jsx
-// NGriffinPay  — Pricing / Packages inner page
+// NGriffinPay — Pricing / Packages inner page
 // Section 1: "Plan Stack" — every plan is a tower of HR modules. Switch plan and the
 //            blocks drop in (GSAP), the price counts up, click any block to see its features.
 // Section 2: "Compare every module" — module × plan matrix, expand a row to see features.
 // Enquiry modal — same fields as the old HTML (package, name, email, mobile).
+//   Mail: POSTs JSON to /api/enquiry (Vercel function in api/enquiry.js).
 // Header & Footer come from App.jsx (your existing site components).
 //
 // Install:  npm i gsap   (already installed — no extra packages needed)
@@ -171,8 +172,8 @@ const featureCount = (p) =>
   modulesIn(p).reduce((n, m) => n + m.features.length, 0);
 const inr = (n) => "₹" + Math.round(n).toLocaleString("en-IN");
 
-// Hook this up to your backend (PHP mail / API). Leave empty to only show the thank-you message.
-const ENQUIRY_ENDPOINT = "";
+// Vercel serverless function that emails the enquiry (api/enquiry.js in the project root)
+const ENQUIRY_ENDPOINT = "/api/enquiry";
 
 const prefersReduced = () =>
   typeof window !== "undefined" &&
@@ -315,7 +316,9 @@ function EnquiryModal({ plan, onClose }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [errors, setErrors] = useState({});
   const [state, setState] = useState("idle"); // idle | sending | done | fail
+  const [failMsg, setFailMsg] = useState("");
   const boxRef = useRef(null);
+  const openedAt = useRef(Date.now()); // spam check: time the modal opened
 
   useEffect(() => {
     const key = (e) => e.key === "Escape" && onClose();
@@ -349,16 +352,36 @@ function EnquiryModal({ plan, onClose }) {
     ev.preventDefault();
     if (!validate()) return;
     setState("sending");
+    setFailMsg("");
     try {
-      if (ENQUIRY_ENDPOINT) {
-        const body = new FormData();
-        body.append("package", plan.name);
-        Object.entries(form).forEach(([k, v]) => body.append(k, v));
-        const res = await fetch(ENQUIRY_ENDPOINT, { method: "POST", body });
-        if (!res.ok) throw new Error("failed");
+      const res = await fetch(ENQUIRY_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          package: plan.name,
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          page: window.location.href,
+          t: Date.now() - openedAt.current, // ms spent on the form
+        }),
+      });
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        /* not JSON — e.g. the function isn't deployed */
+      }
+      if (!res.ok || !data?.ok) {
+        console.error("Package enquiry failed:", res.status, ENQUIRY_ENDPOINT, data); // F12 → Console
+        if (data?.errors) setErrors(data.errors); // server-side validation
+        const err = new Error(data?.message || "failed");
+        err.userMessage = data?.message;
+        throw err;
       }
       setState("done");
-    } catch {
+    } catch (err) {
+      setFailMsg(err?.userMessage || "");
       setState("fail");
     }
   };
@@ -446,7 +469,7 @@ function EnquiryModal({ plan, onClose }) {
               </label>
               {state === "fail" && (
                 <p className="prc-form-err">
-                  Something went wrong. Please try again.
+                  {failMsg || "Something went wrong."} Please try again.
                 </p>
               )}
               <button
