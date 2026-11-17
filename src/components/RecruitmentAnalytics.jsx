@@ -1947,7 +1947,7 @@ function RecruitmentFaqSection() {
               N<i />
             </span>
             <div>
-              <strong>NGriffinPay Assistant</strong>
+              <strong>Griffy</strong>
               <small>{busy ? "typing…" : "Online · replies instantly"}</small>
             </div>
             <button

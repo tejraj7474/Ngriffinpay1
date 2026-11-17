@@ -21,7 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* ------------------------------------------------------------------ */
 
 const CONTACT = {
-  email: ["hr@ngriffin.in", "sales@ngriffin.in", "Support@ngriffin.in"],
+  email: ["hr@ngriffin.in", "sales@ngriffin.in", "support@ngriffin.in"],
   phone: ["+91 9901540666", "+9172046 99307"],
   phoneHref: ["tel:+919901540666", "tel:+917204699307"],
   address:

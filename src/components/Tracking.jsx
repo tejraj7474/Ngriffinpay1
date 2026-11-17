@@ -1,12 +1,13 @@
 // Tracking.jsx
-// NGriffinpay — Product inner page: "Tracking"
-// Section 1: Hero banner (live tracking app on the left, content on the right)
-// Section 2: Live India map (dot-matrix map + GSAP story per tab)
+// NGriffinPay — Product inner page: "Tracking"
+// (Geofencing · Activity Tracking · Workforce Management)
+// Section 1: Hero banner (live tracking app on the left, headings + stats on the right)
+// Section 2: Live India map (dot-matrix map + GSAP story per tab · headings + stats only)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
 // Header & Footer come from App.jsx (your existing site components).
 //
 // Install:  npm i gsap   (already installed — no three.js needed on this page)
-// NOTE: all wording below is placeholder copy — replace it when the client sends the final content.
+// Styles:   uses the existing Tracking.css — no new classes needed.
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -22,28 +23,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FEATURES = [
   {
-    title: "Live Attendance",
-    short: "Live",
-    desc: "Biometric, mobile and web check-ins land in one real-time feed.",
-    icon: "pulse",
-  },
-  {
-    title: "Geo-fencing & GPS",
-    short: "Geo-fence",
-    desc: "Field and site staff can only punch in inside approved locations.",
+    title: "Geofencing",
+    short: "Geofence",
+    stat: "Punch-in blocked outside 150 m radius",
     icon: "pin",
   },
   {
-    title: "Timesheets & Projects",
-    short: "Timesheets",
-    desc: "See hours logged per project and client, with billable time split out.",
-    icon: "clock",
+    title: "Activity Tracking",
+    short: "Activity",
+    stat: "4 field visits tracked live",
+    icon: "route",
   },
   {
-    title: "Overtime & Alerts",
-    short: "Alerts",
-    desc: "Late marks, missed punches and overtime are flagged and sent to payroll.",
-    icon: "bell",
+    title: "Workforce Management",
+    short: "Workforce",
+    stat: "231 / 248 present · 6 locations",
+    icon: "pulse",
+  },
+  {
+    title: "Shifts & Overtime",
+    short: "Shifts",
+    stat: "3 shifts · 2.5 h OT approved",
+    icon: "clock",
   },
 ];
 
@@ -288,7 +289,7 @@ function LivePanel({ delay }) {
   return (
     <div className="trk-panel" ref={ref}>
       <div className="trk-head js-in">
-        <Icon name="pulse" /> Who’s in today{" "}
+        <Icon name="pulse" /> Workforce today{" "}
         <em className="trk-live">
           <i /> Live
         </em>
@@ -421,19 +422,19 @@ function GeoPanel({ delay }) {
           <Icon name="check" size={10} /> Karthik V. checked in · inside zone
         </span>
         <span className="trk-geo-toast bad">
-          <Icon name="x" size={10} /> Punch from 2.4 km away · flagged
+          <Icon name="x" size={10} /> Punch-in blocked · 2.4 km outside radius
         </span>
       </div>
     </div>
   );
 }
 
-// 3 — Timesheets: hours per project
+// 3 — Activity Tracking: hours per activity
 const PROJECTS = [
-  { name: "Payroll revamp", h: 18, bill: true },
-  { name: "Client · Acme Retail", h: 12.5, bill: true },
-  { name: "Internal meetings", h: 7, bill: false },
-  { name: "Training", h: 4, bill: false },
+  { name: "Client visits", h: 18, bill: true },
+  { name: "Travel", h: 12.5, bill: true },
+  { name: "Calls & follow-ups", h: 7, bill: false },
+  { name: "Admin & reports", h: 4, bill: false },
 ];
 const WEEK_HOURS = [8.5, 9.5, 7, 9, 7.5];
 function TimesheetPanel({ delay }) {
@@ -471,8 +472,8 @@ function TimesheetPanel({ delay }) {
   return (
     <div className="trk-panel" ref={ref}>
       <div className="trk-head js-in">
-        <Icon name="clock" /> Timesheet · Priya S.{" "}
-        <em className="trk-tag">27–31 Oct</em>
+        <Icon name="route" /> Activity · Karthik V.{" "}
+        <em className="trk-tag">9–13 Nov</em>
       </div>
       <div className="trk-ts js-in">
         <div className="trk-days">
@@ -503,12 +504,12 @@ function TimesheetPanel({ delay }) {
       </div>
       <div className="trk-bill">
         <span>
-          <i className="bill" /> Billable 30.5 h
+          <i className="bill" /> On-field 30.5 h
         </span>
         <span>
-          <i /> Non-billable 11 h
+          <i /> Desk 11 h
         </span>
-        <em>Sent to client invoice</em>
+        <em>GPS-verified</em>
       </div>
     </div>
   );
@@ -568,7 +569,8 @@ function AlertsPanel({ delay }) {
   return (
     <div className="trk-panel" ref={ref}>
       <div className="trk-head js-in">
-        <Icon name="bell" /> Exceptions today <em className="trk-tag">3 new</em>
+        <Icon name="clock" /> Shifts & overtime{" "}
+        <em className="trk-tag">3 new</em>
       </div>
       <div className="trk-alerts">
         {ALERTS.map((a) => (
@@ -599,7 +601,7 @@ function AlertsPanel({ delay }) {
   );
 }
 
-const PANELS = [LivePanel, GeoPanel, TimesheetPanel, AlertsPanel];
+const PANELS = [GeoPanel, TimesheetPanel, LivePanel, AlertsPanel];
 
 /* ------------------------------------------------------------------ */
 /* Tracking app (left side)                                            */
@@ -692,7 +694,7 @@ function TrackingApp({ frameRef, stage, onSelect }) {
 
       <div className="trk-topbar js-top">
         <span className="trk-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
         </span>
         <b>Admin</b>
         <span className="trk-search">
@@ -933,15 +935,11 @@ function HeroSection() {
         {/* RIGHT: content (first in DOM for SEO) */}
         <div className="trk-content">
           <span className="trk-eyebrow js-reveal">
-            <span className="trk-live-dot" /> Know where every hour goes
+            <span className="trk-live-dot" /> Geofencing · Activity · Workforce
           </span>
           <h1 id="trk-hero-title" className="trk-title js-reveal">
             <span className="trk-grad">Tracking</span>
           </h1>
-          <p className="trk-lead js-reveal">
-            Attendance, location and time — tracked automatically across
-            offices, sites and remote teams, and fed straight into payroll.
-          </p>
 
           <ul
             className="trk-feats"
@@ -962,7 +960,7 @@ function HeroSection() {
                   </span>
                   <span className="trk-feat-txt">
                     <b>{f.title}</b>
-                    <span>{f.desc}</span>
+                    <span>{f.stat}</span>
                   </span>
                   <span className="trk-feat-bar">
                     <i ref={(el) => (barRefs.current[i] = el)} />
@@ -1002,7 +1000,7 @@ function HeroSection() {
               <Icon name="shield" size={14} />
             </span>
             <div>
-              <strong>No proxy punches</strong>
+              <strong>Punch-in blocked outside zone</strong>
               <small>Geo-fence + selfie check</small>
             </div>
           </div>
@@ -1015,18 +1013,16 @@ function HeroSection() {
 /* ------------------------------------------------------------------ */
 
 const GLOBE_HEADING = [
-  ["Track", true],
-  ["attendance,"],
-  ["movement"],
+  ["Geofencing,", true],
+  ["activity", true],
+  ["tracking"],
   ["and"],
-  ["time"],
-  ["across"],
-  ["every", true],
-  ["location", true],
+  ["workforce", true],
+  ["management"],
   ["—"],
-  ["in"],
-  ["real", true],
-  ["time", true],
+  ["live"],
+  ["across"],
+  ["India", true],
 ];
 
 // lat, lon
@@ -1047,60 +1043,67 @@ const VISITS = [
 ];
 const FLAGGED = 1; // Chennai gets the geo-fence alert
 
+// Numbers shown on the right are calculated from the same data the map draws,
+// so the map and the stats can never disagree.
+const TARGET = 90; // attendance target %
+const pctOf = (c) => Math.round((c.present / c.total) * 100);
+const PRESENT = CITIES.reduce((s, c) => s + c.present, 0); // 231
+const HEADCOUNT = CITIES.reduce((s, c) => s + c.total, 0); // 248
+const OVERALL = Math.round((PRESENT / HEADCOUNT) * 100); // 93
+const ABOVE = CITIES.filter((c) => pctOf(c) >= TARGET).length; // 4
+const BEST = CITIES.reduce((b, c) => (pctOf(c) > pctOf(b) ? c : b)); // Bengaluru HQ
+const REMOTE_COUNT = 64; // remote check-ins shown as dots on the map
+
+// Headings + stats only (no descriptions)
 const GLOBE_TABS = [
   {
-    label: "Multi-Location Attendance",
-    icon: "building",
-    title: [["See", true], ["every office"], ["at a glance", true]],
-    desc: "Live headcount from each branch and site, combined into one company-wide view — no more calling each office for numbers.",
-    kind: "offices",
-  },
-  {
-    label: "Field Force Tracking",
-    icon: "route",
-    title: [["Follow", true], ["field visits"], ["as they happen", true]],
-    desc: "Sales and service teams check in at client sites with GPS, and every visit and route is logged automatically.",
-    kind: "visits",
+    label: "Geofencing",
+    icon: "pin",
+    title: [["No punch-in", true], ["outside the"], ["geo-fenced radius", true]],
+    kind: "alert",
     stats: [
-      ["4", "client visits today"],
-      ["214 km", "travelled"],
-      ["42 min", "average visit"],
+      ["150 m", "permitted geo-fence radius"],
+      ["1", "punch-in blocked · Chennai"],
+      ["2.4 km", "outside the radius"],
     ],
   },
   {
-    label: "Remote & WFH Check-ins",
+    label: "Activity Tracking",
+    icon: "route",
+    title: [["Track", true], ["every visit"], ["and activity", true]],
+    kind: "visits",
+    stats: [
+      [String(VISITS.length), "field visits from Bengaluru HQ"],
+      [String(VISITS.length), "cities covered today"],
+      ["42 min", "average time on-site"],
+    ],
+  },
+  {
+    label: "Workforce Management",
+    icon: "building",
+    title: [["Manage", true], ["your workforce"], ["at every location", true]],
+    kind: "offices",
+  },
+  {
+    label: "Remote Workforce",
     icon: "home",
-    title: [["Let", true], ["remote teams"], ["punch in from anywhere", true]],
-    desc: "Selfie and location check-ins keep attendance accurate for remote and hybrid employees, wherever they work.",
+    title: [["Verify", true], ["remote"], ["check-ins", true]],
     kind: "remote",
     stats: [
-      ["64", "working remotely today"],
+      [String(REMOTE_COUNT), "working remotely today"],
       ["100%", "selfie-verified"],
       ["0", "proxy punches"],
     ],
   },
   {
-    label: "Geo-fence Alerts",
-    icon: "alert",
-    title: [["Get", true], ["alerted when"], ["check-ins look wrong", true]],
-    desc: "Punches from outside approved zones or unusual locations are flagged instantly, so HR can review them before payroll.",
-    kind: "alert",
-    stats: [
-      ["1", "punch flagged · Chennai"],
-      ["2.4 km", "outside the zone"],
-      ["5 min", "to review"],
-    ],
-  },
-  {
-    label: "Live Tracking Reports",
+    label: "Workforce Reports",
     icon: "chart",
     title: [["Turn", true], ["tracking data"], ["into decisions", true]],
-    desc: "Attendance, travel and time reports by location, team or person — ready to export for managers and payroll.",
     kind: "reports",
     stats: [
-      ["96%", "on-time arrivals"],
-      ["3", "locations above target"],
-      ["1 click", "Excel & PDF export"],
+      [`${OVERALL}%`, `attendance across ${CITIES.length} locations`],
+      [`${ABOVE} / ${CITIES.length}`, `locations above ${TARGET}% target`],
+      [`${pctOf(BEST)}%`, `highest · ${BEST.name}`],
     ],
   },
 ];
@@ -1134,7 +1137,11 @@ const DOTS = DOT_ROWS.split(";").flatMap((row) => {
   });
 });
 // a scattered subset for "remote check-ins"
-const REMOTE = DOTS.filter((_, i) => (i * 37) % 11 === 0);
+const REMOTE_POOL = DOTS.filter((_, i) => (i * 37) % 11 === 0);
+const REMOTE = Array.from(
+  { length: REMOTE_COUNT },
+  (_, k) => REMOTE_POOL[Math.floor((k * REMOTE_POOL.length) / REMOTE_COUNT)],
+);
 
 // where each city label sits relative to its pin
 const LABEL_SIDE = ["left", "right", "right", "left", "below", "right"];
@@ -1405,6 +1412,7 @@ function IndiaMap({ tab }) {
                   height={h}
                   rx="4"
                   className="tk2-bar"
+                  style={{ opacity: pctOf(c) >= TARGET ? 1 : 0.35 }}
                 />
               );
             })}
@@ -1441,7 +1449,7 @@ function IndiaMap({ tab }) {
                 cx={x}
                 cy={y}
                 r={i === 0 ? 8 : 6.5}
-                className={`tk2-city ${kind === "alert" && i === FLAGGED ? "bad" : ""} ${kind === "alert" && i !== FLAGGED ? "dim" : ""}`}
+                className={`tk2-city ${kind === "alert" && i === FLAGGED ? "bad" : ""} ${(kind === "alert" && i !== FLAGGED) || (kind === "reports" && pctOf(CITIES[i]) < TARGET) ? "dim" : ""}`}
               />
             </g>
           ))}
@@ -1470,10 +1478,12 @@ function IndiaMap({ tab }) {
                 <b>{c.name}</b>
                 <small>
                   {bad
-                    ? "Punch 2.4 km outside zone"
+                    ? "Punch-in blocked · 2.4 km outside"
                     : kind === "visits"
-                      ? "4 field visits today"
-                      : `${c.present}/${c.total} in`}
+                      ? `${VISITS.length} field visits today`
+                      : kind === "reports"
+                        ? `${pctOf(c)}% · ${pctOf(c) >= TARGET ? "above" : "below"} target`
+                        : `${c.present}/${c.total} in`}
                 </small>
               </span>
             );
@@ -1708,7 +1718,6 @@ function GlobeSection() {
                   </span>
                 ))}
               </h3>
-              <p>{tab.desc}</p>
               {tab.kind === "offices" ? (
                 <div className="tk2-offices">
                   {CITIES.map((c) => (
@@ -1775,84 +1784,39 @@ function GlobeSection() {
 
 const FAQS = [
   {
-    q: "What does Tracking in NGriffinPay  cover?",
-    a: "Tracking brings attendance, location and time together. It records check-ins from biometric devices, the mobile app and the web, tracks field staff with GPS and geo-fencing, and captures timesheets — all feeding straight into payroll.",
-    keys: [
-      "what is",
-      "what does",
-      "about",
-      "overview",
-      "explain",
-      "tracking",
-      "cover",
-      "feature",
-      "module",
-    ],
+    q: "What does Tracking in NGriffinPay cover?",
+    a: "Tracking covers three things: geofencing, so employees can’t punch in outside the permitted radius; activity tracking, so field visits, routes and time on each task are logged; and workforce management, so you see live headcount, shifts and overtime across every location — all feeding straight into payroll.",
+    keys: ["what is", "what does", "about", "overview", "explain", "tracking", "cover", "feature", "module"],
   },
   {
-    q: "Can it work with our existing biometric devices?",
-    a: "Yes. NGriffinPay  syncs with most popular biometric and face-recognition devices, so punches flow in automatically. Employees can also check in from the mobile app or web where devices aren’t available.",
-    keys: [
-      "biometric",
-      "device",
-      "machine",
-      "face",
-      "fingerprint",
-      "integrate",
-      "integration",
-      "sync",
-      "existing",
-    ],
+    q: "How does geofencing work?",
+    a: "You draw approved zones around offices, sites or client locations and set a radius, such as 150 m. The system will not allow employees to punch in if they are outside the permitted geo-fenced radius — the punch-in is blocked, and the attempt is logged for HR to see.",
+    keys: ["geofence", "geofencing", "geo-fence", "geo fence", "zone", "radius", "location", "gps", "proxy", "outside"],
   },
   {
-    q: "How does GPS and geo-fencing work for field staff?",
-    a: "You set approved zones such as offices, sites or client locations. Field staff can only check in from inside these zones, their visits are logged with GPS, and any punch from outside a zone is flagged for HR to review.",
-    keys: [
-      "gps",
-      "geo",
-      "geofence",
-      "geo-fence",
-      "location",
-      "field",
-      "sales",
-      "visit",
-      "route",
-      "zone",
-    ],
+    q: "What does activity tracking record?",
+    a: "For field and sales teams, it logs every client visit with GPS, the route travelled and distance covered, how long each visit took, and time spent on calls, travel and admin. Managers see it all in a live dashboard.",
+    keys: ["activity", "field", "sales", "visit", "route", "distance", "km", "travel", "task", "movement"],
   },
   {
-    q: "Can employees log time against projects?",
-    a: "Yes. Employees can fill timesheets against projects, clients or tasks. Managers approve them in one click, and billable and non-billable hours are reported separately.",
-    keys: [
-      "timesheet",
-      "time sheet",
-      "project",
-      "client",
-      "billable",
-      "hours",
-      "task",
-      "log time",
-    ],
+    q: "How does it help with workforce management?",
+    a: "You get live headcount for every office and site, shift rosters, late marks, missed punches and overtime in one place. Approved overtime and attendance exceptions are applied to payroll automatically, with reports ready to export.",
+    keys: ["workforce", "headcount", "shift", "roster", "overtime", "late", "manage", "management", "branch", "report"],
+  },
+  {
+    q: "Is employee location tracked after work hours?",
+    a: "No. Location is captured only at check-in and during working hours or active shifts. Employees can see when tracking is on, and access to location data is limited by role.",
+    keys: ["privacy", "after hours", "after work", "personal", "always", "consent", "track me", "battery"],
   },
   {
     q: "Is tracking connected to payroll?",
-    a: "Absolutely. Late marks, absences, overtime and approved timesheets are applied to payroll automatically, so there are no manual attendance sheets to reconcile at month-end.",
-    keys: [
-      "payroll",
-      "salary",
-      "overtime",
-      "late",
-      "absent",
-      "lop",
-      "loss of pay",
-      "month-end",
-      "connected",
-    ],
+    a: "Yes. Late marks, absences, overtime and verified field hours flow into payroll automatically, so there are no manual attendance sheets to reconcile at month-end.",
+    keys: ["payroll", "salary", "lop", "loss of pay", "month-end", "connected", "absent"],
   },
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about attendance, location or time tracking.";
+  "Hi there! 👋 I'm Griffy. Pick a question or type your own about geofencing, activity tracking or workforce management.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -2219,7 +2183,7 @@ function TrackingFaqSection() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about biometrics, GPS or timesheets…"
+              placeholder="Ask about geofencing, activity or workforce…"
               aria-label="Type your question"
               maxLength={160}
             />

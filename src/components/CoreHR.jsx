@@ -1,11 +1,13 @@
 // CoreHR.jsx
-// NGriffinPay  — Product inner page: "Core HR"
-// Section 1: Hero banner (live HR records app on the left, content on the right)
-// Section 2: HR Metro Map (each Core HR module is a metro line through one employee record)
+// NGriffinPay — Product inner page: "Core HR"
+// Focus: Employee Documents · Offer / Appointment / Promotion / Relieving Letters · E-Signatures · Company Policies
+// Section 1: Hero banner (live Core HR app on the left, content on the right)
+// Section 2: HR Documents Metro Map (each letter / policy flow is a metro line through the employee file)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
 // Header & Footer come from App.jsx (your existing site components).
 //
 // Install:  npm i gsap   (already installed)
+// Styles:   uses the existing CoreHR.css — no new classes needed.
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -21,35 +23,35 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FEATURES = [
   {
-    title: "Unified Employee Records",
-    short: "Records",
-    desc: "Every employee’s profile, job, pay and documents in one secure place.",
-    icon: "id",
+    title: "Employee Documents",
+    short: "Documents",
+    desc: "A secure digital locker for every employee’s ID proofs, certificates and contracts — with expiry alerts.",
+    icon: "file",
   },
   {
-    title: "Org Structure & Reporting",
-    short: "Org chart",
-    desc: "Departments, locations and reporting lines that update as your team changes.",
-    icon: "org",
+    title: "HR Letters in a Click",
+    short: "Letters",
+    desc: "Offer, appointment, promotion and relieving letters auto-filled from the employee record.",
+    icon: "mail",
   },
   {
-    title: "Policies & Compliance",
+    title: "E-Signatures",
+    short: "e-Sign",
+    desc: "Get letters and contracts signed online in minutes — OTP-verified, with a full audit trail.",
+    icon: "pen",
+  },
+  {
+    title: "Company Policies",
     short: "Policies",
-    desc: "Publish HR policies, track acknowledgements and stay PF, ESI and PT ready.",
+    desc: "Publish policies, track who has read and accepted them, and roll out updates with version history.",
     icon: "shield",
-  },
-  {
-    title: "Lifecycle Workflows",
-    short: "Lifecycle",
-    desc: "Joiners, promotions, transfers and exits flow straight into payroll.",
-    icon: "flow",
   },
 ];
 
 const STAGE_TIME = 5.5;
 
 const EMPLOYEES = [
-  { av: "PS", name: "Priya Sharma", role: "Product Designer", tone: "a" },
+  { av: "PS", name: "Priya Sharma", role: "Sr. Product Designer", tone: "a" },
   { av: "KV", name: "Karthik V.", role: "Senior Developer", tone: "b" },
   { av: "AR", name: "Anita Rao", role: "Finance Lead", tone: "c" },
   { av: "RM", name: "Rahul M.", role: "Sales Manager", tone: "d" },
@@ -129,6 +131,48 @@ function Icon({ name, size = 14 }) {
         <svg {...p}>
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <path d="M14 2v6h6M8 13h8M8 17h5" />
+        </svg>
+      );
+    case "mail":
+      return (
+        <svg {...p}>
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="m22 7-10 6L2 7" />
+        </svg>
+      );
+    case "pen":
+      return (
+        <svg {...p}>
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+      );
+    case "lock":
+      return (
+        <svg {...p}>
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </svg>
+      );
+    case "award":
+      return (
+        <svg {...p}>
+          <circle cx="12" cy="8" r="6" />
+          <path d="M8.2 13.2 7 22l5-3 5 3-1.2-8.8" />
+        </svg>
+      );
+    case "trend":
+      return (
+        <svg {...p}>
+          <path d="m22 7-8.5 8.5-5-5L2 17" />
+          <path d="M16 7h6v6" />
+        </svg>
+      );
+    case "exit":
+      return (
+        <svg {...p}>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <path d="m16 17 5-5-5-5M21 12H9" />
         </svg>
       );
     case "wallet":
@@ -235,18 +279,18 @@ function usePanel(build, delay) {
   return ref;
 }
 
-// 1 — Unified Employee Records: one profile, everything filled in
-const PROFILE_FIELDS = [
-  { k: "Employee ID", v: "EMP-0142", icon: "id" },
-  { k: "Department", v: "Design · Whitefield", icon: "pin" },
-  { k: "Reports to", v: "Rahul M.", icon: "user" },
-  { k: "Monthly CTC", v: "₹92,000", icon: "wallet" },
-  { k: "PAN · UAN", v: "Verified", icon: "shield" },
-  { k: "Documents", v: "6 / 6 uploaded", icon: "file" },
+// 1 — Employee Documents: digital locker, every document verified
+const DOC_FIELDS = [
+  { k: "Aadhaar card", v: "Verified", icon: "id" },
+  { k: "PAN card", v: "Verified", icon: "id" },
+  { k: "Degree certificate", v: "Verified", icon: "award" },
+  { k: "Previous payslips", v: "3 files · Verified", icon: "wallet" },
+  { k: "Bank proof", v: "Cancelled cheque", icon: "file" },
+  { k: "Passport", v: "Expiry alert · Aug 2027", icon: "bell" },
 ];
 const RING_R = 22;
 const RING_C = 2 * Math.PI * RING_R;
-function RecordsPanel({ delay }) {
+function DocumentsPanel({ delay }) {
   const pctRef = useRef(null);
   const ref = usePanel((tl, q) => {
     tl.from(
@@ -288,7 +332,7 @@ function RecordsPanel({ delay }) {
         <span className="chr-av lg a">PS</span>
         <div>
           <b>Priya Sharma</b>
-          <small>Product Designer · Joined 12 Mar 2023</small>
+          <small>Sr. Product Designer · Joined 12 Mar 2023</small>
           <span className="chr-tags">
             <em>Full-time</em>
             <em>Bengaluru</em>
@@ -310,18 +354,18 @@ function RecordsPanel({ delay }) {
             <b>
               <span ref={pctRef}>0</span>%
             </b>
-            <small>complete</small>
+            <small>verified</small>
           </span>
         </div>
       </div>
       <div className="chr-ptabs js-in">
-        <span className="is-on">Overview</span>
+        <span>Overview</span>
         <span>Job</span>
-        <span>Pay</span>
-        <span>Documents</span>
+        <span>Letters</span>
+        <span className="is-on">Documents</span>
       </div>
       <div className="chr-fields">
-        {PROFILE_FIELDS.map((f) => (
+        {DOC_FIELDS.map((f) => (
           <div key={f.k} className="chr-field">
             <span className="chr-field-ic">
               <Icon name={f.icon} size={12} />
@@ -337,118 +381,204 @@ function RecordsPanel({ delay }) {
         ))}
       </div>
       <div className="chr-synced">
-        <Icon name="sync" size={12} /> One record shared by payroll, attendance
-        and leave
+        <Icon name="lock" size={12} /> Encrypted locker · employees upload from
+        their phone
       </div>
     </div>
   );
 }
 
-// 2 — Org Structure: chart draws itself
-const HEADS = [
-  { av: "RM", name: "Rahul M.", team: "Sales · 42", tone: "d" },
-  { av: "VK", name: "Vikram K.", team: "Engineering · 104", tone: "b" },
-  { av: "AR", name: "Anita Rao", team: "Finance · 18", tone: "c" },
+// 2 — HR Letters: offer → appointment → promotion → relieving
+const LETTERS = [
+  {
+    t: "Offer letter",
+    d: "05 Feb 2023",
+    note: "₹78,000 / month · accepted",
+    tone: "b",
+    badge: "Signed",
+    bIcon: "check",
+  },
+  {
+    t: "Appointment letter",
+    d: "12 Mar 2023",
+    note: "6-month probation · terms agreed",
+    tone: "c",
+    badge: "Signed",
+    bIcon: "check",
+  },
+  {
+    t: "Promotion letter",
+    d: "01 Apr 2026",
+    note: "Senior Designer · ₹78k → ₹92k",
+    tone: "a",
+    badge: "Sent",
+    bIcon: "send",
+  },
+  {
+    t: "Relieving letter",
+    d: "On exit",
+    note: "Auto-drafted once F&F is settled",
+    tone: "d",
+    badge: "Ready",
+    bIcon: "file",
+  },
 ];
-function OrgPanel({ delay }) {
+function LettersPanel({ delay }) {
   const ref = usePanel((tl, q) => {
     tl.from(
-      q(".chr-node.ceo"),
-      { scale: 0.6, autoAlpha: 0, duration: 0.4, ease: "back.out(2)" },
+      q(".chr-life-line i"),
+      { scaleY: 0, duration: 1.4, ease: "none" },
       0.3,
     );
-    tl.from(
-      q(".chr-org-stem"),
-      { scaleY: 0, transformOrigin: "top", duration: 0.3 },
-      0.65,
-    );
-    tl.from(q(".chr-org-bar"), { scaleX: 0, duration: 0.4 }, 0.9);
-    tl.from(
-      q(".chr-org-drop"),
-      { scaleY: 0, transformOrigin: "top", stagger: 0.08, duration: 0.25 },
-      1.2,
-    );
-    tl.from(
-      q(".chr-node.head"),
-      {
-        y: 12,
-        autoAlpha: 0,
-        stagger: 0.12,
-        duration: 0.35,
-        ease: "back.out(1.8)",
-      },
-      1.35,
-    );
-    tl.from(
-      q(".chr-team-dots i"),
-      { scale: 0, stagger: 0.02, duration: 0.2 },
-      1.8,
-    );
-    tl.from(
-      q(".chr-org-foot span"),
-      { autoAlpha: 0, y: 8, stagger: 0.1, duration: 0.3 },
-      2.3,
-    );
+    q(".chr-ev").forEach((el, i) => {
+      tl.from(el, { autoAlpha: 0, x: 14, duration: 0.35 }, 0.35 + i * 0.35);
+      tl.from(
+        el.querySelector(".chr-ev-sync"),
+        { autoAlpha: 0, scale: 0.6, duration: 0.3, ease: "back.out(2)" },
+        0.55 + i * 0.35,
+      );
+    });
+    tl.from(q(".chr-next"), { autoAlpha: 0, y: 10, duration: 0.4 }, 2.1);
   }, delay);
 
   return (
     <div className="chr-panel" ref={ref}>
       <div className="chr-head js-in">
-        <Icon name="org" /> Organisation chart{" "}
-        <em className="chr-tag">Auto-updated</em>
+        <Icon name="mail" /> Priya’s letters{" "}
+        <em className="chr-tag">Auto-filled</em>
       </div>
-      <div className="chr-org">
-        <div className="chr-node ceo">
-          <span className="chr-av a">SN</span>
-          <span>
-            <b>Sanjay N.</b>
-            <small>CEO · 248 people</small>
-          </span>
-        </div>
-        <span className="chr-org-stem" />
-        <span className="chr-org-bar" />
-        <div className="chr-org-row">
-          {HEADS.map((h) => (
-            <div key={h.av} className="chr-org-col">
-              <span className="chr-org-drop" />
-              <div className="chr-node head">
-                <span className={`chr-av ${h.tone}`}>{h.av}</span>
-                <span>
-                  <b>{h.name}</b>
-                  <small>{h.team}</small>
-                </span>
-              </div>
-              <span className="chr-team-dots">
-                {Array.from({ length: 6 }, (_, i) => (
-                  <i key={i} className={h.tone} />
-                ))}
-              </span>
+      <div className="chr-life">
+        <span className="chr-life-line">
+          <i />
+        </span>
+        {LETTERS.map((e) => (
+          <div key={e.t} className="chr-ev">
+            <span className={`chr-ev-dot ${e.tone}`} />
+            <div className="chr-ev-txt">
+              <b>{e.t}</b>
+              <small>
+                {e.d} · {e.note}
+              </small>
             </div>
-          ))}
-        </div>
+            <span className="chr-ev-sync">
+              <Icon name={e.bIcon} size={10} /> {e.badge}
+            </span>
+          </div>
+        ))}
       </div>
-      <div className="chr-org-foot">
-        <span>
-          <b>6</b> departments
+      <div className="chr-next">
+        <span className="chr-next-ic">
+          <Icon name="star" size={13} />
         </span>
-        <span>
-          <b>3</b> locations
-        </span>
-        <span>
-          <b>14</b> managers
-        </span>
+        <div>
+          <b>Any HR letter in about 30 seconds</b>
+          <small>Name, role, CTC and dates fill in from the record</small>
+        </div>
       </div>
     </div>
   );
 }
 
-// 3 — Policies & Compliance: acknowledgements + statutory checks
-const POLICIES = [
-  { name: "Leave policy 2026", v: 96 },
-  { name: "Code of conduct", v: 100 },
-  { name: "Work-from-home policy", v: 88 },
+// 3 — E-Signatures: signature draws itself, signers tick off
+const SIGNERS = [
+  { k: "1 · Priya Sharma", v: "Signed · OTP verified", icon: "user" },
+  { k: "2 · Deepa N. (HR)", v: "Countersigned", icon: "users" },
+  { k: "3 · Sanjay N. (CEO)", v: "Approved", icon: "award" },
+  { k: "Audit trail", v: "Time · IP · device", icon: "lock" },
 ];
-const STATUTORY = ["PF", "ESI", "PT", "LWF"];
+const SIGN_BOX = {
+  border: "1px dashed rgba(29,111,216,0.45)",
+  background: "rgba(29,111,216,0.06)",
+  borderRadius: 12,
+  padding: "8px 12px 6px",
+  margin: "10px 0",
+};
+function ESignPanel({ delay }) {
+  const ref = usePanel((tl, q) => {
+    tl.fromTo(
+      q(".chr-sign-path"),
+      { strokeDashoffset: 1 },
+      { strokeDashoffset: 0, duration: 1.4, ease: "power1.inOut" },
+      0.35,
+    );
+    tl.from(q(".chr-sign-meta"), { autoAlpha: 0, y: 6, duration: 0.3 }, 1.6);
+    tl.from(
+      q(".chr-field"),
+      { autoAlpha: 0, y: 10, stagger: 0.12, duration: 0.3 },
+      1.7,
+    );
+    q(".chr-field-ok").forEach((el, i) =>
+      tl.from(
+        el,
+        { scale: 0, duration: 0.25, ease: "back.out(2.6)" },
+        1.9 + i * 0.12,
+      ),
+    );
+    tl.from(q(".chr-due"), { autoAlpha: 0, y: 10, duration: 0.4 }, 2.5);
+  }, delay);
+
+  return (
+    <div className="chr-panel" ref={ref}>
+      <div className="chr-head js-in">
+        <Icon name="pen" /> e-Sign · Appointment letter{" "}
+        <em className="chr-tag">OTP verified</em>
+      </div>
+      <div className="js-in" style={SIGN_BOX}>
+        <svg
+          viewBox="0 0 220 56"
+          width="100%"
+          height="48"
+          role="img"
+          aria-label="Priya Sharma's signature"
+        >
+          <path
+            className="chr-sign-path"
+            d="M8 40 C20 8 36 8 30 36 S44 50 54 28 C60 16 68 16 64 32 C61 44 74 44 82 28 C88 16 97 18 94 34 C92 46 108 42 116 26 C122 14 131 16 128 32 C126 44 142 42 150 28 L160 20 C170 12 179 28 168 38 C160 46 188 38 212 24"
+            fill="none"
+            stroke="#1d6fd8"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            pathLength="1"
+            strokeDasharray="1"
+            strokeDashoffset="1"
+          />
+        </svg>
+        <small className="chr-sign-meta" style={{ display: "block" }}>
+          Signed by Priya Sharma · 12 Mar 2023, 10:42 AM
+        </small>
+      </div>
+      <div className="chr-fields">
+        {SIGNERS.map((f) => (
+          <div key={f.k} className="chr-field">
+            <span className="chr-field-ic">
+              <Icon name={f.icon} size={12} />
+            </span>
+            <span>
+              <small>{f.k}</small>
+              <b>{f.v}</b>
+            </span>
+            <span className="chr-field-ok">
+              <Icon name="check" size={9} />
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="chr-due">
+        <Icon name="file" size={12} /> Signed PDF filed to Priya’s documents
+        automatically
+      </div>
+    </div>
+  );
+}
+
+// 4 — Company Policies: publish, acknowledge, track
+const POLICIES = [
+  { name: "POSH policy", v: 100 },
+  { name: "Code of conduct", v: 96 },
+  { name: "Leave policy 2026", v: 88 },
+];
+const POLICY_TOOLS = ["Versions", "e-Accept", "Read log", "Reminders"];
 function PolicyPanel({ delay }) {
   const ref = usePanel((tl, q) => {
     tl.from(
@@ -493,7 +623,7 @@ function PolicyPanel({ delay }) {
   return (
     <div className="chr-panel" ref={ref}>
       <div className="chr-head js-in">
-        <Icon name="shield" /> Policies &amp; compliance{" "}
+        <Icon name="shield" /> Company policies{" "}
         <em className="chr-tag">248 employees</em>
       </div>
       <div className="chr-pols">
@@ -512,96 +642,23 @@ function PolicyPanel({ delay }) {
           </div>
         ))}
       </div>
-      <small className="chr-sub js-in">Statutory registers</small>
+      <small className="chr-sub js-in">Acknowledgement tools</small>
       <div className="chr-stats">
-        {STATUTORY.map((s) => (
+        {POLICY_TOOLS.map((s) => (
           <span key={s} className="chr-stat">
             <Icon name="check" size={10} /> {s}
           </span>
         ))}
       </div>
       <div className="chr-due">
-        <Icon name="bell" size={12} /> Next: PF &amp; ESI returns due 15 Nov ·
-        reminders set
+        <Icon name="bell" size={12} /> 30 people yet to accept Leave policy 2026
+        · reminder sent
       </div>
     </div>
   );
 }
 
-// 4 — Lifecycle Workflows: events flow into payroll
-const EVENTS = [
-  { t: "Joined", d: "12 Mar 2023", note: "Payroll profile created", tone: "b" },
-  { t: "Confirmed", d: "12 Sep 2023", note: "Probation closed", tone: "c" },
-  {
-    t: "Promoted",
-    d: "01 Apr 2026",
-    note: "CTC ₹78k → ₹92k · payroll updated",
-    tone: "a",
-  },
-  {
-    t: "Transferred",
-    d: "01 Oct 2026",
-    note: "Whitefield office · manager changed",
-    tone: "d",
-  },
-];
-function LifecyclePanel({ delay }) {
-  const ref = usePanel((tl, q) => {
-    tl.from(
-      q(".chr-life-line i"),
-      { scaleY: 0, duration: 1.4, ease: "none" },
-      0.3,
-    );
-    q(".chr-ev").forEach((el, i) => {
-      tl.from(el, { autoAlpha: 0, x: 14, duration: 0.35 }, 0.35 + i * 0.35);
-      tl.from(
-        el.querySelector(".chr-ev-sync"),
-        { autoAlpha: 0, scale: 0.6, duration: 0.3, ease: "back.out(2)" },
-        0.55 + i * 0.35,
-      );
-    });
-    tl.from(q(".chr-next"), { autoAlpha: 0, y: 10, duration: 0.4 }, 2.1);
-  }, delay);
-
-  return (
-    <div className="chr-panel" ref={ref}>
-      <div className="chr-head js-in">
-        <Icon name="flow" /> Priya’s journey{" "}
-        <em className="chr-tag">Auto-synced</em>
-      </div>
-      <div className="chr-life">
-        <span className="chr-life-line">
-          <i />
-        </span>
-        {EVENTS.map((e) => (
-          <div key={e.t} className="chr-ev">
-            <span className={`chr-ev-dot ${e.tone}`} />
-            <div className="chr-ev-txt">
-              <b>{e.t}</b>
-              <small>
-                {e.d} · {e.note}
-              </small>
-            </div>
-            <span className="chr-ev-sync">
-              <Icon name="sync" size={10} /> Payroll
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="chr-next">
-        <span className="chr-next-ic">
-          <Icon name="star" size={13} />
-        </span>
-        <div>
-          <b>Next: annual appraisal · Mar 2027</b>
-          <small>Letters and payroll changes generated for you</small>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const PANELS = [RecordsPanel, OrgPanel, PolicyPanel, LifecyclePanel];
+const PANELS = [DocumentsPanel, LettersPanel, ESignPanel, PolicyPanel];
 
 /* ------------------------------------------------------------------ */
 /* Core HR app (left side)                                             */
@@ -660,17 +717,17 @@ function CoreHRApp({ frameRef, stage, onSelect }) {
         <span className="chr-dot y" />
         <span className="chr-dot g" />
         <div className="chr-url">
-          <span aria-hidden>🔒</span> app.NGriffinPay .in/core-hr
+          <span aria-hidden>🔒</span> app.ngriffinpay.in/core-hr/documents
         </div>
       </div>
 
       <div className="chr-topbar js-top">
         <span className="chr-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
         </span>
         <b>Admin</b>
         <span className="chr-search">
-          <Icon name="search" size={12} /> Search 248 employees…
+          <Icon name="search" size={12} /> Search employees, letters, policies…
         </span>
         <span className="chr-bell">
           <Icon name="bell" size={13} />
@@ -891,8 +948,8 @@ function HeroSection() {
         {/* RIGHT: content (first in DOM for SEO) */}
         <div className="chr-content">
           <span className="chr-eyebrow js-reveal">
-            <span className="chr-live-dot" /> One source of truth for your
-            people
+            <span className="chr-live-dot" /> Paperless HR, from offer letter to
+            exit
           </span>
           <h1 id="chr-hero-title" className="chr-title js-reveal">
             Core <span className="chr-grad">HR</span>
@@ -936,17 +993,17 @@ function HeroSection() {
               <Icon name="check" size={14} />
             </span>
             <div>
-              <strong>248 records · 100% complete</strong>
-              <small>No more spreadsheets</small>
+              <strong>1,480 documents · 100% verified</strong>
+              <small>No more paper files</small>
             </div>
           </div>
           <div className="chr-float f2 js-float">
             <span className="chr-float-ic pr">
-              <Icon name="sync" size={14} />
+              <Icon name="pen" size={14} />
             </span>
             <div>
-              <strong>Changes sync to payroll</strong>
-              <small>Instantly, every time</small>
+              <strong>Offer letter e-signed</strong>
+              <small>4 minutes after sending</small>
             </div>
           </div>
         </div>
@@ -956,98 +1013,126 @@ function HeroSection() {
 }
 
 /* ------------------------------------------------------------------ */
-/* SECTION 2 — HR Metro Map (every module is a line through one record) */
+/* SECTION 2 — HR Documents Metro Map (every flow runs through one file) */
 /* ------------------------------------------------------------------ */
 
 const METRO_HEADING = [
-  ["Organise", true],
-  ["your"],
-  ["people,"],
-  ["automate", true],
+  ["Create", true],
+  ["every"],
   ["HR"],
-  ["operations,"],
+  ["letter,"],
+  ["collect", true],
+  ["e-signatures"],
   ["and", true],
-  ["build"],
-  ["a"],
-  ["workplace"],
-  ["that"],
-  ["runs"],
-  ["itself"],
+  ["keep"],
+  ["every"],
+  ["document"],
+  ["in"],
+  ["one"],
+  ["place"],
 ];
 
-// Each tab = one metro line. Every line runs through the central "Employee record" interchange.
+// Each tab = one metro line. Every line runs through the central "Employee file" interchange.
 // path: SVG path in a 640 x 420 map · at: where the 4 stops sit along the line (0–1)
 // lbl: label offset for this line's stops [dx, dy, text-anchor]
 const METRO_LINES = [
   {
-    label: "Employee Database",
-    icon: "id",
+    label: "Offer Letter",
+    icon: "mail",
     color: "#1d6fd8",
     path: "M40 210 H600",
     at: [0.04, 0.3, 0.7, 0.96],
     lbl: [0, -16, "middle"],
     stops: [
-      "Personal details",
-      "Job & salary",
-      "Bank & statutory",
-      "Documents",
+      "Candidate selected",
+      "CTC auto-filled",
+      "Sent for e-Sign",
+      "Offer accepted",
     ],
     title: [
-      ["One", true],
-      ["profile"],
-      ["for every", false],
-      ["employee", true],
+      ["Send", true],
+      ["offer letters"],
+      ["candidates sign", false],
+      ["the same day", true],
     ],
-    desc: "Store personal, job, bank and statutory details in a single searchable record that payroll, attendance and leave all read from.",
-    stat: ["248", "complete employee records"],
+
+    stat: ["2 min", "to roll out an offer"],
   },
   {
-    label: "Hire to Retire",
-    icon: "flow",
+    label: "Appointment Letter",
+    icon: "id",
     color: "#10b981",
     path: "M70 60 H170 L320 210 L470 360 H590",
     at: [0.03, 0.3, 0.7, 0.97],
     lbl: [0, -16, "middle"],
-    stops: ["Offer accepted", "Joining & induction", "Promotion", "Exit & F&F"],
-    title: [["Run", true], ["the full"], ["employee lifecycle", true]],
-    desc: "Offers, confirmations, promotions, transfers and exits move along one workflow, with payroll updated at every step.",
-    stat: ["0", "manual payroll updates"],
+    stops: [
+      "Joining confirmed",
+      "Terms & probation",
+      "Employee e-Signs",
+      "Saved to file",
+    ],
+    title: [["Issue", true], ["appointment letters"], ["on day one", true]],
+
+    stat: ["Day 1", "appointment letters issued"],
   },
   {
-    label: "Org & Hierarchy",
-    icon: "org",
+    label: "Promotion Letter",
+    icon: "trend",
     color: "#38bdf8",
     path: "M320 25 V395",
     at: [0.04, 0.3, 0.7, 0.96],
     lbl: [14, 4, "start"],
-    stops: ["Company", "Location", "Department", "Team & manager"],
-    title: [["Map", true], ["your organisation"], ["as it grows", true]],
-    desc: "Set up companies, locations, departments and reporting lines once — the org chart and approval routes update themselves.",
-    stat: ["6", "departments · 3 locations"],
+    stops: [
+      "Appraisal approved",
+      "New role & CTC",
+      "Manager sign-off",
+      "Payroll updated",
+    ],
+    title: [
+      ["Celebrate", true],
+      ["promotions"],
+      ["without the paperwork", true],
+    ],
+
+    stat: ["0", "manual salary revisions"],
   },
   {
-    label: "Letters & Policies",
-    icon: "file",
+    label: "Relieving Letter",
+    icon: "exit",
     color: "#f59e0b",
     path: "M570 60 H470 L320 210 L170 360 H60",
     at: [0.03, 0.3, 0.7, 0.97],
     lbl: [0, -16, "middle"],
-    stops: ["Pick a template", "Auto-fill details", "e-Sign", "Employee inbox"],
-    title: [["Generate", true], ["letters and policies"], ["in a click", true]],
-    desc: "Offer, confirmation and experience letters fill themselves from the employee record, get signed online and land in the employee’s inbox.",
-    stat: ["30 sec", "to issue any HR letter"],
+    stops: [
+      "Resignation accepted",
+      "Exit clearance",
+      "F&F settled",
+      "Relieving letter",
+    ],
+    title: [["Close", true], ["every exit"], ["on a good note", true]],
+
+    stat: ["24 hrs", "from F&F to relieving letter"],
   },
   {
-    label: "HR Analytics",
-    icon: "chart",
+    label: "Company Policies",
+    icon: "shield",
     color: "#a78bfa",
     path: "M200 120 H440 Q480 120 480 160 V260 Q480 300 440 300 H200 Q160 300 160 260 V160 Q160 120 200 120 Z",
     at: [0, 0.25, 0.5, 0.75],
     lbl: [0, -14, "middle"],
-    stops: ["Headcount", "New joiners", "Exits", "Attrition report"],
-    title: [["See", true], ["headcount and attrition"], ["at a glance", true]],
-    desc: "Live reports on headcount, joiners, exits and attrition by team — ready to download whenever leadership asks.",
-    stat: ["150+", "ready-made HR reports"],
+    stops: [
+      "Draft policy",
+      "Publish to teams",
+      "Read & accept",
+      "Track compliance",
+    ],
+    title: [
+      ["Roll out", true],
+      ["policies everyone"],
+      ["actually reads", true],
+    ],
+
+    stat: ["100%", "acknowledgement tracking"],
   },
 ];
 
@@ -1279,7 +1364,7 @@ function MetroMapSection() {
           className="ch2-tabs"
           ref={tabsRef}
           role="tablist"
-          aria-label="Core HR modules"
+          aria-label="HR letters and policies"
         >
           {METRO_LINES.map((l, i) => (
             <button
@@ -1307,7 +1392,7 @@ function MetroMapSection() {
           <div className="ch2-map">
             <div className="ch2-map-head">
               <span>
-                <Icon name="org" size={14} /> Core HR network
+                <Icon name="file" size={14} /> HR documents network
               </span>
               <em>
                 <i style={{ background: line.color }} /> {line.label} line
@@ -1393,7 +1478,7 @@ function MetroMapSection() {
                 className="ch2-hub-t"
                 textAnchor="middle"
               >
-                record
+                file
               </text>
 
               {/* train */}
@@ -1484,14 +1569,13 @@ function MetroMapSection() {
 }
 
 /* ------------------------------------------------------------------ */
-
 /* SECTION 3 — FAQs as a live chat                                     */
 /* ------------------------------------------------------------------ */
 
 const FAQS = [
   {
-    q: "What is Core HR in NGriffinPay ?",
-    a: "Core HR is the foundation of NGriffinPay . It keeps every employee’s personal, job, salary, bank and statutory details in one secure record, and that same record powers payroll, attendance, leave and every other module.",
+    q: "What is Core HR in NGriffinPay?",
+    a: "Core HR is the foundation of NGriffinPay. It keeps every employee’s personal, job, salary and statutory details in one secure record — and uses that record to store documents, generate HR letters, collect e-signatures and roll out company policies, all in sync with payroll, attendance and leave.",
     keys: [
       "what is",
       "about",
@@ -1504,55 +1588,91 @@ const FAQS = [
     ],
   },
   {
-    q: "Can I import my existing employee data?",
-    a: "Yes. You can bulk-upload employees from Excel or CSV using our ready template. The system checks for missing or duplicate details before importing, and our team can help you migrate during onboarding.",
+    q: "How does NGriffinPay manage employee documents?",
+    a: "Every employee gets a secure digital locker for Aadhaar, PAN, bank proof, education and experience certificates, previous payslips and signed letters. Employees can upload their own documents from the self-service app, HR verifies them in one click, and you get alerts before passports, visas or contracts expire. Existing files can be bulk-uploaded during onboarding.",
     keys: [
-      "import",
+      "document",
+      "documents",
+      "locker",
       "upload",
-      "excel",
-      "csv",
-      "migrate",
-      "migration",
-      "existing data",
+      "aadhaar",
+      "pan",
+      "certificate",
+      "proof",
+      "expiry",
+      "storage",
       "bulk",
-      "spreadsheet",
+      "paperless",
     ],
   },
   {
-    q: "Does it support multiple companies, locations and departments?",
-    a: "Absolutely. You can set up multiple companies, branches, departments and teams with their own reporting lines. The org chart and approval routes update automatically whenever someone moves or a new team is created.",
-    keys: [
-      "multiple",
-      "company",
-      "companies",
-      "location",
-      "branch",
-      "department",
-      "team",
-      "org chart",
-      "hierarchy",
-      "structure",
-    ],
-  },
-  {
-    q: "Can HR generate letters and manage policies?",
-    a: "Yes. Offer, appointment, confirmation, experience and relieving letters are filled in from the employee record using your templates. You can also publish HR policies and track who has read and accepted them.",
+    q: "Which HR letters can I generate?",
+    a: "Offer, appointment, confirmation, promotion, increment, transfer, relieving and experience letters — plus any custom letter you need. Pick a template and the employee’s name, designation, CTC, joining date and manager fill in automatically from their record, so a letter is ready in about 30 seconds.",
     keys: [
       "letter",
+      "letters",
       "offer",
       "appointment",
-      "experience",
+      "promotion",
+      "increment",
       "relieving",
+      "experience",
+      "confirmation",
+      "transfer",
+      "generate",
+    ],
+  },
+  {
+    q: "Can I use my own templates and company letterhead?",
+    a: "Yes. Upload your existing Word templates or start from ours, add your logo, letterhead and authorised signatory, and insert fields like employee name, designation and CTC. Every template keeps a version history, so letters always follow your latest format.",
+    keys: [
       "template",
+      "templates",
+      "letterhead",
+      "logo",
+      "format",
+      "customise",
+      "customize",
+      "word",
+      "branding",
+      "own",
+    ],
+  },
+  {
+    q: "Are e-signatures legally valid in India?",
+    a: "Electronic signatures are recognised under India’s Information Technology Act, 2000, and are widely used for offer and appointment letters. NGriffinPay verifies each signer with an OTP and records the time, IP address and device in a tamper-evident audit trail. For documents that legally need stamp duty or a physical signature, check with your legal advisor.",
+    keys: [
+      "e-sign",
+      "esign",
+      "signature",
+      "signatures",
+      "signing",
+      "legal",
+      "valid",
+      "otp",
+      "it act",
+      "digital sign",
+    ],
+  },
+  {
+    q: "How do company policies and acknowledgements work?",
+    a: "Publish policies like leave, code of conduct, POSH or work-from-home to everyone or to selected teams. Employees read and accept them in the app, you see live acknowledgement percentages, and reminders go automatically to anyone who hasn’t accepted yet. New joiners get the current policies on day one, and every update is versioned.",
+    keys: [
       "policy",
       "policies",
       "acknowledge",
-      "e-sign",
+      "acknowledgement",
+      "handbook",
+      "posh",
+      "code of conduct",
+      "accept",
+      "compliance",
+      "rules",
     ],
   },
   {
-    q: "Is employee data secure?",
-    a: "Your data is encrypted, and role-based access means employees, managers and HR only see what they are allowed to. Every change to a record is logged with who made it and when, so you always have an audit trail.",
+    q: "Is employee data and documents secure?",
+    a: "Records and documents are encrypted, and role-based access means employees, managers and HR only see what they’re allowed to. Every view, download, signature and change is logged with who did it and when, so you always have a complete audit trail.",
     keys: [
       "secure",
       "security",
@@ -1569,7 +1689,7 @@ const FAQS = [
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about Core HR.";
+  "Hi there! 👋 I'm Griffy. Pick a question or type your own about documents, HR letters, e-signatures or policies.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -1849,9 +1969,6 @@ function CoreHRFaqSection() {
           <h2 id="chq-title" className="chq-title js-faq-reveal">
             Core HR – <span className="chr-grad">FAQs</span>
           </h2>
-          <p className="chq-lead js-faq-reveal">
-            Tap a question — or type your own — and get an instant answer.
-          </p>
 
           <ul className="chq-list">
             {FAQS.map((f, i) => (
@@ -1936,7 +2053,7 @@ function CoreHRFaqSection() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about records, imports or letters…"
+              placeholder="Ask about documents, letters, e-sign or policies…"
               aria-label="Type your question"
               maxLength={160}
             />

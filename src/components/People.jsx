@@ -1,13 +1,13 @@
 // People.jsx
-// NGriffinPay  — Product inner page: "People"
-// (Asset Management · Reward & Recognition · Announcements · Separation)
+// NGriffinPay — Product inner page: "People"
+// (Employee day-to-day: Department Allocation · Designations · Grades & Levels · Holiday Listings · Events)
 // Section 1: Hero banner (live People hub app on the left, content on the right)
 // Section 2: People Wall (polaroid corkboard that changes per tab, GSAP)
 // Section 3: FAQs as a live chat (+ FAQPage schema for SEO)
 // Header & Footer come from App.jsx (your existing site components).
 //
 // Install:  npm i gsap   (already installed — no extra packages needed)
-// NOTE: all wording below is placeholder copy — replace it when the client sends the final content.
+// Styles:   uses the existing People.css — no new classes needed.
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -23,28 +23,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FEATURES = [
   {
-    title: "Asset Management",
-    short: "Assets",
-    desc: "Issue, track and recover laptops, phones and ID cards for every employee.",
-    icon: "laptop",
+    title: "Department Allocation",
+    short: "Departments",
+    desc: "Place every employee in the right department, team, location and reporting line — and move them in a click.",
+    icon: "building",
   },
   {
-    title: "Reward & Recognition",
-    short: "Rewards",
-    desc: "Let anyone give kudos, badges and points that people can redeem.",
-    icon: "award",
+    title: "Designations, Grades & Levels",
+    short: "Grades",
+    desc: "Define your own titles, grade bands and career levels, linked to pay, leave and approval rules.",
+    icon: "layers",
   },
   {
-    title: "Announcements",
-    short: "Announce",
-    desc: "Share company news with the right teams and see who has read it.",
-    icon: "megaphone",
+    title: "Holiday Listings",
+    short: "Holidays",
+    desc: "Publish location-wise holiday calendars with optional holidays, synced to attendance and leave.",
+    icon: "calendar",
   },
   {
-    title: "Separation",
-    short: "Separation",
-    desc: "Run resignations, clearances and exit interviews without chasing anyone.",
-    icon: "door",
+    title: "Events & Celebrations",
+    short: "Events",
+    desc: "Plan company events with RSVPs and reminders, and never miss a birthday or work anniversary.",
+    icon: "party",
   },
 ];
 
@@ -71,26 +71,81 @@ function Icon({ name, size = 14 }) {
     "aria-hidden": true,
   };
   switch (name) {
-    case "laptop":
+    case "building":
       return (
         <svg {...p}>
-          <rect x="4" y="4" width="16" height="11" rx="1.5" />
-          <path d="M2 19h20" />
+          <rect x="4" y="2" width="16" height="20" rx="2" />
+          <path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01" />
         </svg>
       );
-    case "phone":
+    case "layers":
       return (
         <svg {...p}>
-          <rect x="6" y="2" width="12" height="20" rx="3" />
-          <path d="M11 18h2" />
+          <path d="m12 2 10 5-10 5L2 7z" />
+          <path d="m2 12 10 5 10-5M2 17l10 5 10-5" />
         </svg>
       );
-    case "id":
+    case "calendar":
       return (
         <svg {...p}>
-          <rect x="3" y="4" width="18" height="16" rx="2" />
-          <circle cx="9" cy="11" r="2.5" />
-          <path d="M5.5 17a3.5 3.5 0 0 1 7 0M15 9h3M15 13h3" />
+          <rect x="3" y="4" width="18" height="18" rx="2" />
+          <path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
+        </svg>
+      );
+    case "party":
+      return (
+        <svg {...p}>
+          <path d="M5.8 11.3 2 22l10.7-3.8" />
+          <path d="M4 3h.01M22 8h.01M15 2h.01M22 20h.01M22 2l-2.2.7a2.9 2.9 0 0 0-1.9 3.4c.2.8-.4 1.6-1.2 1.6h-.4c-.9 0-1.6.6-1.8 1.4L14 10" />
+          <path d="M11 13c1.9 1.9 2.8 4.2 2 5-.8.8-3.1-.1-5-2s-2.8-4.2-2-5c.8-.8 3.1.1 5 2z" />
+        </svg>
+      );
+    case "briefcase":
+      return (
+        <svg {...p}>
+          <rect x="2" y="7" width="20" height="14" rx="2" />
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20" />
+        </svg>
+      );
+    case "pin":
+      return (
+        <svg {...p}>
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+      );
+    case "user":
+      return (
+        <svg {...p}>
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 21a8 8 0 0 1 16 0" />
+        </svg>
+      );
+    case "pen":
+      return (
+        <svg {...p}>
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+      );
+    case "code":
+      return (
+        <svg {...p}>
+          <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+        </svg>
+      );
+    case "wallet":
+      return (
+        <svg {...p}>
+          <rect x="2" y="6" width="20" height="14" rx="2" />
+          <path d="M16 13h.01M2 10h20" />
+        </svg>
+      );
+    case "chart":
+      return (
+        <svg {...p}>
+          <path d="M3 3v18h18" />
+          <path d="M7 15l4-4 3 3 5-6" />
         </svg>
       );
     case "award":
@@ -105,14 +160,6 @@ function Icon({ name, size = 14 }) {
         <svg {...p}>
           <path d="m3 11 18-5v12L3 14v-3z" />
           <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
-        </svg>
-      );
-    case "door":
-      return (
-        <svg {...p}>
-          <path d="M13 4h5a2 2 0 0 1 2 2v14M4 20h16" />
-          <path d="M13 4 6 6v14h7z" />
-          <path d="M10 12v.01" />
         </svg>
       );
     case "cake":
@@ -146,13 +193,6 @@ function Icon({ name, size = 14 }) {
         <svg {...p}>
           <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
           <circle cx="12" cy="12" r="3" />
-        </svg>
-      );
-    case "file":
-      return (
-        <svg {...p}>
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <path d="M14 2v6h6M8 13h8M8 17h5" />
         </svg>
       );
     case "clock":
@@ -238,23 +278,28 @@ function usePanel(build, delay) {
   return ref;
 }
 
-// 1 — Asset Management: an employee's kit
-const KIT = [
+// 1 — Department Allocation: a new joiner placed in the org
+const ALLOCATION = [
   {
-    name: 'MacBook Pro 14"',
-    tag: "LT-0231",
-    icon: "laptop",
-    state: "Assigned",
+    name: "Design department",
+    sub: "Product UX team · 18 members",
+    icon: "building",
+    state: "Allocated",
   },
   {
-    name: "iPhone 13 (office)",
-    tag: "PH-0055",
-    icon: "phone",
-    state: "Assigned",
+    name: "Whitefield office",
+    sub: "Bengaluru · Floor 3 · Cost centre BLR-02",
+    icon: "pin",
+    state: "Mapped",
   },
-  { name: "Access ID card", tag: "ID-1093", icon: "id", state: "Assigned" },
+  {
+    name: "Reports to Rahul M.",
+    sub: "Leave & attendance approvals routed",
+    icon: "user",
+    state: "Linked",
+  },
 ];
-function AssetsPanel({ delay }) {
+function DepartmentPanel({ delay }) {
   const ref = usePanel((tl, q) => {
     tl.from(
       q(".pep-kit"),
@@ -272,18 +317,18 @@ function AssetsPanel({ delay }) {
   return (
     <div className="pep-panel" ref={ref}>
       <div className="pep-head js-in">
-        <Icon name="laptop" /> Assets · Sneha R.{" "}
+        <Icon name="building" /> Allocation · Sneha R.{" "}
         <em className="pep-tag">New joiner</em>
       </div>
       <div className="pep-kits">
-        {KIT.map((k) => (
-          <div key={k.tag} className="pep-kit">
+        {ALLOCATION.map((k) => (
+          <div key={k.name} className="pep-kit">
             <span className="pep-kit-ic">
               <Icon name={k.icon} size={14} />
             </span>
             <span className="pep-kit-txt">
               <b>{k.name}</b>
-              <small>{k.tag} · Condition: New</small>
+              <small>{k.sub}</small>
             </span>
             <span className="pep-kit-ok">
               <Icon name="check" size={9} /> {k.state}
@@ -296,22 +341,25 @@ function AssetsPanel({ delay }) {
           <Icon name="check" size={13} />
         </span>
         <div>
-          <b>Kit acknowledged by Sneha</b>
-          <small>Digital sign-off · IT notified · return tracked at exit</small>
+          <b>Approved by Deepa N. (HR)</b>
+          <small>
+            Org chart, approval flow and payroll cost centre updated
+          </small>
         </div>
       </div>
     </div>
   );
 }
 
-// 2 — Reward & Recognition: kudos post + leaderboard
-const LEADERS = [
-  { av: "KV", name: "Karthik V.", pts: 2400 },
-  { av: "AR", name: "Anita R.", pts: 1950 },
-  { av: "PS", name: "Priya S.", pts: 1620 },
+// 2 — Designations, Grades & Levels: a promotion + grade bands
+const GRADE_BANDS = [
+  { code: "G6", name: "Leadership", n: 14 },
+  { code: "G5", name: "Senior", n: 52 },
+  { code: "G4", name: "Associate", n: 96 },
 ];
-function RewardsPanel({ delay }) {
-  const ptsRef = useRef(null);
+const GRADE_MAX = 96;
+function GradesPanel({ delay }) {
+  const pctRef = useRef(null);
   const ref = usePanel((tl, q) => {
     tl.from(
       q(".pep-badge"),
@@ -336,11 +384,11 @@ function RewardsPanel({ delay }) {
     tl.to(
       st,
       {
-        v: 500,
+        v: 18,
         duration: 0.9,
         ease: "power2.out",
         onUpdate: () =>
-          ptsRef.current && (ptsRef.current.textContent = Math.round(st.v)),
+          pctRef.current && (pctRef.current.textContent = Math.round(st.v)),
       },
       0.8,
     );
@@ -348,7 +396,11 @@ function RewardsPanel({ delay }) {
       tl.fromTo(
         el,
         { scaleX: 0 },
-        { scaleX: LEADERS[i].pts / 2400, duration: 0.7, ease: "power3.out" },
+        {
+          scaleX: GRADE_BANDS[i].n / GRADE_MAX,
+          duration: 0.7,
+          ease: "power3.out",
+        },
         1.3 + i * 0.1,
       ),
     );
@@ -357,17 +409,15 @@ function RewardsPanel({ delay }) {
   return (
     <div className="pep-panel" ref={ref}>
       <div className="pep-head js-in">
-        <Icon name="award" /> Recognition wall{" "}
-        <em className="pep-tag">This month</em>
+        <Icon name="layers" /> Designation change{" "}
+        <em className="pep-tag">Effective 1 Apr</em>
       </div>
       <div className="pep-kudos js-in">
         <div className="pep-kudos-top">
-          <span className="pep-av b">AR</span>
+          <span className="pep-av b">KV</span>
           <span>
-            <b>Anita R.</b> recognised <b>Karthik V.</b>
-            <small>
-              “Shipped the attendance report a day early. Superstar!”
-            </small>
+            <b>Karthik V.</b> is now <b>Tech Lead</b>
+            <small>Senior Developer → Tech Lead · Engineering</small>
           </span>
         </div>
         <div className="pep-kudos-foot">
@@ -378,25 +428,25 @@ function RewardsPanel({ delay }) {
               ))}
             </span>
             <span className="pep-badge">
-              <Icon name="star" size={13} /> Star Performer
+              <Icon name="star" size={13} /> Grade G5 · Level 3
             </span>
           </span>
           <span className="pep-pts">
-            +<b ref={ptsRef}>0</b> points
+            +<b ref={pctRef}>0</b>% pay band
           </span>
         </div>
       </div>
-      <small className="pep-sub js-in">Leaderboard</small>
+      <small className="pep-sub js-in">Grade bands · headcount</small>
       <div className="pep-lb">
-        {LEADERS.map((l, i) => (
-          <div key={l.av} className="pep-lb-row js-in">
+        {GRADE_BANDS.map((g, i) => (
+          <div key={g.code} className="pep-lb-row js-in">
             <em>{i + 1}</em>
-            <span className={`pep-av sm ${["b", "c", "a"][i]}`}>{l.av}</span>
-            <span className="pep-lb-name">{l.name}</span>
+            <span className={`pep-av sm ${["b", "c", "a"][i]}`}>{g.code}</span>
+            <span className="pep-lb-name">{g.name}</span>
             <span className="pep-lb-bar">
               <i />
             </span>
-            <b>{l.pts.toLocaleString("en-IN")}</b>
+            <b>{g.n}</b>
           </div>
         ))}
       </div>
@@ -404,121 +454,15 @@ function RewardsPanel({ delay }) {
   );
 }
 
-// 3 — Announcements: compose, publish, read receipts
-const ANN_TITLE = "Diwali celebration · Friday 4 PM";
-function AnnouncePanel({ delay }) {
-  const titleRef = useRef(null);
-  const readRef = useRef(null);
-  const ref = usePanel((tl, q) => {
-    const st = { n: 0 };
-    tl.to(
-      st,
-      {
-        n: ANN_TITLE.length,
-        duration: 1.1,
-        ease: "none",
-        onUpdate: () =>
-          titleRef.current &&
-          (titleRef.current.textContent = ANN_TITLE.slice(0, Math.round(st.n))),
-      },
-      0.4,
-    );
-    tl.from(
-      q(".pep-chip"),
-      {
-        scale: 0.6,
-        autoAlpha: 0,
-        stagger: 0.1,
-        duration: 0.3,
-        ease: "back.out(2)",
-      },
-      1.2,
-    );
-    tl.to(
-      q(".pep-publish"),
-      { scale: 0.93, duration: 0.12, yoyo: true, repeat: 1 },
-      1.7,
-    );
-    tl.call(() => q(".pep-publish")[0]?.classList.add("is-sent"), null, 1.9);
-    const r = { v: 0 };
-    tl.to(
-      r,
-      {
-        v: 212,
-        duration: 1.2,
-        ease: "power2.out",
-        onUpdate: () =>
-          readRef.current && (readRef.current.textContent = Math.round(r.v)),
-      },
-      2,
-    );
-    tl.fromTo(
-      q(".pep-read-bar i"),
-      { scaleX: 0 },
-      { scaleX: 212 / 248, duration: 1.2, ease: "power2.out" },
-      2,
-    );
-    tl.from(
-      q(".pep-react span"),
-      { y: 10, autoAlpha: 0, stagger: 0.1, duration: 0.3, ease: "back.out(2)" },
-      2.4,
-    );
-  }, delay);
-
-  return (
-    <div className="pep-panel" ref={ref}>
-      <div className="pep-head js-in">
-        <Icon name="megaphone" /> New announcement
-      </div>
-      <div className="pep-compose js-in">
-        <small>Title</small>
-        <b>
-          <span ref={titleRef} />
-          <i className="pep-caret" />
-        </b>
-        <div className="pep-chips">
-          <span className="pep-chip">
-            <Icon name="users" size={10} /> All employees · 248
-          </span>
-          <span className="pep-chip">App + email</span>
-          <span className="pep-chip">Pin for 3 days</span>
-        </div>
-        <span className="pep-publish">
-          <span className="a">
-            <Icon name="send" size={11} /> Publish
-          </span>
-          <span className="b">
-            <Icon name="check" size={11} /> Published
-          </span>
-        </span>
-      </div>
-      <div className="pep-read js-in">
-        <span>
-          <Icon name="eye" size={12} /> Read by <b ref={readRef}>0</b> / 248
-        </span>
-        <span className="pep-read-bar">
-          <i />
-        </span>
-      </div>
-      <div className="pep-react">
-        <span>🎉 86</span>
-        <span>🪔 54</span>
-        <span>❤️ 31</span>
-        <span>👏 22</span>
-      </div>
-    </div>
-  );
-}
-
-// 4 — Separation: exit checklist
-const EXIT_STEPS = [
-  "Resignation accepted",
-  "Handover to Rahul M.",
-  "Assets returned",
-  "Finance & IT clearance",
-  "F&F and relieving letter",
+// 3 — Holiday Listings: location-wise calendar, synced everywhere
+const HOLIDAYS = [
+  "26 Jan · Republic Day",
+  "1 May · May Day",
+  "15 Aug · Independence Day",
+  "2 Oct · Gandhi Jayanti",
+  "1 Nov · Kannada Rajyotsava",
 ];
-function SeparationPanel({ delay }) {
+function HolidayPanel({ delay }) {
   const pctRef = useRef(null);
   const ref = usePanel((tl, q) => {
     q(".pep-step").forEach((el, i) =>
@@ -548,8 +492,8 @@ function SeparationPanel({ delay }) {
   return (
     <div className="pep-panel" ref={ref}>
       <div className="pep-head js-in">
-        <Icon name="door" /> Exit · Vikram P.{" "}
-        <em className="pep-tag">Last day 31 Oct</em>
+        <Icon name="calendar" /> Holiday list 2026 · Whitefield{" "}
+        <em className="pep-tag">Karnataka</em>
       </div>
       <div className="pep-exit js-in">
         <span className="pep-exit-bar">
@@ -560,7 +504,7 @@ function SeparationPanel({ delay }) {
         </b>
       </div>
       <ul className="pep-steps">
-        {EXIT_STEPS.map((s) => (
+        {HOLIDAYS.map((s) => (
           <li key={s} className="pep-step">
             <i>
               <Icon name="check" size={9} />
@@ -571,18 +515,127 @@ function SeparationPanel({ delay }) {
       </ul>
       <div className="pep-farewell">
         <span className="pep-farewell-ic">
-          <Icon name="heart" size={13} />
+          <Icon name="calendar" size={13} />
         </span>
         <div>
-          <b>Farewell card signed by 34 colleagues</b>
-          <small>Exit interview done · alumni network invite sent</small>
+          <b>Synced to 248 employee calendars</b>
+          <small>+ 2 optional holidays · attendance & leave skip them</small>
         </div>
       </div>
     </div>
   );
 }
 
-const PANELS = [AssetsPanel, RewardsPanel, AnnouncePanel, SeparationPanel];
+// 4 — Events: create, publish, RSVPs
+const EVENT_TITLE = "Annual Day 2026 · Sat 12 Dec";
+function EventsPanel({ delay }) {
+  const titleRef = useRef(null);
+  const rsvpRef = useRef(null);
+  const ref = usePanel((tl, q) => {
+    const st = { n: 0 };
+    tl.to(
+      st,
+      {
+        n: EVENT_TITLE.length,
+        duration: 1.1,
+        ease: "none",
+        onUpdate: () =>
+          titleRef.current &&
+          (titleRef.current.textContent = EVENT_TITLE.slice(
+            0,
+            Math.round(st.n),
+          )),
+      },
+      0.4,
+    );
+    tl.from(
+      q(".pep-chip"),
+      {
+        scale: 0.6,
+        autoAlpha: 0,
+        stagger: 0.1,
+        duration: 0.3,
+        ease: "back.out(2)",
+      },
+      1.2,
+    );
+    tl.to(
+      q(".pep-publish"),
+      { scale: 0.93, duration: 0.12, yoyo: true, repeat: 1 },
+      1.7,
+    );
+    tl.call(() => q(".pep-publish")[0]?.classList.add("is-sent"), null, 1.9);
+    const r = { v: 0 };
+    tl.to(
+      r,
+      {
+        v: 186,
+        duration: 1.2,
+        ease: "power2.out",
+        onUpdate: () =>
+          rsvpRef.current && (rsvpRef.current.textContent = Math.round(r.v)),
+      },
+      2,
+    );
+    tl.fromTo(
+      q(".pep-read-bar i"),
+      { scaleX: 0 },
+      { scaleX: 186 / 248, duration: 1.2, ease: "power2.out" },
+      2,
+    );
+    tl.from(
+      q(".pep-react span"),
+      { y: 10, autoAlpha: 0, stagger: 0.1, duration: 0.3, ease: "back.out(2)" },
+      2.4,
+    );
+  }, delay);
+
+  return (
+    <div className="pep-panel" ref={ref}>
+      <div className="pep-head js-in">
+        <Icon name="party" /> New event
+      </div>
+      <div className="pep-compose js-in">
+        <small>Event</small>
+        <b>
+          <span ref={titleRef} />
+          <i className="pep-caret" />
+        </b>
+        <div className="pep-chips">
+          <span className="pep-chip">
+            <Icon name="users" size={10} /> All employees · 248
+          </span>
+          <span className="pep-chip">RSVP on</span>
+          <span className="pep-chip">Calendar invite</span>
+        </div>
+        <span className="pep-publish">
+          <span className="a">
+            <Icon name="send" size={11} /> Publish
+          </span>
+          <span className="b">
+            <Icon name="check" size={11} /> Published
+          </span>
+        </span>
+      </div>
+      <div className="pep-read js-in">
+        <span>
+          <Icon name="check" size={12} /> Going <b ref={rsvpRef}>0</b> / 248
+        </span>
+        <span className="pep-read-bar">
+          <i />
+        </span>
+      </div>
+      <div className="pep-react">
+        <span>✅ 186</span>
+        <span>🤔 24</span>
+        <span>🎉 92</span>
+        <span>🍽️ 140</span>
+      </div>
+    </div>
+  );
+}
+
+const PANELS = [DepartmentPanel, GradesPanel, HolidayPanel, EventsPanel];
 
 /* ------------------------------------------------------------------ */
 /* People hub app (left side)                                          */
@@ -592,8 +645,8 @@ const PULSE_R = 30;
 const PULSE_C = 2 * Math.PI * PULSE_R;
 const TODAY = [
   { icon: "cake", text: "Priya S. · Birthday" },
-  { icon: "award", text: "Rahul M. · 5 years" },
-  { icon: "gift", text: "Sneha R. · Joins Mon" },
+  { icon: "party", text: "Annual Day · 12 Dec" },
+  { icon: "calendar", text: "Christmas · 25 Dec" },
 ];
 
 function PeopleApp({ frameRef, stage, onSelect }) {
@@ -604,11 +657,11 @@ function PeopleApp({ frameRef, stage, onSelect }) {
   const first = useRef(true);
   const startDelay = first.current ? 1.3 : 0.2;
 
-  // engagement ring counts up once
+  // allocation ring counts up once
   useEffect(() => {
     const st = { v: 0 };
     const tw = gsap.to(st, {
-      v: 82,
+      v: 98,
       duration: prefersReduced() ? 0 : 1.6,
       delay: 0.9,
       ease: "power2.out",
@@ -674,11 +727,11 @@ function PeopleApp({ frameRef, stage, onSelect }) {
 
       <div className="pep-topbar js-top">
         <span className="pep-logo">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
+          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
         </span>
         <b>Admin</b>
         <span className="pep-search">
-          <Icon name="search" size={12} /> Search people, assets or posts…
+          <Icon name="search" size={12} /> Search people, departments or events…
         </span>
         <span className="pep-av sm a">PR</span>
       </div>
@@ -710,7 +763,7 @@ function PeopleApp({ frameRef, stage, onSelect }) {
         </div>
 
         <aside className="pep-side js-side">
-          <small className="pep-side-lbl">Team pulse</small>
+          <small className="pep-side-lbl">Org health</small>
           <div className="pep-ring">
             <svg viewBox="0 0 72 72" aria-hidden>
               <circle cx="36" cy="36" r={PULSE_R} className="pep-ring-bg" />
@@ -726,12 +779,12 @@ function PeopleApp({ frameRef, stage, onSelect }) {
             </svg>
             <span>
               <b>
-                <span ref={scoreRef}>0</span>
+                <span ref={scoreRef}>0</span>%
               </b>
-              <small>engagement</small>
+              <small>allocated</small>
             </span>
           </div>
-          <small className="pep-side-lbl">Today</small>
+          <small className="pep-side-lbl">Coming up</small>
           <div className="pep-today">
             {TODAY.map((t) => (
               <span key={t.text}>
@@ -908,15 +961,11 @@ function HeroSection() {
         {/* RIGHT: content (first in DOM for SEO) */}
         <div className="pep-content">
           <span className="pep-eyebrow js-reveal">
-            <span className="pep-live-dot" /> From first laptop to farewell
+            <span className="pep-live-dot" /> Everyday people operations, sorted
           </span>
           <h1 id="pep-hero-title" className="pep-title js-reveal">
             <span className="pep-grad">People</span>
           </h1>
-          <p className="pep-lead js-reveal">
-            Equip, recognise and keep every employee in the loop — and when it’s
-            time to say goodbye, do it the right way.
-          </p>
 
           <ul className="pep-feats" role="tablist" aria-label="People features">
             {FEATURES.map((f, i) => (
@@ -961,20 +1010,20 @@ function HeroSection() {
           <PeopleApp frameRef={frameRef} stage={stage} onSelect={setStage} />
           <div className="pep-float f1 js-float">
             <span className="pep-float-ic ok">
-              <Icon name="star" size={14} />
+              <Icon name="building" size={14} />
             </span>
             <div>
-              <strong>1,240 kudos this year</strong>
-              <small>Recognition that’s seen by all</small>
+              <strong>12 departments · 6 grades</strong>
+              <small>Org structure always up to date</small>
             </div>
           </div>
           <div className="pep-float f2 js-float">
             <span className="pep-float-ic pr">
-              <Icon name="megaphone" size={14} />
+              <Icon name="calendar" size={14} />
             </span>
             <div>
-              <strong>85% read in 1 hour</strong>
-              <small>Announcements that land</small>
+              <strong>Holiday lists for 3 locations</strong>
+              <small>Synced to every calendar</small>
             </div>
           </div>
         </div>
@@ -982,115 +1031,180 @@ function HeroSection() {
     </section>
   );
 }
+
 /* ------------------------------------------------------------------ */
 /* SECTION 2 — People Wall (polaroid corkboard, changes per tab)       */
 /* ------------------------------------------------------------------ */
 
 const WALL_HEADING = [
-  ["Equip,", true],
-  ["celebrate", true],
+  ["Organise", true],
+  ["every"],
+  ["team,"],
+  ["title"],
   ["and"],
-  ["connect", true],
-  ["your"],
-  ["people"],
+  ["grade", true],
   ["—"],
-  ["from"],
-  ["first"],
-  ["day"],
-  ["to"],
-  ["farewell", true],
+  ["and"],
+  ["keep"],
+  ["everyone’s"],
+  ["calendar", true],
+  ["in"],
+  ["sync", true],
 ];
 
+// dept = icon shown on the Department tab · lvl = career level shown on the Grades tab
 const WALL_PEOPLE = [
-  { av: "PS", name: "Priya S.", role: "Design", tone: "a", asset: "laptop" },
+  {
+    av: "PS",
+    name: "Priya S.",
+    role: "Design",
+    tone: "a",
+    dept: "pen",
+    lvl: "L2",
+  },
   {
     av: "KV",
     name: "Karthik V.",
     role: "Engineering",
     tone: "b",
-    asset: "laptop",
+    dept: "code",
+    lvl: "L3",
   },
-  { av: "AR", name: "Anita R.", role: "Finance", tone: "c", asset: "phone" },
-  { av: "RM", name: "Rahul M.", role: "Sales", tone: "d", asset: "phone" },
-  { av: "DN", name: "Deepa N.", role: "HR", tone: "e", asset: "id" },
-  { av: "SR", name: "Sneha R.", role: "Design", tone: "a", asset: "laptop" },
+  {
+    av: "AR",
+    name: "Anita R.",
+    role: "Finance",
+    tone: "c",
+    dept: "wallet",
+    lvl: "L4",
+  },
+  {
+    av: "RM",
+    name: "Rahul M.",
+    role: "Sales",
+    tone: "d",
+    dept: "chart",
+    lvl: "L3",
+  },
+  {
+    av: "DN",
+    name: "Deepa N.",
+    role: "HR",
+    tone: "e",
+    dept: "users",
+    lvl: "L2",
+  },
+  {
+    av: "SR",
+    name: "Sneha R.",
+    role: "Design",
+    tone: "a",
+    dept: "pen",
+    lvl: "L1",
+  },
   {
     av: "VP",
     name: "Vikram P.",
     role: "Operations",
     tone: "d",
-    asset: "laptop",
+    dept: "briefcase",
+    lvl: "L3",
   },
-  { av: "MK", name: "Meera K.", role: "Marketing", tone: "c", asset: "phone" },
+  {
+    av: "MK",
+    name: "Meera K.",
+    role: "Marketing",
+    tone: "c",
+    dept: "megaphone",
+    lvl: "L2",
+  },
   {
     av: "AJ",
     name: "Arjun J.",
     role: "Engineering",
     tone: "b",
-    asset: "laptop",
+    dept: "code",
+    lvl: "L1",
   },
-  { av: "NS", name: "Neha S.", role: "Support", tone: "e", asset: "id" },
-  { av: "RT", name: "Rohit T.", role: "Sales", tone: "d", asset: "phone" },
-  { av: "IK", name: "Isha K.", role: "Finance", tone: "a", asset: "laptop" },
+  {
+    av: "NS",
+    name: "Neha S.",
+    role: "Support",
+    tone: "e",
+    dept: "smile",
+    lvl: "L1",
+  },
+  {
+    av: "RT",
+    name: "Rohit T.",
+    role: "Sales",
+    tone: "d",
+    dept: "chart",
+    lvl: "L2",
+  },
+  {
+    av: "IK",
+    name: "Isha K.",
+    role: "Finance",
+    tone: "a",
+    dept: "wallet",
+    lvl: "L2",
+  },
 ];
-const STAR = 1; // Karthik gets recognised
-const LEAVER = 6; // Vikram leaves
+const STAR = 1; // Karthik gets the new designation
 const MILESTONES = { 0: "cake", 3: "award", 9: "cake", 5: "gift" };
 
 const WALL_TABS = [
   {
-    label: "Asset Management",
-    icon: "laptop",
-    title: [["Equip", true], ["every employee"], ["from day one", true]],
-    desc: "Laptops, phones and ID cards are issued against each person, tracked through repairs and recovered automatically at exit.",
+    label: "Department Allocation",
+    icon: "building",
+    title: [["Put", true], ["every employee"], ["in the right team", true]],
+
     stats: [
-      ["384", "assets tracked"],
-      ["2 min", "to issue a full kit"],
-      ["0", "assets lost at exit"],
+      ["12", "departments · 3 locations"],
+      ["1 click", "to transfer an employee"],
+      ["100%", "allocation history kept"],
     ],
   },
   {
-    label: "Reward & Recognition",
-    icon: "award",
-    title: [["Celebrate", true], ["great work,"], ["publicly", true]],
-    desc: "Anyone can give kudos, badges and points. Recognition shows up on the company wall and points can be redeemed for rewards.",
+    label: "Designations, Grades & Levels",
+    icon: "layers",
+    title: [["Build", true], ["a clear"], ["career ladder", true]],
     stats: [
-      ["1,240", "kudos given this year"],
-      ["9", "badges to award"],
-      ["500", "points per Star Performer"],
+      ["40+", "designations supported"],
+      ["6", "grade bands · 4 levels"],
+      ["0", "manual rule updates on promotion"],
     ],
   },
   {
-    label: "Announcements",
-    icon: "megaphone",
-    title: [["Reach", true], ["every employee"], ["instantly", true]],
-    desc: "Post news to the whole company or just one team or location, send it by app and email, and see exactly who has read it.",
+    label: "Holiday Listings",
+    icon: "calendar",
+    title: [["One", true], ["holiday calendar"], ["per location", true]],
     stats: [
-      ["212 / 248", "read within an hour"],
-      ["App + email", "delivered together"],
+      ["3", "location-wise holiday lists"],
+      ["2", "optional holidays per employee"],
+      ["248", "calendars synced"],
+    ],
+  },
+  {
+    label: "Events",
+    icon: "party",
+    title: [["Plan", true], ["company events"], ["people show up to", true]],
+    stats: [
+      ["186 / 248", "RSVPs for Annual Day"],
+      ["Auto", "calendar invites & reminders"],
       ["By team", "or location targeting"],
     ],
   },
   {
-    label: "Separation",
-    icon: "door",
-    title: [["Say", true], ["goodbye"], ["the right way", true]],
-    desc: "Resignations, handovers, clearances and exit interviews run on one checklist — with F&F and relieving letters at the end.",
-    stats: [
-      ["4", "departments cleared automatically"],
-      ["48 hrs", "to full & final settlement"],
-      ["100%", "exit interviews recorded"],
-    ],
-  },
-  {
-    label: "Milestones",
+    label: "Birthdays & Anniversaries",
     icon: "cake",
     title: [
       ["Never miss", true],
       ["a birthday or"],
       ["work anniversary", true],
     ],
-    desc: "Birthdays, work anniversaries and new joiners are surfaced every morning, with wishes sent automatically on the day.",
+
     stats: [
       ["2", "birthdays today"],
       ["1", "five-year anniversary"],
@@ -1366,7 +1480,6 @@ function PeopleWallSection() {
 
   const stateOf = (i) => {
     if (active === 1) return i === STAR ? "is-star" : "is-dim";
-    if (active === 3) return i === LEAVER ? "is-leaving" : "";
     if (active === 4) return MILESTONES[i] ? "is-mile" : "is-dim";
     return "";
   };
@@ -1436,8 +1549,16 @@ function PeopleWallSection() {
                   <small>{p.role}</small>
 
                   {active === 0 && (
-                    <span className="pp2-tagchip">
-                      <Icon name={p.asset} size={11} />
+                    <span className="pp2-tagchip" title={p.role}>
+                      <Icon name={p.dept} size={11} />
+                    </span>
+                  )}
+                  {active === 1 && i !== STAR && (
+                    <span
+                      className="pp2-tagchip"
+                      style={{ fontSize: 9, fontWeight: 700 }}
+                    >
+                      {p.lvl}
                     </span>
                   )}
                   {active === 1 && i === STAR && (
@@ -1452,7 +1573,7 @@ function PeopleWallSection() {
                       </span>
                     </>
                   )}
-                  {active === 2 && i !== LEAVER && i % 5 !== 4 && (
+                  {active === 2 && i % 5 !== 4 && (
                     <span className="pp2-seen">
                       <Icon name="check" size={9} />
                     </span>
@@ -1467,10 +1588,10 @@ function PeopleWallSection() {
 
               {active === 1 && (
                 <div className="pp2-kudo">
-                  <span className="pep-av sm c">AR</span>
+                  <span className="pep-av sm b">KV</span>
                   <span>
-                    <b>Anita → Karthik</b>
-                    <small>“Shipped the report a day early!” · +500 pts</small>
+                    <b>Karthik V. → Tech Lead</b>
+                    <small>Grade G5 · Level 3 · pay band & leave updated</small>
                   </span>
                 </div>
               )}
@@ -1478,24 +1599,24 @@ function PeopleWallSection() {
                 <div className="pp2-notice">
                   <span className="pp2-notice-pin" />
                   <small>
-                    <Icon name="megaphone" size={11} /> Announcement
+                    <Icon name="calendar" size={11} /> Next holiday
                   </small>
-                  <b>Diwali celebration 🪔</b>
-                  <span>Friday, 4 PM · Cafeteria</span>
+                  <b>Christmas 🎄</b>
+                  <span>Friday, 25 Dec · Office closed</span>
                   <em>
-                    <Icon name="eye" size={11} /> Read by 212 of 248
+                    <Icon name="check" size={11} /> On 248 calendars
                   </em>
                 </div>
               )}
               {active === 3 && (
                 <div className="pp2-farewell">
-                  <small>Farewell · Vikram P.</small>
-                  <b>Thank you for 4 great years 💙</b>
+                  <small>Event · Sat 12 Dec</small>
+                  <b>Annual Day 2026 🎉</b>
                   {[
-                    "Handover done",
-                    "Laptop & ID returned",
-                    "F&F processed",
-                    "Relieving letter sent",
+                    "Invite sent to 248",
+                    "186 RSVPs · meal choices in",
+                    "Calendar invite added",
+                    "Reminder 1 day before",
                   ].map((c) => (
                     <span key={c} className="pp2-fw-check">
                       <Icon name="check" size={10} /> {c}
@@ -1572,8 +1693,8 @@ function PeopleWallSection() {
 
 const FAQS = [
   {
-    q: "What does the People module in NGriffinPay  include?",
-    a: "People brings together four everyday HR jobs: asset management, reward & recognition, company announcements and employee separation — all linked to the same employee record, so nothing is tracked twice.",
+    q: "What does the People module in NGriffinPay include?",
+    a: "People covers the day-to-day side of HR: department allocation, designations, grades and levels, location-wise holiday listings, and company events, birthdays and work anniversaries — all linked to the same employee record, so nothing is maintained twice.",
     keys: [
       "what is",
       "what does",
@@ -1587,71 +1708,101 @@ const FAQS = [
     ],
   },
   {
-    q: "How are company assets tracked and recovered?",
-    a: "Every laptop, phone or ID card is issued against an employee with a digital acknowledgement. You can see who has what, its condition and service history — and at exit, pending assets are added to the clearance checklist automatically.",
+    q: "How does department allocation work?",
+    a: "Assign each employee to a department, sub-team, location, cost centre and reporting manager — individually or in bulk from Excel. When someone moves, the org chart, approval routes and payroll costing update automatically, and the full transfer history is kept on their profile.",
     keys: [
-      "asset",
-      "laptop",
-      "phone",
-      "id card",
-      "equipment",
-      "device",
-      "recover",
-      "return",
-      "track",
-    ],
-  },
-  {
-    q: "How does reward and recognition work?",
-    a: "Managers and colleagues can give kudos, badges and points from the web or mobile app. Recognition appears on the company wall, and points can be redeemed for rewards set up by HR.",
-    keys: [
-      "reward",
-      "recognition",
-      "kudos",
-      "badge",
-      "points",
-      "appreciate",
-      "award",
-      "redeem",
-      "r&r",
-    ],
-  },
-  {
-    q: "Can announcements be sent to specific teams or locations?",
-    a: "Yes. Post to the whole company or target a department, team or office location. Announcements go out on the app and by email, can be pinned, and you can see who has read them.",
-    keys: [
-      "announcement",
-      "announce",
-      "news",
-      "notice",
-      "circular",
+      "department",
+      "allocation",
+      "allocate",
       "team",
-      "location",
-      "broadcast",
-      "read",
+      "transfer",
+      "move",
+      "cost centre",
+      "cost center",
+      "reporting",
+      "manager",
+      "org chart",
     ],
   },
   {
-    q: "How is employee separation handled?",
-    a: "When a resignation is accepted, a separation checklist starts: notice period, handover, department clearances, asset return and exit interview. Once cleared, full & final settlement and relieving letters are generated.",
+    q: "Can we set up our own designations, grades and levels?",
+    a: "Yes. Create any designations you use, group them into grade bands and career levels, and link each grade to salary ranges, leave entitlements, reimbursement limits and approval rights. When an employee is promoted, everything tied to their grade updates with it.",
     keys: [
-      "separation",
-      "exit",
-      "resign",
-      "resignation",
-      "leaving",
-      "clearance",
-      "notice",
-      "relieving",
-      "full and final",
-      "f&f",
-      "offboarding",
+      "designation",
+      "title",
+      "grade",
+      "grades",
+      "level",
+      "levels",
+      "band",
+      "career",
+      "promotion",
+      "hierarchy",
+    ],
+  },
+  {
+    q: "Can different offices have different holiday lists?",
+    a: "Yes. Create a separate holiday list for each location or state — for example Karnataka for Bengaluru and Maharashtra for Pune — and add optional or restricted holidays that employees can choose from. Holidays appear in every employee’s app and calendar, and attendance and leave calculations skip them automatically.",
+    keys: [
+      "holiday",
+      "holidays",
+      "calendar",
+      "festival",
+      "optional",
+      "restricted",
+      "location",
+      "state",
+      "office",
+      "public holiday",
+    ],
+  },
+  {
+    q: "How are company events managed?",
+    a: "Create town halls, trainings, team outings or annual days for the whole company or selected teams and locations. Employees get a calendar invite and reminders, can RSVP and share meal preferences from the app, and HR sees live attendance numbers.",
+    keys: [
+      "event",
+      "events",
+      "rsvp",
+      "town hall",
+      "outing",
+      "annual day",
+      "celebration",
+      "invite",
+      "training",
+      "party",
+    ],
+  },
+  {
+    q: "Are birthdays and work anniversaries celebrated automatically?",
+    a: "Yes. Upcoming birthdays, work anniversaries and new joiners show on the dashboard every morning, and wishes go out automatically on the day — so no milestone slips through the cracks.",
+    keys: [
+      "birthday",
+      "anniversary",
+      "anniversaries",
+      "milestone",
+      "wish",
+      "wishes",
+      "new joiner",
+    ],
+  },
+  {
+    q: "Can employees see this on their phone?",
+    a: "Yes. From the NGriffinPay employee app, staff can see their department, designation, grade and manager, check the holiday list for their location, pick optional holidays, and RSVP to company events.",
+    keys: [
+      "mobile",
+      "phone",
+      "app",
+      "employee self",
+      "self service",
+      "self-service",
+      "android",
+      "ios",
     ],
   },
 ];
 
 const FAQ_GREETING =
-  "Hi there! 👋 I'm the Griffy. Pick a question or type your own about assets, rewards, announcements or separation.";
+  "Hi there! 👋 I'm Griffy. Pick a question or type your own about departments, grades, holidays or events.";
 const FAQ_FALLBACK =
   "That's a great question! I don't have a ready answer for it here, but our team can walk you through it in a quick live demo.";
 
@@ -1931,9 +2082,6 @@ function PeopleFaqSection() {
           <h2 id="peq-title" className="peq-title js-faq-reveal">
             People – <span className="pep-grad">FAQs</span>
           </h2>
-          <p className="peq-lead js-faq-reveal">
-            Tap a question — or type your own — and get an instant answer.
-          </p>
 
           <ul className="peq-list">
             {FAQS.map((f, i) => (
@@ -2018,7 +2166,7 @@ function PeopleFaqSection() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about assets, kudos or exits…"
+              placeholder="Ask about departments, grades, holidays or events…"
               aria-label="Type your question"
               maxLength={160}
             />

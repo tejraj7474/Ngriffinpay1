@@ -231,7 +231,7 @@
 }
 .pep-ctas {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 12px;
 }
 .pep-btn {
@@ -241,7 +241,7 @@
   padding: 14px 24px;
   border-radius: 12px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 12px;
   text-decoration: none;
   transition:
     transform 0.25s,

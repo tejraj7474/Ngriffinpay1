@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 const LAST_UPDATED = "June 17, 2025";
 const CONTACT_EMAIL = "sales@ngriffin.in";
 const CONTACT_PHONE = "+91 9901540666";
-const GRIEVANCE_EMAIL = "Support@ngriffin.in";
+const GRIEVANCE_EMAIL = "support@ngriffin.in";
 
 const INTRO =
   "At Ngriffin, we recognize the significance of privacy to our customers, and we are dedicated to safeguarding their personal information. This Privacy Policy elucidates the categories of personal information we gather, our methods of utilization and safeguarding of that information, and the options our customers have concerning the utilization of their personal information.";
