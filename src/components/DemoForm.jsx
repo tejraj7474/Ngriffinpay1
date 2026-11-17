@@ -213,7 +213,7 @@ const DemoForm = ({ onSuccess, endpoint = "/api/demo-popup" }) => {
           </>
         ) : (
           <>
-            Book My 10-min Demo <span className="df__arrow">→</span>
+            Book My 30-min Demo <span className="df__arrow">→</span>
           </>
         )}
       </button>

@@ -4,35 +4,64 @@ import "./HrmsDemoCTA.css";
 /* ---------------- HRMS icons ---------------- */
 const Icon = {
   payroll: (
-    <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2" /><circle cx="12" cy="12.5" r="2.5" /><path d="M6 10v5M18 10v5" /></svg>
+    <svg viewBox="0 0 24 24">
+      <rect x="2" y="6" width="20" height="13" rx="2" />
+      <circle cx="12" cy="12.5" r="2.5" />
+      <path d="M6 10v5M18 10v5" />
+    </svg>
   ),
   shield: (
-    <svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z" />
+      <path d="M8.5 12l2.5 2.5 4.5-5" />
+    </svg>
   ),
   clock: (
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
   ),
   leave: (
-    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4M9 15l2 2 4-4" /></svg>
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="17" rx="2" />
+      <path d="M3 9h18M8 2v4M16 2v4M9 15l2 2 4-4" />
+    </svg>
   ),
   payslip: (
-    <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" /><path d="M14 2v6h6M9 13h7M9 17h5" /></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M6 2h9l5 5v15H6z" />
+      <path d="M14 2v6h6M9 13h7M9 17h5" />
+    </svg>
   ),
   close: (
-    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
   ),
   check: (
-    <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </svg>
   ),
 };
 
 /* Rotating HRMS messages in the bar */
 const MESSAGES = [
-  { icon: "payroll", text: "Run payroll for your entire team in just 3 clicks" },
+  {
+    icon: "payroll",
+    text: "Run payroll for your entire team in just 3 clicks",
+  },
   { icon: "shield", text: "Auto PF, ESI, PT & TDS compliance. Zero penalties" },
   { icon: "clock", text: "Geo-fenced mobile attendance & shift tracking" },
-  { icon: "leave", text: "Leave approvals in one tap. No more WhatsApp requests" },
-  { icon: "payslip", text: "Payslips & Form 16 delivered to employees automatically" },
+  {
+    icon: "leave",
+    text: "Leave approvals in one tap. No more WhatsApp requests",
+  },
+  {
+    icon: "payslip",
+    text: "Payslips & Form 16 delivered to employees automatically",
+  },
 ];
 
 /* Benefits shown on the left side of the popup */
@@ -42,7 +71,6 @@ const BENEFITS = [
   "AI insights on attrition & workforce cost",
   "Go live in days, with a local Bengaluru team",
 ];
-
 
 /**
  * HrmsDemoCTA
@@ -61,9 +89,9 @@ const BENEFITS = [
  */
 const HrmsDemoCTA = ({
   children,
-  renderPopup,               // optional: use YOUR own popup instead of the built-in one
-  interval = 20000,          // 20 seconds
-  buttonText = "Book a 10-min Demo",
+  renderPopup, // optional: use YOUR own popup instead of the built-in one
+  interval = 20000, // 20 seconds
+  buttonText = "Book a 30-min Demo",
 }) => {
   const [barVisible, setBarVisible] = useState(false);
   const [msgIndex, setMsgIndex] = useState(0);
@@ -79,7 +107,10 @@ const HrmsDemoCTA = ({
 
   /* Rotate messages every 3.5 s */
   useEffect(() => {
-    const t = setInterval(() => setMsgIndex((i) => (i + 1) % MESSAGES.length), 3500);
+    const t = setInterval(
+      () => setMsgIndex((i) => (i + 1) % MESSAGES.length),
+      3500,
+    );
     return () => clearInterval(t);
   }, []);
 
@@ -115,7 +146,11 @@ const HrmsDemoCTA = ({
   return (
     <>
       {/* ============ Floating HRMS bar ============ */}
-      <div className={`hdc-bar ${barVisible ? "hdc-bar--show" : ""}`} role="region" aria-label="Book an HRMS demo">
+      <div
+        className={`hdc-bar ${barVisible ? "hdc-bar--show" : ""}`}
+        role="region"
+        aria-label="Book an HRMS demo"
+      >
         <div className="hdc-bar__inner">
           <div className="hdc-bar__badge">
             <span className="hdc-bar__live" />
@@ -153,7 +188,8 @@ const HrmsDemoCTA = ({
       </div>
 
       {/* ============ Your own popup (if provided) ============ */}
-      {renderPopup && renderPopup({ isOpen, onClose: close, onSuccess: handleSuccess })}
+      {renderPopup &&
+        renderPopup({ isOpen, onClose: close, onSuccess: handleSuccess })}
 
       {/* ============ Built-in popup form ============ */}
       {!renderPopup && isOpen && (
@@ -165,7 +201,12 @@ const HrmsDemoCTA = ({
             aria-labelledby="hdc-title"
             onMouseDown={(e) => e.stopPropagation()}
           >
-            <button type="button" className="hdc-modal__close" onClick={close} aria-label="Close">
+            <button
+              type="button"
+              className="hdc-modal__close"
+              onClick={close}
+              aria-label="Close"
+            >
               {Icon.close}
             </button>
 
@@ -176,7 +217,8 @@ const HrmsDemoCTA = ({
                 See NGriffinPay HRMS <br /> in action
               </h3>
               <p className="hdc-modal__sub">
-                From attendance to payslips, watch your whole HR & payroll cycle run on autopilot.
+                From attendance to payslips, watch your whole HR & payroll cycle
+                run on autopilot.
               </p>
 
               <ul className="hdc-modal__list">
@@ -195,14 +237,20 @@ const HrmsDemoCTA = ({
                   <span className="hdc-payslip__status">Processed</span>
                 </div>
                 <div className="hdc-payslip__amount">248 employees</div>
-                <div className="hdc-payslip__bar"><span /></div>
-                <div className="hdc-payslip__foot">PF · ESI · TDS filed automatically</div>
+                <div className="hdc-payslip__bar">
+                  <span />
+                </div>
+                <div className="hdc-payslip__foot">
+                  PF · ESI · TDS filed automatically
+                </div>
               </div>
             </aside>
 
             {/* Right: YOUR existing form */}
             <div className="hdc-modal__form">
-              {typeof children === "function" ? children(handleSuccess) : children}
+              {typeof children === "function"
+                ? children(handleSuccess)
+                : children}
             </div>
           </div>
         </div>
