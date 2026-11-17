@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "../gsap";
 import logo from "../assets/ngriffinpay-logo.png";
 import "./HrOrbit.css";
-import icAttendance from "../assets/icons/attendance.gif";
-import icPayroll from "../assets/icons/payroll.gif";
-import icLeave from "../assets/icons/leave.gif";
-import icHiring from "../assets/icons/hiring.gif";
-import icPerformance from "../assets/icons/performance.gif";
-import icCompliance from "../assets/icons/compliance.gif";
+import icAttendance from "../assets/icons/attendance.webp";
+import icPayroll from "../assets/icons/payroll.webp";
+import icLeave from "../assets/icons/leave.webp";
+import icHiring from "../assets/icons/hiring.webp";
+import icPerformance from "../assets/icons/performance.webp";
+import icCompliance from "../assets/icons/compliance.webp";
 
 /* sc = scattered "chaos" pose: [x as fraction of width, y as fraction of height, rotation, scale] */
 const MODS = [

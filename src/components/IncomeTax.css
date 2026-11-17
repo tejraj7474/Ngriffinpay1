@@ -1,7 +1,4 @@
 /* IncomeTax.css — NGriffinPay  product inner page (brand blue theme) */
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap");
-
 .itx-page {
   --it-primary: #0a3f83;
   --it-primary-2: #1d6fd8;

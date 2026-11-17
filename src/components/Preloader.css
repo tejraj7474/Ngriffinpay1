@@ -1,6 +1,4 @@
 /* Preloader.css — NGriffinPay  website preloader (logo gradient theme) */
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap");
-
 html.ngp-loading,
 html.ngp-loading body {
   overflow: hidden;
@@ -40,7 +38,7 @@ html.ngp-loading body {
     #071631 60%,
     #050f22 100%
   );
-  transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
 }
 .ngp-pre-half.top {
   top: 0;
@@ -303,11 +301,11 @@ html.ngp-loading body {
 }
 .ngp-pre.is-leaving .ngp-pre-half.top {
   transform: translateY(-101%);
-  transition-delay: 0.25s;
+  transition-delay: 0.12s;
 }
 .ngp-pre.is-leaving .ngp-pre-half.bottom {
   transform: translateY(101%);
-  transition-delay: 0.25s;
+  transition-delay: 0.12s;
 }
 
 @keyframes ngpPreIn {

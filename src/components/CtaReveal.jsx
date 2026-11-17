@@ -69,7 +69,7 @@ export default function CtaReveal() {
         {/* 3. fixed mountain image (swap file name for your own) */}
         <img
           className="cr-mountain"
-          src={I("cta-mountain.png")}
+          src={I("cta-mountain.webp")}
           alt=""
           aria-hidden="true"
         />

@@ -1,5 +1,5 @@
 // Content for the Services section, rebuilt from brochure pages 5–11.
-// Photos live in the same images folder used by I(): svc-photo-1.png … svc-photo-6.png
+// Photos live in the same images folder used by I(): svc-photo-1.webp … svc-photo-6.webp
 // (page 5 "HR / Admin Benefits" has no photo).
 
 export const SERVICES = [
@@ -22,7 +22,7 @@ export const SERVICES = [
     title: ['Employee', 'Benefits'],
     sub: 'Transparency, Speed & Independence for Employees',
     layout: 'phone',
-    photo: 'svc-photo-1.png',
+    photo: 'svc-photo-1.webp',
     items: [
       { i: 'mail', t: 'Instant Salary Slips', d: 'Anytime access, no HR chase' },
       { i: 'pointer', t: 'One-Click Requests', d: 'Leave or advance in seconds' },
@@ -35,7 +35,7 @@ export const SERVICES = [
     tab: 'Core HR & Onboarding',
     title: ['Core HR &', 'Onboarding'],
     layout: 'wheel',
-    photo: 'svc-photo-2.png',
+    photo: 'svc-photo-2.webp',
     banner: 'Streamline onboarding. Ensure accuracy. Drive productivity from day one.',
     items: [
       { i: 'file', t: 'Document collection, bank details, payment modes.' },
@@ -48,7 +48,7 @@ export const SERVICES = [
     tab: 'Attendance & Leave',
     title: ['Attendance &', 'Leave'],
     layout: 'steps',
-    photo: 'svc-photo-3.png',
+    photo: 'svc-photo-3.webp',
     checkin: { label: 'Check-in', time: '9:30 AM', place: 'Bangalore Office' },
     items: [
       'GPS, biometric, facial login.',
@@ -62,7 +62,7 @@ export const SERVICES = [
     tab: 'Payroll & Finance',
     title: ['Payroll &', 'Finance'],
     layout: 'twocol',
-    photo: 'svc-photo-4.png',
+    photo: 'svc-photo-4.webp',
     banner: 'Accurate. Compliant. On Time. Every Time.',
     items: [
       'Instant payslips & 15+ payroll reports.',
@@ -78,7 +78,7 @@ export const SERVICES = [
     tab: 'Performance & Engagement',
     title: ['Performance &', 'Engagement'],
     layout: 'timeline',
-    photo: 'svc-photo-5.png',
+    photo: 'svc-photo-5.webp',
     banner: 'Empower People. Drive Performance. Build Culture.',
     items: [
       'Appraisals with KRAs, KPIs, skill-based metrics.',
@@ -90,7 +90,7 @@ export const SERVICES = [
     tab: 'Task Management',
     title: ['Task Management', '(HRMS)'],
     layout: 'quad',
-    photo: 'svc-photo-6.png',
+    photo: 'svc-photo-6.webp',
     items: [
       { i: 'checklist', t: 'Task Assignment & Tracking', d: 'Simplify task execution with a centralized platform for assigning and managing work.' },
       { i: 'bell', t: 'Automated Notifications', d: 'Send reminders and alerts for pending tasks.' },

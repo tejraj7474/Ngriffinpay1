@@ -81,8 +81,10 @@ export default function Hero() {
 
       <img
         className="ppl"
-        src={I("people-foreground.png")}
+        src={I("people-foreground.webp")}
         alt="Smiling HR team"
+        fetchpriority="high"
+        decoding="async"
       />
     </section>
   );

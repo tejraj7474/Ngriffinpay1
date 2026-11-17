@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import * as THREE from "three";
 import "./PartnerBurst.css";
 
 /* =====================================================================
@@ -85,13 +84,32 @@ const GPX_ANIM_SHARE = 0.8;
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
 
 /* ---------------- Three.js particles + rings ---------------- */
+// Performance: three.js is loaded on demand (dynamic import) instead of being part of
+// the main JavaScript bundle that every page has to download first.
 function GpxBurstCanvas({ progressRef, activeRef }) {
   const hostRef = useRef(null);
 
   useEffect(() => {
-    const host = hostRef.current;
+    let cleanup = () => {};
+    let cancelled = false;
+    import("three").then((THREE) => {
+      if (cancelled || !hostRef.current) return;
+      cleanup = setupBurst(THREE, hostRef.current, progressRef, activeRef);
+    });
+    return () => {
+      cancelled = true;
+      cleanup();
+    };
+  }, [progressRef, activeRef]);
+
+  return <div className="gpx-canvas" ref={hostRef} aria-hidden="true" />;
+}
+
+// builds the particle burst; returns its cleanup function
+function setupBurst(THREE, host, progressRef, activeRef) {
+  {
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     host.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
@@ -212,9 +230,7 @@ function GpxBurstCanvas({ progressRef, activeRef }) {
       if (renderer.domElement.parentNode === host)
         host.removeChild(renderer.domElement);
     };
-  }, [progressRef, activeRef]);
-
-  return <div className="gpx-canvas" ref={hostRef} aria-hidden="true" />;
+  }
 }
 
 /* ---------------- Main component ---------------- */

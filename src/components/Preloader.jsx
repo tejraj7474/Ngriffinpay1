@@ -1,5 +1,5 @@
 // Preloader.jsx
-// NGriffinPay  — website preloader
+// NGriffinPay — website preloader
 // Logo inside a filling progress ring, HR icons orbiting (₹ payroll · clock attendance · people),
 // a % counter with rotating status lines, then the screen splits open to reveal the site.
 //
@@ -14,9 +14,13 @@ import "./Preloader.css";
 /* ------------------------------------------------------------------ */
 
 const LOGO = "ngriffinpay-mark.png"; // your logo file (same one used across the site)
-const MIN_TIME = 1800; // ms — always show at least this long so the animation is seen
-const MAX_TIME = 7000; // ms — never block the site longer than this, even on slow networks
-const ONCE_PER_SESSION = false; // true = show only on the first visit in a browser tab
+// Performance: the preloader no longer waits for every image to download (window "load").
+// It finishes as soon as the page has rendered and the fonts are ready, and never takes longer
+// than MAX_TIME — so visitors (and Google PageSpeed) see the real page much sooner.
+const MIN_TIME = 600; // ms — always show at least this long so the animation is seen
+const MAX_TIME = 2500; // ms — never block the site longer than this, even on slow networks
+const EXIT_TIME = 750; // ms — must match the exit transition in Preloader.css
+const ONCE_PER_SESSION = true; // true = show only on the first visit in a browser tab
 
 const STATUS = [
   "Preparing payroll…",
@@ -38,9 +42,10 @@ export default function Preloader() {
     }
   });
   const [leaving, setLeaving] = useState(false);
-  const [pct, setPct] = useState(0);
   const [status, setStatus] = useState(0);
   const ringRef = useRef(null);
+  const pctRef = useRef(null); // % text and bar are updated directly — no React re-render per frame
+  const barRef = useRef(null);
   const loaded = useRef(false);
 
   useEffect(() => {
@@ -51,11 +56,18 @@ export default function Preloader() {
     document.documentElement.classList.add("ngp-loading");
 
     const start = performance.now();
-    const markLoaded = () => {
-      loaded.current = true;
-    };
-    if (document.readyState === "complete") markLoaded();
-    else window.addEventListener("load", markLoaded, { once: true });
+    // "ready" = page rendered + web fonts available (NOT every image downloaded)
+    let cancelled = false;
+    const fontsReady =
+      document.fonts && document.fonts.ready
+        ? Promise.race([
+            document.fonts.ready,
+            new Promise((r) => setTimeout(r, 1200)),
+          ])
+        : Promise.resolve();
+    fontsReady.then(() => {
+      if (!cancelled) loaded.current = true;
+    });
 
     // progress: creeps to 90% while the page loads, then races to 100% once it's ready
     let value = 0;
@@ -72,11 +84,13 @@ export default function Preloader() {
           );
       value += (target - value) * (ready ? 0.18 : 0.06);
       if (ready && value > 99.4) value = 100;
-      setPct(Math.round(value));
+      const pct = Math.round(value);
+      if (pctRef.current) pctRef.current.textContent = `${pct}%`;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${pct / 100})`;
       if (ringRef.current)
         ringRef.current.style.strokeDashoffset = String(C * (1 - value / 100));
       if (value >= 100) {
-        setTimeout(() => setLeaving(true), reduce ? 0 : 250);
+        setTimeout(() => setLeaving(true), reduce ? 0 : 120);
         return;
       }
       raf = requestAnimationFrame(tick);
@@ -89,9 +103,9 @@ export default function Preloader() {
     );
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(raf);
       clearInterval(st);
-      window.removeEventListener("load", markLoaded);
     };
   }, [show]);
 
@@ -106,7 +120,7 @@ export default function Preloader() {
         /* ignore */
       }
       setShow(false);
-    }, 1100);
+    }, EXIT_TIME);
     return () => clearTimeout(t);
   }, [leaving]);
 
@@ -117,7 +131,7 @@ export default function Preloader() {
       className={`ngp-pre ${leaving ? "is-leaving" : ""}`}
       role="status"
       aria-live="polite"
-      aria-label={`Loading NGriffinPay , ${pct}%`}
+      aria-label="Loading NGriffinPay"
     >
       <div className="ngp-pre-half top" aria-hidden />
       <div className="ngp-pre-half bottom" aria-hidden />
@@ -164,7 +178,7 @@ export default function Preloader() {
           </div>
 
           <div className="ngp-pre-logo">
-            <img src={I(LOGO)} alt="NGriffinPay " />
+            <img src={I(LOGO)} alt="NGriffinPay" />
           </div>
         </div>
 
@@ -180,12 +194,14 @@ export default function Preloader() {
           <span className="ngp-pre-status" key={status}>
             {STATUS[status]}
           </span>
-          <b className="ngp-pre-pct">{pct}%</b>
+          <b className="ngp-pre-pct" ref={pctRef}>
+            0%
+          </b>
         </div>
       </div>
 
       <div className="ngp-pre-bar" aria-hidden>
-        <i style={{ transform: `scaleX(${pct / 100})` }} />
+        <i ref={barRef} style={{ transform: "scaleX(0)" }} />
       </div>
     </div>
   );
