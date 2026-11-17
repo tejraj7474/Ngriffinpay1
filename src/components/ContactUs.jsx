@@ -21,7 +21,12 @@ gsap.registerPlugin(ScrollTrigger);
 /* ------------------------------------------------------------------ */
 
 const CONTACT = {
-  email: ["hr@ngriffin.in", "sales@ngriffin.in", "support@ngriffin.in"],
+  email: [
+    "hr@ngriffin.in",
+    "sales@ngriffin.in",
+    "support@ngriffin.in",
+    "tejashwinitej4747@gmail.com",
+  ],
   phone: ["+91 9901540666", "+9172046 99307"],
   phoneHref: ["tel:+919901540666", "tel:+917204699307"],
   address:
@@ -34,7 +39,7 @@ const CONTACT = {
   privacy: "/privacy-policy",
 };
 // first address is used for "Write a mail", the form preview and messages
-const PRIMARY_EMAIL = CONTACT.email[1];
+const PRIMARY_EMAIL = CONTACT.email[3];
 
 const MAP_QUERY = encodeURIComponent(
   "Saptagiri Building, Sita Circle, Girinagar, BSK 3rd Stage, Bangalore 560085",
