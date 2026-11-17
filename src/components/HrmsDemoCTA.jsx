@@ -212,7 +212,7 @@ const HrmsDemoCTA = ({
 
             {/* Left: HRMS pitch */}
             <aside className="hdc-modal__side">
-              <span className="hdc-modal__tag">Free 10-minute demo</span>
+              <span className="hdc-modal__tag">Free 30-minute demo</span>
               <h3 id="hdc-title" className="hdc-modal__title">
                 See NGriffinPay HRMS <br /> in action
               </h3>

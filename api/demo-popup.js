@@ -158,10 +158,10 @@ export default async function handler(req, res) {
         subject: `Your 10-minute NGriffinPay demo · ${ref}`,
         html: `<div style="font-family:Arial,sans-serif;font-size:14px;color:#0f172a">
 <p>Hi ${esc(first)},</p>
-<p>Thanks for booking a 10-minute demo of NGriffinPay for <b>${esc(company)}</b>. Our HRMS expert will call you on <b>+91 ${esc(phone)}</b> within 24 hours to schedule it.</p>
+<p>Thanks for booking a 30-minute demo of NGriffinPay for <b>${esc(company)}</b>. Our HRMS expert will call you on <b>+91 ${esc(phone)}</b> within 24 hours to schedule it.</p>
 <p>Your reference number is <b>${esc(ref)}</b>.</p>
 <p>Regards,<br>Team NGriffinPay</p></div>`,
-        text: `Hi ${first},\n\nThanks for booking a 10-minute demo of NGriffinPay for ${company}. Our HRMS expert will call you on +91 ${phone} within 24 hours to schedule it.\n\nReference: ${ref}\n\nRegards,\nTeam NGriffinPay`,
+        text: `Hi ${first},\n\nThanks for booking a 30-minute demo of NGriffinPay for ${company}. Our HRMS expert will call you on +91 ${phone} within 24 hours to schedule it.\n\nReference: ${ref}\n\nRegards,\nTeam NGriffinPay`,
       });
     } catch (err) {
       console.error("Demo pop-up auto-reply failed:", err);

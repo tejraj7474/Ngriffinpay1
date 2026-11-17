@@ -109,7 +109,7 @@ const DemoForm = ({ onSuccess, endpoint = "/api/demo-popup" }) => {
         <h4>Demo request received!</h4>
         <p>
           Our HRMS expert will call you within 24 hours to schedule your
-          10-minute demo.
+          30-minute demo.
         </p>
       </div>
     );
