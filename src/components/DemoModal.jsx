@@ -1,9 +1,10 @@
 // DemoModal.jsx
-// NGriffinPay  — "Book a Demo" pop-up form
+// NGriffinPay — "Book a Demo" pop-up form
 // Opens from the Header's "Request a Demo" button (and from anywhere else with openDemo()).
 // Fields: Name*, Phone Number, Company Name*, Business Email*, consent checkbox + Privacy Policy link.
 //
-// No extra packages needed.
+// Mail: the form POSTs JSON to /api/demo (Vercel function in api/demo.js),
+//       which emails the request to the addresses in the MAIL_TO environment variable.
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -14,9 +15,8 @@ import "./DemoModal.css";
 /* Settings                                                            */
 /* ------------------------------------------------------------------ */
 
-// Put your form handler here (PHP mail script / API URL).
-// Leave it empty while testing — the form will just show the success screen.
-const DEMO_ENDPOINT = "";
+// Vercel serverless function that sends the email (api/demo.js in the project root)
+const DEMO_ENDPOINT = "/api/demo";
 
 const PRIVACY_URL = "/privacy-policy";
 const OPEN_EVENT = "ngp:open-demo";
@@ -44,7 +44,14 @@ const FREE_MAIL = [
   "rediffmail.com",
   "icloud.com",
 ];
-const EMPTY = { name: "", phone: "", company: "", email: "", consent: false };
+const EMPTY = {
+  name: "",
+  phone: "",
+  company: "",
+  email: "",
+  consent: false,
+  website: "", // honeypot — hidden from people, bots fill it in
+};
 
 function validate(f) {
   const e = {};
@@ -181,6 +188,7 @@ export default function DemoModal({ open, onClose }) {
   const [form, setForm] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [state, setState] = useState("idle"); // idle | sending | sent | fail
+  const [failMsg, setFailMsg] = useState("");
   const [closing, setClosing] = useState(false);
   const boxRef = useRef(null);
   const stateRef = useRef(state);
@@ -261,20 +269,36 @@ export default function DemoModal({ open, onClose }) {
       return;
     }
     setState("sending");
+    setFailMsg("");
     try {
-      if (DEMO_ENDPOINT) {
-        const body = new FormData();
-        body.append("name", form.name.trim());
-        body.append("phone", form.phone.trim());
-        body.append("company", form.company.trim());
-        body.append("email", form.email.trim());
-        body.append("consent", form.consent ? "yes" : "no");
-        body.append("page", window.location.href);
-        const res = await fetch(DEMO_ENDPOINT, { method: "POST", body });
-        if (!res.ok) throw new Error("failed");
+      const res = await fetch(DEMO_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          company: form.company.trim(),
+          email: form.email.trim(),
+          consent: form.consent,
+          website: form.website,
+          page: window.location.href,
+        }),
+      });
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        /* not JSON — e.g. the function isn't deployed */
+      }
+      if (!res.ok || !data?.ok) {
+        if (data?.errors) setErrors(data.errors); // server-side validation
+        const err = new Error(data?.message || "failed");
+        err.userMessage = data?.message;
+        throw err;
       }
       setState("sent");
-    } catch {
+    } catch (err) {
+      setFailMsg(err?.userMessage || "");
       setState("fail");
     }
   };
@@ -313,7 +337,7 @@ export default function DemoModal({ open, onClose }) {
         {/* ---------- Left: brand panel ---------- */}
         <aside className="dmo-side">
           <span className="dmo-logo">
-            <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
+            <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
           </span>
           <h2 id="dmo-title">Book a Demo</h2>
           <p>
@@ -450,9 +474,28 @@ export default function DemoModal({ open, onClose }) {
                 </span>
               </label>
 
+              {/* honeypot: hidden from people, catches spam bots */}
+              <input
+                type="text"
+                name="website"
+                value={form.website}
+                onChange={set("website")}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: 1,
+                  height: 1,
+                  opacity: 0,
+                }}
+              />
+
               {state === "fail" && (
                 <p className="dmo-fail">
-                  Something went wrong. Please try again in a moment.
+                  {failMsg || "Something went wrong."} Please try again in a
+                  moment.
                 </p>
               )}
 
