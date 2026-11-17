@@ -4,6 +4,7 @@
 // Section 2: Form + live email preview — the preview fills in as the visitor types,
 //            then "sends" on submit with a delivery timeline (GSAP)
 // Section 3: Office map (Google Maps embed) with address card + directions
+// Mail: the form POSTs to /api/contact.php, which emails sales@ngriffin.in + support@ngriffin.in
 // Header & Footer come from App.jsx (your existing site components).
 //
 // Install:  npm i gsap   (already installed — no extra packages needed)
@@ -38,8 +39,10 @@ const CONTACT = {
   ],
   privacy: "/privacy-policy",
 };
-// first address is used for "Write a mail", the form preview and messages
-const PRIMARY_EMAIL = CONTACT.email[3];
+// used for "Write a mail" and the error message
+const PRIMARY_EMAIL = "sales@ngriffin.in";
+// where the form details are delivered (must match MAIL_TO in public/api/mail-config.php)
+const FORM_RECIPIENTS = ["sales@ngriffin.in", "support@ngriffin.in"];
 
 const MAP_QUERY = encodeURIComponent(
   "Saptagiri Building, Sita Circle, Girinagar, BSK 3rd Stage, Bangalore 560085",
@@ -49,8 +52,8 @@ const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${MAP
 
 const EMPLOYEE_LIMITS = ["1-10", "11-50", "51-200", "201+"];
 
-// Hook this up to your backend (PHP mail / API). Leave empty to only show the success state.
-const CONTACT_ENDPOINT = "";
+// PHP script that sends the email (lives in public/api/contact.php)
+const CONTACT_ENDPOINT = "/api/contact.php";
 
 const EMPTY = {
   firstName: "",
@@ -61,6 +64,7 @@ const EMPTY = {
   employees: "",
   comments: "",
   consent: false,
+  website: "", // honeypot — hidden from people, bots fill it in
 };
 
 const prefersReduced = () =>
@@ -434,6 +438,7 @@ function ContactForm() {
   const [errors, setErrors] = useState({});
   const [state, setState] = useState("idle"); // idle | sending | sent | fail
   const [ticket, setTicket] = useState("");
+  const [failMsg, setFailMsg] = useState("");
   const rootRef = useRef(null);
   const mailRef = useRef(null);
 
@@ -489,17 +494,26 @@ function ContactForm() {
       return;
     }
     setState("sending");
+    setFailMsg("");
     try {
-      if (CONTACT_ENDPOINT) {
-        const body = new FormData();
-        Object.entries(form).forEach(([k, v]) =>
-          body.append(k, typeof v === "boolean" ? (v ? "yes" : "no") : v),
-        );
-        const res = await fetch(CONTACT_ENDPOINT, { method: "POST", body });
-        if (!res.ok) throw new Error("failed");
+      const body = new FormData();
+      Object.entries(form).forEach(([k, v]) =>
+        body.append(k, typeof v === "boolean" ? (v ? "yes" : "no") : v),
+      );
+      const res = await fetch(CONTACT_ENDPOINT, { method: "POST", body });
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        /* not JSON — e.g. PHP not running */
       }
-      const ref = "NGP-" + Math.floor(100000 + Math.random() * 900000);
-      setTicket(ref);
+      if (!res.ok || !data?.ok) {
+        if (data?.errors) setErrors(data.errors); // server-side validation
+        const err = new Error(data?.message || "failed");
+        err.userMessage = data?.message;
+        throw err;
+      }
+      setTicket(data.ref);
       // fly the email away, then show the sent state
       if (!prefersReduced() && mailRef.current) {
         await new Promise((resolve) => {
@@ -522,7 +536,8 @@ function ContactForm() {
         });
       }
       setState("sent");
-    } catch {
+    } catch (err) {
+      setFailMsg(err?.userMessage || "");
       setState("fail");
     }
   };
@@ -718,10 +733,22 @@ function ContactForm() {
               </span>
             </label>
 
+            {/* honeypot: hidden from people, catches spam bots */}
+            <input
+              type="text"
+              name="website"
+              value={form.website}
+              onChange={set("website")}
+              className="cnt-visually-hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+            />
+
             {state === "fail" && (
               <p className="cnt-form-err">
-                Something went wrong. Please try again or email us at{" "}
-                {PRIMARY_EMAIL}.
+                {failMsg || "Something went wrong."} Please try again or email
+                us at {PRIMARY_EMAIL}.
               </p>
             )}
 
@@ -772,7 +799,7 @@ function ContactForm() {
                     <span className="cnt-mail-time">now</span>
                   </div>
                   <div className="cnt-mail-to">
-                    To: <b>{PRIMARY_EMAIL}</b>
+                    To: <b>{FORM_RECIPIENTS.join(", ")}</b>
                   </div>
                   <div className="cnt-mail-subj">
                     New enquiry from{" "}
@@ -853,7 +880,7 @@ function ContactForm() {
                       <span>
                         <Icon name="check" size={11} />
                       </span>
-                      Delivered to {PRIMARY_EMAIL}
+                      Delivered to {FORM_RECIPIENTS.join(" & ")}
                     </li>
                     <li className="cnt-step">
                       <span>
@@ -929,7 +956,7 @@ function OfficeMap() {
         <div className="cnt-map-card">
           <div className="cnt-map-top">
             <span className="cnt-map-logo">
-              <img src={I("ngriffinpay-mark.png")} alt="NGriffinpay" />
+              <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
             </span>
             <div>
               <b>NGriffinPay Office</b>
@@ -950,7 +977,7 @@ function OfficeMap() {
             >
               <Icon name="nav" size={14} /> Get directions
             </a>
-            <a className="cnt-chip" href={CONTACT.phoneHref}>
+            <a className="cnt-chip" href={CONTACT.phoneHref[0]}>
               <Icon name="phone" size={13} /> Call before visiting
             </a>
           </div>
