@@ -51,10 +51,11 @@ export default async function handler(req, res) {
     }
   }
 
-  // Honeypot: real visitors never fill the hidden "hp_check" field
-  // (named so browser autofill never recognises it)
-  if (b.hp_check) {
-    console.warn("Contact form: honeypot triggered, request ignored");
+  // Spam check: the page sends how long the visitor spent on the form (t, in ms).
+  // Bots submit instantly; no human fills the form in under 1 second.
+  const t = Number(b.t);
+  if (b.t !== undefined && (!Number.isFinite(t) || t < 1000)) {
+    console.warn("Contact form: submitted too fast (" + b.t + " ms), request ignored");
     return res.status(200).json({ ok: true, message: "Thank you", ref: makeRef() });
   }
 

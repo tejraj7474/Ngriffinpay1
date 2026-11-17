@@ -65,7 +65,6 @@ const EMPTY = {
   employees: "",
   comments: "",
   consent: false,
-  hp_check: "", // honeypot — hidden from people, bots fill it in
 };
 
 const prefersReduced = () =>
@@ -442,6 +441,7 @@ function ContactForm() {
   const [failMsg, setFailMsg] = useState("");
   const rootRef = useRef(null);
   const mailRef = useRef(null);
+  const openedAt = useRef(Date.now()); // spam check: time the page was opened
 
   useLayoutEffect(() => {
     if (prefersReduced()) return undefined;
@@ -500,7 +500,7 @@ function ContactForm() {
       const res = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, t: Date.now() - openedAt.current }),
       });
       let data = null;
       try {
@@ -733,22 +733,6 @@ function ContactForm() {
                 </a>
               </span>
             </label>
-
-            {/* honeypot: hidden from people, catches spam bots */}
-            <input
-              type="text"
-              name="hp_check"
-              id="cnt-hp-check"
-              value={form.hp_check}
-              onChange={set("hp_check")}
-              className="cnt-visually-hidden"
-              tabIndex={-1}
-              autoComplete="off"
-              data-lpignore="true"
-              data-1p-ignore="true"
-              data-form-type="other"
-              aria-hidden
-            />
 
             {state === "fail" && (
               <p className="cnt-form-err">

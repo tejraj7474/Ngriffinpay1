@@ -44,14 +44,7 @@ const FREE_MAIL = [
   "rediffmail.com",
   "icloud.com",
 ];
-const EMPTY = {
-  name: "",
-  phone: "",
-  company: "",
-  email: "",
-  consent: false,
-  hp_check: "", // honeypot — hidden from people, bots fill it in
-};
+const EMPTY = { name: "", phone: "", company: "", email: "", consent: false };
 
 function validate(f) {
   const e = {};
@@ -195,11 +188,13 @@ export default function DemoModal({ open, onClose }) {
   stateRef.current = state;
   const closeRef = useRef(null);
   const lastFocus = useRef(null);
+  const openedAt = useRef(0); // spam check: time the pop-up was opened
 
   // open: lock scroll, focus first field, Esc to close, keep Tab inside the pop-up
   useEffect(() => {
     if (!open) return undefined;
     lastFocus.current = document.activeElement;
+    openedAt.current = Date.now();
     document.documentElement.classList.add("dmo-lock"); // stop the page behind from scrolling
     const t = setTimeout(
       () => boxRef.current?.querySelector("input")?.focus(),
@@ -280,7 +275,7 @@ export default function DemoModal({ open, onClose }) {
           company: form.company.trim(),
           email: form.email.trim(),
           consent: form.consent,
-          hp_check: form.hp_check,
+          t: Date.now() - openedAt.current, // ms spent on the form
           page: window.location.href,
         }),
       });
@@ -473,28 +468,6 @@ export default function DemoModal({ open, onClose }) {
                   </a>
                 </span>
               </label>
-
-              {/* honeypot: hidden from people, catches spam bots */}
-              <input
-                type="text"
-                name="hp_check"
-                id="dmo-hp-check"
-                value={form.hp_check}
-                onChange={set("hp_check")}
-                tabIndex={-1}
-                autoComplete="off"
-                data-lpignore="true"
-                data-1p-ignore="true"
-                data-form-type="other"
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  left: "-9999px",
-                  width: 1,
-                  height: 1,
-                  opacity: 0,
-                }}
-              />
 
               {state === "fail" && (
                 <p className="dmo-fail">
