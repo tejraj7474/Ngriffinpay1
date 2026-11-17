@@ -4,7 +4,8 @@
 // Section 2: Form + live email preview — the preview fills in as the visitor types,
 //            then "sends" on submit with a delivery timeline (GSAP)
 // Section 3: Office map (Google Maps embed) with address card + directions
-// Mail: the form POSTs to /api/contact.php, which emails sales@ngriffin.in + support@ngriffin.in
+// Mail: the form POSTs JSON to /api/contact (Vercel function in api/contact.js),
+//       which emails the addresses set in the MAIL_TO environment variable
 // Header & Footer come from App.jsx (your existing site components).
 //
 // Install:  npm i gsap   (already installed — no extra packages needed)
@@ -41,7 +42,7 @@ const CONTACT = {
 };
 // used for "Write a mail" and the error message
 const PRIMARY_EMAIL = "sales@ngriffin.in";
-// where the form details are delivered (must match MAIL_TO in public/api/mail-config.php)
+// where the form details are delivered (keep in sync with MAIL_TO in Vercel env vars)
 const FORM_RECIPIENTS = ["sales@ngriffin.in", "support@ngriffin.in"];
 
 const MAP_QUERY = encodeURIComponent(
@@ -52,8 +53,8 @@ const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${MAP
 
 const EMPLOYEE_LIMITS = ["1-10", "11-50", "51-200", "201+"];
 
-// PHP script that sends the email (lives in public/api/contact.php)
-const CONTACT_ENDPOINT = "/api/contact.php";
+// Vercel serverless function that sends the email (api/contact.js in the project root)
+const CONTACT_ENDPOINT = "/api/contact";
 
 const EMPTY = {
   firstName: "",
@@ -496,16 +497,16 @@ function ContactForm() {
     setState("sending");
     setFailMsg("");
     try {
-      const body = new FormData();
-      Object.entries(form).forEach(([k, v]) =>
-        body.append(k, typeof v === "boolean" ? (v ? "yes" : "no") : v),
-      );
-      const res = await fetch(CONTACT_ENDPOINT, { method: "POST", body });
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
       let data = null;
       try {
         data = await res.json();
       } catch {
-        /* not JSON — e.g. PHP not running */
+        /* not JSON — e.g. the function isn't deployed */
       }
       if (!res.ok || !data?.ok) {
         if (data?.errors) setErrors(data.errors); // server-side validation
