@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./DemoForm.css";
 
 const EMPLOYEE_OPTIONS = ["1 - 25", "26 - 50", "51 - 100", "101 - 250", "251 - 500", "500+"];
@@ -17,12 +17,15 @@ const INITIAL = {
  *
  * Props:
  *  onSuccess  – passed in by HrmsDemoCTA; closes popup + stops auto-open
- *  endpoint   – optional URL to POST the form data to (your API / PHP / Google Script)
+ *  endpoint   – URL that emails the request. Defaults to its own Vercel function
+ *               api/demo-popup.js (separate from the "Book a Demo" modal's api/demo.js).
  */
-const DemoForm = ({ onSuccess, endpoint = "" }) => {
+const DemoForm = ({ onSuccess, endpoint = "/api/demo-popup" }) => {
   const [values, setValues] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | done | error
+  const [failMsg, setFailMsg] = useState("");
+  const openedAt = useRef(Date.now()); // spam check: time the form appeared
 
   const validate = (v) => {
     const e = {};
@@ -50,23 +53,35 @@ const DemoForm = ({ onSuccess, endpoint = "" }) => {
     if (Object.keys(v).length) return;
 
     setStatus("sending");
+    setFailMsg("");
     try {
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...values, source: "20s-popup", page: window.location.href }),
-        });
-        if (!res.ok) throw new Error("Request failed");
-      } else {
-        // No endpoint yet – just log it so you can test
-        console.log("Demo request:", values);
-        await new Promise((r) => setTimeout(r, 800));
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...values,
+          source: "20s-popup",
+          page: window.location.href,
+          t: Date.now() - openedAt.current, // ms spent on the form
+        }),
+      });
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        /* not JSON — e.g. the function isn't deployed */
+      }
+      if (!res.ok || !data?.ok) {
+        if (data?.errors) setErrors(data.errors); // server-side validation
+        const err = new Error(data?.message || "Request failed");
+        err.userMessage = data?.message;
+        throw err;
       }
       setStatus("done");
       setValues(INITIAL);
       setTimeout(() => onSuccess && onSuccess(), 2500);
     } catch (err) {
+      setFailMsg(err?.userMessage || "");
       setStatus("error");
     }
   };
@@ -127,7 +142,9 @@ const DemoForm = ({ onSuccess, endpoint = "" }) => {
       </div>
 
       {status === "error" && (
-        <p className="df__alert">Something went wrong. Please try again or WhatsApp us.</p>
+        <p className="df__alert">
+          {failMsg || "Something went wrong."} Please try again or WhatsApp us.
+        </p>
       )}
 
       <button type="submit" className="df__submit" disabled={status === "sending"}>

@@ -1,4 +1,5 @@
-// api/demo.js — Vercel serverless function for the "Book a Demo" pop-up.
+// api/demo.js — Vercel serverless function for the "Book a Demo" button modal (DemoModal.jsx).
+// The 20-second auto pop-up (DemoForm.jsx) has its own function: api/demo-popup.js
 // Emails the demo request to the addresses in MAIL_TO.
 //
 // Put this file next to api/contact.js (PROJECT ROOT → api/demo.js).
