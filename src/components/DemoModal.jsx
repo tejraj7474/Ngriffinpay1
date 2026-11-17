@@ -334,7 +334,7 @@ export default function DemoModal({ open, onClose }) {
           <span className="dmo-logo">
             <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
           </span>
-          <h2 id="dmo-title">Book a Demo</h2>
+          <h2 id="dmo-title">Experience NGriffinPay</h2>
           <p>
             See how NGriffinPay runs payroll, attendance and compliance for your
             team.
