@@ -37,8 +37,10 @@ export default async function handler(req, res) {
     }
   }
 
-  // Honeypot: real visitors never fill the hidden "website" field
-  if (b.website) {
+  // Honeypot: real visitors never fill the hidden "hp_check" field
+  // (named so browser autofill never recognises it)
+  if (b.hp_check) {
+    console.warn("Demo form: honeypot triggered, request ignored");
     return res.status(200).json({ ok: true, message: "Thank you", ref: makeRef() });
   }
 

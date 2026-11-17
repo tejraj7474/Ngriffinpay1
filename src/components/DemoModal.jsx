@@ -50,7 +50,7 @@ const EMPTY = {
   company: "",
   email: "",
   consent: false,
-  website: "", // honeypot — hidden from people, bots fill it in
+  hp_check: "", // honeypot — hidden from people, bots fill it in
 };
 
 function validate(f) {
@@ -280,7 +280,7 @@ export default function DemoModal({ open, onClose }) {
           company: form.company.trim(),
           email: form.email.trim(),
           consent: form.consent,
-          website: form.website,
+          hp_check: form.hp_check,
           page: window.location.href,
         }),
       });
@@ -477,11 +477,15 @@ export default function DemoModal({ open, onClose }) {
               {/* honeypot: hidden from people, catches spam bots */}
               <input
                 type="text"
-                name="website"
-                value={form.website}
-                onChange={set("website")}
+                name="hp_check"
+                id="dmo-hp-check"
+                value={form.hp_check}
+                onChange={set("hp_check")}
                 tabIndex={-1}
                 autoComplete="off"
+                data-lpignore="true"
+                data-1p-ignore="true"
+                data-form-type="other"
                 aria-hidden="true"
                 style={{
                   position: "absolute",

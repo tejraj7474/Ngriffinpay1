@@ -65,7 +65,7 @@ const EMPTY = {
   employees: "",
   comments: "",
   consent: false,
-  website: "", // honeypot — hidden from people, bots fill it in
+  hp_check: "", // honeypot — hidden from people, bots fill it in
 };
 
 const prefersReduced = () =>
@@ -737,12 +737,16 @@ function ContactForm() {
             {/* honeypot: hidden from people, catches spam bots */}
             <input
               type="text"
-              name="website"
-              value={form.website}
-              onChange={set("website")}
+              name="hp_check"
+              id="cnt-hp-check"
+              value={form.hp_check}
+              onChange={set("hp_check")}
               className="cnt-visually-hidden"
               tabIndex={-1}
               autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
               aria-hidden
             />
 
