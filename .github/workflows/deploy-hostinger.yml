@@ -1,0 +1,52 @@
+# .github/workflows/deploy-hostinger.yml
+# Every push to "main": build the site and put the ready-made files (dist/)
+# on a branch called "hostinger". Hostinger deploys that branch to public_html.
+#
+# Hostinger only copies files — it can't run "npm run build" on shared hosting —
+# so GitHub builds it for you here.
+
+name: Build for Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # also lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hostinger-deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check the build has what Hostinger needs
+        run: |
+          test -f dist/index.html
+          test -f dist/.htaccess
+          test -f dist/api/contact.php
+          test ! -f dist/api/ngp-mail-config.php
+
+      - name: Publish dist/ to the "hostinger" branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: hostinger
+          folder: dist
+          clean: true
+          commit-message: "Deploy ${{ github.sha }}"
