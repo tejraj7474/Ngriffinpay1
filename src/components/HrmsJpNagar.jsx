@@ -1,0 +1,52 @@
+// HrmsJpNagar.jsx — location page for JP Nagar.
+// Uses the shared HrmsLocation template with JP Nagar's own FAQs, images and preview heading.
+import HrmsLocation from "./HrmsLocation";
+
+const JP_NAGAR_FAQS = [
+  {
+    q: "What is HRMS software and how can it help businesses?",
+    a: "HRMS software helps businesses manage employee records, attendance, leave, payroll, payslips and HR reports from one centralised platform — reducing repetitive admin work.",
+  },
+  {
+    q: "What HR and payroll features does NGriffinPay provide?",
+    a: "Employee management, attendance management, leave management, payroll management, payslip management and HR reports — all together in one platform.",
+  },
+  {
+    q: "Is NGriffinPay suitable for businesses in JP Nagar?",
+    a: "Yes. NGriffinPay helps businesses in JP Nagar and across Bengaluru manage everyday HR and payroll operations from one centralised platform.",
+  },
+  {
+    q: "Can businesses in JP Nagar manage payroll with NGriffinPay?",
+    a: "Yes. NGriffinPay helps you organise payroll information and manage recurring payroll activities through a structured workflow.",
+  },
+  {
+    q: "Can NGriffinPay manage employee attendance and leave?",
+    a: "Yes. Attendance and leave management help you maintain organised employee records and manage everyday HR processes systematically.",
+  },
+  {
+    q: "Does NGriffinPay include payslip management?",
+    a: "Yes. Payslip management keeps employee salary and payslip information organised within the platform.",
+  },
+  {
+    q: "Is NGriffinPay suitable for growing businesses?",
+    a: "Yes. NGriffinPay supports businesses as their workforce grows by bringing essential HR and payroll processes together in one platform.",
+  },
+  {
+    q: "How can I get an HRMS software demo in JP Nagar?",
+    a: "Request a free demo of NGriffinPay to see how the platform can simplify HR and payroll management for your business.",
+  },
+];
+
+export default function HrmsJpNagar() {
+  return (
+    <HrmsLocation
+      area="JP Nagar"
+      faqs={JP_NAGAR_FAQS}
+      heroImage="hrms-payroll-software-jp-nagar.png"
+      heroAlt="Best HRMS and Payroll Software in JP Nagar Bangalore"
+      previewImage="hrms-payroll-software-jp-nagar-1.jpg"
+      previewAlt="Payroll Software in JP Nagar Bangalore"
+      previewTitle={["Simple for everyday HR operations.", "Structured for growing businesses."]}
+    />
+  );
+}

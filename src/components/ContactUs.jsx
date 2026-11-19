@@ -39,11 +39,16 @@ const CONTACT = {
 const PRIMARY_EMAIL = "sales@ngriffin.in";
 // where the form details are delivered (keep in sync with MAIL_TO in Vercel env vars)
 const FORM_RECIPIENTS = ["sales@ngriffin.in", "support@ngriffin.in"];
+const MAP_ADDRESS =
+  "N Griffin Management Consulting Pvt Ltd, 1st & 2nd Floor, Saptagiri Building, 4272, near Sita Circle, 1st phase Girinagar, Banashankari 3rd Stage, Banashankari, Bengaluru, Karnataka 560085";
 
-const MAP_QUERY = encodeURIComponent(
-  "Saptagiri Building, Sita Circle, Girinagar, BSK 3rd Stage, Bangalore 560085",
-);
-const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&z=16&output=embed`;
+const MAP_QUERY = encodeURIComponent(MAP_ADDRESS);
+
+// Official Google embed (from Share → Embed a map)
+const MAP_EMBED =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3073.34675523245!2d77.54858109999999!3d12.938683500000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3e3d00551e7d%3A0x67c245ae27c4e327!2sN%20Griffin%20Management%20Consulting%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1794993548099!5m2!1sen!2sin";
+
+// "Get Directions" button
 const MAP_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${MAP_QUERY}`;
 
 const EMPLOYEE_LIMITS = ["1-10", "11-50", "51-200", "201+"];

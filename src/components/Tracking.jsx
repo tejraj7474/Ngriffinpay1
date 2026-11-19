@@ -972,7 +972,7 @@ function HeroSection() {
 
           <div className="trk-ctas js-reveal">
             <a href="/contact-us" className="trk-btn primary">
-              Book a Free Demo <Icon name="arrow" size={16} />
+              Experience NGriffinPay <Icon name="arrow" size={16} />
             </a>
             <a href="#trk-next" className="trk-btn ghost">
               <span className="trk-play">
@@ -1059,7 +1059,11 @@ const GLOBE_TABS = [
   {
     label: "Geofencing",
     icon: "pin",
-    title: [["No punch-in", true], ["outside the"], ["geo-fenced radius", true]],
+    title: [
+      ["No punch-in", true],
+      ["outside the"],
+      ["geo-fenced radius", true],
+    ],
     kind: "alert",
     stats: [
       ["150 m", "permitted geo-fence radius"],
@@ -1786,32 +1790,92 @@ const FAQS = [
   {
     q: "What does Tracking in NGriffinPay cover?",
     a: "Tracking covers three things: geofencing, so employees can’t punch in outside the permitted radius; activity tracking, so field visits, routes and time on each task are logged; and workforce management, so you see live headcount, shifts and overtime across every location — all feeding straight into payroll.",
-    keys: ["what is", "what does", "about", "overview", "explain", "tracking", "cover", "feature", "module"],
+    keys: [
+      "what is",
+      "what does",
+      "about",
+      "overview",
+      "explain",
+      "tracking",
+      "cover",
+      "feature",
+      "module",
+    ],
   },
   {
     q: "How does geofencing work?",
     a: "You draw approved zones around offices, sites or client locations and set a radius, such as 150 m. The system will not allow employees to punch in if they are outside the permitted geo-fenced radius — the punch-in is blocked, and the attempt is logged for HR to see.",
-    keys: ["geofence", "geofencing", "geo-fence", "geo fence", "zone", "radius", "location", "gps", "proxy", "outside"],
+    keys: [
+      "geofence",
+      "geofencing",
+      "geo-fence",
+      "geo fence",
+      "zone",
+      "radius",
+      "location",
+      "gps",
+      "proxy",
+      "outside",
+    ],
   },
   {
     q: "What does activity tracking record?",
     a: "For field and sales teams, it logs every client visit with GPS, the route travelled and distance covered, how long each visit took, and time spent on calls, travel and admin. Managers see it all in a live dashboard.",
-    keys: ["activity", "field", "sales", "visit", "route", "distance", "km", "travel", "task", "movement"],
+    keys: [
+      "activity",
+      "field",
+      "sales",
+      "visit",
+      "route",
+      "distance",
+      "km",
+      "travel",
+      "task",
+      "movement",
+    ],
   },
   {
     q: "How does it help with workforce management?",
     a: "You get live headcount for every office and site, shift rosters, late marks, missed punches and overtime in one place. Approved overtime and attendance exceptions are applied to payroll automatically, with reports ready to export.",
-    keys: ["workforce", "headcount", "shift", "roster", "overtime", "late", "manage", "management", "branch", "report"],
+    keys: [
+      "workforce",
+      "headcount",
+      "shift",
+      "roster",
+      "overtime",
+      "late",
+      "manage",
+      "management",
+      "branch",
+      "report",
+    ],
   },
   {
     q: "Is employee location tracked after work hours?",
     a: "No. Location is captured only at check-in and during working hours or active shifts. Employees can see when tracking is on, and access to location data is limited by role.",
-    keys: ["privacy", "after hours", "after work", "personal", "always", "consent", "track me", "battery"],
+    keys: [
+      "privacy",
+      "after hours",
+      "after work",
+      "personal",
+      "always",
+      "consent",
+      "track me",
+      "battery",
+    ],
   },
   {
     q: "Is tracking connected to payroll?",
     a: "Yes. Late marks, absences, overtime and verified field hours flow into payroll automatically, so there are no manual attendance sheets to reconcile at month-end.",
-    keys: ["payroll", "salary", "lop", "loss of pay", "month-end", "connected", "absent"],
+    keys: [
+      "payroll",
+      "salary",
+      "lop",
+      "loss of pay",
+      "month-end",
+      "connected",
+      "absent",
+    ],
   },
 ];
 
@@ -2011,7 +2075,7 @@ function TrackingFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact-us" },
+                  cta: { label: "Experience NGriffinPay", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },

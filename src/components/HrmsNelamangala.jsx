@@ -1,0 +1,196 @@
+// HrmsNelamangala.jsx — location page for Nelamangala (manufacturing, logistics & warehousing).
+// URL: /hr-payroll-software-nelamangala-bangalore
+// Uses the shared HrmsLocation template with industrial features, business types, FAQs and images.
+// Images (public/images/): hrms-payroll-software-nelamangala.png, hrms-payroll-software-nelamangala-1.jpg
+import HrmsLocation from "./HrmsLocation";
+
+// Workforce flow for shift-based industrial teams
+const FLOW = [
+  { k: "Biometric / GPS", sub: "Punch in at site", icon: "finger" },
+  { k: "Shifts", sub: "Morning · evening · night", icon: "calendar" },
+  { k: "Overtime", sub: "Extra hours tracked", icon: "clock" },
+  { k: "Leave", sub: "Requests & approvals", icon: "check" },
+  { k: "Payroll", sub: "Calculated automatically", icon: "rupee" },
+  { k: "Reports", sub: "Workforce insights", icon: "chart" },
+];
+
+// 9 feature cards, each with a small realistic UI preview
+const FEATURES = [
+  {
+    t: "GPS Attendance",
+    d: "Attendance for employees across warehouses, sites and branches.",
+    icon: "pin",
+    ui: "gps",
+  },
+  {
+    t: "Biometric Attendance",
+    d: "Biometric punches flow straight into your HRMS.",
+    icon: "finger",
+    ui: "bio",
+  },
+  {
+    t: "Payroll Management",
+    d: "Salaries from attendance, leave, overtime and deductions.",
+    icon: "rupee",
+    ui: "payroll",
+  },
+  {
+    t: "Shift Management",
+    d: "Morning, evening, night and rotating shifts in one place.",
+    icon: "calendar",
+    ui: "shift",
+  },
+  {
+    t: "Overtime Management",
+    d: "Extra hours tracked and calculated without manual work.",
+    icon: "clock",
+    ui: "ot",
+  },
+  {
+    t: "Leave Management",
+    d: "Online requests, approvals and clear leave balances.",
+    icon: "check",
+    ui: "leave",
+  },
+  {
+    t: "Employee Management",
+    d: "Documents, departments and designations — organised.",
+    icon: "users",
+    ui: "people",
+  },
+  {
+    t: "Employee Self-Service",
+    d: "Attendance, leave and payslips without asking HR.",
+    icon: "phone",
+    ui: "ess",
+  },
+  {
+    t: "HR Reports",
+    d: "Attendance, payroll, leave and overtime at a glance.",
+    icon: "chart",
+    ui: "spark",
+  },
+];
+
+// Business types in Nelamangala and surrounding industrial areas
+const INDUSTRIES = [
+  [
+    "Manufacturing",
+    "Factory employees, shifts, attendance and payroll.",
+    "factory",
+  ],
+  [
+    "Warehouses & Distribution",
+    "Warehouse staff, shifts, overtime and attendance.",
+    "warehouse",
+  ],
+  [
+    "Logistics & Transport",
+    "Drivers, delivery teams, field and office staff.",
+    "truck",
+  ],
+  [
+    "Automotive & Engineering",
+    "Large teams across departments and shifts.",
+    "cog",
+  ],
+  [
+    "Packaging & Industrial Units",
+    "Attendance, overtime and payroll for production staff.",
+    "box",
+  ],
+  [
+    "SMEs & Growing Businesses",
+    "Replace manual HR with one centralised HRMS.",
+    "trend",
+  ],
+];
+
+const MANUAL = [
+  "Attendance sheets and registers",
+  "Overtime calculated by hand",
+  "Shifts tracked in spreadsheets",
+  "Hours spent on salary calculations",
+];
+
+const WITH_NGP = [
+  "Biometric & GPS attendance synced",
+  "Overtime calculated automatically",
+  "Shifts managed from one place",
+  "Payroll from attendance & leave",
+];
+
+const WHY = [
+  { t: "Fewer errors", icon: "shield" },
+  { t: "Less HR admin", icon: "zap" },
+  { t: "Multi-location workforce", icon: "pin" },
+  { t: "Better workforce visibility", icon: "eye" },
+  { t: "Built for growing businesses", icon: "trend" },
+];
+
+const NELAMANGALA_FAQS = [
+  {
+    q: "Is NGriffinPay suitable for manufacturing companies in Nelamangala?",
+    a: "Yes. NGriffinPay helps manufacturing units manage factory employees, shifts, attendance, overtime and payroll from one platform.",
+  },
+  {
+    q: "Can NGriffinPay manage shift-based employees?",
+    a: "Yes. HR teams can assign morning, evening, night and rotating shifts, monitor attendance and manage shift-based employees in one place.",
+  },
+  {
+    q: "Does NGriffinPay support biometric attendance?",
+    a: "Yes. NGriffinPay connects with biometric attendance systems and brings attendance data into the HRMS, reducing errors and simplifying payroll.",
+  },
+  {
+    q: "Can we track attendance for field and delivery staff?",
+    a: "Yes. GPS-based attendance helps you manage employees working across warehouses, delivery locations, sites and multiple branches.",
+  },
+  {
+    q: "How does NGriffinPay handle overtime?",
+    a: "NGriffinPay tracks additional working hours and makes overtime calculations easier for employees working beyond their scheduled shifts.",
+  },
+  {
+    q: "Is payroll calculated automatically?",
+    a: "Yes. Payroll is calculated using attendance, leave, overtime, deductions and other salary components — no more manual salary calculations.",
+  },
+  {
+    q: "Can employees check payslips and apply for leave themselves?",
+    a: "Yes. With employee self-service, employees can check attendance, apply for leave and access payslips without depending on HR.",
+  },
+  {
+    q: "How can I get an HRMS demo in Nelamangala?",
+    a: "Experience NGriffinPay to see how NGriffinPay can help your manufacturing, logistics or warehousing business manage its workforce.",
+  },
+];
+
+export default function HrmsNelamangala() {
+  return (
+    <HrmsLocation
+      area="Nelamangala"
+      heroTitle={[
+        "HRMS Software in Nelamangala for ",
+        "Manufacturing, Logistics & Warehousing",
+        "",
+      ]}
+      heroTagline="Manage your employees, attendance and payroll in one place."
+      heroIntro="GPS and biometric attendance, shifts, overtime, leave and payroll — for factory, warehouse, office and field teams, from one platform."
+      flowSteps={FLOW}
+      flowTitle={["From the factory punch to", "the monthly payroll"]}
+      features={FEATURES}
+      featuresTitle={["HRMS designed for", "industrial & growing businesses"]}
+      industries={INDUSTRIES}
+      compareTitle={["Spend less time on", "HR administration."]}
+      manual={MANUAL}
+      withNgp={WITH_NGP}
+      why={WHY}
+      faqs={NELAMANGALA_FAQS}
+      heroImage="hrms-payroll-software-nelamangala.png"
+      heroAlt="HRMS Software in Nelamangala for Manufacturing, Logistics & Warehousing"
+      previewImage="hrms-payroll-software-nelamangala-1.jpg"
+      previewAlt="HRMS Software in Nelamangala for Manufacturing, Logistics & Warehousing"
+      previewTitle={["Everything your HR team needs.", "In one platform."]}
+      ctaTitle="Make HR management simpler with NGriffinPay"
+      ctaText="The HRMS for manufacturing, logistics, warehouse and industrial businesses in Nelamangala."
+    />
+  );
+}

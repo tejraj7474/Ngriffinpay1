@@ -2397,7 +2397,7 @@ function AppShowcaseSection() {
                 </div>
               ) : (
                 <a href="/contact-us" className="ess-btn primary js-copy-fade">
-                  Book a Free Demo <Icon name="arrow" size={16} />
+                  Experience NGriffinPay <Icon name="arrow" size={16} />
                 </a>
               )}
             </div>
@@ -2717,7 +2717,7 @@ function SelfServiceFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact-us" },
+                  cta: { label: "Experience NGriffinPay", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },

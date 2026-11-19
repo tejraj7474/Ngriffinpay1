@@ -994,7 +994,7 @@ function HeroSection() {
 
           <div className="pep-ctas js-reveal">
             <a href="/contact-us" className="pep-btn primary">
-              Book a Free Demo <Icon name="arrow" size={16} />
+              Experience NGriffinPay <Icon name="arrow" size={16} />
             </a>
             <a href="#pep-next" className="pep-btn ghost">
               <span className="pep-play">
@@ -1997,7 +1997,7 @@ function PeopleFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Book a Free Demo", href: "/contact-us" },
+                  cta: { label: "Experience NGriffinPay", href: "/contact-us" },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },

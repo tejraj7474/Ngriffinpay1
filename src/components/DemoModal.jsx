@@ -23,7 +23,7 @@ const OPEN_EVENT = "ngp:open-demo";
 
 // Call this from any button on any page to open the pop-up:
 //   import { openDemo } from "./DemoModal";
-//   <button onClick={openDemo}>Book a Free Demo</button>
+//   <button onClick={openDemo}>Experience NGriffinPay</button>
 export const openDemo = (e) => {
   if (e && e.preventDefault) e.preventDefault();
   window.dispatchEvent(new Event(OPEN_EVENT));
@@ -487,7 +487,7 @@ export default function DemoModal({ open, onClose }) {
                   </>
                 ) : (
                   <>
-                    Book my demo <Icon name="arrow" size={16} />
+                    Experience NGriffinPay <Icon name="arrow" size={16} />
                   </>
                 )}
               </button>
