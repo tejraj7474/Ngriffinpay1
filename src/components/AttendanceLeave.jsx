@@ -2168,7 +2168,8 @@ function DialSection() {
             <p className="js-fade">{t.desc}</p>
             <div className="ald-actions js-fade">
               <a href="/contact-us" className="alm-btn primary">
-                Experience NGriffinPay <Icon name="arrow" size={16} />
+                Experience NGriffinPay - Book a Demo
+                <Icon name="arrow" size={16} />
               </a>
               <div className="ald-nav">
                 <button
@@ -2475,7 +2476,10 @@ function AttendanceFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Experience NGriffinPay", href: "/contact-us" },
+                  cta: {
+                    label: "Experience NGriffinPay - Book a Demo",
+                    href: "/contact-us",
+                  },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },

@@ -1056,7 +1056,7 @@ export default function HrmsExplainer() {
                   <img className="hx-endlogo" src={logo} alt="NGriffinPay " />
                   <p className="hx-endtxt">Smarter HR for IT teams</p>
                   <a className="hx-btn" href="#contact">
-                    Experience NGriffinPay
+                    Experience NGriffinPay - Book a Demo
                   </a>
                 </div>
               </div>

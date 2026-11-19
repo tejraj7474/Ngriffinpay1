@@ -159,7 +159,7 @@ const NELAMANGALA_FAQS = [
   },
   {
     q: "How can I get an HRMS demo in Nelamangala?",
-    a: "Experience NGriffinPay to see how NGriffinPay can help your manufacturing, logistics or warehousing business manage its workforce.",
+    a: "Experience NGriffinPay - Book a Demoto see how NGriffinPay can help your manufacturing, logistics or warehousing business manage its workforce.",
   },
 ];
 

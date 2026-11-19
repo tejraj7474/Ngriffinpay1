@@ -698,18 +698,16 @@ function Hero({ area, heroImage, heroAlt, heroTitle, heroTagline, heroIntro }) {
           },
           "-=0.3",
         );
-      gsap.utils
-        .toArray(".loc-float")
-        .forEach((el, i) =>
-          gsap.to(el, {
-            y: i % 2 ? 8 : -8,
-            duration: 2.4 + i * 0.3,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            delay: 1.5,
-          }),
-        );
+      gsap.utils.toArray(".loc-float").forEach((el, i) =>
+        gsap.to(el, {
+          y: i % 2 ? 8 : -8,
+          duration: 2.4 + i * 0.3,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 1.5,
+        }),
+      );
     }, ref);
     return () => ctx.revert();
   }, []);
@@ -753,7 +751,8 @@ function Hero({ area, heroImage, heroAlt, heroTitle, heroTagline, heroIntro }) {
               className="loc-btn primary"
               onClick={openDemo}
             >
-              Experience NGriffinPay <Icon name="arrow" size={16} />
+              Experience NGriffinPay - Book a Demo
+              <Icon name="arrow" size={16} />
             </a>
             <a href="#loc-flow" className="loc-btn ghost">
               <span className="loc-play">
@@ -1878,7 +1877,8 @@ function FinalCta({ area, title, text }) {
           </p>
         </div>
         <a href="/contact-us" className="loc-btn light" onClick={openDemo}>
-          Experience NGriffinPay <Icon name="arrow" size={16} />
+          Experience NGriffinPay - Book a Demo
+          <Icon name="arrow" size={16} />
         </a>
       </div>
     </section>

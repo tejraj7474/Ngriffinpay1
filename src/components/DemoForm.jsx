@@ -119,7 +119,7 @@ const DemoForm = ({ onSuccess, endpoint = "/api/demo-popup" }) => {
   return (
     <form className="df" onSubmit={handleSubmit} noValidate>
       <div className="df__head">
-        <h4 className="df__title">Experience NGriffinPay</h4>
+        <h4 className="df__title">Experience NGriffinPay - Book a Demo</h4>
         <p className="df__sub">Takes less than 30 seconds</p>
       </div>
 
@@ -213,7 +213,8 @@ const DemoForm = ({ onSuccess, endpoint = "/api/demo-popup" }) => {
           </>
         ) : (
           <>
-            Experience NGriffinPay <span className="df__arrow">→</span>
+            Experience NGriffinPay - Book a Demo
+            <span className="df__arrow">→</span>
           </>
         )}
       </button>

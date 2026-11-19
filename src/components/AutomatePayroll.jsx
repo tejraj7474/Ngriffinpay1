@@ -2589,7 +2589,10 @@ function PayrollFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Experience NGriffinPay", href: "/contact-us" },
+                  cta: {
+                    label: "Experience NGriffinPay - Book a Demo",
+                    href: "/contact-us",
+                  },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },

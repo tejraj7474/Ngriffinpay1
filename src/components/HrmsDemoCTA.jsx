@@ -91,7 +91,7 @@ const HrmsDemoCTA = ({
   children,
   renderPopup, // optional: use YOUR own popup instead of the built-in one
   interval = 20000, // 20 seconds
-  buttonText = "Experience NGriffinPay",
+  buttonText = "Experience NGriffinPay - Book a Demo",
 }) => {
   const [barVisible, setBarVisible] = useState(false);
   const [msgIndex, setMsgIndex] = useState(0);
@@ -182,7 +182,9 @@ const HrmsDemoCTA = ({
           >
             <span className="hdc-bar__btn-icon">{Icon.leave}</span>
             <span className="hdc-bar__btn-long">{buttonText}</span>
-            <span className="hdc-bar__btn-short">Experience NGriffinPay</span>
+            <span className="hdc-bar__btn-short">
+              Experience NGriffinPay - Book a Demo
+            </span>
           </button>
         </div>
       </div>

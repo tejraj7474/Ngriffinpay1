@@ -150,7 +150,7 @@ const KORAMANGALA_FAQS = [
   },
   {
     q: "How can I see NGriffinPay in action?",
-    a: "Experience NGriffinPay to see how NGriffinPay can fit your company's HR and payroll workflow.",
+    a: "Experience NGriffinPay - Book a Demoto see how NGriffinPay can fit your company's HR and payroll workflow.",
   },
 ];
 

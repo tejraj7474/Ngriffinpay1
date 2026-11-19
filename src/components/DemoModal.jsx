@@ -23,7 +23,7 @@ const OPEN_EVENT = "ngp:open-demo";
 
 // Call this from any button on any page to open the pop-up:
 //   import { openDemo } from "./DemoModal";
-//   <button onClick={openDemo}>Experience NGriffinPay</button>
+//   <button onClick={openDemo}>Experience NGriffinPay - Book a Demo</button>
 export const openDemo = (e) => {
   if (e && e.preventDefault) e.preventDefault();
   window.dispatchEvent(new Event(OPEN_EVENT));
@@ -334,7 +334,7 @@ export default function DemoModal({ open, onClose }) {
           <span className="dmo-logo">
             <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay" />
           </span>
-          <h2 id="dmo-title">Experience NGriffinPay</h2>
+          <h2 id="dmo-title">Experience NGriffinPay - Book a Demo</h2>
           <p>
             See how NGriffinPay runs payroll, attendance and compliance for your
             team.
@@ -487,7 +487,8 @@ export default function DemoModal({ open, onClose }) {
                   </>
                 ) : (
                   <>
-                    Experience NGriffinPay <Icon name="arrow" size={16} />
+                    Experience NGriffinPay - Book a Demo
+                    <Icon name="arrow" size={16} />
                   </>
                 )}
               </button>

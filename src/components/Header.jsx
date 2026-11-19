@@ -86,7 +86,7 @@ export default function Header() {
   };
 
   // Any "Demo" button anywhere on the site opens the same pop-up
-  // ("Request a Demo", "Experience NGriffinPay", "Book a Demo" …) — no need to edit each page.
+  // ("Request a Demo", "Experience NGriffinPay - Book a Demo", "Book a Demo" …) — no need to edit each page.
   // You can also force it on any element with data-demo, href="#demo" or openDemo().
   useEffect(() => {
     const onClick = (e) => {

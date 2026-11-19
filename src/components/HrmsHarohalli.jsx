@@ -35,7 +35,7 @@ const HAROHALLI_FAQS = [
   },
   {
     q: "How can I get an HRMS software demo in Harohalli?",
-    a: "Experience NGriffinPay of NGriffinPay to see how the platform can simplify HR and payroll management for your business.",
+    a: "Experience NGriffinPay - Book a Demoof NGriffinPay to see how the platform can simplify HR and payroll management for your business.",
   },
 ];
 

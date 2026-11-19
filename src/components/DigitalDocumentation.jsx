@@ -1819,7 +1819,8 @@ function DrawerSection() {
             <p className="js-fade">{t.desc}</p>
             <div className="ddw-actions js-fade">
               <a href="/contact-us" className="dde-btn primary">
-                Experience NGriffinPay <Icon name="arrow" size={16} />
+                Experience NGriffinPay - Book a Demo
+                <Icon name="arrow" size={16} />
               </a>
               <div className="ddw-nav">
                 <button
@@ -2126,7 +2127,10 @@ function DocumentationFaqSection() {
                   from: "bot",
                   text: FAQ_FALLBACK,
                   animate: !reduceRef.current,
-                  cta: { label: "Experience NGriffinPay", href: "/contact-us" },
+                  cta: {
+                    label: "Experience NGriffinPay - Book a Demo",
+                    href: "/contact-us",
+                  },
                 };
           setMessages((m) => [...m.filter((x) => x.id !== typingId), reply]);
         },

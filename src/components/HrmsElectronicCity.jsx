@@ -182,7 +182,7 @@ const ELECTRONIC_CITY_FAQS = [
   },
   {
     q: "How can I see NGriffinPay in action?",
-    a: "Experience NGriffinPay to see how NGriffinPay can automate payroll for your Electronic City team.",
+    a: "Experience NGriffinPay - Book a Demoto see how NGriffinPay can automate payroll for your Electronic City team.",
   },
 ];
 
