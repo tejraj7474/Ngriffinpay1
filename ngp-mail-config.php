@@ -15,11 +15,11 @@ return [
 
     /* ---------- OPTION A (recommended): a Hostinger email account ----------
        hPanel → Emails → create e.g. website@yourdomain.in, then use its password. */
-    'smtp_host'   => 'smtp.hostinger.com',
-    'smtp_port'   => 465,          // 465 = SSL. If it fails, try 587 with 'tls'
-    'smtp_secure' => 'ssl',        // 'ssl' for 465, 'tls' for 587
-    'smtp_user'   => 'website@YOUR-DOMAIN.in',
-    'smtp_pass'   => 'PASSWORD-OF-THAT-MAILBOX',
+  'smtp_host'   => 'smtp.gmail.com',
+'smtp_port'   => 587,
+'smtp_secure' => 'tls',
+'smtp_user'   => 'testmaildigitalnock@gmail.com',
+'smtp_pass'   => 'eywv-llvf-yrrr-hnwd',   // your 16-letter App Password, letters only
 
     /* ---------- OPTION B: keep using Gmail ----------
     'smtp_host'   => 'smtp.gmail.com',
