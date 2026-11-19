@@ -28,10 +28,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
+      # "npm install" (not "npm ci"): works even when package-lock.json is empty
+      # or was made on Windows, and fetches the Linux build tools Vite needs.
       - name: Install
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
