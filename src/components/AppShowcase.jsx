@@ -438,7 +438,7 @@ export default function AppShowcase() {
                   <div className="ngp-scroll">
                     <Status />
                     <header className="ngp-hd">
-                      <img
+                      <img loading="lazy"
                         src={logo}
                         alt="NGriffinPay "
                         className="ngp-hd-logo"
@@ -684,7 +684,7 @@ export default function AppShowcase() {
 
                 {/* splash with logo */}
                 <div className="ngp-splash">
-                  <img src={logo} alt="NGriffinPay " />
+                  <img loading="lazy" src={logo} alt="NGriffinPay " />
                 </div>
               </div>
             </div>

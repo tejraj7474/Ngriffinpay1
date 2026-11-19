@@ -5,6 +5,7 @@ import Hero3D from "./Hero3D";
 
 export default function Hero() {
   const root = useRef();
+  const wrap = useRef();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -18,15 +19,18 @@ export default function Hero() {
       });
 
       // pin lasts 300%: first 200% runs the animation,
-      // the last 100% keeps the hero fixed while Features slides over it
+      // the last 100% keeps the hero fixed while Features slides over it.
+      // Performance (CLS): the scroll space for the pin is reserved in CSS by
+      // .hero-pin (400vh), so pinSpacing is off and nothing jumps when GSAP starts.
       gsap
         .timeline({
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "+=300%",
+            end: () => "+=" + (wrap.current.offsetHeight - root.current.offsetHeight),
             scrub: 1,
             pin: true,
+            pinSpacing: false,
             invalidateOnRefresh: true,
           },
         })
@@ -48,11 +52,12 @@ export default function Hero() {
   }, []);
 
   return (
+    <div className="hero-pin" ref={wrap}>
     <section className="hero" ref={root}>
       <div
         className="hero-bg"
         style={{
-          backgroundImage: `url(${I("mountain-bg1.jpg")})`,
+          backgroundImage: `url(${I("mountain-bg1.webp")})`,
           height: "800px",
         }}
       />
@@ -87,5 +92,6 @@ export default function Hero() {
         decoding="async"
       />
     </section>
+    </div>
   );
 }

@@ -210,7 +210,7 @@ export default function Workflow() {
           <div className="hrv-stage" ref={stage}>
             <div className="hrv-phones">
               <div className="hrv-float">
-                <img src={I("phones.webp")} alt="NGriffin Pay mobile app" />
+                <img loading="lazy" src={I("phones.webp")} alt="NGriffin Pay mobile app" />
               </div>
               <span className="hrv-shadow" />
             </div>

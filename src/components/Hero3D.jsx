@@ -14,6 +14,10 @@ export default function Hero3D() {
     let cleanup = () => {};
     let cancelled = false;
 
+    // The canvas is hidden in CSS (.hero3d { display: none }): skip three.js entirely
+    // (saves ~170 KB of JavaScript and a long main-thread task on every homepage visit).
+    if (!el || getComputedStyle(el).display === "none") return undefined;
+
     const start = async () => {
       const THREE = await import("three");
       if (cancelled || !el) return;

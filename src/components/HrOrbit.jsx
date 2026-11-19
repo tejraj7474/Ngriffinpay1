@@ -293,7 +293,7 @@ export default function HrOrbit() {
 
           <div className="ho-core" ref={coreRef}>
             <div className="ho-disc">
-              <img src={logo} alt="NGriffinPay " />
+              <img loading="lazy" src={logo} alt="NGriffinPay " />
             </div>
           </div>
 
@@ -316,7 +316,7 @@ export default function HrOrbit() {
               <span className="ho-mess">{mod.mess}</span>
               <span className="ho-neat">
                 <i className="ho-ic">
-                  <img src={mod.ic} alt="" draggable="false" />
+                  <img loading="lazy" src={mod.ic} alt="" draggable="false" />
                 </i>
                 <b>{mod.n}</b>
               </span>
@@ -328,7 +328,7 @@ export default function HrOrbit() {
         <div className="ho-panel" ref={panelRef}>
           <div className="ho-pcard" key={act}>
             <i className="ho-ic ho-ic-lg">
-              <img src={m.ic} alt="" draggable="false" />
+              <img loading="lazy" src={m.ic} alt="" draggable="false" />
             </i>
             <div>
               <b>{m.n}</b>

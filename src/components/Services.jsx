@@ -241,7 +241,7 @@ function Panel({ s }) {
     case "phone": // page 6
       return (
         <div className="l-phone">
-          <img
+          <img loading="lazy"
             className="photo pop"
             src={I(s.photo)}
             alt="NGriffinPay  employee app"
@@ -298,7 +298,7 @@ function Panel({ s }) {
             </div>
           </div>
           <div className="wheel-foot">
-            <img
+            <img loading="lazy"
               className="photo pop"
               src={I(s.photo)}
               alt="HR team onboarding"
@@ -321,7 +321,7 @@ function Panel({ s }) {
             ))}
           </ul>
           <div className="photo-box pop">
-            <img
+            <img loading="lazy"
               className="photo"
               src={I(s.photo)}
               alt="Location based attendance"
@@ -358,7 +358,7 @@ function Panel({ s }) {
               </ul>
             ))}
           </div>
-          <img
+          <img loading="lazy"
             className="photo pop"
             src={I(s.photo)}
             alt="Payroll calculator"
@@ -371,7 +371,7 @@ function Panel({ s }) {
       return (
         <div className="l-time-wrap">
           <div className="l-time">
-            <img
+            <img loading="lazy"
               className="photo pop"
               src={I(s.photo)}
               alt="Performance dashboard"
@@ -428,7 +428,7 @@ function Panel({ s }) {
                 />
               ))}
             </div>
-            <img
+            <img loading="lazy"
               className="photo"
               src={I(s.photo)}
               alt="Task dashboard on laptop"

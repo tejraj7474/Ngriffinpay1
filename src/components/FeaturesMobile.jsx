@@ -63,7 +63,7 @@ const AppHead = ({ at }) => (
       className={`fm-ah ${at !== undefined ? "fm-in" : ""}`}
       style={at !== undefined ? { "--d": `${at}s` } : undefined}
     >
-      <img
+      <img loading="lazy"
         className="fm-logo"
         src={I("ngriffinpay-mark.png")}
         alt="NGriffinPay "
@@ -634,7 +634,7 @@ const DeskShell = ({ active, overlay, children }) => (
     <div className="fd-body">
       <aside className="fd-side">
         <div className="fd-brand">
-          <img src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
+          <img loading="lazy" src={I("ngriffinpay-mark.png")} alt="NGriffinPay " />
           <b>NGriffinPay </b>
         </div>
         <ul>

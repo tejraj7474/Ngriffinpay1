@@ -92,12 +92,26 @@ function GpxBurstCanvas({ progressRef, activeRef }) {
   useEffect(() => {
     let cleanup = () => {};
     let cancelled = false;
-    import("three").then((THREE) => {
-      if (cancelled || !hostRef.current) return;
-      cleanup = setupBurst(THREE, hostRef.current, progressRef, activeRef);
-    });
+    const host = hostRef.current;
+    if (!host) return undefined;
+
+    // download three.js only when this section is about to scroll into view
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        import("three").then((THREE) => {
+          if (cancelled || !hostRef.current) return;
+          cleanup = setupBurst(THREE, hostRef.current, progressRef, activeRef);
+        });
+      },
+      { rootMargin: "600px 0px" },
+    );
+    io.observe(host);
+
     return () => {
       cancelled = true;
+      io.disconnect();
       cleanup();
     };
   }, [progressRef, activeRef]);

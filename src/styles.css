@@ -248,6 +248,11 @@ img {
   }
 }
 
+/* reserves the hero's pinned scroll space from the first paint (100vh hero + 300vh pin) */
+.hero-pin {
+  height: 400vh;
+}
+
 .hero {
   position: relative;
   height: 100vh !important;
