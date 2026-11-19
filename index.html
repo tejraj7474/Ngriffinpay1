@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NGriffin Pay – Modern HRMS & Payroll Software for Growing Enterprises</title>
+    <meta name="description" content="NGriffin Pay: payroll, attendance, hiring and performance in one HRMS platform." />
+    <link rel="canonical" href="https://ngriffinpay.in/" />
+    <meta property="og:title" content="NGriffin Pay – HRMS & Payroll" />
+    <meta property="og:image" content="/images/og.jpg" />
+    <meta name="theme-color" content="#053a93" />
+
+    <!-- Fonts: connect early, load ONE stylesheet without blocking the first paint
+         (replaces the 26 @import lines that used to be inside the CSS files) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
+
+    <!-- Homepage only: start downloading the hero images before React renders -->
+    <script>
+      if (location.pathname === "/") {
+        [
+          ["/images/people-foreground.webp", "high"],
+          ["/images/mountain-bg1.jpg", "high"],
+        ].forEach(function (x) {
+          var l = document.createElement("link");
+          l.rel = "preload";
+          l.as = "image";
+          l.href = x[0];
+          l.setAttribute("fetchpriority", x[1]);
+          document.head.appendChild(l);
+        });
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"SoftwareApplication","name":"NGriffin Pay","applicationCategory":"BusinessApplication","url":"https://ngriffinpay.in/"}
+    </script>
+    <script type="module" crossorigin src="/assets/index-8tKnAa6v.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-D90crrBb.js">
+    <link rel="modulepreload" crossorigin href="/assets/gsap-CHcZyhIi.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CVuRSGUC.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
