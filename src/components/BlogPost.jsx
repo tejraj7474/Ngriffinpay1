@@ -4,6 +4,7 @@
 // • Article with rich blocks (headings, lists, callouts, tables, quotes)
 // • Sticky "On this page" contents that highlights the section you're reading
 // • Share buttons (WhatsApp, LinkedIn, X, copy link) + demo CTA card
+// • FAQ accordion block ({ type: "faq", title, items: [{ q, a }] }) + FAQPage schema
 // • "Keep reading" related posts + BlogPosting schema for SEO
 // Posts come from ./blogData.js. Header & Footer come from App.jsx.
 //
@@ -26,7 +27,7 @@ import "./BlogPost.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SITE = "https://NGriffinPay .in";
+const SITE = "https://ngriffinpay.in";
 
 const prefersReduced = () =>
   typeof window !== "undefined" &&
@@ -151,9 +152,47 @@ function Rich({ text }) {
   );
 }
 
+/* ---------- FAQ accordion ---------- */
+function Faq({ b }) {
+  const [open, setOpen] = useState(0);
+  return (
+    <div className="bpo-faq">
+      <h2 id={slugify(b.title)} className="bpo-h2">
+        <Rich text={b.title} />
+      </h2>
+      {b.items.map((f, i) => (
+        <div key={i} className={`bpo-faq-item ${open === i ? "is-open" : ""}`}>
+          <button
+            type="button"
+            aria-expanded={open === i}
+            onClick={() => setOpen(open === i ? -1 : i)}
+          >
+            <span className="bpo-faq-n">{String(i + 1).padStart(2, "0")}</span>
+            <span className="bpo-faq-q">
+              <Rich text={f.q} />
+            </span>
+            <span className="bpo-faq-ic" aria-hidden>
+              <Icon name="chev" size={16} />
+            </span>
+          </button>
+          <div className="bpo-faq-a">
+            <div>
+              <p>
+                <Rich text={f.a} />
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* ---------- content blocks ---------- */
 function Block({ b }) {
   switch (b.type) {
+    case "faq":
+      return <Faq b={b} />;
     case "h2":
       return (
         <h2 id={slugify(b.text)} className="bpo-h2">
@@ -331,11 +370,11 @@ export default function BlogPost() {
 
   const toc = post
     ? post.content
-        .filter((b) => b.type === "h2")
-        .map((b) => ({
-          id: slugify(b.text),
-          text: b.text.replace(/\*\*/g, ""),
-        }))
+        .filter((b) => b.type === "h2" || b.type === "faq")
+        .map((b) => {
+          const text = b.type === "faq" ? b.title : b.text;
+          return { id: slugify(text), text: text.replace(/\*\*/g, "") };
+        })
     : [];
   const related = post
     ? sortedPosts()
@@ -475,7 +514,21 @@ export default function BlogPost() {
     author: { "@type": "Organization", name: post.author },
     publisher: { "@type": "Organization", name: "NGriffinPay ", url: SITE },
     mainEntityOfPage: `${SITE}/blog/${post.slug}`,
+    image: post.image ? `${SITE}${post.image}` : undefined,
   };
+  // FAQ rich results: built from any FAQ block in the post
+  const faqItems = post.content.filter((b) => b.type === "faq").flatMap((b) => b.items);
+  const faqSchema = faqItems.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((f) => ({
+          "@type": "Question",
+          name: f.q.replace(/\*\*/g, ""),
+          acceptedAnswer: { "@type": "Answer", text: f.a.replace(/\*\*/g, "") },
+        })),
+      }
+    : null;
 
   return (
     <main className="bpo-page" ref={rootRef}>
@@ -483,6 +536,12 @@ export default function BlogPost() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <div className="bpo-progress" aria-hidden>
         <i ref={barRef} />
       </div>

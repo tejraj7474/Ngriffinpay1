@@ -867,3 +867,115 @@
     transition: none;
   }
 }
+
+/* ---------- FAQ accordion block ---------- */
+.bpo-faq {
+  margin: 10px 0 30px;
+}
+.bpo-faq-item {
+  margin-bottom: 12px;
+  border: 1px solid var(--b-line);
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.bpo-faq-item:hover,
+.bpo-faq-item.is-open {
+  border-color: #b9d1f3;
+  box-shadow: 0 14px 30px -22px rgba(10, 63, 131, 0.45);
+}
+.bpo-faq-item button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.bpo-faq-n {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: #eaf2ff;
+  color: var(--b-blue);
+  font-size: 12px;
+  font-weight: 800;
+  transition: background 0.25s, color 0.25s;
+}
+.bpo-faq-item.is-open .bpo-faq-n {
+  background: var(--b-grad);
+  color: #fff;
+}
+.bpo-faq-q {
+  flex: 1;
+  color: var(--b-navy);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.bpo-faq-ic {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--b-bg);
+  color: var(--b-blue);
+  transition: transform 0.3s, background 0.25s, color 0.25s;
+}
+.bpo-faq-item.is-open .bpo-faq-ic {
+  transform: rotate(180deg);
+  background: var(--b-blue);
+  color: #fff;
+}
+.bpo-faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.bpo-faq-item.is-open .bpo-faq-a {
+  grid-template-rows: 1fr;
+}
+.bpo-faq-a > div {
+  overflow: hidden;
+}
+.bpo-faq-a p {
+  margin: 0;
+  padding: 0 20px 18px 68px;
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+@media (max-width: 640px) {
+  .bpo-faq-item button {
+    gap: 10px;
+    padding: 14px 12px;
+  }
+  .bpo-faq-n {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 11px;
+  }
+  .bpo-faq-q {
+    font-size: 14.5px;
+  }
+  .bpo-faq-a p {
+    padding: 0 14px 16px 52px;
+    font-size: 14.5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bpo-faq-a,
+  .bpo-faq-ic {
+    transition: none;
+  }
+}
