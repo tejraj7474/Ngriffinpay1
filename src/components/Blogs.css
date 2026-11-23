@@ -271,7 +271,7 @@
 .blg-feat-img {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--b-soft);
 }
