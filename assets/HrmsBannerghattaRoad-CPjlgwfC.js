@@ -1,1 +1,0 @@
-import{j as a}from"./react-D90crrBb.js";import{H as r}from"./HrmsLocation-DG_Xo1iN.js";import"./gsap-CHcZyhIi.js";import"./index-D4F4MycX.js";function s(){return a.jsx(r,{area:"Bannerghatta Road"})}export{s as default};
