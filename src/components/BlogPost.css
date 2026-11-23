@@ -208,7 +208,7 @@
   position: relative;
   margin: 0 auto;
   max-width: 1060px;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 26px 26px 0 0;
   background: var(--b-soft);
@@ -878,7 +878,9 @@
   border-radius: 16px;
   background: #fff;
   overflow: hidden;
-  transition: border-color 0.25s, box-shadow 0.25s;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s;
 }
 .bpo-faq-item:hover,
 .bpo-faq-item.is-open {
@@ -908,7 +910,9 @@
   color: var(--b-blue);
   font-size: 12px;
   font-weight: 800;
-  transition: background 0.25s, color 0.25s;
+  transition:
+    background 0.25s,
+    color 0.25s;
 }
 .bpo-faq-item.is-open .bpo-faq-n {
   background: var(--b-grad);
@@ -930,7 +934,10 @@
   border-radius: 50%;
   background: var(--b-bg);
   color: var(--b-blue);
-  transition: transform 0.3s, background 0.25s, color 0.25s;
+  transition:
+    transform 0.3s,
+    background 0.25s,
+    color 0.25s;
 }
 .bpo-faq-item.is-open .bpo-faq-ic {
   transform: rotate(180deg);
