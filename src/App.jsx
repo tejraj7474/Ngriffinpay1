@@ -11,7 +11,6 @@ import AppShowcase from "./components/AppShowcase";
 import HrOrbit from "./components/HrOrbit";
 import PartnerBurst from "./components/PartnerBurst";
 import Preloader from "./components/Preloader";
-import HrmsDemoCTA from "./components/HrmsDemoCTA";
 import DemoForm from "./components/DemoForm";
 const HrmsBannerghattaRoad = lazy(
   () => import("./components/HrmsBannerghattaRoad"),
@@ -28,7 +27,9 @@ const HrmsItpl = lazy(() => import("./components/HrmsItpl"));
 const HrmsSarjapur = lazy(() => import("./components/HrmsSarjapur"));
 const HrmsHarohalli = lazy(() => import("./components/HrmsHarohalli"));
 const HrmsMagadiRoad = lazy(() => import("./components/HrmsMagadiRoad"));
-const HrmsElectronicCity = lazy(() => import("./components/HrmsElectronicCity"));
+const HrmsElectronicCity = lazy(
+  () => import("./components/HrmsElectronicCity"),
+);
 
 // Inner pages are code-split: each page's JS + CSS downloads only when it is visited,
 // so the homepage no longer ships the code for all 27 pages up front.

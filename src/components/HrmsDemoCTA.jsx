@@ -114,13 +114,6 @@ const HrmsDemoCTA = ({
     return () => clearInterval(t);
   }, []);
 
-  /* Auto-open popup: 20 s after load, and 20 s after each close */
-  useEffect(() => {
-    if (isOpen || submitted) return;
-    const t = setTimeout(() => setIsOpen(true), interval);
-    return () => clearTimeout(t);
-  }, [isOpen, submitted, interval]);
-
   const close = useCallback(() => setIsOpen(false), []);
 
   const handleSuccess = useCallback(() => {
