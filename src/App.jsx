@@ -263,9 +263,6 @@ export default function App() {
         </Suspense>
       </main>
       <Footer footRef={foot} />
-      <HrmsDemoCTA>
-        {(onSuccess) => <DemoForm onSuccess={onSuccess} />}
-      </HrmsDemoCTA>
     </div>
   );
 }
